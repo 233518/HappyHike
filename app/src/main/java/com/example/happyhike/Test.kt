@@ -1,4 +1,4 @@
-package com.example.turglad
+package com.example.happyhike
 
 class Test {
     fun helloWorld(){

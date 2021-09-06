@@ -1,4 +1,4 @@
-package com.example.turglad
+package com.example.happyhike
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
