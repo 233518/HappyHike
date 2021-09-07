@@ -1,4 +1,4 @@
 package com.example.happyhike.utils
 
-class hi {
+class CoordinateFormatter {
 }
