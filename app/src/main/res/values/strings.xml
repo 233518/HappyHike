@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Turglad</string>
+    <string name="fname">Fornavn</string>
+    <string name="lname">Etternavn</string>
+    <string name="password">Passord</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Bekreft Passord</string>
+    <string name="submit_btn">Registrer Deg</string>
+    <string name="cancel_btn">Angre</string>
+
 </resources>

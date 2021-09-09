@@ -36,7 +36,15 @@
         </activity>
         <activity
             android:name=".scenes.LoginScene"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
         </activity>
-    </application>
+
+        <activity
+            android:name=".scenes.RegisterScene"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>    </application>
 </manifest>
