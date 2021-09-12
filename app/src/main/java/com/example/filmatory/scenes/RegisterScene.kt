@@ -1,11 +1,9 @@
-package com.example.happyhike.scenes
+package com.example.filmatory.scenes
 
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.happyhike.R
-import com.example.happyhike.controllers.LoginController
-import com.example.happyhike.controllers.RegisterController
+import com.example.filmatory.R
+import com.example.filmatory.controllers.RegisterController
 
 class RegisterScene : AppCompatActivity() {
     lateinit var registerController: RegisterController

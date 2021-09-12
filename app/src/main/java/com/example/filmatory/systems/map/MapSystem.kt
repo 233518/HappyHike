@@ -1,4 +1,4 @@
-package com.example.happyhike.systems.map
+package com.example.filmatory.systems.map
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

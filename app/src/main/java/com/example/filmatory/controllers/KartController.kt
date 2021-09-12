@@ -1,9 +1,9 @@
-package OnMapReadyCallbackcom.example.happyhike.controllers
+package com.example.filmatory.controllers
 
-import com.example.happyhike.R
-import com.example.happyhike.guis.KartGui
-import com.example.happyhike.scenes.KartScene
-import com.example.happyhike.systems.map.MapSystem
+import com.example.filmatory.R
+import com.example.filmatory.guis.KartGui
+import com.example.filmatory.scenes.KartScene
+import com.example.filmatory.systems.map.MapSystem
 import com.google.android.gms.maps.SupportMapFragment
 
 class KartController(kartScene : KartScene) {

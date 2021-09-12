@@ -1,8 +1,8 @@
-package com.example.happyhike.logger
+package com.example.filmatory.logger
 
 import android.os.Build
 import android.util.Log
-import com.example.happyhike.BuildConfig
+import com.example.filmatory.BuildConfig
 import java.time.LocalDateTime
 
 open class Logger {

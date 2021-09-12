@@ -1,10 +1,10 @@
-package com.example.happyhike
+package com.example.filmatory
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.gms.maps.GoogleMap
 import android.content.Intent
-import com.example.happyhike.scenes.LoginScene
+import com.example.filmatory.scenes.LoginScene
 
 
 class MainActivity : AppCompatActivity() {

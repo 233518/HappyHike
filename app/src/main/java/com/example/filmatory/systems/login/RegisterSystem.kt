@@ -1,10 +1,10 @@
-package com.example.happyhike.systems.login
+package com.example.filmatory.systems.login
 
 import android.net.Uri
 import android.view.View
 import android.widget.VideoView
-import com.example.happyhike.R
-import com.example.happyhike.scenes.RegisterScene
+import com.example.filmatory.R
+import com.example.filmatory.scenes.RegisterScene
 
 class RegisterSystem(registerScene: RegisterScene) {
     private lateinit var videoView: VideoView

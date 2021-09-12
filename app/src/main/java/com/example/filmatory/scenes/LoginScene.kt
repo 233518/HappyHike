@@ -1,11 +1,11 @@
-package com.example.happyhike.scenes
+package com.example.filmatory.scenes
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.example.happyhike.R
-import com.example.happyhike.controllers.LoginController
+import com.example.filmatory.R
+import com.example.filmatory.controllers.LoginController
 
 
 

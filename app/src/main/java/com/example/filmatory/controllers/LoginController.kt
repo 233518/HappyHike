@@ -1,10 +1,8 @@
-package com.example.happyhike.controllers
+package com.example.filmatory.controllers
 
-import android.widget.Button
-import com.example.happyhike.guis.LoginGui
-import com.example.happyhike.scenes.LoginScene
-import com.example.happyhike.systems.login.LoginSystem
-import com.example.happyhike.R
+import com.example.filmatory.guis.LoginGui
+import com.example.filmatory.scenes.LoginScene
+import com.example.filmatory.systems.login.LoginSystem
 
 class LoginController(loginScene: LoginScene) {
     private var loginGui: LoginGui = LoginGui()

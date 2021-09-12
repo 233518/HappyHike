@@ -1,4 +1,4 @@
-package com.example.happyhike
+package com.example.filmatory
 
 import org.junit.Test
 
