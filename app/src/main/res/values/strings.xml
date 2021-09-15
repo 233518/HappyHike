@@ -7,5 +7,11 @@
     <string name="confirm_password">Bekreft Passord</string>
     <string name="submit_btn">Registrer Deg</string>
     <string name="cancel_btn">Angre</string>
-
+    <string name="more">More</string>
+    <string name="search">Search</string>
+    <string name="favorite">Favorite</string>
+    <string name="content_description_favorite">Favorite description</string>
+    <string name="content_description_search">Search description</string>
+    <string name="content_description_more">More description</string>
+    <string name="page_title">Filmatory</string>
 </resources>

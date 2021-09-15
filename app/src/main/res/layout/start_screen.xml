@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:menu="@menu/top_app_bar"
+                app:navigationIcon="@drawable/ic_menu_24dp"
+                app:title="@string/page_title" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+
+        <!-- Note: A RecyclerView can also be used -->
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/header_image"
+                android:layout_width="match_parent"
+                android:layout_height="209dp"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/header_image" />
+
+            <TextView
+                android:id="@+id/header_text"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="90dp"
+                android:text="Millions of movies, TV shows and people to discover. Explore now. "
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.175"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/header_image" />
+            <TextView
+                android:id="@+id/categoryTxt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:text="Movie Title 1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_image" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_slider_1"
+                android:layout_width="match_parent"
+                android:layout_height="206dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categoryTxt1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/movie1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/movie1" />
+
+                    <ImageButton
+                        android:id="@+id/movie2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toEndOf="@id/movie1"
+                        app:layout_constraintTop_toTopOf="@id/movie1"
+                        app:srcCompat="@drawable/movie2" />
+
+                    <ImageButton
+                        android:id="@+id/movie3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie2"
+                        app:layout_constraintTop_toTopOf="@id/movie2"
+                        app:srcCompat="@drawable/movie3" />
+
+                    <ImageButton
+                        android:id="@+id/movie4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie3"
+                        app:layout_constraintTop_toTopOf="@id/movie3"
+                        app:srcCompat="@drawable/movie4" />
+
+                    <ImageButton
+                        android:id="@+id/movie5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie4"
+                        app:layout_constraintTop_toTopOf="@id/movie4"
+                        app:srcCompat="@drawable/movie5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/categoryTxt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="30dp"
+                android:text="Movie Title 2"
+                app:layout_constraintStart_toStartOf="@id/categoryTxt1"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_slider_1" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_slider_2"
+                android:layout_width="match_parent"
+                android:layout_height="206dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categoryTxt2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/movie6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/movie6" />
+
+                    <ImageButton
+                        android:id="@+id/movie7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toEndOf="@id/movie6"
+                        app:layout_constraintTop_toTopOf="@id/movie6"
+                        app:srcCompat="@drawable/movie7" />
+
+                    <ImageButton
+                        android:id="@+id/movie8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie7"
+                        app:layout_constraintTop_toTopOf="@id/movie7"
+                        app:srcCompat="@drawable/movie8" />
+
+                    <ImageButton
+                        android:id="@+id/movie9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie8"
+                        app:layout_constraintTop_toTopOf="@id/movie8"
+                        app:srcCompat="@drawable/movie9" />
+
+                    <ImageButton
+                        android:id="@+id/movie10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie9"
+                        app:layout_constraintTop_toTopOf="@id/movie9"
+                        app:srcCompat="@drawable/movie10" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/categoryTxt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="30dp"
+                android:text="Movie Title 3"
+                app:layout_constraintStart_toStartOf="@id/categoryTxt2"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_slider_2" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_slider_3"
+                android:layout_width="match_parent"
+                android:layout_height="206dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categoryTxt3">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/movie11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/movie11" />
+
+                    <ImageButton
+                        android:id="@+id/movie12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        app:layout_constraintStart_toEndOf="@id/movie11"
+                        app:layout_constraintTop_toTopOf="@id/movie11"
+                        app:srcCompat="@drawable/movie12" />
+
+                    <ImageButton
+                        android:id="@+id/movie13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie12"
+                        app:layout_constraintTop_toTopOf="@id/movie12"
+                        app:srcCompat="@drawable/movie13" />
+
+                    <ImageButton
+                        android:id="@+id/movie14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie13"
+                        app:layout_constraintTop_toTopOf="@id/movie13"
+                        app:srcCompat="@drawable/movie14" />
+
+                    <ImageButton
+                        android:id="@+id/movie15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:layout_constraintStart_toEndOf="@id/movie14"
+                        app:layout_constraintTop_toTopOf="@id/movie14"
+                        app:srcCompat="@drawable/movie15" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </HorizontalScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

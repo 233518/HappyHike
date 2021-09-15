@@ -14,14 +14,8 @@ class LoginScene : AppCompatActivity() {
     lateinit var registerBtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_screen)
-        loginController = LoginController(this)
-
-        registerBtn = findViewById<Button>(R.id.registerBtn)
-        registerBtn.setOnClickListener {
-            val intent = Intent(this, RegisterScene::class.java)
-            startActivity(intent)
-        }
+        setContentView(R.layout.start_screen)
+        //loginController = LoginController(this)
 
     }
 }

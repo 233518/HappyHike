@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.filmatory" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.filmatory" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- ... -->
     </style>
     <style name="Theme.App" parent="Theme.MaterialComponents">
