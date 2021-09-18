@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Turglad</string>
+    <string name="app_name">Filmatory</string>
     <string name="fname">Fornavn</string>
     <string name="lname">Etternavn</string>
     <string name="password">Passord</string>
@@ -14,4 +14,8 @@
     <string name="content_description_search">Search description</string>
     <string name="content_description_more">More description</string>
     <string name="page_title">Filmatory</string>
+    <string name="my_files">My Files</string>
+    <string name="shared">Shared</string>
+    <string name="openNavDrawer">Open</string>
+    <string name="closeNavDrawer">Close</string>
 </resources>

@@ -7,6 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="btnColor">#FFFFFFFF</color>
-    <color name="input_bg_color">#66000000</color>
+    <color name="btnColor">#FF000000</color>
+    <color name="input_bg_color">#CC000000</color>
+    <color name="dark_grey">#666666</color>
+    <color name="silver">#CCCCCC</color>
+    <color name="green">#669933</color>
 </resources>
