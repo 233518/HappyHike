@@ -12,4 +12,5 @@
     <color name="dark_grey">#666666</color>
     <color name="silver">#CCCCCC</color>
     <color name="green">#669933</color>
+    <color name="header_color">#91C690</color>
 </resources>
