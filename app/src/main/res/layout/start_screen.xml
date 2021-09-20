@@ -2,9 +2,9 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
     android:background="@color/white">
 
 
@@ -55,7 +55,7 @@
                 android:text="Movie Title 1"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header_image"/>
+                app:layout_constraintTop_toBottomOf="@id/header_image" />
 
             <HorizontalScrollView
                 android:id="@+id/horizontal_slider_1"
@@ -262,12 +262,9 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <include
-        layout="@layout/toolbar"
-        />
-    <include
-        layout="@layout/nav_drawer"
-        />
+    <include layout="@layout/toolbar" />
+
+    <include layout="@layout/nav_drawer" />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

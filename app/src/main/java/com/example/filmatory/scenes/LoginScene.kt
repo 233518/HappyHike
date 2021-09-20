@@ -38,12 +38,51 @@ class LoginScene : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.nav_home -> Toast.makeText(applicationContext,
-                    "Clicked item", Toast.LENGTH_SHORT).show()
-                R.id.nav_movies -> Toast.makeText(applicationContext,
-                    "Clicked item", Toast.LENGTH_SHORT).show()
-                R.id.nav_series -> Toast.makeText(applicationContext,
-                    "Clicked item", Toast.LENGTH_SHORT).show()
+                R.id.nav_home -> {
+                    setContentView(R.layout.start_screen)
+                }
+                R.id.nav_movies -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_series -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_upcoming_movies -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_upcoming_tvshows -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_lists -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_user_profile -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_user_favorites -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_user_watchlist -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_user_my_lists -> {
+                    Toast.makeText(applicationContext,
+                        "Clicked item", Toast.LENGTH_SHORT).show()
+                }
+                R.id.nav_user_logout -> {
+                    setContentView(R.layout.register_screen)
+                }
+                R.id.nav_user_login -> {
+                    setContentView(R.layout.register_screen)
+                }
             }
             true
         }
