@@ -11,14 +11,5 @@ class RegisterSystem(registerScene: RegisterScene) {
     var registerScene = registerScene
 
     init {
-        runVideo()
-    }
-
-    private fun runVideo() {
-        videoView = registerScene.findViewById<View>(R.id.videoView) as VideoView
-        var uri = Uri.parse("android.resource://" + registerScene.packageName + "/" + R.raw.happyhike_bg)
-        videoView.setVideoURI(uri)
-        videoView.setOnPreparedListener { mp -> mp.isLooping = true }
-        videoView.start()
     }
 }
