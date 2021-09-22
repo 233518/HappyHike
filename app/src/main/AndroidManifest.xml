@@ -3,11 +3,13 @@
     package="com.example.filmatory">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
-
-    <!-- Limits app visibility in the Google Play Store to ARCore supported devices
-         (https://developers.google.com/ar/devices). -->
-    <uses-feature android:glEsVersion="0x00030000" android:required="true" />
+    <!--
+ Limits app visibility in the Google Play Store to ARCore supported devices
+         (https://developers.google.com/ar/devices).
+    -->
+    <uses-feature
+        android:glEsVersion="0x00030000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +18,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Filmatory">
-        <!-- "AR Required" app, requires "Google Play Services for AR" (ARCore)
-         to be installed, as the app does not include any non-AR features. -->
+        <!--
+         "AR Required" app, requires "Google Play Services for AR" (ARCore)
+         to be installed, as the app does not include any non-AR features.
+        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
@@ -26,7 +30,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.example.filmatory.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,20 +38,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.KartScene"
+            android:name=".scenes.KartScene"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.LoginScene"
+            android:name=".scenes.LoginScene"
+            android:configChanges="orientation|keyboardHidden"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden" >
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".scenes.RegisterScene"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".scenes.MoviesScene"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name="com.example.filmatory.scenes.RegisterScene"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>    </application>
+            android:name=".scenes.MovieScene"
+            android:parentActivityName=".scenes.MoviesScene"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true">
+        </activity>
+    </application>
+
 </manifest>

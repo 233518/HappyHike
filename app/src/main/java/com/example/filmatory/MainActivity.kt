@@ -5,17 +5,15 @@ import android.os.Bundle
 import com.google.android.gms.maps.GoogleMap
 import android.content.Intent
 import com.example.filmatory.scenes.LoginScene
+import com.example.filmatory.scenes.MoviesScene
+import com.example.filmatory.systems.media.Movie
 
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var mMap: GoogleMap
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val intent = Intent(this, LoginScene::class.java)
+        val intent = Intent(this, MoviesScene::class.java)
         startActivity(intent)
     }
 }
