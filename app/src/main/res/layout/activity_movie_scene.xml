@@ -10,15 +10,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:gravity="top">
 
         <ImageView
             android:id="@+id/m_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:layout_centerHorizontal="true"
             android:background="#2d2d2d"
             android:src="@mipmap/ic_launcher"
-            android:layout_centerHorizontal="true"/>
+            android:layout_marginTop="70dp"/>
 
         <TextView
             android:id="@+id/m_title"
@@ -28,7 +29,7 @@
             android:text="Title"
             android:layout_below="@+id/m_img"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
         <TextView
@@ -42,6 +43,19 @@
             android:gravity="center"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="?android:attr/textColorSecondary" />
+
+        <TextView
+            android:id="@+id/m_overview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/lorem"
+            android:layout_below="@+id/m_date"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary" />
+
 
     </RelativeLayout>
 
