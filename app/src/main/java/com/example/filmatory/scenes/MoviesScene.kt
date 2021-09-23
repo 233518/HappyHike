@@ -2,18 +2,21 @@ package com.example.filmatory.scenes
 
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
+import com.example.filmatory.systems.NavSystem
 import com.example.filmatory.systems.media.Movie
 import com.example.filmatory.utils.RecyclerViewAdapter
 
 class MoviesScene : AppCompatActivity() {
-
+    private lateinit var navSystem: NavSystem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.card_container)
+        navSystem = NavSystem(this)
         val arrayList: MutableList<Movie> = ArrayList()
         var recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         arrayList.add(Movie("Movie 1", "Dato 1", R.drawable.movie1))
@@ -31,5 +34,11 @@ class MoviesScene : AppCompatActivity() {
 
         recyclerView.layoutManager = GridLayoutManager(this, 2)
         recyclerView.adapter = myAdapter
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(navSystem.toggle.onOptionsItemSelected(item)){
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

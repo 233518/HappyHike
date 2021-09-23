@@ -2,23 +2,15 @@ package com.example.filmatory.scenes
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.filmatory.R
 import com.example.filmatory.systems.NavSystem
-import com.example.filmatory.systems.api.ApiSystem
-import com.google.android.material.navigation.NavigationView
 
-class LoginScene : AppCompatActivity() {
-    private var apiSystem = ApiSystem()
+class StartScene : AppCompatActivity() {
     private lateinit var navSystem: NavSystem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //apiSystem.requestApprovedReviewById("60b3a9194001540015069d2c")
-        setContentView(R.layout.login_screen)
+        setContentView(R.layout.start_screen)
         navSystem = NavSystem(this)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -28,4 +20,3 @@ class LoginScene : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-
