@@ -8,6 +8,6 @@
     android:fitsSystemWindows="true"
     android:isScrollContainer="true"
     app:headerLayout="@layout/nav_header"
-    app:menu="@menu/nav_menu">
+    app:menu="@menu/nav_menu_logged_out">
 
 </com.google.android.material.navigation.NavigationView>

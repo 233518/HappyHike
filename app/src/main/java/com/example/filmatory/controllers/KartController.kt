@@ -2,7 +2,6 @@ package com.example.filmatory.controllers
 
 import com.example.filmatory.R
 import com.example.filmatory.guis.KartGui
-import com.example.filmatory.scenes.KartScene
 import com.example.filmatory.systems.map.MapSystem
 import com.google.android.gms.maps.SupportMapFragment
 

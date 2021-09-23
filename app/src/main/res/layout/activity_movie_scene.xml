@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
+    android:background="@color/white"
     tools:context=".scenes.MovieScene">
 
     <RelativeLayout
@@ -27,6 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Title"
+            android:textColor="@color/black"
             android:layout_below="@+id/m_img"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
@@ -42,7 +44,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/m_overview"
@@ -54,7 +56,7 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="@color/black" />
 
 
     </RelativeLayout>

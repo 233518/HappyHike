@@ -17,7 +17,7 @@ class LoginScene : AppCompatActivity() {
     private lateinit var navSystem: NavSystem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //apiSystem.requestApprovedReviewById("60b3a9194001540015069d2c")
+        // apiSystem.requestApprovedReviewById("60b3a9194001540015069d2c")
         setContentView(R.layout.login_screen)
         navSystem = NavSystem(this)
     }
