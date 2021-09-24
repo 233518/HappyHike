@@ -34,10 +34,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.KartScene"
-            android:exported="true">
-        </activity>
-        <activity
             android:name="com.example.filmatory.scenes.LoginScene"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -63,6 +59,30 @@
         </activity>
         <activity
             android:name="com.example.filmatory.scenes.StartScene"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.example.filmatory.scenes.TvScene"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.example.filmatory.scenes.UpcomingMoviesScene"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.example.filmatory.scenes.UpcomingTvsScene"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.example.filmatory.scenes.TvsScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >

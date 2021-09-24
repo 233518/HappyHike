@@ -9,10 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.transition.Scene
 import com.example.filmatory.R
-import com.example.filmatory.scenes.LoginScene
-import com.example.filmatory.scenes.MoviesScene
-import com.example.filmatory.scenes.RegisterScene
-import com.example.filmatory.scenes.StartScene
+import com.example.filmatory.scenes.*
 import com.google.android.material.navigation.NavigationView
 
 class NavSystem(appCompatActivity: AppCompatActivity){
@@ -46,16 +43,16 @@ class NavSystem(appCompatActivity: AppCompatActivity){
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_series -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, TvsScene::class.java)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_upcoming_movies -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, UpcomingMoviesScene::class.java)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_upcoming_tvshows -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, UpcomingTvsScene::class.java)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_lists -> {
                     Toast.makeText(appCompatActivity.applicationContext,
