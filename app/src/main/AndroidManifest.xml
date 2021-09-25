@@ -60,7 +60,6 @@
         <activity
             android:name="com.example.filmatory.scenes.StartScene"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
