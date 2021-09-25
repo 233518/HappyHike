@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.filmatory.R
+import com.example.filmatory.api.ApiRespons
 import com.example.filmatory.systems.NavSystem
 import com.example.filmatory.systems.api.ApiSystem
 import com.google.android.material.navigation.NavigationView
@@ -17,7 +18,7 @@ class LoginScene : AppCompatActivity() {
     private lateinit var navSystem: NavSystem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // apiSystem.requestApprovedReviewById("60b3a9194001540015069d2c")
+        apiSystem.requestApprovedReviewById("60b3a9194001540015069d2c", ::printTest)
         setContentView(R.layout.login_screen)
         navSystem = NavSystem(this)
     }
@@ -26,6 +27,10 @@ class LoginScene : AppCompatActivity() {
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun printTest(apiRespons: ApiRespons) {
+        println(apiRespons)
     }
 }
 

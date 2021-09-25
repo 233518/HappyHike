@@ -8,5 +8,5 @@ data class PendingReview(
     val stars: Int,
     val text: String,
     val tvId: Any,
-    val userId: String
-)
+    val userId: String, override var respons: Boolean
+) : ApiRespons()

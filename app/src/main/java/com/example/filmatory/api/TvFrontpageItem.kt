@@ -14,5 +14,5 @@ data class TvFrontpageItem(
     val popularity: Double,
     val poster_path: String,
     val vote_average: Double,
-    val vote_count: Int
-)
+    val vote_count: Int, override var respons: Boolean
+) : ApiRespons()
