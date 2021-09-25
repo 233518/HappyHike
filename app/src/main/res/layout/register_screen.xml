@@ -5,116 +5,102 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    android:background="@drawable/abc"
+    android:background="@drawable/gradient_background"
     tools:context=".scenes.LoginScene">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.utils.widget.ImageFilterView
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/logo_login"
             android:layout_width="356dp"
             android:layout_height="162dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="80dp"
             android:src="@drawable/filmatorylogo"
-            app:layout_constraintBottom_toTopOf="@+id/registerEmailTextField"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_centerHorizontal="true"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registerEmailTextField"
+            android:id="@+id/regEmailField"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="50dp"
+            android:layout_below="@id/logo_login"
             android:background="@color/input_bg_color"
             android:hint="@string/email"
+            android:layout_centerHorizontal="true"
             android:textColorHint="@color/white"
-            app:hintTextColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registerPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/input_bg_color"
-            android:hint="@string/password"
-            android:textColorHint="@color/white"
-            app:hintTextColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerEmailTextField">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textColorHighlight="#FFFFFF" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registerConfirmPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/input_bg_color"
-            android:hint="@string/confirm_password"
-            android:textColorHint="@color/white"
-            app:hintTextColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerPassword">
+            app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/white" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegPasswordField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/input_bg_color"
+            android:hint="@string/password"
+            android:textColorHint="@color/white"
+            app:hintTextColor="@color/white"
+            app:endIconMode="password_toggle"
+            android:layout_below="@+id/regEmailField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHighlight="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/regPasswordRepeatField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/input_bg_color"
+            android:hint="@string/password"
+            android:textColorHint="@color/white"
+            app:hintTextColor="@color/white"
+            app:endIconMode="password_toggle"
+            android:layout_below="@+id/RegPasswordField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHighlight="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/registerSubmitBtn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginTop="92dp"
-            android:backgroundTint="@color/green"
-            android:text="Registrer"
-            android:textColor="@color/btnColor"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerConfirmPassword" />
-
-        <Button
-            android:id="@+id/registerCancelBtn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="92dp"
-            android:layout_marginEnd="84dp"
-            android:backgroundTint="@color/green"
-            android:text="Angre"
-            android:textColor="@color/btnColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registerConfirmPassword" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:id="@+id/reg_btn"
+            android:layout_below="@+id/regPasswordRepeatField"
+            android:text="@string/register"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_width="200dp"
+            android:layout_height="55dp"
+            android:background="@drawable/green_btn"
+            android:shadowColor="#A8A8A8"
+            android:shadowRadius="5"
+            />
+    </RelativeLayout>
 
     <include
         layout="@layout/toolbar"
