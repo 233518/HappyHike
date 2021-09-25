@@ -13,7 +13,7 @@ import com.example.filmatory.scenes.*
 import com.google.android.material.navigation.NavigationView
 
 class NavSystem(appCompatActivity: AppCompatActivity){
-    lateinit var toggle: ActionBarDrawerToggle
+    var toggle: ActionBarDrawerToggle
     private var drawerLayout: DrawerLayout = appCompatActivity.findViewById(R.id.drawer_layout)
     private var navigationView: NavigationView = appCompatActivity.findViewById(R.id.nav_view)
     private var toolbar: Toolbar = appCompatActivity.findViewById(R.id.main_toolbar)
@@ -85,7 +85,5 @@ class NavSystem(appCompatActivity: AppCompatActivity){
             }
             true
         }
-
     }
-
 }
