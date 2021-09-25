@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/mint_cream">
 
 
     <ScrollView
@@ -52,212 +52,94 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
-                android:text="Movie Title 1"
+                android:text="@string/discoverMovies"
+                android:textSize="20sp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/header_image" />
 
-            <HorizontalScrollView
-                android:id="@+id/horizontal_slider_1"
+            <RelativeLayout
+                android:id="@+id/slider_one"
                 android:layout_width="match_parent"
-                android:layout_height="206dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/categoryTxt1">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/slider_recycler_view"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <ImageButton
-                        android:id="@+id/movie1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/movie1" />
-
-                    <ImageButton
-                        android:id="@+id/movie2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        app:layout_constraintStart_toEndOf="@id/movie1"
-                        app:layout_constraintTop_toTopOf="@id/movie1"
-                        app:srcCompat="@drawable/movie2" />
-
-                    <ImageButton
-                        android:id="@+id/movie3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie2"
-                        app:layout_constraintTop_toTopOf="@id/movie2"
-                        app:srcCompat="@drawable/movie3" />
-
-                    <ImageButton
-                        android:id="@+id/movie4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie3"
-                        app:layout_constraintTop_toTopOf="@id/movie3"
-                        app:srcCompat="@drawable/movie4" />
-
-                    <ImageButton
-                        android:id="@+id/movie5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie4"
-                        app:layout_constraintTop_toTopOf="@id/movie4"
-                        app:srcCompat="@drawable/movie5" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </HorizontalScrollView>
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/categoryTxt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
-                android:text="Movie Title 2"
+                android:text="@string/discoverTvs"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@id/categoryTxt1"
-                app:layout_constraintTop_toBottomOf="@id/horizontal_slider_1" />
-
-            <HorizontalScrollView
-                android:id="@+id/horizontal_slider_2"
-                android:layout_width="match_parent"
-                android:layout_height="206dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider_one" />
+            <RelativeLayout
+                android:id="@+id/slider_two"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/categoryTxt2">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/slider_recycler_view2"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-
-                    <ImageButton
-                        android:id="@+id/movie6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/movie6" />
-
-                    <ImageButton
-                        android:id="@+id/movie7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        app:layout_constraintStart_toEndOf="@id/movie6"
-                        app:layout_constraintTop_toTopOf="@id/movie6"
-                        app:srcCompat="@drawable/movie7" />
-
-                    <ImageButton
-                        android:id="@+id/movie8"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie7"
-                        app:layout_constraintTop_toTopOf="@id/movie7"
-                        app:srcCompat="@drawable/movie8" />
-
-                    <ImageButton
-                        android:id="@+id/movie9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie8"
-                        app:layout_constraintTop_toTopOf="@id/movie8"
-                        app:srcCompat="@drawable/movie9" />
-
-                    <ImageButton
-                        android:id="@+id/movie10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie9"
-                        app:layout_constraintTop_toTopOf="@id/movie9"
-                        app:srcCompat="@drawable/movie10" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </HorizontalScrollView>
-
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/categoryTxt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
-                android:text="Movie Title 3"
+                android:text="@string/recMovies"
+                android:textSize="20sp"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toStartOf="@id/categoryTxt2"
-                app:layout_constraintTop_toBottomOf="@id/horizontal_slider_2" />
-
-            <HorizontalScrollView
-                android:id="@+id/horizontal_slider_3"
-                android:layout_width="match_parent"
-                android:layout_height="206dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider_two" />
+            <RelativeLayout
+                android:id="@+id/slider_three"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/categoryTxt3">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/slider_recycler_view3"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/categoryTxt4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/recTvs"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/slider_three" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/categoryTxt4">
 
-                    <ImageButton
-                        android:id="@+id/movie11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/movie11" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/slider_recycler_view4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
 
-                    <ImageButton
-                        android:id="@+id/movie12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        app:layout_constraintStart_toEndOf="@id/movie11"
-                        app:layout_constraintTop_toTopOf="@id/movie11"
-                        app:srcCompat="@drawable/movie12" />
-
-                    <ImageButton
-                        android:id="@+id/movie13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie12"
-                        app:layout_constraintTop_toTopOf="@id/movie12"
-                        app:srcCompat="@drawable/movie13" />
-
-                    <ImageButton
-                        android:id="@+id/movie14"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie13"
-                        app:layout_constraintTop_toTopOf="@id/movie13"
-                        app:srcCompat="@drawable/movie14" />
-
-                    <ImageButton
-                        android:id="@+id/movie15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintStart_toEndOf="@id/movie14"
-                        app:layout_constraintTop_toTopOf="@id/movie14"
-                        app:srcCompat="@drawable/movie15" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </HorizontalScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -12,5 +12,8 @@
     <color name="dark_grey">#666666</color>
     <color name="silver">#CCCCCC</color>
     <color name="green">#669933</color>
-    <color name="header_color">#91C690</color>
+    <color name="toolbar_color">#F18F01</color>
+    <color name="card_color">#705D56</color>
+    <color name="black_coffee">#32292F</color>
+    <color name="mint_cream">#F0F7F4</color>
 </resources>
