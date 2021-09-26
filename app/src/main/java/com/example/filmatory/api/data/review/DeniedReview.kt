@@ -1,4 +1,4 @@
-package com.example.filmatory.api
+package com.example.filmatory.api.data.review
 
 data class DeniedReview(
     val __v: Int,
@@ -9,6 +9,5 @@ data class DeniedReview(
     val stars: Int,
     val text: String,
     val tvId: Any,
-    val userId: String,
-    override var respons: Boolean
-) : ApiRespons()
+    val userId: String
+)

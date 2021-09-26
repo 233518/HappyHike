@@ -1,4 +1,4 @@
-package com.example.filmatory.api
+package com.example.filmatory.api.data.review
 
 data class PendingReview(
     val __v: Int,
@@ -7,6 +7,5 @@ data class PendingReview(
     val movieId: Int,
     val stars: Int,
     val text: String,
-    val tvId: Any,
-    val userId: String, override var respons: Boolean
-) : ApiRespons()
+    val tvId: Any
+)

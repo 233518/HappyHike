@@ -1,4 +1,4 @@
-package com.example.filmatory.api
+package com.example.filmatory.api.data.movie
 
 data class MovieFrontpageItem(
     val adult: Boolean,
@@ -15,5 +15,5 @@ data class MovieFrontpageItem(
     val title: String,
     val video: Boolean,
     val vote_average: Double,
-    val vote_count: Int, override var respons: Boolean
-) : ApiRespons()
+    val vote_count: Int
+)

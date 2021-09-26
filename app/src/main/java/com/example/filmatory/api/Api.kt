@@ -9,7 +9,7 @@ class Api {
     private var onApiRequestFinishedListener: OnApiRequestFinishedListener? = null
     private var requestId: Int? = null
 
-    fun runRequest(url: String, callback : OnApiRequestFinishedListener, requestId: Int, function: (apiRespons : ApiRespons) -> Unit) {
+    fun runRequest(url: String, callback : OnApiRequestFinishedListener, requestId: Int, function: (any : Any) -> Unit) {
         this.onApiRequestFinishedListener = callback
         this.requestId = requestId
         val request = Request.Builder()

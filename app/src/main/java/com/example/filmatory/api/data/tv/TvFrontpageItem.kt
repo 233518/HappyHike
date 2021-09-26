@@ -1,4 +1,4 @@
-package com.example.filmatory.api
+package com.example.filmatory.api.data.tv
 
 data class TvFrontpageItem(
     val backdrop_path: String,
@@ -13,6 +13,5 @@ data class TvFrontpageItem(
     val overview: String,
     val popularity: Double,
     val poster_path: String,
-    val vote_average: Double,
-    val vote_count: Int, override var respons: Boolean
-) : ApiRespons()
+    val vote_average: Double
+)

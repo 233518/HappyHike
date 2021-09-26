@@ -3,7 +3,6 @@ package com.example.filmatory.controllers
 import android.content.Intent
 import android.widget.TextView
 import com.example.filmatory.R
-import com.example.filmatory.api.ApiRespons
 import com.example.filmatory.scenes.LoginScene
 import com.example.filmatory.scenes.RegisterScene
 
@@ -28,7 +27,7 @@ class LoginController(loginScene: LoginScene) : MainController(loginScene) {
     }
 
     //Just a test function for API
-    fun printTest(apiRespons: ApiRespons) {
-        println(apiRespons)
+    fun printTest(any: Any) {
+        println(any)
     }
 }
