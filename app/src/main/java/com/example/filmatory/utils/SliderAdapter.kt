@@ -1,22 +1,22 @@
 package com.example.filmatory.utils
 
 import android.content.Context
-import android.widget.ImageView
-import android.widget.TextView
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.scenes.MovieScene
 import com.example.filmatory.systems.media.MediaItem
 
 
-class RecyclerViewAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+class SliderAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false)
         )
     }
 
@@ -43,9 +43,9 @@ class RecyclerViewAdapter(private val arrayList: MutableList<MediaItem>, private
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val itemImage: ImageView = view.findViewById(R.id.media_image)
-        val itemTitle: TextView = view.findViewById(R.id.media_title)
-        val itemDate: TextView = view.findViewById(R.id.media_date)
+        val itemImage: ImageView = view.findViewById(R.id.slider_image)
+        val itemTitle: TextView = view.findViewById(R.id.slider_title)
+        val itemDate: TextView = view.findViewById(R.id.slider_date)
     }
 
 }

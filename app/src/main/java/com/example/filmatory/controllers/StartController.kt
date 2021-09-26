@@ -6,13 +6,14 @@ import com.example.filmatory.R
 import com.example.filmatory.scenes.StartScene
 import com.example.filmatory.systems.media.MediaItem
 import com.example.filmatory.utils.RecyclerViewAdapter
+import com.example.filmatory.utils.SliderAdapter
 
 class StartController(startScene: StartScene) : MainController(startScene) {
     val startScene = startScene
 
     init {
         val discoverMoviesArraylist: MutableList<MediaItem> = ArrayList()
-        val discoverMoviesAdapter = RecyclerViewAdapter(discoverMoviesArraylist,startScene)
+        val discoverMoviesAdapter = SliderAdapter(discoverMoviesArraylist,startScene)
         val discoverMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view)
         discoverMoviesArraylist.add(MediaItem("Movie 1", "Dato 1", R.drawable.movie1))
         discoverMoviesArraylist.add(MediaItem("Movie 2", "Dato 2", R.drawable.movie2))
@@ -23,18 +24,18 @@ class StartController(startScene: StartScene) : MainController(startScene) {
         discoverMoviesRecyclerView.adapter = discoverMoviesAdapter
 
         val discoverTvsArrayList: MutableList<MediaItem> = ArrayList()
-        val discoverTvsAdapter = RecyclerViewAdapter(discoverTvsArrayList,startScene)
+        val discoverTvsAdapter = SliderAdapter(discoverTvsArrayList,startScene)
         val discoverTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view2)
-        discoverTvsArrayList.add(MediaItem("Movie 6", "Dato 6", R.drawable.movie6))
-        discoverTvsArrayList.add(MediaItem("Movie 7", "Dato 7", R.drawable.movie7))
-        discoverTvsArrayList.add(MediaItem("Movie 8", "Dato 8", R.drawable.movie8))
-        discoverTvsArrayList.add(MediaItem("Movie 9", "Dato 9", R.drawable.movie9))
-        discoverTvsArrayList.add(MediaItem("Movie 10", "Dato 10", R.drawable.movie10))
+        discoverTvsArrayList.add(MediaItem("Tv 1", "Dato 6", R.drawable.movie6))
+        discoverTvsArrayList.add(MediaItem("Tv 2", "Dato 7", R.drawable.movie7))
+        discoverTvsArrayList.add(MediaItem("Tv 3", "Dato 8", R.drawable.movie8))
+        discoverTvsArrayList.add(MediaItem("Tv 4", "Dato 9", R.drawable.movie9))
+        discoverTvsArrayList.add(MediaItem("Tv 5", "Dato 10", R.drawable.movie10))
         discoverTvsRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
         discoverTvsRecyclerView.adapter = discoverTvsAdapter
 
         val recMoviesArrayList: MutableList<MediaItem> = ArrayList()
-        val redMoviesAdapter = RecyclerViewAdapter(recMoviesArrayList, startScene)
+        val redMoviesAdapter = SliderAdapter(recMoviesArrayList, startScene)
         val recMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view3)
         recMoviesArrayList.add(MediaItem("Movie 11", "Dato 11", R.drawable.movie11))
         recMoviesArrayList.add(MediaItem("Movie 12", "Dato 12", R.drawable.movie12))
@@ -45,13 +46,13 @@ class StartController(startScene: StartScene) : MainController(startScene) {
         recMoviesRecyclerView.adapter = redMoviesAdapter
 
         val recTvsArrayList: MutableList<MediaItem> = ArrayList()
-        val recTvsAdapter = RecyclerViewAdapter(recTvsArrayList, startScene)
+        val recTvsAdapter = SliderAdapter(recTvsArrayList, startScene)
         val recTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view4)
-        recTvsArrayList.add(MediaItem("Movie 16", "Dato 16", R.drawable.movie16))
-        recTvsArrayList.add(MediaItem("Movie 17", "Dato 17", R.drawable.movie17))
-        recTvsArrayList.add(MediaItem("Movie 18", "Dato 18", R.drawable.movie18))
-        recTvsArrayList.add(MediaItem("Movie 19", "Dato 19", R.drawable.movie19))
-        recTvsArrayList.add(MediaItem("Movie 20", "Dato 20", R.drawable.movie20))
+        recTvsArrayList.add(MediaItem("Tv 6", "Dato 16", R.drawable.movie16))
+        recTvsArrayList.add(MediaItem("Tv 7", "Dato 17", R.drawable.movie17))
+        recTvsArrayList.add(MediaItem("Tv 8", "Dato 18", R.drawable.movie18))
+        recTvsArrayList.add(MediaItem("Tv 9", "Dato 19", R.drawable.movie19))
+        recTvsArrayList.add(MediaItem("Tv 10", "Dato 20", R.drawable.movie20))
         recTvsRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
         recTvsRecyclerView.adapter = recTvsAdapter
     }
