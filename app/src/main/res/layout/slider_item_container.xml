@@ -2,27 +2,38 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="160dp"
+    android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:adjustViewBounds="true"
     app:strokeWidth="1dp"
     app:strokeColor="@color/black_coffee"
     app:cardElevation="0dp"
-    android:layout_marginRight="15dp"
+    app:cardBackgroundColor="@color/slider_card_color"
+    app:cardCornerRadius="20dp"
     android:layout_marginBottom="25dp"
-    app:cardBackgroundColor="@color/mint_cream">
+    android:layout_marginEnd="20dp">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/slider_image"
+            android:layout_width="150dp"
+            android:layout_height="230dp"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/movie9"
+
+            />
+
+<!--        <ImageView
+            android:id="@+id/slider_image2"
             android:layout_width="match_parent"
-            android:layout_height="206dp"
+            android:layout_height="226dp"
             android:layout_marginTop="10dp"
             android:layout_marginStart="25dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/movie9"/>
+            android:src="@drawable/movie9"/>-->
 
         <TextView
             android:id="@+id/slider_title"
@@ -30,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/slider_image"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black" />
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/slider_date"
@@ -40,6 +51,6 @@
             android:layout_below="@+id/slider_title"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

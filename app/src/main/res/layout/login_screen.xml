@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    android:background="@drawable/gradient_background"
     tools:context=".scenes.LoginScene">
-
+    <ImageView
+        android:id="@+id/loginImgView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
     <RelativeLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/login_overlay_color">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/logo_login"
@@ -92,7 +96,7 @@
                 android:layout_height="1dp"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/regHereBtn"
-                android:background="@color/black_coffee" />
+                android:background="@color/white" />
     </RelativeLayout>
 
     <include

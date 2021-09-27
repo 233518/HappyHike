@@ -21,8 +21,8 @@ class SliderAdapter(private val arrayList: MutableList<MediaItem>, private val c
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemTitle.setText(arrayList[position].title)
-        holder.itemDate.setText(arrayList[position].date)
+        holder.itemTitle.text = arrayList[position].title
+        holder.itemDate.text = arrayList[position].date
         holder.itemImage.setImageResource(arrayList[position].image)
 
         holder.itemView.setOnClickListener {
