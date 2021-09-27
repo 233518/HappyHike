@@ -6,7 +6,7 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.MovieController
 import com.example.filmatory.utils.BlurImage
 
-class MovieScene : AppCompatActivity() {
+class MovieScene : SuperScene() {
     private lateinit var movieController : MovieController
     private var blurImage: BlurImage = BlurImage()
     override fun onCreate(savedInstanceState: Bundle?) {

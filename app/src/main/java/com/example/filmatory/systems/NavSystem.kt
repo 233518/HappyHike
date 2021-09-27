@@ -1,9 +1,6 @@
 package com.example.filmatory.systems
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,23 +11,14 @@ import com.example.filmatory.scenes.*
 import com.google.android.material.navigation.NavigationView
 
 import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
 
-
-class NavSystem(appCompatActivity: AppCompatActivity){
+class NavSystem(appCompatActivity: AppCompatActivity)  {
     var toggle: ActionBarDrawerToggle
     private var drawerLayout: DrawerLayout = appCompatActivity.findViewById(R.id.drawer_layout)
     private var navigationView: NavigationView = appCompatActivity.findViewById(R.id.nav_view)
     private var toolbar: Toolbar = appCompatActivity.findViewById(R.id.main_toolbar)
 
     init{
-
-/*        override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-            appCompatActivity.menuInflater.inflate(R.menu.toolbar_menu, menu)
-            return true
-        }*/
         appCompatActivity.setSupportActionBar(toolbar)
         toggle = ActionBarDrawerToggle(
             appCompatActivity,

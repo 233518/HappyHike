@@ -12,7 +12,7 @@ import com.example.filmatory.systems.NavSystem
 import com.example.filmatory.systems.media.MediaItem
 import com.example.filmatory.utils.RecyclerViewAdapter
 
-class TvsScene : AppCompatActivity() {
+class TvsScene : SuperScene() {
     private lateinit var tvsController: TvsController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,7 +6,7 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.StartController
 import com.example.filmatory.utils.BlurImage
 
-class StartScene : AppCompatActivity() {
+class StartScene : SuperScene() {
     private lateinit var startController: StartController
     private var blurImage: BlurImage = BlurImage()
 

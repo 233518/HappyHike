@@ -10,7 +10,7 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.TvController
 import com.example.filmatory.systems.NavSystem
 
-class TvScene : AppCompatActivity() {
+class TvScene : SuperScene() {
     private lateinit var tvController: TvController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

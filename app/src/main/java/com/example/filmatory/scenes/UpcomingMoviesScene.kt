@@ -7,7 +7,7 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.UpcomingMoviesController
 
 
-class UpcomingMoviesScene : AppCompatActivity() {
+class UpcomingMoviesScene : SuperScene() {
     private lateinit var upcomingMoviesController: UpcomingMoviesController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,7 +7,7 @@ import com.example.filmatory.controllers.RegisterController
 import com.example.filmatory.utils.BlurImage
 
 
-class RegisterScene : AppCompatActivity() {
+class RegisterScene : SuperScene() {
     private lateinit var registerController: RegisterController
     private var blurImage: BlurImage = BlurImage()
     override fun onCreate(savedInstanceState: Bundle?) {
