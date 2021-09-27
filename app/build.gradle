@@ -5,6 +5,9 @@ plugins {
 }
 
 android {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     compileSdk 31
 
     defaultConfig {
