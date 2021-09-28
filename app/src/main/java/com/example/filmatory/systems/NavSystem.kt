@@ -59,8 +59,8 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
                         "Clicked item", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_user_profile -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, AccountScene::class.java)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_favorites -> {
                     Toast.makeText(appCompatActivity.applicationContext,
@@ -75,7 +75,7 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
                         "Clicked item", Toast.LENGTH_SHORT).show()
                 }
                 R.id.nav_user_logout -> {
-                    val intent = Intent(appCompatActivity, RegisterScene::class.java)
+                    val intent = Intent(appCompatActivity, StartScene::class.java)
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_login -> {

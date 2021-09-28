@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    tools:context=".scenes.LoginScene">
+
+    <ImageView
+        android:id="@+id/account_imgView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/overlay_50per">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:text="Hello Sivert"
+            android:fontFamily="@font/roboto"
+            android:textSize="22sp"
+            android:textColor="@color/white"/>
+        <LinearLayout
+            android:id="@+id/account_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/account_cardOne"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="150dp"
+                android:layout_weight=".5"
+                android:layout_marginStart="30dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/acc_info"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="18sp"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/account_cardTwo"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_weight=".5"
+                android:layout_marginTop="150dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/favorites"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/roboto"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"/>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="450dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/account_cardThree"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_weight=".5"
+                android:layout_marginStart="30dp"
+                app:strokeColor="@color/white"
+                app:strokeWidth="1dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:text="@string/watchlist"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/account_cardFour"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_weight=".5"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/mylists"
+                    android:fontFamily="@font/roboto"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"/>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include
+        layout="@layout/toolbar"
+        />
+    <include
+        layout="@layout/nav_drawer"
+        />
+</androidx.drawerlayout.widget.DrawerLayout>

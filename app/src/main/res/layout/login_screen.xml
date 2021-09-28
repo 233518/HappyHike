@@ -67,7 +67,7 @@
                 android:textColor="@color/white"
                 android:textColorHighlight="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_btn"
             android:layout_below="@+id/loginPasswordTextField"
             android:text="@string/login"

@@ -25,5 +25,9 @@
     <string name="login">Login</string>
     <string name="register">Registrer</string>
     <string name="registerHer">Registrer her!</string>
+    <string name="acc_info">Konto</string>
+    <string name="favorites">Favoritter</string>
+    <string name="watchlist">Sett-liste</string>
+    <string name="mylists">Mine Lister</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel iaculis massa. Nulla tincidunt purus leo, ultrices egestas sem aliquet mattis. Sed sed ornare mi. Maecenas congue semper quam in commodo. Praesent ac egestas quam. Donec tempor nisl et sapien lacinia tristique. Sed vel ipsum dolor. Nunc mollis purus orci, et tincidunt nisi finibus in. Vestibulum dignissim quam sit amet nibh posuere consequat. In accumsan dui facilisis lectus euismod facilisis. Cras et efficitur sem. Quisque at pharetra enim. Cras vel facilisis nunc. Suspendisse elementum nulla vel metus luctus tincidunt. Aliquam eleifend nisi non risus maximus feugiat. In a suscipit leo.</string>
 </resources>

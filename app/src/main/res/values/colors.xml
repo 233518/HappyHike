@@ -19,6 +19,8 @@
     <color name="black_coffee">#32292F</color>
     <color name="login_overlay_color">#8032292F</color>
     <color name="movie_overlay_color">#BF32292F</color>
+    <color name="overlay_50per">#8032292F</color>
+    <color name="overlay_75per">#BF32292F</color>
     <color name="mint_cream">#F0F7F4</color>
     <color name="test_color">#CC32292F</color>
 </resources>
