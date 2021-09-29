@@ -26,15 +26,6 @@
 
             />
 
-<!--        <ImageView
-            android:id="@+id/slider_image2"
-            android:layout_width="match_parent"
-            android:layout_height="226dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="25dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/movie9"/>-->
-
         <TextView
             android:id="@+id/slider_title"
             android:layout_width="wrap_content"

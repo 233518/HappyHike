@@ -9,8 +9,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.filmatory.R
 import com.example.filmatory.scenes.*
 import com.google.android.material.navigation.NavigationView
+import com.example.filmatory.scenes.fragments.FavoriteFragment
 
-import android.view.Menu
+
 
 class NavSystem(appCompatActivity: AppCompatActivity)  {
     var toggle: ActionBarDrawerToggle
@@ -20,6 +21,7 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
 
     init{
         appCompatActivity.setSupportActionBar(toolbar)
+        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle = ActionBarDrawerToggle(
             appCompatActivity,
         drawerLayout,
@@ -30,7 +32,7 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
@@ -63,16 +65,19 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_favorites -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, AccountInfoScene::class.java)
+                    intent.putExtra("position", 1)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_watchlist -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, AccountInfoScene::class.java)
+                    intent.putExtra("position", 2)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_my_lists -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, AccountInfoScene::class.java)
+                    intent.putExtra("position", 3)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_logout -> {
                     val intent = Intent(appCompatActivity, StartScene::class.java)
