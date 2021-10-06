@@ -1,11 +1,11 @@
-package com.example.filmatory.controllers
+package com.example.filmatory.controllers.sceneControllers
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
-import com.example.filmatory.scenes.StartScene
-import com.example.filmatory.systems.media.MediaItem
-import com.example.filmatory.utils.RecyclerViewAdapter
+import com.example.filmatory.controllers.MainController
+import com.example.filmatory.scenes.activities.StartScene
+import com.example.filmatory.utils.MediaItem
 import com.example.filmatory.utils.SliderAdapter
 
 class StartController(startScene: StartScene) : MainController(startScene) {

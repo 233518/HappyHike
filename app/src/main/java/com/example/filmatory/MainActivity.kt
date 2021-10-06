@@ -3,7 +3,7 @@ package com.example.filmatory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
-import com.example.filmatory.scenes.StartScene
+import com.example.filmatory.scenes.activities.StartScene
 
 
 class MainActivity : AppCompatActivity() {

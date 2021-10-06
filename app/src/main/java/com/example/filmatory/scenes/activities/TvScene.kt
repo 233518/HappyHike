@@ -1,14 +1,9 @@
-package com.example.filmatory.scenes
+package com.example.filmatory.scenes.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.app.ActionBar
 import com.example.filmatory.R
-import com.example.filmatory.controllers.TvController
-import com.example.filmatory.systems.NavSystem
+import com.example.filmatory.controllers.sceneControllers.TvController
+import com.example.filmatory.scenes.SuperScene
 
 class TvScene : SuperScene() {
     private lateinit var tvController: TvController

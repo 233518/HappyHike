@@ -1,8 +1,9 @@
-package com.example.filmatory.scenes
+package com.example.filmatory.scenes.activities
 
 import android.os.Bundle
 import com.example.filmatory.R
-import com.example.filmatory.controllers.LoginController
+import com.example.filmatory.controllers.sceneControllers.LoginController
+import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.utils.BlurImage
 
 class LoginScene : SuperScene() {

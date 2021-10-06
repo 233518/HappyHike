@@ -1,4 +1,4 @@
-package com.example.filmatory.systems.api
+package com.example.filmatory.systems
 
 import com.example.filmatory.api.*
 import com.example.filmatory.api.data.movie.Movie

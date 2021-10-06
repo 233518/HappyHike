@@ -1,11 +1,11 @@
-package com.example.filmatory.scenes
+package com.example.filmatory.scenes.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.example.filmatory.R
-import com.example.filmatory.controllers.AccountController
+import com.example.filmatory.controllers.sceneControllers.AccountController
+import com.example.filmatory.scenes.SuperScene
 
 import com.example.filmatory.utils.BlurImage
 

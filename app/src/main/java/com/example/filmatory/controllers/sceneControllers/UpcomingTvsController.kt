@@ -1,18 +1,18 @@
-package com.example.filmatory.controllers
+package com.example.filmatory.controllers.sceneControllers
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
-import com.example.filmatory.scenes.TvsScene
-import com.example.filmatory.systems.media.MediaItem
+import com.example.filmatory.controllers.MainController
+import com.example.filmatory.scenes.activities.UpcomingTvsScene
+import com.example.filmatory.utils.MediaItem
 import com.example.filmatory.utils.RecyclerViewAdapter
 
-class TvsController(tvsScene: TvsScene) : MainController(tvsScene) {
-    val tvsScene = tvsScene
-
+class UpcomingTvsController(upcomingTvsScene: UpcomingTvsScene) : MainController(upcomingTvsScene) {
+    val upcomingTvsScene = upcomingTvsScene
     init {
         val arrayList: MutableList<MediaItem> = ArrayList()
-        var recyclerView: RecyclerView = tvsScene.findViewById(R.id.recyclerView)
+        var recyclerView: RecyclerView = upcomingTvsScene.findViewById(R.id.recyclerView)
         arrayList.add(MediaItem("TV 1", "Dato 1", R.drawable.movie1))
         arrayList.add(MediaItem("TV 2", "Dato 2", R.drawable.movie2))
         arrayList.add(MediaItem("TV 3", "Dato 3", R.drawable.movie3))
@@ -24,9 +24,9 @@ class TvsController(tvsScene: TvsScene) : MainController(tvsScene) {
         arrayList.add(MediaItem("TV 9", "Dato 9", R.drawable.movie9))
         arrayList.add(MediaItem("TV 10", "Dato 10", R.drawable.movie10))
 
-        val myAdapter = RecyclerViewAdapter(arrayList, tvsScene)
+        val myAdapter = RecyclerViewAdapter(arrayList, upcomingTvsScene)
 
-        recyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+        recyclerView.layoutManager = GridLayoutManager(upcomingTvsScene, 2)
         recyclerView.adapter = myAdapter
     }
 }

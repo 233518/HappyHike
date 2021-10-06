@@ -31,66 +31,66 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.LoginScene"
+            android:name="com.example.filmatory.scenes.activities.LoginScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.RegisterScene"
+            android:name="com.example.filmatory.scenes.activities.RegisterScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.MoviesScene"
+            android:name="com.example.filmatory.scenes.activities.MoviesScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.MovieScene"
+            android:name="com.example.filmatory.scenes.activities.MovieScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.StartScene"
+            android:name="com.example.filmatory.scenes.activities.StartScene"
             android:exported="true"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.TvScene"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden" >
-        </activity>
-        <activity
-            android:name="com.example.filmatory.scenes.UpcomingMoviesScene"
+            android:name="com.example.filmatory.scenes.activities.TvScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.UpcomingTvsScene"
+            android:name="com.example.filmatory.scenes.activities.UpcomingMoviesScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.TvsScene"
+            android:name="com.example.filmatory.scenes.activities.UpcomingTvsScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.AccountScene"
+            android:name="com.example.filmatory.scenes.activities.TvsScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.AccountInfoScene"
+            android:name="com.example.filmatory.scenes.activities.AccountScene"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        <activity
+            android:name="com.example.filmatory.scenes.activities.AccountInfoScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
