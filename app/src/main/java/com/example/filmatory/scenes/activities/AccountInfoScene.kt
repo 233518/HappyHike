@@ -1,6 +1,9 @@
-package com.example.filmatory.scenes
+package com.example.filmatory.scenes.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.filmatory.R
 import com.example.filmatory.controllers.AccountInfoController
@@ -23,7 +26,7 @@ class AccountInfoScene : SuperScene() {
 
         val defaultPage = 0
         val page = intent.getIntExtra("position", defaultPage)
-        viewPager2.currentItem = page
+        viewPager2.setCurrentItem(page)
 
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {

@@ -1,10 +1,11 @@
-package com.example.filmatory.controllers
+package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
 import android.widget.TextView
 import com.example.filmatory.R
-import com.example.filmatory.scenes.LoginScene
-import com.example.filmatory.scenes.RegisterScene
+import com.example.filmatory.controllers.MainController
+import com.example.filmatory.scenes.activities.LoginScene
+import com.example.filmatory.scenes.activities.RegisterScene
 
 class LoginController(loginScene: LoginScene) : MainController(loginScene) {
     val loginScene = loginScene

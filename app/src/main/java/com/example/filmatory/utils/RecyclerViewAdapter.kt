@@ -9,8 +9,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.filmatory.R
-import com.example.filmatory.scenes.MovieScene
-import com.example.filmatory.systems.media.MediaItem
+import com.example.filmatory.scenes.activities.MovieScene
 
 
 class RecyclerViewAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {

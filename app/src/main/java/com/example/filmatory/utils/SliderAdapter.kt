@@ -9,8 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
-import com.example.filmatory.scenes.MovieScene
-import com.example.filmatory.systems.media.MediaItem
+import com.example.filmatory.scenes.activities.MovieScene
 
 
 class SliderAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {

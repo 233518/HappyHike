@@ -7,10 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.filmatory.R
-import com.example.filmatory.scenes.*
+import com.example.filmatory.scenes.activities.*
 import com.google.android.material.navigation.NavigationView
-import com.example.filmatory.scenes.fragments.FavoriteFragment
-
 
 
 class NavSystem(appCompatActivity: AppCompatActivity)  {

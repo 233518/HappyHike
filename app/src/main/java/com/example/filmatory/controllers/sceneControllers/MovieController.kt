@@ -1,9 +1,10 @@
-package com.example.filmatory.controllers
+package com.example.filmatory.controllers.sceneControllers
 
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.filmatory.R
-import com.example.filmatory.scenes.MovieScene
+import com.example.filmatory.controllers.MainController
+import com.example.filmatory.scenes.activities.MovieScene
 
 class MovieController(movieScene: MovieScene) : MainController(movieScene) {
     val movieScene = movieScene
