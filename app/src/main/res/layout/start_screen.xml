@@ -19,7 +19,9 @@
                 android:id="@+id/startscreen_imgView"
                 android:layout_width="match_parent"
                 android:layout_height="2000dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/start_screen_scene_background"
+                />
 
             <ImageView
                 android:id="@+id/header_image"

@@ -5,18 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".scenes.LoginScene">
+    tools:context=".scenes.RegisterScene">
     <ImageView
         android:id="@+id/regImgView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/register_scene_background"/>
 
     <RelativeLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/login_overlay_color">
+        android:background="@color/overlay_50per">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/logo_login"

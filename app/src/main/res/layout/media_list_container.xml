@@ -8,7 +8,8 @@
         android:id="@+id/mediaImgView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/movies_scene_background"/>
 
     <LinearLayout
         android:background="@color/overlay_75per"

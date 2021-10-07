@@ -2,21 +2,16 @@ package com.example.filmatory.scenes
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.example.filmatory.R
 import com.example.filmatory.controllers.AccountController
 
-import com.example.filmatory.utils.BlurImage
-
 class AccountScene : SuperScene() {
     private lateinit var accountController: AccountController
-    private var blurImage: BlurImage = BlurImage()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
         accountController = AccountController(this)
-        blurImage.blurImage(this, R.drawable.image10, findViewById(R.id.account_imgView))
 
         var accountCardView = findViewById<CardView>(R.id.account_cardOne)
         var favoriteCardView = findViewById<CardView>(R.id.account_cardTwo)

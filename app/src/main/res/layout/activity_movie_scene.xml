@@ -10,7 +10,8 @@
         android:id="@+id/movie_imgView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/movie_scene_background"/>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

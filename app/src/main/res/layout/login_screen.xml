@@ -7,15 +7,17 @@
     android:id="@+id/drawer_layout"
     tools:context=".scenes.LoginScene">
     <ImageView
-        android:id="@+id/loginImgView"
+        android:id="@+id/startscreen_imgView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_scene_background"
+        />
     <RelativeLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/login_overlay_color">
+        android:background="@color/overlay_75per">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/logo_login"

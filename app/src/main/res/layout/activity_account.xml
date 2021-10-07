@@ -8,15 +8,17 @@
     tools:context=".scenes.LoginScene">
 
     <ImageView
-        android:id="@+id/account_imgView"
+        android:id="@+id/startscreen_imgView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
-
+        android:layout_height="2000dp"
+        android:scaleType="centerCrop"
+        android:src ="@drawable/account_menu_scene_background"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/overlay_75per">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

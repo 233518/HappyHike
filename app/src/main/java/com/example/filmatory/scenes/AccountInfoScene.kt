@@ -1,20 +1,15 @@
 package com.example.filmatory.scenes
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.filmatory.R
 import com.example.filmatory.controllers.AccountInfoController
-import com.example.filmatory.utils.BlurImage
 import com.example.filmatory.utils.ViewPageAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class AccountInfoScene : SuperScene() {
     private lateinit var accountInfoController: AccountInfoController
-    private var blurImage: BlurImage = BlurImage()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_information)
@@ -28,7 +23,7 @@ class AccountInfoScene : SuperScene() {
 
         val defaultPage = 0
         val page = intent.getIntExtra("position", defaultPage)
-        viewPager2.setCurrentItem(page)
+        viewPager2.currentItem = page
 
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
