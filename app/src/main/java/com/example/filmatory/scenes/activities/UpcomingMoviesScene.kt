@@ -4,8 +4,8 @@ package com.example.filmatory.scenes.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.R
-import com.example.filmatory.controllers.UpcomingMoviesController
-import com.example.filmatory.utils.BlurImage
+import com.example.filmatory.controllers.sceneControllers.UpcomingMoviesController
+import com.example.filmatory.scenes.SuperScene
 
 
 class UpcomingMoviesScene : SuperScene() {

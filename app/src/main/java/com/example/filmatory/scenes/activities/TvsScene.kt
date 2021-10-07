@@ -2,12 +2,9 @@ package com.example.filmatory.scenes.activities
 
 
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
-import com.example.filmatory.controllers.TvsController
+import com.example.filmatory.controllers.sceneControllers.TvsController
+import com.example.filmatory.scenes.SuperScene
 
 class TvsScene : SuperScene() {
     private lateinit var tvsController: TvsController
