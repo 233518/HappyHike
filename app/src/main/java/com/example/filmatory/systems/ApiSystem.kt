@@ -11,35 +11,36 @@ import com.example.filmatory.api.data.tv.TvFrontpage
 import com.example.filmatory.api.data.user.User
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
+import kotlin.reflect.KFunction1
 
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()
         get() = field
 
     //GET
-    fun requestApprovedReviewById(id : String, function: (any : Any) -> Unit) {
-        api.runRequestGet("/review/approved/get/$id", this, 1, function);
+    fun requestApprovedReviewById(id : String, function: (approvedReview : ApprovedReview) -> Unit) {
+        api.runRequestGet("/review/approved/get/$id", this, 1, function as (Any) -> Unit);
     }
-    fun requestDeniedReviewById(id : String, function: (any : Any) -> Unit) {
-        api.runRequestGet("/review/denied/get/$id", this, 2, function);
+    fun requestDeniedReviewById(id : String, function: (deniedReview : DeniedReview) -> Unit) {
+        api.runRequestGet("/review/denied/get/$id", this, 2, function as (Any) -> Unit);
     }
-    fun requestPendingReviewById(id : String, function: (any : Any) -> Unit) {
-        api.runRequestGet("/review/pending/get/$id", this, 3, function);
+    fun requestPendingReviewById(id : String, function: (pendingReview : PendingReview) -> Unit) {
+        api.runRequestGet("/review/pending/get/$id", this, 3, function as (Any) -> Unit);
     }
-    fun requestUser(id : String, function: (any : Any) -> Unit) {
-        api.runRequestGet("/user/get/$id", this, 4, function);
+    fun requestUser(id : String, function: (user : User) -> Unit) {
+        api.runRequestGet("/user/get/$id", this, 4, function as (Any) -> Unit);
     }
-    fun requestMovie(id : String, function: (any : Any) -> Unit) {
-        api.runRequestGet("/movie/get/$id", this, 5, function);
+    fun requestMovie(id : String, function: (movie : Movie) -> Unit) {
+        api.runRequestGet("/movie/get/$id", this, 5, function as (Any) -> Unit);
     }
-    fun requestMovieFrontpage(function: (any : Any) -> Unit) {
-        api.runRequestGet("/movie/frontpage", this, 6, function);
+    fun requestMovieFrontpage(function: (movieFrontPage : MovieFrontpage) -> Unit) {
+        api.runRequestGet("/movie/frontpage", this, 6, function as (Any) -> Unit);
     }
-    fun requestTV(id : String, function: (any : Any) -> Unit) {
-        api.runRequestGet("/tv/get/$id", this, 7, function);
+    fun requestTV(id : String, function: (tv : Tv) -> Unit) {
+        api.runRequestGet("/tv/get/$id", this, 7, function as (Any) -> Unit);
     }
-    fun requestTvFrontpage(function: (any : Any) -> Unit) {
-        api.runRequestGet("/tv/frontpage", this, 8, function);
+    fun requestTvFrontpage(function: (tvFrontPage : TvFrontpage) -> Unit) {
+        api.runRequestGet("/tv/frontpage", this, 8, function as (Any) -> Unit);
     }
 
     //POST
