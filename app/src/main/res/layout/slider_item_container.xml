@@ -22,17 +22,16 @@
             android:layout_height="230dp"
             android:adjustViewBounds="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/movie9"
-
-            />
+            android:src="@drawable/movie9" />
 
         <TextView
             android:id="@+id/slider_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/slider_image"
+            android:textSize="14sp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white" />
 
         <TextView
@@ -41,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/slider_title"
             android:layout_centerHorizontal="true"
+            android:textSize="12sp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/white"/>
     </RelativeLayout>

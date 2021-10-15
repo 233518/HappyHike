@@ -27,8 +27,7 @@
                 android:id="@+id/media_image"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/movie9" />
+                android:adjustViewBounds="true" />
 
             <TextView
                 android:id="@+id/media_title"

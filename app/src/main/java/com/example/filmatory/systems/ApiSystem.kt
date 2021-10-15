@@ -3,12 +3,15 @@ package com.example.filmatory.systems
 import com.example.filmatory.api.*
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieFrontpage
+import com.example.filmatory.api.data.movie.Movies
 import com.example.filmatory.api.data.movie.UpcomingMovies
 import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.api.data.review.DeniedReview
 import com.example.filmatory.api.data.review.PendingReview
 import com.example.filmatory.api.data.tv.Tv
 import com.example.filmatory.api.data.tv.TvFrontpage
+import com.example.filmatory.api.data.tv.Tvs
+import com.example.filmatory.api.data.tv.UpcomingTvs
 import com.example.filmatory.api.data.user.User
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
@@ -46,6 +49,15 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestMovieUpcoming(function: (upcomingMovies : UpcomingMovies) -> Unit) {
         api.runRequestGet("/movie/upcomingmovies", this, 9, function as (Any) -> Unit);
     }
+    fun requestMovies(function: (movies : Movies) -> Unit) {
+        api.runRequestGet("/movie/movies", this, 10, function as (Any) -> Unit);
+    }
+    fun requestTvs(function: (tvs : Tvs) -> Unit) {
+        api.runRequestGet("/tv/tvs", this, 11, function as (Any) -> Unit);
+    }
+    fun requestTvsUpcoming(function: (upcomingTvs : UpcomingTvs) -> Unit) {
+        api.runRequestGet("/tv/upcomingtvs", this, 12, function as (Any) -> Unit);
+    }
 
     //POST
     fun postUser(email : String, password : String, passwordRepeat : String, function: (any : Any) -> Unit) {
@@ -70,6 +82,9 @@ class ApiSystem : OnApiRequestFinishedListener {
             7 -> function(gson.fromJson(result, Tv::class.java))
             8 -> function(gson.fromJson(result, TvFrontpage::class.java))
             9 -> function(gson.fromJson(result, UpcomingMovies::class.java))
+            10 -> function(gson.fromJson(result, Movies::class.java))
+            11 -> function(gson.fromJson(result, Tvs::class.java))
+            12 -> function(gson.fromJson(result, UpcomingTvs::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")
             }
