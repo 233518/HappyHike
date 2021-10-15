@@ -69,6 +69,7 @@ class ApiSystem : OnApiRequestFinishedListener {
             6 -> function(gson.fromJson(result, MovieFrontpage::class.java))
             7 -> function(gson.fromJson(result, Tv::class.java))
             8 -> function(gson.fromJson(result, TvFrontpage::class.java))
+            9 -> function(gson.fromJson(result, UpcomingMovies::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")
             }
