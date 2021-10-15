@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.MovieScene
 
@@ -22,17 +23,21 @@ class SliderAdapter(private val arrayList: MutableList<MediaItem>, private val c
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemTitle.text = arrayList[position].title
         holder.itemDate.text = arrayList[position].date
-        holder.itemImage.setImageResource(arrayList[position].image)
+        Glide.with(this.context)
+            .load(arrayList[position].image)
+            .into(holder.itemImage)
 
         holder.itemView.setOnClickListener {
             val model = arrayList[position]
             val movieTitle: String = model.title
-            val movieImage: Int = model.image
+            val movieImage: String = model.image
             val movieDate: String = model.date
+            val movieId: Int = model.id
             val intent = Intent(context, MovieScene::class.java)
             intent.putExtra("movieTitle", movieTitle)
             intent.putExtra("moviePoster", movieImage)
             intent.putExtra("movieDate", movieDate)
+            intent.putExtra("movieId", movieId)
             context.startActivity(intent)
         }
     }
@@ -45,6 +50,7 @@ class SliderAdapter(private val arrayList: MutableList<MediaItem>, private val c
         val itemImage: ImageView = view.findViewById(R.id.slider_image)
         val itemTitle: TextView = view.findViewById(R.id.slider_title)
         val itemDate: TextView = view.findViewById(R.id.slider_date)
+        val itemId: Int? = null
     }
 
 }

@@ -25,7 +25,7 @@ class StartController(startScene: StartScene) : MainController(startScene) {
             val discoverMoviesAdapter = SliderAdapter(discoverMoviesArraylist,startScene)
             val discoverMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view)
             movieFrontpage.forEach{
-                    item -> discoverMoviesArraylist.add(MediaItem(item.original_title, item.release_date, R.drawable.movie1))
+                    item -> discoverMoviesArraylist.add(MediaItem(item.original_title, item.release_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
             }
             discoverMoviesRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             discoverMoviesRecyclerView.adapter = discoverMoviesAdapter
@@ -38,7 +38,7 @@ class StartController(startScene: StartScene) : MainController(startScene) {
             val discoverTvsAdapter = SliderAdapter(discoverTvsArrayList,startScene)
             val discoverTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view2)
             tvFrontpage.forEach{
-                    item -> discoverTvsArrayList.add(MediaItem(item.name, item.first_air_date, R.drawable.movie6))
+                    item -> discoverTvsArrayList.add(MediaItem(item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
             }
             discoverTvsRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             discoverTvsRecyclerView.adapter = discoverTvsAdapter
@@ -51,7 +51,7 @@ class StartController(startScene: StartScene) : MainController(startScene) {
             val redMoviesAdapter = SliderAdapter(recMoviesArrayList, startScene)
             val recMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view3)
             movieFrontpage.forEach{
-                    item -> recMoviesArrayList.add(MediaItem(item.original_title, item.release_date, R.drawable.movie15))
+                    item -> recMoviesArrayList.add(MediaItem(item.original_title, item.release_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
             }
             recMoviesRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             recMoviesRecyclerView.adapter = redMoviesAdapter
@@ -64,7 +64,7 @@ class StartController(startScene: StartScene) : MainController(startScene) {
             val recTvsAdapter = SliderAdapter(recTvsArrayList, startScene)
             val recTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view4)
             tvFrontpage.forEach{
-                    item -> recTvsArrayList.add(MediaItem(item.name, item.first_air_date, R.drawable.movie18))
+                    item -> recTvsArrayList.add(MediaItem(item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
             }
             recTvsRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             recTvsRecyclerView.adapter = recTvsAdapter

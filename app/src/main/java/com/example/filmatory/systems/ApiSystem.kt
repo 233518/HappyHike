@@ -3,6 +3,7 @@ package com.example.filmatory.systems
 import com.example.filmatory.api.*
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieFrontpage
+import com.example.filmatory.api.data.movie.UpcomingMovies
 import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.api.data.review.DeniedReview
 import com.example.filmatory.api.data.review.PendingReview
@@ -41,6 +42,9 @@ class ApiSystem : OnApiRequestFinishedListener {
     }
     fun requestTvFrontpage(function: (tvFrontPage : TvFrontpage) -> Unit) {
         api.runRequestGet("/tv/frontpage", this, 8, function as (Any) -> Unit);
+    }
+    fun requestMovieUpcoming(function: (upcomingMovies : UpcomingMovies) -> Unit) {
+        api.runRequestGet("/movie/upcomingmovies", this, 9, function as (Any) -> Unit);
     }
 
     //POST
