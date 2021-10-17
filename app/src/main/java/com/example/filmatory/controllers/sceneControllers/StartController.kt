@@ -1,5 +1,6 @@
 package com.example.filmatory.controllers.sceneControllers
 
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
@@ -9,6 +10,7 @@ import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.StartScene
 import com.example.filmatory.utils.MediaItem
 import com.example.filmatory.utils.SliderAdapter
+import com.example.filmatory.utils.TvSliderAdapter
 
 class StartController(startScene: StartScene) : MainController(startScene) {
     val startScene = startScene
@@ -35,7 +37,7 @@ class StartController(startScene: StartScene) : MainController(startScene) {
     fun discoverTvData(tvFrontpage: TvFrontpage){
         startScene.runOnUiThread(Runnable {
             val discoverTvsArrayList: MutableList<MediaItem> = ArrayList()
-            val discoverTvsAdapter = SliderAdapter(discoverTvsArrayList,startScene)
+            val discoverTvsAdapter = TvSliderAdapter(discoverTvsArrayList,startScene)
             val discoverTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view2)
             tvFrontpage.forEach{
                     item -> discoverTvsArrayList.add(MediaItem(item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
@@ -61,7 +63,7 @@ class StartController(startScene: StartScene) : MainController(startScene) {
     fun recTvData(tvFrontpage: TvFrontpage){
         startScene.runOnUiThread(Runnable {
             val recTvsArrayList: MutableList<MediaItem> = ArrayList()
-            val recTvsAdapter = SliderAdapter(recTvsArrayList, startScene)
+            val recTvsAdapter = TvSliderAdapter(recTvsArrayList, startScene)
             val recTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view4)
             tvFrontpage.forEach{
                     item -> recTvsArrayList.add(MediaItem(item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))

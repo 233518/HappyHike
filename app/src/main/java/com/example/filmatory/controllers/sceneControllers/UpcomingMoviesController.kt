@@ -1,5 +1,6 @@
 package com.example.filmatory.controllers.sceneControllers
 
+import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
@@ -14,7 +15,7 @@ class UpcomingMoviesController(upcomingMoviesScene: UpcomingMoviesScene) : MainC
     val upcomingMoviesScene = upcomingMoviesScene
     var upcomingMoviesRecyclerView: RecyclerView = upcomingMoviesScene.findViewById(R.id.recyclerView)
     var upcomingMoviesArrayList: MutableList<MediaItem> = ArrayList()
-    var upcomingMoviesAdapter = TvRecyclerViewAdapter(upcomingMoviesArrayList, upcomingMoviesScene)
+    var upcomingMoviesAdapter = RecyclerViewAdapter(upcomingMoviesArrayList, upcomingMoviesScene)
 
     init {
         upcomingMoviesRecyclerView.layoutManager = GridLayoutManager(upcomingMoviesScene, 2)

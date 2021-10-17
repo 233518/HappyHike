@@ -9,12 +9,13 @@ import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.UpcomingTvsScene
 import com.example.filmatory.utils.MediaItem
 import com.example.filmatory.utils.RecyclerViewAdapter
+import com.example.filmatory.utils.TvRecyclerViewAdapter
 
 class UpcomingTvsController(upcomingTvsScene: UpcomingTvsScene) : MainController(upcomingTvsScene) {
     val upcomingTvsScene = upcomingTvsScene
     val upcomingTvsArraylist: MutableList<MediaItem> = ArrayList()
     var upcomingTvsRecyclerView: RecyclerView = upcomingTvsScene.findViewById(R.id.recyclerView)
-    val upcomingTvsAdapter = RecyclerViewAdapter(upcomingTvsArraylist, upcomingTvsScene)
+    val upcomingTvsAdapter = TvRecyclerViewAdapter(upcomingTvsArraylist, upcomingTvsScene)
 
     init {
         upcomingTvsRecyclerView.layoutManager = GridLayoutManager(upcomingTvsScene, 2)
