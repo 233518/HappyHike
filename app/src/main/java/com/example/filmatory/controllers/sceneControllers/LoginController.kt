@@ -24,7 +24,7 @@ class LoginController(loginScene: LoginScene) : MainController(loginScene) {
             val intent = Intent(loginScene, RegisterScene::class.java)
             loginScene.startActivity(intent)
         }
-        apiSystem.postUser("hello123@protonmail.com", "Test1234!", "Test1234!", ::printTest)
+        //apiSystem.postUser("hello123@protonmail.com", "Test1234!", "Test1234!", ::printTest)
         //apiSystem.requestApprovedReviewById("60b3a9194001540015069d2c", ::printTest)
     }
 

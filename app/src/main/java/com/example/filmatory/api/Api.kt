@@ -16,6 +16,7 @@ class Api {
         client.newCall(request).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
                 callback.onSuccessRequest(response.body()?.string(), requestId, function)
+                response.close();
             }
             override fun onFailure(call: Call, e: IOException) {
                 TODO("Not yet implemented")
@@ -31,6 +32,7 @@ class Api {
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 callback.onSuccessRequest(response.body()?.string(), requestId, function)
+                response.close();
             }
             override fun onFailure(call: Call, e: IOException) {
                 TODO("Not yet implemented")
