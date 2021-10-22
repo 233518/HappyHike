@@ -5,6 +5,7 @@ import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.movie.Movies
 import com.example.filmatory.api.data.movie.UpcomingMovies
+import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.api.data.review.DeniedReview
 import com.example.filmatory.api.data.review.PendingReview
@@ -15,7 +16,6 @@ import com.example.filmatory.api.data.tv.UpcomingTvs
 import com.example.filmatory.api.data.user.User
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
-import kotlin.reflect.KFunction1
 
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()
@@ -58,6 +58,9 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestTvsUpcoming(function: (upcomingTvs : UpcomingTvs) -> Unit) {
         api.runRequestGet("/tv/upcomingtvs", this, 12, function as (Any) -> Unit);
     }
+    fun requestPerson(id : String, function: (person : Person) -> Unit) {
+        api.runRequestGet("/person/get/$id", this, 15, function as (Any) -> Unit);
+    }
 
     //POST
     fun postUser(email : String, password : String, passwordRepeat : String, function: (any : Any) -> Unit) {
@@ -85,6 +88,7 @@ class ApiSystem : OnApiRequestFinishedListener {
             10 -> function(gson.fromJson(result, Movies::class.java))
             11 -> function(gson.fromJson(result, Tvs::class.java))
             12 -> function(gson.fromJson(result, UpcomingTvs::class.java))
+            15 -> function(gson.fromJson(result, Person::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")
             }

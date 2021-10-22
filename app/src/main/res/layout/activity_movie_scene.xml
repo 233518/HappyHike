@@ -23,8 +23,8 @@
             android:layout_width="220dp"
             android:layout_height="350dp"
             android:layout_centerHorizontal="true"
-            android:background="#2d2d2d"
-            android:layout_marginTop="70dp"/>
+            android:layout_marginTop="70dp"
+            android:background="#2d2d2d" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -61,11 +61,11 @@
             android:id="@+id/m_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/lorem"
             android:layout_below="@+id/m_date"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
             android:gravity="center"
+            android:text="@string/lorem"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/white" />
 
