@@ -1,6 +1,8 @@
 package com.example.filmatory.systems
 
 import com.example.filmatory.api.*
+import com.example.filmatory.api.data.Lists.List
+import com.example.filmatory.api.data.Lists.Lists
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.movie.Movies
@@ -58,6 +60,12 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestTvsUpcoming(function: (upcomingTvs : UpcomingTvs) -> Unit) {
         api.runRequestGet("/tv/upcomingtvs", this, 12, function as (Any) -> Unit);
     }
+    fun requestAllLists(function: (lists : Lists) -> Unit) {
+        api.runRequestGet("/lists/get", this, 13, function as (Any) -> Unit);
+    }
+    fun requestList(id : String, function: (list : List) -> Unit) {
+        api.runRequestGet("/list/get/$id", this, 14, function as (Any) -> Unit);
+    }
     fun requestPerson(id : String, function: (person : Person) -> Unit) {
         api.runRequestGet("/person/get/$id", this, 15, function as (Any) -> Unit);
     }
@@ -88,6 +96,8 @@ class ApiSystem : OnApiRequestFinishedListener {
             10 -> function(gson.fromJson(result, Movies::class.java))
             11 -> function(gson.fromJson(result, Tvs::class.java))
             12 -> function(gson.fromJson(result, UpcomingTvs::class.java))
+            13 -> function(gson.fromJson(result, Lists::class.java))
+            14 -> function(gson.fromJson(result, List::class.java))
             15 -> function(gson.fromJson(result, Person::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")

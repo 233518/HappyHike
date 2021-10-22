@@ -18,6 +18,7 @@ class MovieController(movieScene: MovieScene) : MainController(movieScene) {
 
     fun getMovie(movie: Movie){
         movieScene.runOnUiThread(Runnable {
+            println(movie)
             movieScene.findViewById<TextView>(R.id.m_title).text = movie.title
             movieScene.findViewById<TextView>(R.id.m_date).text = movie.release_date
             Glide.with(movieScene)

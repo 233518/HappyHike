@@ -55,8 +55,8 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_lists -> {
-                    Toast.makeText(appCompatActivity.applicationContext,
-                        "Clicked item", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(appCompatActivity, ListsScene::class.java)
+                    appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_profile -> {
                     val intent = Intent(appCompatActivity, AccountScene::class.java)
