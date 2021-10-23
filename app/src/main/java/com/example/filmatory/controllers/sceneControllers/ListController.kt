@@ -5,6 +5,7 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.Lists.List
 import com.example.filmatory.api.data.Lists.ListItem
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.logger.Logger
 import com.example.filmatory.scenes.activities.ListScene
 
 class ListController(listScene: ListScene) : MainController(listScene) {
@@ -13,12 +14,16 @@ class ListController(listScene: ListScene) : MainController(listScene) {
     val listId = intent.getStringExtra("listId")
 
     init {
-        apiSystem.requestList(listId.toString() ,::getList)
+        if (listId != null) {
+            apiSystem.requestList(listId ,::getList)
+        }
     }
 
     fun getList(list: List){
         listScene.runOnUiThread(Runnable {
-            listScene.findViewById<TextView>(R.id.l_title).text = "Test"
+            Logger.debug(list.toString())
+            listScene.findViewById<TextView>(R.id.l_title).text = list.toString()
+
         })
     }
 }
