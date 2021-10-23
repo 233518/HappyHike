@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "355339460870",
+    "project_id": "filmatory-7266f",
+    "storage_bucket": "filmatory-7266f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355339460870:android:1b5e19c188d1de14e8fe87",
+        "android_client_info": {
+          "package_name": "com.example.filmatory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355339460870-pq5g7dktb3afkikkmntr6dogf1g8vehd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh3RS2_ADvqfa4T8BLm2NRXB9kBEL2nrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355339460870-pq5g7dktb3afkikkmntr6dogf1g8vehd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

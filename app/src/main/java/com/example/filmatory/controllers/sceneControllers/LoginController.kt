@@ -1,21 +1,19 @@
 package com.example.filmatory.controllers.sceneControllers
 
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import com.example.filmatory.R
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.LoginScene
 import com.example.filmatory.scenes.activities.RegisterScene
+import com.google.firebase.auth.FirebaseUser
 
 class LoginController(loginScene: LoginScene) : MainController(loginScene) {
     val loginScene = loginScene
     private var regBtn: TextView
-
-    //Backend
-
-
-    //Frontend
-
 
     //Init
     init {
@@ -24,12 +22,27 @@ class LoginController(loginScene: LoginScene) : MainController(loginScene) {
             val intent = Intent(loginScene, RegisterScene::class.java)
             loginScene.startActivity(intent)
         }
-        //apiSystem.postUser("hello123@protonmail.com", "Test1234!", "Test1234!", ::printTest)
-        //apiSystem.requestApprovedReviewById("60b3a9194001540015069d2c", ::printTest)
     }
 
-    //Just a test function for API
-    fun printTest(any: Any) {
-        println(any)
+    private fun loginUser(email : String, password : String) {
+        loginScene.auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(loginScene) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success")
+                    val user = loginScene.auth.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(loginScene, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                    updateUI(null)
+                }
+            }
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        TODO("Not yet implemented")
     }
 }
