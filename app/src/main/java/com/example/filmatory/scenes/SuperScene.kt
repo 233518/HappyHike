@@ -1,6 +1,9 @@
 package com.example.filmatory.scenes
 
+import android.content.ContentValues.TAG
+import android.nfc.Tag
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.R
@@ -24,7 +27,7 @@ open class SuperScene : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser != null){
-            println("Sup")
+            Log.d(TAG, "User is signed in")
         }
     }
 }

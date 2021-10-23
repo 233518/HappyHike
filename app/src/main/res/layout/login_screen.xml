@@ -41,6 +41,7 @@
             app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginEmailEditTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -63,6 +64,7 @@
             android:layout_below="@+id/loginEmailTextField">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loginPasswordEditTextField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

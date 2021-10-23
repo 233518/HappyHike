@@ -41,6 +41,7 @@
             app:hintTextColor="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regEmailEditField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -49,7 +50,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/RegPasswordField"
+            android:id="@+id/regPasswordField"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -63,6 +64,7 @@
             android:layout_below="@+id/regEmailField">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regPasswordEditField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -85,6 +87,7 @@
             android:layout_below="@+id/RegPasswordField">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/regPasswordRepeatEditField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

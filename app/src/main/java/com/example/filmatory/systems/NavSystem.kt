@@ -9,6 +9,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.*
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class NavSystem(appCompatActivity: AppCompatActivity)  {
@@ -78,6 +80,7 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_logout -> {
+                    Firebase.auth.signOut()
                     val intent = Intent(appCompatActivity, StartScene::class.java)
                     appCompatActivity.startActivity(intent)
                 }
