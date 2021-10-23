@@ -1,8 +1,8 @@
 package com.example.filmatory.systems
 
 import com.example.filmatory.api.*
-import com.example.filmatory.api.data.Lists.List
-import com.example.filmatory.api.data.Lists.Lists
+import com.example.filmatory.api.data.lists.List
+import com.example.filmatory.api.data.lists.Lists
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.movie.Movies
@@ -17,7 +17,6 @@ import com.example.filmatory.api.data.tv.UpcomingTvs
 import com.example.filmatory.api.data.user.User
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
-import kotlin.reflect.KFunction1
 
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()

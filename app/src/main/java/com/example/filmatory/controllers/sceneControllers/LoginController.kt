@@ -21,6 +21,7 @@ class LoginController(loginScene: LoginScene) : MainController(loginScene) {
         regBtn.setOnClickListener {
             val intent = Intent(loginScene, RegisterScene::class.java)
             loginScene.startActivity(intent)
+        loginUser("testuser@test123.no", "hello12345");
         }
     }
 
