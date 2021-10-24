@@ -10,6 +10,12 @@ import com.example.filmatory.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import android.view.View
+
+import com.google.android.material.navigation.NavigationView
+
+
+
 
 open class SuperScene : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -26,8 +32,14 @@ open class SuperScene : AppCompatActivity() {
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
+        val navigationView : NavigationView = findViewById(R.id.nav_view)
         if(currentUser != null){
             Log.d(TAG, "User is signed in")
+            navigationView.menu.clear()
+            navigationView.inflateMenu(R.menu.nav_menu_logged_in)
+        }else {
+            navigationView.menu.clear()
+            navigationView.inflateMenu(R.menu.nav_menu_logged_out)
         }
     }
 }

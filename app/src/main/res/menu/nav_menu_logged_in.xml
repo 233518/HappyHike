@@ -62,11 +62,6 @@
                     android:title="Log Out"
                     android:icon="@drawable/logout_icon">
                 </item>
-                <item
-                    android:id="@+id/nav_user_login"
-                    android:title="Login"
-                    android:icon="@drawable/login_icon">
-                </item>
             </menu>
         </item>
     </group>
