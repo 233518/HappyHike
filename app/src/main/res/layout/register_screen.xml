@@ -84,7 +84,7 @@
             android:textColorHint="@color/white"
             app:hintTextColor="@color/white"
             app:endIconMode="password_toggle"
-            android:layout_below="@+id/RegPasswordField">
+            android:layout_below="@+id/regPasswordField">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/regPasswordRepeatEditField"
