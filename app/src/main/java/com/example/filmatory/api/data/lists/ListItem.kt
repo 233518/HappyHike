@@ -1,4 +1,4 @@
-package com.example.filmatory.api.data.Lists
+package com.example.filmatory.api.data.lists
 
 data class ListItem(
     val id: Int,

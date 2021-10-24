@@ -37,8 +37,10 @@ class ListsAdapter(private val arrayList: MutableList<ListItem>, private val con
         holder.itemView.setOnClickListener {
             val model = arrayList[position]
             val listId: String = model.list_id
+            val listName: String = model.list_name
             val intent = Intent(context, ListScene::class.java)
             intent.putExtra("listId", listId)
+            intent.putExtra("listName", listName)
             context.startActivity(intent)
         }
     }

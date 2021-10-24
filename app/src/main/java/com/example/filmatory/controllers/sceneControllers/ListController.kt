@@ -1,24 +1,40 @@
 package com.example.filmatory.controllers.sceneControllers
 
+import android.content.Intent
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
-import com.example.filmatory.api.data.Lists.List
-import com.example.filmatory.api.data.Lists.ListItem
+import com.example.filmatory.api.data.lists.List
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.logger.Logger
 import com.example.filmatory.scenes.activities.ListScene
+import com.example.filmatory.utils.MediaItem
+import com.example.filmatory.utils.RecyclerViewAdapter
 
-class ListController(listScene: ListScene) : MainController(listScene) {
-    val listScene = listScene
-    var intent = listScene.intent
-    val listId = intent.getStringExtra("listId")
+class ListController(private val listScene: ListScene) : MainController(listScene) {
+    var intent: Intent = listScene.intent
+    private val listId = intent.getStringExtra("listId")
+    private val listName = intent.getStringExtra("listName")
+    private var listRecyclerView: RecyclerView = listScene.findViewById(R.id.listRecyclerView)
+    private var listArrayList: MutableList<MediaItem> = ArrayList()
+    private var listAdapter = RecyclerViewAdapter(listArrayList, listScene)
 
     init {
-        apiSystem.requestList(listId.toString() ,::getList)
+        listRecyclerView.layoutManager = GridLayoutManager(listScene, 2)
+        listRecyclerView.adapter = listAdapter
+        if (listId != null) {
+            apiSystem.requestList(listId ,::getList)
+        }
     }
 
-    fun getList(list: List){
+    private fun getList(list: List){
         listScene.runOnUiThread(Runnable {
-            listScene.findViewById<TextView>(R.id.l_title).text = "Test"
+            listScene.findViewById<TextView>(R.id.l_title).text = listName
+            for (item in list) {
+                listArrayList.add(MediaItem(item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+            }
+            listAdapter.notifyDataSetChanged()
         })
     }
 }

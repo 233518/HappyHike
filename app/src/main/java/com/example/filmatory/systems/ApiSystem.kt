@@ -1,8 +1,8 @@
 package com.example.filmatory.systems
 
 import com.example.filmatory.api.*
-import com.example.filmatory.api.data.Lists.List
-import com.example.filmatory.api.data.Lists.Lists
+import com.example.filmatory.api.data.lists.List
+import com.example.filmatory.api.data.lists.Lists
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.movie.Movies

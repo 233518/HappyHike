@@ -3,7 +3,7 @@ package com.example.filmatory.controllers.sceneControllers
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
-import com.example.filmatory.api.data.Lists.Lists
+import com.example.filmatory.api.data.lists.Lists
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.ListsScene
 import com.example.filmatory.utils.ListItem
