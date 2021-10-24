@@ -20,7 +20,8 @@ class RegisterController(registerScene: RegisterScene) : MainController(register
             var email = registerScene.findViewById<TextInputEditText>(R.id.regEmailEditField).text.toString()
             var password = registerScene.findViewById<TextInputEditText>(R.id.regPasswordEditField).text.toString()
             var passwordRepeat = registerScene.findViewById<TextInputEditText>(R.id.regPasswordRepeatEditField).text.toString()
-            registerUser("test123@test123.no", "heipådeg123", "hi")
+            if(password === passwordRepeat)
+                registerUser(email, password, "hi")
         }
     }
 
