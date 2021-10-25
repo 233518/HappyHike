@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
+import com.example.filmatory.scenes.activities.MovieScene
+import com.example.filmatory.scenes.activities.PersonScene
 import com.example.filmatory.scenes.activities.TvScene
 
 class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, private val context: Context) : RecyclerView.Adapter<PersonRecyclerViewAdapter.ViewHolder>() {
@@ -29,6 +31,14 @@ class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, 
             .placeholder(R.drawable.placeholder_image)
             .into(holder.itemImage)
         holder.itemId = arrayList[position].id
+
+        holder.itemView.setOnClickListener {
+            val model = arrayList[position]
+            val personId: Int = model.id
+            val intent = Intent(context, PersonScene::class.java)
+            intent.putExtra("personId", personId)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
