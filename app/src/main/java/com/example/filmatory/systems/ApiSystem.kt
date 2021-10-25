@@ -71,17 +71,14 @@ class ApiSystem : OnApiRequestFinishedListener {
     }
 
     //POST
-    fun postUser(email : String, password : String, passwordRepeat : String, function: (any : Any) -> Unit) {
+    fun postUser(uid : String, function: (string : String?) -> Unit) {
         val formBody = FormBody.Builder()
-            .add("email", email)
-            .add("password", password)
-            .add("passwordRepeat", passwordRepeat)
+            .add("uid", uid)
             .build()
-        println(formBody)
-        api.runRequestPostForm("/user/new", formBody,this, 9, function);
+        api.runRequestPostForm("/user/new", formBody,this, 1, function as (Any) -> Unit);
     }
 
-    override fun onSuccessRequest(result: String?, requestId: Int?, function: (any : Any) -> Unit) {
+    override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
         val gson = GsonBuilder().create()
         when (requestId) {
             1 -> function(gson.fromJson(result, ApprovedReview::class.java))
@@ -100,6 +97,15 @@ class ApiSystem : OnApiRequestFinishedListener {
             14 -> function(gson.fromJson(result, List::class.java))
             15 -> function(gson.fromJson(result, Person::class.java))
             else -> { // Note the block
+                print("Something went wrong, cant find requestId")
+            }
+        }
+    }
+
+    override fun onSuccessRequestPost(result: String?, requestId: Int, function: (any: Any) -> Unit) {
+        when(requestId) {
+            1 -> function(result as (Any))
+            else -> {
                 print("Something went wrong, cant find requestId")
             }
         }

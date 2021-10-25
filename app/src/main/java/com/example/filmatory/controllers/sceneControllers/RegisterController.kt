@@ -16,7 +16,7 @@ class RegisterController(private val registerScene: RegisterScene) : MainControl
             var email = registerScene.findViewById<TextInputEditText>(R.id.regEmailEditField).text.toString()
             var password = registerScene.findViewById<TextInputEditText>(R.id.regPasswordEditField).text.toString()
             var passwordRepeat = registerScene.findViewById<TextInputEditText>(R.id.regPasswordRepeatEditField).text.toString()
-            if(password === passwordRepeat)
+            if(password == passwordRepeat)
                 authSystem.registerUser(email, password)
         }
     }
