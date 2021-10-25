@@ -16,6 +16,9 @@ import com.example.filmatory.api.data.tv.TvFrontpage
 import com.example.filmatory.api.data.tv.Tvs
 import com.example.filmatory.api.data.tv.UpcomingTvs
 import com.example.filmatory.api.data.user.User
+import com.example.filmatory.scenes.fragments.FavoriteFragment
+import com.example.filmatory.scenes.fragments.ListFragment
+import com.example.filmatory.scenes.fragments.WatchlistFragment
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
 
@@ -69,6 +72,15 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestPerson(id : String, function: (person : Person) -> Unit) {
         api.runRequestGet("/person/get/$id", this, 15, function as (Any) -> Unit);
     }
+    fun requestUserFavorites(id : String, function: (list : List) -> Unit) {
+        api.runRequestGet("/user/get/favorites/$id", this, 16, function as (Any) -> Unit);
+    }
+    fun requestUserWatchlist(id : String, function: (list : List) -> Unit) {
+        api.runRequestGet("/user/get/watchlist/$id", this, 17, function as (Any) -> Unit);
+    }
+    fun requestUserLists(id : String, function: (list : List) -> Unit) {
+        api.runRequestGet("/user/get/lists/$id", this, 18, function as (Any) -> Unit);
+    }
 
     //POST
     fun postUser(uid : String, function: (string : String?) -> Unit) {
@@ -96,6 +108,9 @@ class ApiSystem : OnApiRequestFinishedListener {
             13 -> function(gson.fromJson(result, Lists::class.java))
             14 -> function(gson.fromJson(result, List::class.java))
             15 -> function(gson.fromJson(result, Person::class.java))
+            16 -> function(gson.fromJson(result, FavoriteFragment::class.java))
+            17 -> function(gson.fromJson(result, WatchlistFragment::class.java))
+            18 -> function(gson.fromJson(result, ListFragment::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")
             }
