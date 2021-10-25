@@ -1,6 +1,6 @@
 package com.example.filmatory.api.data.user
 
-data class ListsItem(
+data class UserListsItem(
     val __v: Int,
     val _id: String,
     val movies: List<String>,
