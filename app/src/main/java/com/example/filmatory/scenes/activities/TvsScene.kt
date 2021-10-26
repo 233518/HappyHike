@@ -6,6 +6,10 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.TvsController
 import com.example.filmatory.scenes.SuperScene
 
+/**
+ * TvsScene is the scene for showing tvs
+ *
+ */
 class TvsScene : SuperScene() {
     private lateinit var tvsController: TvsController
     override fun onCreate(savedInstanceState: Bundle?) {

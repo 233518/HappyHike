@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    tools:context=".scenes.activities.LoginScene">
+    tools:context=".scenes.activities.auth.LoginScene">
     <ImageView
         android:id="@+id/startscreen_imgView"
         android:layout_width="match_parent"

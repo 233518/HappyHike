@@ -31,13 +31,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.activities.LoginScene"
+            android:name="com.example.filmatory.scenes.activities.auth.LoginScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
         <activity
-            android:name="com.example.filmatory.scenes.activities.RegisterScene"
+            android:name="com.example.filmatory.scenes.activities.auth.RegisterScene"
             android:exported="true"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden">

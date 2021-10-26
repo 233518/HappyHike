@@ -7,8 +7,21 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * AuthSystem takes care of authenticaton of users
+ *
+ * @property apiSystem The ApiSystem to use
+ * @property auth The FirebaseAuth object to use
+ * @property scene What scene it will be implemented in
+ */
 class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAuth, private val scene: AppCompatActivity) {
 
+    /**
+     * loginUser logs the user in
+     *
+     * @param email The email for the user
+     * @param password The password for the user
+     */
     fun loginUser(email : String, password : String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(scene) { task ->
@@ -24,6 +37,12 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
             }
     }
 
+    /**
+     * registerUser creates a new user
+     *
+     * @param email The email for the new account
+     * @param password The password for the new account
+     */
     fun registerUser(email : String, password : String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(scene) { task ->
@@ -41,9 +60,20 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
             }
     }
 
+    /**
+     * Creates a new user in the mongoDb database
+     *
+     * @param uid The uid for the user
+     */
     private fun newUserInDatabase(uid : String) {
         apiSystem.postUser(uid, ::newUserResponse)
     }
+
+    /**
+     * The respond from the API
+     *
+     * @param string Result
+     */
     private fun newUserResponse(string : String?) {
         Log.d(TAG, "$string")
     }

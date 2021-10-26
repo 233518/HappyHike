@@ -5,6 +5,10 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.ListsController
 import com.example.filmatory.scenes.SuperScene
 
+/**
+ * ListsScene is the scene for showing lists
+ *
+ */
 class ListsScene : SuperScene() {
     private lateinit var listController : ListsController
     override fun onCreate(savedInstanceState: Bundle?) {

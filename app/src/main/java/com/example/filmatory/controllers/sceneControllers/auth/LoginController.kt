@@ -1,19 +1,16 @@
-package com.example.filmatory.controllers.sceneControllers
+package com.example.filmatory.controllers.sceneControllers.auth
 
 import android.content.Intent
 import android.widget.Button
 import android.widget.TextView
 import com.example.filmatory.R
-import com.example.filmatory.controllers.MainController
-import com.example.filmatory.scenes.activities.LoginScene
-import com.example.filmatory.scenes.activities.RegisterScene
-import com.example.filmatory.systems.AuthSystem
+import com.example.filmatory.scenes.activities.auth.LoginScene
+import com.example.filmatory.scenes.activities.auth.RegisterScene
 import com.google.android.material.textfield.TextInputEditText
 
-class LoginController(private val loginScene: LoginScene) : MainController(loginScene) {
+class LoginController(private val loginScene: LoginScene) : AuthController(loginScene) {
     private var regBtn = loginScene.findViewById<TextView>(R.id.regHereBtn)
     private var logBtn = loginScene.findViewById<Button>(R.id.login_btn)
-    private var authSystem = AuthSystem(apiSystem, loginScene.auth, loginScene)
 
     init {
         regBtn.setOnClickListener {

@@ -1,12 +1,14 @@
-package com.example.filmatory.scenes.activities
+package com.example.filmatory.scenes.activities.auth
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.R
-import com.example.filmatory.controllers.sceneControllers.RegisterController
-import com.example.filmatory.scenes.SuperScene
+import com.example.filmatory.controllers.sceneControllers.auth.RegisterController
 
-class RegisterScene : SuperScene() {
+/**
+ * RegisterScene is the scene for showing the register page
+ *
+ */
+class RegisterScene : AuthScene() {
     private lateinit var registerController: RegisterController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

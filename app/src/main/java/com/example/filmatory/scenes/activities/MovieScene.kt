@@ -1,11 +1,14 @@
 package com.example.filmatory.scenes.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.MovieController
 import com.example.filmatory.scenes.SuperScene
 
+/**
+ * MovieScene is the scene for showing movie information
+ *
+ */
 class MovieScene : SuperScene() {
     private lateinit var movieController : MovieController
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -19,17 +19,19 @@ import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.User
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
-import com.example.filmatory.scenes.fragments.FavoriteFragment
-import com.example.filmatory.scenes.fragments.ListFragment
-import com.example.filmatory.scenes.fragments.WatchlistFragment
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
 
+/**
+ * ApiSystem handles the interaction with the API
+ *
+ */
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()
         get() = field
 
-    //GET
+    /** All the GET requests */
+
     fun requestApprovedReviewById(id : String, function: (approvedReview : ApprovedReview) -> Unit) {
         api.runRequestGet("/review/approved/get/$id", this, 1, function as (Any) -> Unit);
     }
@@ -85,7 +87,8 @@ class ApiSystem : OnApiRequestFinishedListener {
         api.runRequestGet("/user/get/lists/$id", this, 18, function as (Any) -> Unit);
     }
 
-    //POST
+    /** All the POST requests */
+
     fun postUser(uid : String, function: (string : String?) -> Unit) {
         val formBody = FormBody.Builder()
             .add("uid", uid)

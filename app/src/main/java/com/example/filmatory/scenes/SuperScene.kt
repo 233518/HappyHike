@@ -1,7 +1,6 @@
 package com.example.filmatory.scenes
 
 import android.content.ContentValues.TAG
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -10,13 +9,13 @@ import com.example.filmatory.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import android.view.View
 
 import com.google.android.material.navigation.NavigationView
 
-
-
-
+/**
+ * SuperScene is the main scene for all the scenes. Every scene will extend this class
+ *
+ */
 open class SuperScene : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
 

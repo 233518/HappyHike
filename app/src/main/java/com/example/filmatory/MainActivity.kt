@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.content.Intent
 import com.example.filmatory.scenes.activities.StartScene
 
-
+/**
+ * Main activity - This is where everything starts
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

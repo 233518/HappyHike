@@ -1,18 +1,24 @@
 package com.example.filmatory.systems
 
 import android.content.Intent
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.*
+import com.example.filmatory.scenes.activities.auth.LoginScene
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-
+/**
+ * NavSystem is used to initialize the navigation in the application
+ *
+ * @constructor
+ *
+ * @param appCompatActivity The activity the navigation is on
+ */
 class NavSystem(appCompatActivity: AppCompatActivity)  {
     var toggle: ActionBarDrawerToggle
     private var drawerLayout: DrawerLayout = appCompatActivity.findViewById(R.id.drawer_layout)

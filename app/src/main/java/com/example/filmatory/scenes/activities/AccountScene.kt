@@ -7,6 +7,10 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.AccountController
 import com.example.filmatory.scenes.SuperScene
 
+/**
+ * AccountScene is the scene for showing the account dashboard
+ *
+ */
 class AccountScene : SuperScene() {
     private lateinit var accountController: AccountController
     override fun onCreate(savedInstanceState: Bundle?) {
