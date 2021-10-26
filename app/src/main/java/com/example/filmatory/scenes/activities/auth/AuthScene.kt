@@ -9,9 +9,5 @@ import com.example.filmatory.scenes.SuperScene
  *
  */
 open class AuthScene : SuperScene(){
-    protected lateinit var authController: AuthController
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        authController = AuthController(this)
-    }
+
 }
