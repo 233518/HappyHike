@@ -26,6 +26,7 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
     private var toolbar: Toolbar = appCompatActivity.findViewById(R.id.main_toolbar)
 
     init{
+        println("DEBUG NAV: " + appCompatActivity.findViewById(R.id.drawer_layout))
         appCompatActivity.setSupportActionBar(toolbar)
         appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle = ActionBarDrawerToggle(
