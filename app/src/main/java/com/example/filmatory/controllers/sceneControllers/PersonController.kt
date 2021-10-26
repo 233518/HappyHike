@@ -1,28 +1,33 @@
 package com.example.filmatory.controllers.sceneControllers
 
-import android.media.Image
+import android.content.Intent
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.PersonScene
 
-class PersonController(personScene: PersonScene) : MainController(personScene) {
-    val personScene = personScene
-    var intent = personScene.intent
-    val pId = intent.getIntExtra("personId",0)
-
+/**
+ * PersonController manipulates the PersonScene gui
+ *
+ * @param personScene The PersonScene to use
+ */
+class PersonController(private val personScene: PersonScene) : MainController(personScene) {
+    var intent: Intent = personScene.intent
+    private val pId = intent.getIntExtra("personId",0)
 
     init {
         apiSystem.requestPerson(pId.toString(),::getPerson)
     }
 
-
-    fun getPerson(person: Person){
+    /**
+     * Update the gui with data from API
+     *
+     * @param person The response from API
+     */
+    private fun getPerson(person: Person){
         var gender = "Other";
         var status = "Alive";
 

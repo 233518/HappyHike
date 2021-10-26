@@ -8,6 +8,11 @@ import com.example.filmatory.scenes.activities.auth.LoginScene
 import com.example.filmatory.scenes.activities.auth.RegisterScene
 import com.google.android.material.textfield.TextInputEditText
 
+/**
+ * LoginController manipulates the LoginScene gui
+ *
+ * @property loginScene The LoginScene to use
+ */
 class LoginController(private val loginScene: LoginScene) : AuthController(loginScene) {
     private var regBtn = loginScene.findViewById<TextView>(R.id.regHereBtn)
     private var logBtn = loginScene.findViewById<Button>(R.id.login_btn)

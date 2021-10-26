@@ -5,6 +5,10 @@ import android.util.Log
 import com.example.filmatory.BuildConfig
 import java.time.LocalDateTime
 
+/**
+ * Custom logger, maybe throw?
+ * Not in use atm
+ */
 open class Logger {
     companion object {
         open fun debug(message: String) {

@@ -7,11 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.lists.List
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.logger.Logger
 import com.example.filmatory.scenes.activities.ListScene
 import com.example.filmatory.utils.MediaItem
 import com.example.filmatory.utils.RecyclerViewAdapter
 
+/**
+ * ListController manipulates the ListScene gui
+ *
+ * @property listScene The ListScene to use
+ */
 class ListController(private val listScene: ListScene) : MainController(listScene) {
     var intent: Intent = listScene.intent
     private val listId = intent.getStringExtra("listId")
@@ -28,6 +32,11 @@ class ListController(private val listScene: ListScene) : MainController(listScen
         }
     }
 
+    /**
+     * Update the gui with data from API
+     *
+     * @param list The respons from API
+     */
     private fun getList(list: List){
         listScene.runOnUiThread(Runnable {
             listScene.findViewById<TextView>(R.id.l_title).text = listName

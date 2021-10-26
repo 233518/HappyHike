@@ -1,5 +1,6 @@
 package com.example.filmatory.controllers.sceneControllers
 
+import android.content.Intent
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,25 +9,32 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.MovieScene
-import com.example.filmatory.utils.MediaItem
 import com.example.filmatory.utils.PersonItem
 import com.example.filmatory.utils.PersonRecyclerViewAdapter
-import com.example.filmatory.utils.RecyclerViewAdapter
 
-class MovieController(movieScene: MovieScene) : MainController(movieScene) {
-    val movieScene = movieScene
-    var intent = movieScene.intent
-    val mId = intent.getIntExtra("movieId", 0)
-    val personsArrayList: MutableList<PersonItem> = ArrayList()
-    val personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
-    val personsAdapter = PersonRecyclerViewAdapter(personsArrayList, movieScene)
+/**
+ * MovieController manipulates the MovieScene gui
+ *
+ * @param movieScene The MovieScene to use
+ */
+class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
+    var intent: Intent = movieScene.intent
+    private val mId = intent.getIntExtra("movieId", 0)
+    private val personsArrayList: MutableList<PersonItem> = ArrayList()
+    private val personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
+    private val personsAdapter = PersonRecyclerViewAdapter(personsArrayList, movieScene)
 
 
     init {
         apiSystem.requestMovie(mId.toString() ,::getMovie)
     }
 
-    fun getMovie(movie: Movie){
+    /**
+     * Update the gui with data from API
+     *
+     * @param movie The response from API
+     */
+    private fun getMovie(movie: Movie){
         movieScene.runOnUiThread(Runnable {
             movieScene.findViewById<TextView>(R.id.m_title).text = movie.filminfo.title
             movieScene.findViewById<TextView>(R.id.m_date).text = movie.filminfo.release_date

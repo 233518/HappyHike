@@ -9,18 +9,28 @@ import com.example.filmatory.scenes.activities.ListsScene
 import com.example.filmatory.utils.ListItem
 import com.example.filmatory.utils.ListsAdapter
 
-class ListsController(listsScene: ListsScene) : MainController(listsScene) {
-    val listsScene = listsScene
-    val listsArrayList: MutableList<ListItem> = ArrayList()
-    val listsRecyclerView: RecyclerView = listsScene.findViewById(R.id.recyclerView)
-    val listsAdapter = ListsAdapter(listsArrayList, listsScene)
+/**
+ * ListsController manipulates the ListsScene gui
+ *
+ * @param listsScene The ListsScene to use
+ */
+class ListsController(private val listsScene: ListsScene) : MainController(listsScene) {
+    private val listsArrayList: MutableList<ListItem> = ArrayList()
+    private val listsRecyclerView: RecyclerView = listsScene.findViewById(R.id.recyclerView)
+    private val listsAdapter = ListsAdapter(listsArrayList, listsScene)
 
     init {
         listsRecyclerView.layoutManager = LinearLayoutManager(listsScene, LinearLayoutManager.VERTICAL, false)
         listsRecyclerView.adapter = listsAdapter
         apiSystem.requestAllLists(::listsData)
     }
-    fun listsData(lists: Lists){
+
+    /**
+     * Update the gui with data from API
+     *
+     * @param lists The response from API
+     */
+    private fun listsData(lists: Lists){
         listsScene.runOnUiThread(Runnable {
             lists.forEach{
                     item -> listsArrayList.add(ListItem(item.listName, item.userName, "http://placeimg.com/640/480/any", item.numberOfTvShows.toString(), item.numberOfMovies.toString(), item.listId))

@@ -1,6 +1,5 @@
 package com.example.filmatory.controllers.sceneControllers
 
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
@@ -12,8 +11,12 @@ import com.example.filmatory.utils.MediaItem
 import com.example.filmatory.utils.SliderAdapter
 import com.example.filmatory.utils.TvSliderAdapter
 
-class StartController(startScene: StartScene) : MainController(startScene) {
-    val startScene = startScene
+/**
+ * StartController manipulates the StartScene gui
+ *
+ * @param startScene The StartScene to use
+ */
+class StartController(private val startScene: StartScene) : MainController(startScene) {
 
     init {
         apiSystem.requestMovieFrontpage(::discoverMoviesData)
@@ -21,7 +24,13 @@ class StartController(startScene: StartScene) : MainController(startScene) {
         apiSystem.requestMovieFrontpage(::recMovieData)
         apiSystem.requestTvFrontpage(::recTvData)
     }
-    fun discoverMoviesData(movieFrontpage: MovieFrontpage){
+
+    /**
+     * Update the gui with data from API
+     *
+     * @param movieFrontpage The response from API
+     */
+    private fun discoverMoviesData(movieFrontpage: MovieFrontpage){
         startScene.runOnUiThread(Runnable {
             val discoverMoviesArraylist: MutableList<MediaItem> = ArrayList()
             val discoverMoviesAdapter = SliderAdapter(discoverMoviesArraylist,startScene)
@@ -34,7 +43,12 @@ class StartController(startScene: StartScene) : MainController(startScene) {
         })
     }
 
-    fun discoverTvData(tvFrontpage: TvFrontpage){
+    /**
+     * Update the gui with data from API
+     *
+     * @param tvFrontpage The respons from API
+     */
+    private fun discoverTvData(tvFrontpage: TvFrontpage){
         startScene.runOnUiThread(Runnable {
             val discoverTvsArrayList: MutableList<MediaItem> = ArrayList()
             val discoverTvsAdapter = TvSliderAdapter(discoverTvsArrayList,startScene)
@@ -47,7 +61,12 @@ class StartController(startScene: StartScene) : MainController(startScene) {
         })
     }
 
-    fun recMovieData(movieFrontpage: MovieFrontpage){
+    /**
+     * Update the gui with data from API
+     *
+     * @param movieFrontpage The respons from API
+     */
+    private fun recMovieData(movieFrontpage: MovieFrontpage){
         startScene.runOnUiThread(Runnable {
             val recMoviesArrayList: MutableList<MediaItem> = ArrayList()
             val redMoviesAdapter = SliderAdapter(recMoviesArrayList, startScene)
@@ -60,7 +79,12 @@ class StartController(startScene: StartScene) : MainController(startScene) {
         })
     }
 
-    fun recTvData(tvFrontpage: TvFrontpage){
+    /**
+     * Update the gui with data from API
+     *
+     * @param tvFrontpage The respons from API
+     */
+    private fun recTvData(tvFrontpage: TvFrontpage){
         startScene.runOnUiThread(Runnable {
             val recTvsArrayList: MutableList<MediaItem> = ArrayList()
             val recTvsAdapter = TvSliderAdapter(recTvsArrayList, startScene)
