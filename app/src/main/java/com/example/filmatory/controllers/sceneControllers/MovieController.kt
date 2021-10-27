@@ -214,7 +214,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 }
                 if (!watchProviders.results.NO.buy.isNullOrEmpty()) {
                     movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
-                    for (item in watchProviders.results.NO.flatrate) {
+                    for (item in watchProviders.results.NO.buy) {
                         if (item.provider_name == "Netflix") {
                             movieScene.findViewById<View>(R.id.m_b_netflix_logo).visibility =
                                 View.VISIBLE
