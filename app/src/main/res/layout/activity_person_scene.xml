@@ -155,12 +155,34 @@
                 android:text="@string/lorem"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/white" />
+            <LinearLayout
+                android:id="@+id/person_button_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/person_biography"
+                android:layout_centerHorizontal="true">
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/person_readmore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p_showMore" />
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/person_readless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/p_showLess"
+                    android:visibility="gone" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/person_biography"
-                android:layout_marginTop="10dp"
+                android:layout_below="@id/person_button_wrapper"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:orientation="horizontal">

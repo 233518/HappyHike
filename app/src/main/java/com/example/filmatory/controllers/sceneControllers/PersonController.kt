@@ -2,6 +2,7 @@ package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
@@ -17,9 +18,22 @@ import com.example.filmatory.scenes.activities.PersonScene
 class PersonController(private val personScene: PersonScene) : MainController(personScene) {
     var intent: Intent = personScene.intent
     private val pId = intent.getIntExtra("personId",0)
+    private val person_readmore_btn = personScene.findViewById<Button>(R.id.person_readmore)
+    private val person_readless_btn = personScene.findViewById<Button>(R.id.person_readless)
+    private val personData : MutableList<String> = ArrayList()
 
     init {
         apiSystem.requestPerson(pId.toString(),::getPerson)
+        person_readmore_btn.setOnClickListener {
+            loadMoreBio(personData);
+            person_readmore_btn.visibility = View.GONE
+            person_readless_btn.visibility = View.VISIBLE
+        }
+        person_readless_btn.setOnClickListener {
+            loadLessBio(personData);
+            person_readmore_btn.visibility = View.VISIBLE
+            person_readless_btn.visibility = View.GONE
+        }
     }
 
     /**
@@ -27,7 +41,16 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
      *
      * @param person The response from API
      */
+
+    private fun loadMoreBio(data : MutableList<String>){
+        personScene.findViewById<TextView>(R.id.person_biography).text = data[0]
+    }
+    private fun loadLessBio(data : MutableList<String>){
+        personScene.findViewById<TextView>(R.id.person_biography).text = data[1]
+    }
     private fun getPerson(person: Person){
+        personData.add(person.personinfo.biography)
+        personData.add(person.shortBio)
         var gender = "Other";
         var status = "Alive";
 
@@ -42,6 +65,9 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
         }
 
         personScene.runOnUiThread(Runnable {
+            if (person.shortBio == person.personinfo.biography){
+                person_readmore_btn.visibility = View.GONE
+            }
             if (person.links.imdb_id != null){
                 personScene.findViewById<View>(R.id.person_imdbLogo).visibility = View.VISIBLE
             }
