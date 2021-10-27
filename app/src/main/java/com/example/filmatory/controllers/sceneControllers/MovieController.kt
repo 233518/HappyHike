@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
+import com.example.filmatory.api.data.movie.WatchProviders
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.utils.PersonItem
@@ -27,6 +28,11 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
 
     init {
         apiSystem.requestMovie(mId.toString() ,::getMovie)
+        apiSystem.requestWatchProviders(mId.toString(), ::getWatchprovider)
+    }
+
+    private fun getWatchprovider(watchProviders: WatchProviders){
+        println(watchProviders)
     }
 
     /**

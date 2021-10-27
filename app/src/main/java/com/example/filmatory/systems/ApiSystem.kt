@@ -3,10 +3,7 @@ package com.example.filmatory.systems
 import com.example.filmatory.api.*
 import com.example.filmatory.api.data.lists.List
 import com.example.filmatory.api.data.lists.Lists
-import com.example.filmatory.api.data.movie.Movie
-import com.example.filmatory.api.data.movie.MovieFrontpage
-import com.example.filmatory.api.data.movie.Movies
-import com.example.filmatory.api.data.movie.UpcomingMovies
+import com.example.filmatory.api.data.movie.*
 import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.api.data.review.DeniedReview
@@ -83,6 +80,9 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestUserLists(id : String, function: (userLists : UserLists) -> Unit) {
         api.runRequestGet("/user/get/lists/$id", this, 18, function as (Any) -> Unit);
     }
+    fun requestWatchProviders(id : String, function: (watchProviders : WatchProviders) -> Unit) {
+        api.runRequestGet("/movie/get/watch/providers/$id", this, 19, function as (Any) -> Unit);
+    }
 
     /** All the POST requests */
 
@@ -114,6 +114,7 @@ class ApiSystem : OnApiRequestFinishedListener {
             16 -> function(gson.fromJson(result, Favorites::class.java))
             17 -> function(gson.fromJson(result, Watchlist::class.java))
             18 -> function(gson.fromJson(result, UserLists::class.java))
+            19 -> function(gson.fromJson(result, WatchProviders::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")
             }
