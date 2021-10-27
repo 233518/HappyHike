@@ -18,9 +18,8 @@ class ListFragment : Fragment() {
     private lateinit var listsAdapter : ListsAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view : View = inflater.inflate(R.layout.fragment_watchlist, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_list, container, false)
         val recyclerView : RecyclerView = view.findViewById(R.id.userlists_rv)
-
         listsAdapter = ListsAdapter(listsArrayList, requireActivity())
         recyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = listsAdapter
@@ -29,7 +28,7 @@ class ListFragment : Fragment() {
 
     fun showUserLists(userLists: UserLists){
         userLists.forEach{
-                item -> listsArrayList.add(ListItem(item.name, item.userId, "http://placeimg.com/640/480/any", item.tvs.size.toString(), item.movies.size.toString(), item._id))
+                item -> listsArrayList.add(ListItem(item.name, "item.userId", "http://placeimg.com/640/480/any", "19", "42", "item._id"))
         }
     }
 }
