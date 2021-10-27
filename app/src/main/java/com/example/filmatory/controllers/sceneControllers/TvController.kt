@@ -26,18 +26,18 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
      *
      * @param tv The response from API
      */
-    private fun getTv(tv: Tv){
+    private fun getTv(tv : Tv){
         tvScene.runOnUiThread(Runnable {
-            tvScene.findViewById<TextView>(R.id.m_title).text = tv.name
-            tvScene.findViewById<TextView>(R.id.m_date).text = tv.first_air_date
+            tvScene.findViewById<TextView>(R.id.m_title).text = tv.serieinfo.name
+            tvScene.findViewById<TextView>(R.id.m_date).text = tv.serieinfo.first_air_date
             Glide.with(tvScene)
-                .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + tv.poster_path)
+                .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + tv.serieinfo.poster_path)
                 .placeholder(R.drawable.placeholder_image)
                 .fallback(R.drawable.placeholder_image)
                 .error(R.drawable.placeholder_image)
                 .centerCrop()
                 .into(tvScene.findViewById(R.id.m_img))
-            tvScene.findViewById<TextView>(R.id.m_overview).text = tv.overview
+            tvScene.findViewById<TextView>(R.id.m_overview).text = tv.serieinfo.overview
         })
     }
 }
