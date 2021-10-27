@@ -11,10 +11,7 @@ import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.api.data.review.DeniedReview
 import com.example.filmatory.api.data.review.PendingReview
-import com.example.filmatory.api.data.tv.Tv
-import com.example.filmatory.api.data.tv.TvFrontpage
-import com.example.filmatory.api.data.tv.Tvs
-import com.example.filmatory.api.data.tv.UpcomingTvs
+import com.example.filmatory.api.data.tv.*
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.User
 import com.example.filmatory.api.data.user.UserLists
