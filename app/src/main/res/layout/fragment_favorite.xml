@@ -2,12 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Favorite Fragment"
-        android:textColor="@color/white"
-        android:layout_centerInParent="true"/>
+        android:padding="10dp"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:id="@+id/allFavoritesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"/>
+        <Button
+            android:id="@+id/movieFavoritesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Movies"/>
+        <Button
+            android:id="@+id/tvFavoritesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tvs"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/favorite_rv" />
 
 </RelativeLayout>

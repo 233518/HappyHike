@@ -15,20 +15,19 @@ import com.google.android.material.tabs.TabLayoutMediator
  */
 class AccountInfoScene : SuperScene() {
     private lateinit var accountInfoController: AccountInfoController
+    val tabAdapter = ViewPageAdapter(supportFragmentManager, lifecycle)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_information)
-        accountInfoController = AccountInfoController(this)
 
         val tabLayout: TabLayout = findViewById(R.id.tab_layout)
         val viewPager2: ViewPager2 = findViewById(R.id.tab_viewpager)
-        val tabAdapter = ViewPageAdapter(supportFragmentManager, lifecycle)
 
         viewPager2.adapter = tabAdapter
 
         val defaultPage = 0
         val page = intent.getIntExtra("position", defaultPage)
-        viewPager2.setCurrentItem(page)
+        viewPager2.currentItem = page
 
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             when (position) {
@@ -47,4 +46,10 @@ class AccountInfoScene : SuperScene() {
             }
         }.attach()
     }
+
+    override fun onStart() {
+        super.onStart()
+        accountInfoController = AccountInfoController(this)
+    }
+
 }

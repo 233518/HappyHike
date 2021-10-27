@@ -11,6 +11,9 @@ import com.example.filmatory.scenes.fragments.WatchlistFragment
 
 
 class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+    var favoriteFragment = FavoriteFragment()
+    var watchlistFragment = WatchlistFragment()
+    var listFragment = ListFragment()
     override fun getItemCount(): Int {
         return 4
     }
@@ -21,13 +24,13 @@ class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : 
                 return AccinfoFragment()
             }
             1 ->{
-                return FavoriteFragment()
+                return favoriteFragment
             }
             2 ->{
-                return WatchlistFragment()
+                return watchlistFragment
             }
             3 ->{
-                return ListFragment()
+                return listFragment
             }
             else->{
                 return Fragment()
