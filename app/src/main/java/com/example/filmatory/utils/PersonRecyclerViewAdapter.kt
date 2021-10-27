@@ -17,7 +17,7 @@ import com.example.filmatory.scenes.activities.TvScene
 class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, private val context: Context) : RecyclerView.Adapter<PersonRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false)
         )
     }
 
@@ -46,9 +46,9 @@ class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, 
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val itemImage: ImageView = view.findViewById(R.id.media_image)
-        val itemRealName: TextView = view.findViewById(R.id.media_title)
-        val itemCharName: TextView = view.findViewById(R.id.media_date)
+        val itemImage: ImageView = view.findViewById(R.id.slider_image)
+        val itemRealName: TextView = view.findViewById(R.id.slider_title)
+        val itemCharName: TextView = view.findViewById(R.id.slider_date)
         var itemId: Int? = null
     }
 

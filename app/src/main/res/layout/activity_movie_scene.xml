@@ -73,7 +73,7 @@
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/white" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/m_overview"
@@ -83,7 +83,7 @@
                     android:id="@+id/m_person_slider"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
-            </RelativeLayout>
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 
