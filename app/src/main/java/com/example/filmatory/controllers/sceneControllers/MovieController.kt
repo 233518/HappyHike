@@ -39,9 +39,9 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
         movieScene.runOnUiThread(Runnable {
             if(watchProviders.results.NO != null){
                 if (!watchProviders.results.NO.flatrate.isNullOrEmpty()) {
-                    movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                     for (item in watchProviders.results.NO.flatrate) {
                         if (item.provider_name == "Netflix") {
+                            movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_netflix_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_netflix_logo).setOnClickListener {
@@ -54,6 +54,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "HBO Max") {
+                            movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_hbo_logo).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_hbo_logo).setOnClickListener {
                                 movieScene.startActivity(
@@ -65,6 +66,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Viaplay") {
+                            movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_viaplay_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_viaplay_logo).setOnClickListener {
@@ -77,6 +79,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Disney Plus") {
+                            movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_disneyplus_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_disneyplus_logo).setOnClickListener {
@@ -89,6 +92,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Strim") {
+                            movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_strim_logo).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_strim_logo).setOnClickListener {
                                 movieScene.startActivity(
@@ -100,6 +104,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Google Play Movies") {
+                            movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_googleplay_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_googleplay_logo).setOnClickListener {
@@ -112,6 +117,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Apple iTunes") {
+                            movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_itunes_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_itunes_logo).setOnClickListener {
@@ -126,7 +132,6 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                     }
                 }
                 if (!watchProviders.results.NO.rent.isNullOrEmpty()) {
-                    movieScene.findViewById<TextView>(R.id.m_rent_on).visibility = View.VISIBLE
                     for (item in watchProviders.results.NO.rent) {
                         if (item.provider_name == "Netflix") {
                             movieScene.findViewById<View>(R.id.m_r_netflix_logo).visibility =
@@ -141,6 +146,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "HBO Max") {
+                            movieScene.findViewById<TextView>(R.id.m_rent_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_hbo_logo).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_hbo_logo).setOnClickListener {
                                 movieScene.startActivity(
@@ -152,6 +158,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Viaplay") {
+                            movieScene.findViewById<TextView>(R.id.m_rent_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_viaplay_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_viaplay_logo).setOnClickListener {
@@ -164,6 +171,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Disney Plus") {
+                            movieScene.findViewById<TextView>(R.id.m_rent_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_disneyplus_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_disneyplus_logo).setOnClickListener {
@@ -176,6 +184,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Strim") {
+                            movieScene.findViewById<TextView>(R.id.m_rent_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_strim_logo).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_strim_logo).setOnClickListener {
                                 movieScene.startActivity(
@@ -187,6 +196,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Google Play Movies") {
+                            movieScene.findViewById<TextView>(R.id.m_rent_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_googleplay_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_googleplay_logo).setOnClickListener {
@@ -199,6 +209,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Apple iTunes") {
+                            movieScene.findViewById<TextView>(R.id.m_rent_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_itunes_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_r_itunes_logo).setOnClickListener {
@@ -213,7 +224,6 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                     }
                 }
                 if (!watchProviders.results.NO.buy.isNullOrEmpty()) {
-                    movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
                     for (item in watchProviders.results.NO.buy) {
                         if (item.provider_name == "Netflix") {
                             movieScene.findViewById<View>(R.id.m_b_netflix_logo).visibility =
@@ -228,6 +238,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "HBO Max") {
+                            movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_hbo_logo).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_hbo_logo).setOnClickListener {
                                 movieScene.startActivity(
@@ -239,6 +250,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Viaplay") {
+                            movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_viaplay_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_viaplay_logo).setOnClickListener {
@@ -251,6 +263,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Disney Plus") {
+                            movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_disneyplus_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_disneyplus_logo).setOnClickListener {
@@ -263,6 +276,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Strim") {
+                            movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_strim_logo).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_strim_logo).setOnClickListener {
                                 movieScene.startActivity(
@@ -274,6 +288,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Google Play Movies") {
+                            movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_googleplay_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_googleplay_logo).setOnClickListener {
@@ -286,6 +301,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                             }
                         }
                         if (item.provider_name == "Apple iTunes") {
+                            movieScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_itunes_logo).visibility =
                                 View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_b_itunes_logo).setOnClickListener {
