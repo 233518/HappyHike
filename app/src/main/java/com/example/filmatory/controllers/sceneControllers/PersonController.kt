@@ -10,6 +10,8 @@ import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.PersonScene
 
+import android.net.Uri
+
 /**
  * PersonController manipulates the PersonScene gui
  *
@@ -21,7 +23,6 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
     private val person_readmore_btn = personScene.findViewById<Button>(R.id.person_readmore)
     private val person_readless_btn = personScene.findViewById<Button>(R.id.person_readless)
     private val personData : MutableList<String> = ArrayList()
-
     init {
         apiSystem.requestPerson(pId.toString(),::getPerson)
         person_readmore_btn.setOnClickListener {
@@ -35,13 +36,11 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
             person_readless_btn.visibility = View.GONE
         }
     }
-
     /**
      * Update the gui with data from API
      *
      * @param person The response from API
      */
-
     private fun loadMoreBio(data : MutableList<String>){
         personScene.findViewById<TextView>(R.id.person_biography).text = data[0]
     }
@@ -63,22 +62,36 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
         if (person.personinfo.deathday != null) {
             status = "Died " + person.personinfo.deathday;
         }
-
         personScene.runOnUiThread(Runnable {
             if (person.shortBio == person.personinfo.biography){
                 person_readmore_btn.visibility = View.GONE
             }
             if (person.links.imdb_id != null){
                 personScene.findViewById<View>(R.id.person_imdbLogo).visibility = View.VISIBLE
+                personScene.findViewById<View>(R.id.person_imdbLogo).setOnClickListener {
+                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.imdb.com/name/" + person.links.imdb_id)))
+                }
             }
             if (person.links.facebook_id != null){
                 personScene.findViewById<View>(R.id.person_facebook_logo).visibility = View.VISIBLE
+                personScene.findViewById<View>(R.id.person_facebook_logo).setOnClickListener {
+                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + person.links.facebook_id)))
+                }
             }
             if (person.links.instagram_id != null){
                 personScene.findViewById<View>(R.id.person_instagram_logo).visibility = View.VISIBLE
+                personScene.findViewById<View>(R.id.person_instagram_logo).setOnClickListener {
+                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/" + person.links.instagram_id)))
+                }
             }
             if (person.links.twitter_id != null){
                 personScene.findViewById<View>(R.id.person_twitter_logo).visibility = View.VISIBLE
+                personScene.findViewById<View>(R.id.person_twitter_logo).setOnClickListener {
+                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/" + person.links.twitter_id)))
+                }
+            }
+            personScene.findViewById<View>(R.id.person_tmdb_logo).setOnClickListener {
+                personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/person/" + person.links.id)))
             }
             personScene.findViewById<TextView>(R.id.person_biography).text = person.shortBio
             personScene.findViewById<TextView>(R.id.person_name).text = person.personinfo.name
