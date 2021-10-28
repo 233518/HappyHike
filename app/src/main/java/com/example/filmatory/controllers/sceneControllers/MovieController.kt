@@ -3,14 +3,13 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
-import com.example.filmatory.api.data.movie.WatchProviders
+import com.example.filmatory.api.data.movie.MovieWatchProviders
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.utils.PersonItem
@@ -30,16 +29,16 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
 
     init {
         apiSystem.requestMovie(mId.toString() ,::getMovie)
-        apiSystem.requestWatchProviders(mId.toString(), ::getWatchprovider)
+        apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
         personsRecyclerView.adapter = personsAdapter
     }
 
-    private fun getWatchprovider(watchProviders: WatchProviders){
+    private fun getWatchprovider(movieWatchProviders: MovieWatchProviders){
         movieScene.runOnUiThread(Runnable {
-            if(watchProviders.results.NO != null){
-                if (!watchProviders.results.NO.flatrate.isNullOrEmpty()) {
-                    for (item in watchProviders.results.NO.flatrate) {
+            if(movieWatchProviders.results.NO != null){
+                if (!movieWatchProviders.results.NO.flatrate.isNullOrEmpty()) {
+                    for (item in movieWatchProviders.results.NO.flatrate) {
                         if (item.provider_name == "Netflix") {
                             movieScene.findViewById<TextView>(R.id.m_streaming_on).visibility = View.VISIBLE
                             movieScene.findViewById<View>(R.id.m_s_netflix_logo).visibility =
@@ -48,7 +47,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -60,7 +59,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -73,7 +72,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -86,7 +85,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -98,7 +97,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -111,7 +110,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -124,15 +123,15 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
                         }
                     }
                 }
-                if (!watchProviders.results.NO.rent.isNullOrEmpty()) {
-                    for (item in watchProviders.results.NO.rent) {
+                if (!movieWatchProviders.results.NO.rent.isNullOrEmpty()) {
+                    for (item in movieWatchProviders.results.NO.rent) {
                         if (item.provider_name == "Netflix") {
                             movieScene.findViewById<View>(R.id.m_r_netflix_logo).visibility =
                                 View.VISIBLE
@@ -140,7 +139,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -152,7 +151,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -165,7 +164,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -178,7 +177,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -190,7 +189,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -203,7 +202,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -216,15 +215,15 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
                         }
                     }
                 }
-                if (!watchProviders.results.NO.buy.isNullOrEmpty()) {
-                    for (item in watchProviders.results.NO.buy) {
+                if (!movieWatchProviders.results.NO.buy.isNullOrEmpty()) {
+                    for (item in movieWatchProviders.results.NO.buy) {
                         if (item.provider_name == "Netflix") {
                             movieScene.findViewById<View>(R.id.m_b_netflix_logo).visibility =
                                 View.VISIBLE
@@ -232,7 +231,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -244,7 +243,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -257,7 +256,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -270,7 +269,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -282,7 +281,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -295,7 +294,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }
@@ -308,7 +307,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                                 movieScene.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(watchProviders.results.NO.link)
+                                        Uri.parse(movieWatchProviders.results.NO.link)
                                     )
                                 )
                             }

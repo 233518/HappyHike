@@ -130,7 +130,7 @@
                     android:visibility="gone" />
                 <ImageView
                     android:id="@+id/m_s_disneyplus_logo"
-                    android:layout_width="40dp"
+                    android:layout_width="65dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
@@ -223,7 +223,7 @@
                     android:visibility="gone" />
                 <ImageView
                     android:id="@+id/m_r_disneyplus_logo"
-                    android:layout_width="40dp"
+                    android:layout_width="65dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
@@ -316,7 +316,7 @@
                     android:visibility="gone" />
                 <ImageView
                     android:id="@+id/m_b_disneyplus_logo"
-                    android:layout_width="40dp"
+                    android:layout_width="65dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
@@ -352,16 +352,16 @@
                     android:layout_marginEnd="15dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/googleplaylogo2"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/m_b_itunes_logo"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ituneslogo"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
             </LinearLayout>
 
