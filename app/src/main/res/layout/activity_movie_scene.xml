@@ -14,12 +14,12 @@
         android:src="@drawable/movie_scene_background"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/movie_overlay_color">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/movie_overlay_color"
             android:gravity="top">
 
             <ImageView
@@ -352,7 +352,7 @@
                     android:layout_marginEnd="15dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/googleplaylogo2"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/m_b_itunes_logo"
@@ -361,7 +361,7 @@
                     android:layout_weight="1"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ituneslogo"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
