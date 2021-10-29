@@ -53,4 +53,10 @@
     <string name="list_author">作者</string>
     <string name="list_total_movies">电影</string>
     <string name="list_total_tv">电视节目</string>
+    <string name="new_password">新密码</string>
+    <string name="repeat_password">重复输入密码</string>
+    <string name="change_password">更改密码</string>
+    <string name="change_username">更改用户名</string>
+    <string name="username">用户名</string>
+    <string name="confirm_btn">确认</string>
 </resources>

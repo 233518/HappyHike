@@ -53,4 +53,10 @@
     <string name="list_author">Author</string>
     <string name="list_total_movies">Movies</string>
     <string name="list_total_tv">Tv-Shows</string>
+    <string name="new_password">New Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_username">Change Username</string>
+    <string name="username">Username</string>
+    <string name="confirm_btn">Confirm</string>
 </resources>

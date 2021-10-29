@@ -54,4 +54,10 @@
     <string name="list_author">Laget av</string>
     <string name="list_total_movies">Filmer</string>
     <string name="list_total_tv">Tv-Serier</string>
+    <string name="new_password">Nytt Password</string>
+    <string name="repeat_password">Gjenta Passord</string>
+    <string name="change_password">Bytt Passord</string>
+    <string name="change_username">Bytt Brukernavn</string>
+    <string name="username">Brukernavn</string>
+    <string name="confirm_btn">Bekreft</string>
 </resources>

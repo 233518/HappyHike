@@ -53,4 +53,10 @@
     <string name="list_author">Autor</string>
     <string name="list_total_movies">Filme</string>
     <string name="list_total_tv">Fernsehsendungen</string>
+    <string name="new_password">Neues Kennwort</string>
+    <string name="repeat_password">Passwort wiederholen</string>
+    <string name="change_password">Passwort ändern</string>
+    <string name="change_username">Benutzernamen ändern</string>
+    <string name="username">Nutzername</string>
+    <string name="confirm_btn">Bestätigt</string>
 </resources>
