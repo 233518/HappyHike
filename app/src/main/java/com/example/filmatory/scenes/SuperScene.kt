@@ -11,6 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 import com.google.android.material.navigation.NavigationView
+import com.yariksoffice.lingver.Lingver
 
 /**
  * SuperScene is the main scene for all the scenes. Every scene will extend this class
@@ -24,7 +25,7 @@ open class SuperScene : AppCompatActivity() {
         setTheme(R.style.filmatoryTheme)
         auth = Firebase.auth
     }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }

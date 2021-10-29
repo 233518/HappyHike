@@ -28,7 +28,7 @@
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/movie1"/>
+                android:src="@drawable/placeholder_image"/>
 
             <TextView
                 android:id="@+id/media_title"

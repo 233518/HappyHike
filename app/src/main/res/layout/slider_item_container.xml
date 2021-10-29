@@ -22,7 +22,7 @@
             android:layout_height="230dp"
             android:adjustViewBounds="true"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/movie9" />
+            android:src="@drawable/placeholder_image" />
 
         <TextView
             android:id="@+id/slider_title"

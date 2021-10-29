@@ -1,7 +1,9 @@
 package com.example.filmatory.systems
 
 import android.content.Intent
+import android.widget.ImageButton
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
@@ -11,6 +13,7 @@ import com.example.filmatory.scenes.activities.auth.LoginScene
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.yariksoffice.lingver.Lingver
 
 /**
  * NavSystem is used to initialize the navigation in the application
@@ -20,15 +23,15 @@ import com.google.firebase.ktx.Firebase
  * @param appCompatActivity The activity the navigation is on
  */
 class NavSystem(appCompatActivity: AppCompatActivity)  {
-    var toggle: ActionBarDrawerToggle
+    private var toggle: ActionBarDrawerToggle
     private var drawerLayout: DrawerLayout = appCompatActivity.findViewById(R.id.drawer_layout)
     private var navigationView: NavigationView = appCompatActivity.findViewById(R.id.nav_view)
     private var toolbar: Toolbar = appCompatActivity.findViewById(R.id.main_toolbar)
-
+    private var langBtn : ImageButton = appCompatActivity.findViewById(R.id.language_btn)
     init{
         println("DEBUG NAV: " + appCompatActivity.findViewById(R.id.drawer_layout))
         appCompatActivity.setSupportActionBar(toolbar)
-        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        appCompatActivity.supportActionBar?.setDisplayShowHomeEnabled(true)
         toggle = ActionBarDrawerToggle(
             appCompatActivity,
         drawerLayout,
@@ -39,8 +42,10 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
-
+        langBtn.setOnClickListener{
+            changeLangAlert(appCompatActivity)
+        }
+        currentLang(appCompatActivity)
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_home -> {
@@ -98,7 +103,55 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
             }
             true
         }
-
     }
+    fun changeLangAlert(appCompatActivity: AppCompatActivity){
+        var dialog : AlertDialog
+        var availableLangs = arrayOf("English", "Norsk", "Deutsch", "Français", "Español", "中国人")
+        var builder = AlertDialog.Builder(appCompatActivity)
+        builder.setTitle(R.string.choose_lang)
+        builder.setSingleChoiceItems(availableLangs,-1) { _, which ->
+            when(which){
+                0 -> {
+                    Lingver.getInstance().setLocale(appCompatActivity, "en")
+                    val intent = Intent(appCompatActivity, StartScene::class.java)
+                    appCompatActivity.startActivity(intent)
+                }
+                1 -> {
+                    Lingver.getInstance().setLocale(appCompatActivity, "no")
+                    val intent = Intent(appCompatActivity, StartScene::class.java)
+                    appCompatActivity.startActivity(intent)
+                }
+                2 -> {
+                    Lingver.getInstance().setLocale(appCompatActivity, "de")
+                    val intent = Intent(appCompatActivity, StartScene::class.java)
+                    appCompatActivity.startActivity(intent)
+                }
+                3 -> {
+                    Lingver.getInstance().setLocale(appCompatActivity, "fr")
+                    val intent = Intent(appCompatActivity, StartScene::class.java)
+                    appCompatActivity.startActivity(intent)
+                }
+                4 -> {
+                    Lingver.getInstance().setLocale(appCompatActivity, "es")
+                    val intent = Intent(appCompatActivity, StartScene::class.java)
+                    appCompatActivity.startActivity(intent)
+                }
+                5 -> {
+                    Lingver.getInstance().setLocale(appCompatActivity, "zh")
+                    val intent = Intent(appCompatActivity, StartScene::class.java)
+                    appCompatActivity.startActivity(intent)
+                }
 
+                else -> {
+                    println("Error her")
+                }
+            }
+        }
+        dialog = builder.create()
+        dialog.show()
+    }
+    fun currentLang(appCompatActivity: AppCompatActivity){
+        val img : String = Lingver.getInstance().getLocale().toString()
+        langBtn.setImageResource(appCompatActivity.resources.getIdentifier(img, "drawable", appCompatActivity.packageName))
+    }
 }
