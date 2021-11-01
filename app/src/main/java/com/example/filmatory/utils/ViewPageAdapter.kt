@@ -14,6 +14,7 @@ class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : 
     var favoriteFragment = FavoriteFragment()
     var watchlistFragment = WatchlistFragment()
     var listFragment = ListFragment()
+    var accinfoFragment = AccinfoFragment()
     override fun getItemCount(): Int {
         return 4
     }
@@ -21,7 +22,7 @@ class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : 
     override fun createFragment(position: Int): Fragment {
          when(position){
             0 ->{
-                return AccinfoFragment()
+                return accinfoFragment
             }
             1 ->{
                 return favoriteFragment

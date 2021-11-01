@@ -60,12 +60,44 @@
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/white" />
+            <RelativeLayout
+                android:id="@+id/icon_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_below="@+id/m_date">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/movie_favorite_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_favorite_24dp"/>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/movie_watchlist_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/movie_favorite_icon"
+                    android:src="@drawable/bookmark_icon"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/movie_addtolist_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="15dp"
+                    android:textSize="16sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/movie_watchlist_icon"
+                    android:text="Add to list"/>
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/m_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/m_date"
+                android:layout_below="@+id/icon_wrapper"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
                 android:gravity="center"

@@ -18,12 +18,11 @@ import com.yariksoffice.lingver.Lingver
  *
  */
 open class SuperScene : AppCompatActivity() {
-    lateinit var auth: FirebaseAuth
+    var auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.filmatoryTheme)
-        auth = Firebase.auth
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
