@@ -16,3 +16,4 @@ local.properties
 *.xml
 .idea
 .idea\misc.xml
+app/google-services.json
