@@ -3,6 +3,7 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,10 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieWatchProviders
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.controllers.sceneControllers.auth.AuthController
 import com.example.filmatory.scenes.activities.MovieScene
+import com.example.filmatory.systems.MovieSystem
+import com.example.filmatory.systems.UserInfoSystem
 import com.example.filmatory.utils.PersonItem
 import com.example.filmatory.utils.PersonRecyclerViewAdapter
 
@@ -22,12 +26,28 @@ import com.example.filmatory.utils.PersonRecyclerViewAdapter
  */
 class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     var intent: Intent = movieScene.intent
+    private val userInfoSystem = UserInfoSystem(apiSystem)
+    private val movieSystem = MovieSystem(apiSystem)
     private val mId = intent.getIntExtra("movieId", 0)
     private val personsArrayList: MutableList<PersonItem> = ArrayList()
     private val personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
     private val personsAdapter = PersonRecyclerViewAdapter(personsArrayList, movieScene)
+    private val favoriteBtn : ImageButton = movieScene.findViewById(R.id.movie_favorite_icon)
+    private val watchlistBtn : ImageButton = movieScene.findViewById(R.id.movie_watchlist_icon)
+    private val addToListBtn : TextView = movieScene.findViewById(R.id.movie_addtolist_btn)
 
     init {
+        favoriteBtn.setOnClickListener {
+
+        }
+
+        watchlistBtn.setOnClickListener {
+            addToWatchlist()
+        }
+
+        addToListBtn.setOnClickListener {
+            addToUserList()
+        }
         apiSystem.requestMovie(mId.toString() ,::getMovie)
         apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
@@ -341,5 +361,16 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
             }
             personsAdapter.notifyDataSetChanged()
         })
+    }
+    private fun addToFavorites(){
+
+    }
+
+    private fun addToWatchlist(){
+
+    }
+
+    private fun addToUserList(){
+
     }
 }

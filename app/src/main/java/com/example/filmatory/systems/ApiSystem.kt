@@ -94,7 +94,23 @@ class ApiSystem : OnApiRequestFinishedListener {
         val formBody = FormBody.Builder()
             .add("uid", uid)
             .build()
-        api.runRequestPostForm("/user/new", formBody,this, 1, function as (Any) -> Unit);
+        api.runRequestPostForm("/user/new", formBody,this, 1, function as (Any) -> Unit)
+    }
+
+    fun postUserUsername(uid : String, username : String, function: (string : String?) -> Unit) {
+        val formBody = FormBody.Builder()
+            .add("uid", uid)
+            .add("username", username)
+            .build()
+        api.runRequestPostForm("/user/update/username", formBody, this, 2, function as (Any) -> Unit)
+    }
+
+    fun postUserAddFavorites(uid : String, movieId : String, function: (string : String?) -> Unit) {
+        val formBody = FormBody.Builder()
+            .add("uid", uid)
+            .add("movieId", movieId)
+            .build()
+        api.runRequestPostForm("/user/add/favorite", formBody, this, 3, function as (Any) -> Unit)
     }
 
     override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
@@ -129,6 +145,8 @@ class ApiSystem : OnApiRequestFinishedListener {
     override fun onSuccessRequestPost(result: String?, requestId: Int, function: (any: Any) -> Unit) {
         when(requestId) {
             1 -> function(result as (Any))
+            2 -> function(result as (Any))
+            3 -> function(result as (Any))
             else -> {
                 print("Something went wrong, cant find requestId")
             }
