@@ -105,14 +105,55 @@ class ApiSystem : OnApiRequestFinishedListener {
         api.runRequestPostForm("/user/update/username", formBody, this, 2, function as (Any) -> Unit)
     }
 
-    fun postUserAddFavorites(uid : String, movieId : String, function: (string : String?) -> Unit) {
+    fun postUserAddMovieFavorite(uid : String, movieId : String, function: (string : String?) -> Unit) {
         val formBody = FormBody.Builder()
             .add("uid", uid)
             .add("movieId", movieId)
             .build()
-        api.runRequestPostForm("/user/add/favorite", formBody, this, 3, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/add/movie/favorite", formBody, this, 3, function as (Any) -> Unit)
     }
 
+    fun postUserRemoveMovieFavorite(uid : String, movieId : String, function: (string : String?) -> Unit) {
+        val formBody = FormBody.Builder()
+            .add("uid", uid)
+            .add("movieId", movieId)
+            .build()
+        api.runRequestPostForm("/user/remove/movie/favorite", formBody, this, 4, function as (Any) -> Unit)
+    }
+
+    fun postUserAddTvFavorite(uid : String, tvId : String, function: (string : String?) -> Unit) {
+        val formBody = FormBody.Builder()
+            .add("uid", uid)
+            .add("movieId", tvId)
+            .build()
+        api.runRequestPostForm("/user/add/tv/favorite", formBody, this, 5, function as (Any) -> Unit)
+    }
+
+    fun postUserRemoveTvFavorite(uid : String, tvId : String, function: (string : String?) -> Unit) {
+        val formBody = FormBody.Builder()
+            .add("uid", uid)
+            .add("movieId", tvId)
+            .build()
+        api.runRequestPostForm("/user/remove/tv/favorite", formBody, this, 6, function as (Any) -> Unit)
+    }
+
+    fun postUserAddWatchlist(uid : String, mediaId : String, type : String, function: (string : String?) -> Unit) {
+        val formBody = FormBody.Builder()
+            .add("uid", uid)
+            .add("movieId", mediaId)
+            .add("mediaType", type)
+            .build()
+        api.runRequestPostForm("/user/add/watchlist", formBody, this, 7, function as (Any) -> Unit)
+    }
+
+    fun postUserRemoveWatchlist(uid : String, mediaId : String, type : String, function: (string : String?) -> Unit) {
+        val formBody = FormBody.Builder()
+            .add("uid", uid)
+            .add("movieId", mediaId)
+            .add("mediaType", type)
+            .build()
+        api.runRequestPostForm("/user/remove/watchlist", formBody, this, 8, function as (Any) -> Unit)
+    }
     override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
         val gson = GsonBuilder().create()
         when (requestId) {
@@ -147,6 +188,11 @@ class ApiSystem : OnApiRequestFinishedListener {
             1 -> function(result as (Any))
             2 -> function(result as (Any))
             3 -> function(result as (Any))
+            4 -> function(result as (Any))
+            5 -> function(result as (Any))
+            6 -> function(result as (Any))
+            7 -> function(result as (Any))
+            8 -> function(result as (Any))
             else -> {
                 print("Something went wrong, cant find requestId")
             }

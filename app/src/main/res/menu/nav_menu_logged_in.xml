@@ -45,7 +45,7 @@
                 <item
                     android:id="@+id/nav_user_favorites"
                     android:title="@string/favorites"
-                    android:icon="@drawable/favorite_icon">
+                    android:icon="@drawable/favorite_icon_filled">
                 </item>
                 <item
                     android:id="@+id/nav_user_watchlist"

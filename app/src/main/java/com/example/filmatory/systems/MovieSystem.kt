@@ -13,10 +13,21 @@ import com.example.filmatory.api.data.movie.MovieFrontpage
  */
 class MovieSystem(apiSystem: ApiSystem) {
     val apiSystem = apiSystem
-    lateinit var movieFrontpage : MovieFrontpage
 
     fun addMovieToFavorites(uid : String, movieId : String){
-        apiSystem.postUserAddFavorites(uid, movieId, ::newUserResponse)
+        apiSystem.postUserAddMovieFavorite(uid, movieId, ::newUserResponse)
+    }
+
+    fun removeMovieFromFavorites(uid : String, movieId : String){
+        apiSystem.postUserRemoveMovieFavorite(uid, movieId, ::newUserResponse)
+    }
+
+    fun addMovieToWatchlist(uid : String, movieId : String){
+        apiSystem.postUserAddWatchlist(uid, movieId, "movie", ::newUserResponse)
+    }
+
+    fun removeMovieFromWatchlist(uid : String, movieId : String){
+        apiSystem.postUserRemoveWatchlist(uid, movieId, "movie", ::newUserResponse)
     }
 
     private fun newUserResponse(string : String?) {

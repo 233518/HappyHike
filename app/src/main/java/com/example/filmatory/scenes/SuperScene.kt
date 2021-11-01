@@ -6,12 +6,9 @@ import android.util.Log
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.R
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
 import com.google.android.material.navigation.NavigationView
-import com.yariksoffice.lingver.Lingver
 
 /**
  * SuperScene is the main scene for all the scenes. Every scene will extend this class

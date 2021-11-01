@@ -37,6 +37,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     private val addToListBtn : TextView = movieScene.findViewById(R.id.movie_addtolist_btn)
 
     init {
+
         favoriteBtn.setOnClickListener {
 
         }
