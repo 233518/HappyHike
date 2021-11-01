@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/movie_favorite_icon"
-                    android:src="@drawable/bookmark_icon"/>
+                    android:src="@drawable/watchlist_icon_border"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/movie_addtolist_btn"
                     android:layout_width="wrap_content"
