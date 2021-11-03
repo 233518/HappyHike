@@ -6,8 +6,8 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movies
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.MoviesScene
-import com.example.filmatory.utils.MediaItem
-import com.example.filmatory.utils.RecyclerViewAdapter
+import com.example.filmatory.utils.items.MediaItem
+import com.example.filmatory.utils.adapters.RecyclerViewAdapter
 
 /**
  * MoviesController manipulates the MoviesScene gui

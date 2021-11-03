@@ -1,4 +1,4 @@
-package com.example.filmatory.utils
+package com.example.filmatory.utils.adapters
 
 import android.content.Context
 import android.widget.ImageView
@@ -10,9 +10,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
-import com.example.filmatory.scenes.activities.TvScene
+import com.example.filmatory.scenes.activities.MovieScene
+import com.example.filmatory.utils.items.MediaItem
 
-class TvRecyclerViewAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<TvRecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false)
@@ -32,9 +33,9 @@ class TvRecyclerViewAdapter(private val arrayList: MutableList<MediaItem>, priva
 
         holder.itemView.setOnClickListener {
             val model = arrayList[position]
-            val tvId: Int = model.id
-            val intent = Intent(context, TvScene::class.java)
-            intent.putExtra("tvId", tvId)
+            val movieId: Int = model.id
+            val intent = Intent(context, MovieScene::class.java)
+            intent.putExtra("movieId", movieId)
             context.startActivity(intent)
         }
     }

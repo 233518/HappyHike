@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.UserLists
-import com.example.filmatory.utils.ListItem
-import com.example.filmatory.utils.ListsAdapter
-import com.example.filmatory.utils.RecyclerViewAdapter
+import com.example.filmatory.utils.items.ListItem
+import com.example.filmatory.utils.adapters.ListsAdapter
 
 class ListFragment : Fragment() {
     private val listsArrayList: MutableList<ListItem> = ArrayList()

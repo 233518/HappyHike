@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.Watchlist
-import com.example.filmatory.utils.MediaItem
-import com.example.filmatory.utils.RecyclerViewAdapter
+import com.example.filmatory.utils.items.MediaItem
+import com.example.filmatory.utils.adapters.RecyclerViewAdapter
 
 
 class WatchlistFragment : Fragment() {

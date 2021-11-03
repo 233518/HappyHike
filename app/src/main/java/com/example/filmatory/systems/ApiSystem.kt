@@ -23,7 +23,6 @@ import okhttp3.FormBody
  */
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()
-        get() = field
 
     /** All the GET requests */
 

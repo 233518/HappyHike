@@ -1,32 +1,35 @@
-package com.example.filmatory.utils
+package com.example.filmatory.utils.adapters
 
 import android.content.Context
-import android.content.Intent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
-import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.scenes.activities.TvScene
+import com.example.filmatory.utils.items.MediaItem
 
-
-class TvSliderAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<TvSliderAdapter.ViewHolder>() {
+class TvRecyclerViewAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<TvRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int){
         holder.itemTitle.text = arrayList[position].title
         holder.itemDate.text = arrayList[position].date
         Glide.with(this.context)
             .load(arrayList[position].image)
+            .error(R.drawable.placeholder_image)
+            .fallback(R.drawable.placeholder_image)
+            .placeholder(R.drawable.placeholder_image)
             .into(holder.itemImage)
+        holder.itemId = arrayList[position].id
 
         holder.itemView.setOnClickListener {
             val model = arrayList[position]
@@ -42,10 +45,10 @@ class TvSliderAdapter(private val arrayList: MutableList<MediaItem>, private val
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val itemImage: ImageView = view.findViewById(R.id.slider_image)
-        val itemTitle: TextView = view.findViewById(R.id.slider_title)
-        val itemDate: TextView = view.findViewById(R.id.slider_date)
-        val itemId: Int? = null
+        val itemImage: ImageView = view.findViewById(R.id.media_image)
+        val itemTitle: TextView = view.findViewById(R.id.media_title)
+        val itemDate: TextView = view.findViewById(R.id.media_date)
+        var itemId: Int? = null
     }
 
 }

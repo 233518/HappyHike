@@ -6,8 +6,8 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.tv.Tvs
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.TvsScene
-import com.example.filmatory.utils.MediaItem
-import com.example.filmatory.utils.TvRecyclerViewAdapter
+import com.example.filmatory.utils.items.MediaItem
+import com.example.filmatory.utils.adapters.TvRecyclerViewAdapter
 
 /**
  * TvsController manipulates the TvsScene gui

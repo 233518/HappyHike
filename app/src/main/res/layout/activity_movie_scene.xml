@@ -398,8 +398,10 @@
 
     </ScrollView>
 
-
     <include layout="@layout/toolbar" />
 
     <include layout="@layout/nav_drawer" />
+
+    <include layout="@layout/snackbar_coordinatorayout" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

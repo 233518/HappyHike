@@ -7,7 +7,7 @@ import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.AccountInfoScene
-import com.example.filmatory.utils.ViewPageAdapter
+import com.example.filmatory.utils.adapters.ViewPageAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

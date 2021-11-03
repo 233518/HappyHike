@@ -7,9 +7,9 @@ import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.tv.TvFrontpage
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.StartScene
-import com.example.filmatory.utils.MediaItem
-import com.example.filmatory.utils.SliderAdapter
-import com.example.filmatory.utils.TvSliderAdapter
+import com.example.filmatory.utils.items.MediaItem
+import com.example.filmatory.utils.adapters.SliderAdapter
+import com.example.filmatory.utils.adapters.TvSliderAdapter
 
 /**
  * StartController manipulates the StartScene gui
@@ -23,6 +23,11 @@ class StartController(private val startScene: StartScene) : MainController(start
         apiSystem.requestTvFrontpage(::discoverTvData)
         apiSystem.requestMovieFrontpage(::recMovieData)
         apiSystem.requestTvFrontpage(::recTvData)
+        snackbarSystem.showSnackbarFailure("Something unexpected happen!", ::test, "Retry")
+    }
+
+    fun test() {
+
     }
 
     /**
