@@ -1,21 +1,19 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
-import android.net.Uri
-import android.view.View
 import android.widget.ImageButton
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.tv.Tv
-import com.example.filmatory.api.data.tv.TvWatchProviders
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.TvScene
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.TvSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
@@ -39,9 +37,9 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     private var tvIsFavorited : Boolean = false
 
     init {
-        apiSystem.requestTV(tvId.toString(), ::getTv)
-        apiSystem.requestUserFavorites(tvScene.auth.currentUser!!.uid, ::checkIfFavorited)
-        apiSystem.requestUserWatchlist(tvScene.auth.currentUser!!.uid, ::checkIfWatchlist)
+        apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure))
+        apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser!!.uid, ::checkIfFavorited, ::onFailure))
+        apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser!!.uid, ::checkIfWatchlist, ::onFailure))
         favoriteBtn.setOnClickListener {
             if(!tvIsFavorited){
                 addToFavorites()
@@ -66,6 +64,12 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         personsRecyclerView.adapter = personsAdapter
         //apiSystem.requestTvWatchProviders(tvId.toString(), ::getWatchprovider)
     }
+
+    fun onFailure(baseError: BaseError) {
+
+    }
+
+
     /*private fun getWatchprovider(tvWatchProviders: TvWatchProviders){
         tvScene.runOnUiThread(Runnable {
             if(tvWatchProviders.results.NO != null){

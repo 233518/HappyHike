@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.tv.UpcomingTvs
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.UpcomingTvsScene
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.items.MediaItem
 import com.example.filmatory.utils.adapters.TvRecyclerViewAdapter
 
@@ -22,7 +24,11 @@ class UpcomingTvsController(private val upcomingTvsScene: UpcomingTvsScene) : Ma
     init {
         upcomingTvsRecyclerView.layoutManager = GridLayoutManager(upcomingTvsScene, 2)
         upcomingTvsRecyclerView.adapter = upcomingTvsAdapter
-        apiSystem.requestTvsUpcoming(::upcomingTvsData)
+        apiSystem.requestTvsUpcoming(RequestBaseOptions(null, null, ::upcomingTvsData, ::onFailure))
+    }
+
+    fun onFailure(baseError: BaseError) {
+
     }
 
     /**

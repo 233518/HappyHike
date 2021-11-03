@@ -14,6 +14,7 @@ import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.User
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
+import com.example.filmatory.errors.BaseError
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
 
@@ -24,67 +25,74 @@ import okhttp3.FormBody
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()
 
+    data class RequestBaseOptions(
+        val id: String?,
+        val uid: String?,
+        val callbackSuccess: Any,
+        val callbackFailure: (baseError: BaseError) -> Unit
+    )
+
     /** All the GET requests */
 
-    fun requestApprovedReviewById(id : String, function: (approvedReview : ApprovedReview) -> Unit) {
-        api.runRequestGet("/review/approved/get/$id", this, 1, function as (Any) -> Unit);
+    fun requestApprovedReviewById(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/review/approved/get/${requestOptions.id}", this, 1, requestOptions);
     }
-    fun requestDeniedReviewById(id : String, function: (deniedReview : DeniedReview) -> Unit) {
-        api.runRequestGet("/review/denied/get/$id", this, 2, function as (Any) -> Unit);
+    fun requestDeniedReviewById(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/review/denied/get/${requestOptions.id}", this, 2, requestOptions);
     }
-    fun requestPendingReviewById(id : String, function: (pendingReview : PendingReview) -> Unit) {
-        api.runRequestGet("/review/pending/get/$id", this, 3, function as (Any) -> Unit);
+    fun requestPendingReviewById(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/review/pending/get/${requestOptions.id}", this, 3, requestOptions);
     }
-    fun requestUser(id : String, function: (user : User) -> Unit) {
-        api.runRequestGet("/user/get/$id", this, 4, function as (Any) -> Unit);
+    fun requestUser(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/${requestOptions.uid}", this, 4, requestOptions);
     }
-    fun requestMovie(id : String, function: (movie : Movie) -> Unit) {
-        api.runRequestGet("/movie/get/$id", this, 5, function as (Any) -> Unit);
+    fun requestMovie(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/get/${requestOptions.id}", this, 5, requestOptions);
     }
-    fun requestMovieFrontpage(function: (movieFrontPage : MovieFrontpage) -> Unit) {
-        api.runRequestGet("/movie/frontpage", this, 6, function as (Any) -> Unit);
+    fun requestMovieFrontpage(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/frontpage", this, 6, requestOptions);
     }
-    fun requestTV(id : String, function: (tv : Tv) -> Unit) {
-        api.runRequestGet("/tv/get/$id", this, 7, function as (Any) -> Unit);
+    fun requestTV(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/get/${requestOptions.id}", this, 7, requestOptions);
     }
-    fun requestTvFrontpage(function: (tvFrontPage : TvFrontpage) -> Unit) {
-        api.runRequestGet("/tv/frontpage", this, 8, function as (Any) -> Unit);
+    fun requestTvFrontpage(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/frontpage", this, 8, requestOptions);
     }
-    fun requestMovieUpcoming(function: (upcomingMovies : UpcomingMovies) -> Unit) {
-        api.runRequestGet("/movie/upcomingmovies", this, 9, function as (Any) -> Unit);
+    fun requestMovieUpcoming(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/upcomingmovies", this, 9, requestOptions);
     }
-    fun requestMovies(function: (movies : Movies) -> Unit) {
-        api.runRequestGet("/movie/movies", this, 10, function as (Any) -> Unit);
+    fun requestMovies(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/movies", this, 10, requestOptions);
     }
-    fun requestTvs(function: (tvs : Tvs) -> Unit) {
-        api.runRequestGet("/tv/tvs", this, 11, function as (Any) -> Unit);
+    fun requestTvs(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/tvs", this, 11, requestOptions);
     }
-    fun requestTvsUpcoming(function: (upcomingTvs : UpcomingTvs) -> Unit) {
-        api.runRequestGet("/tv/upcomingtvs", this, 12, function as (Any) -> Unit);
+    fun requestTvsUpcoming(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/upcomingtvs", this, 12, requestOptions);
     }
-    fun requestAllLists(function: (lists : Lists) -> Unit) {
-        api.runRequestGet("/lists/get", this, 13, function as (Any) -> Unit);
+    fun requestAllLists(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/lists/get", this, 13, requestOptions);
     }
-    fun requestList(id : String, function: (list : List) -> Unit) {
-        api.runRequestGet("/list/get/$id", this, 14, function as (Any) -> Unit);
+    fun requestList(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/list/get/${requestOptions.id}", this, 14, requestOptions);
     }
-    fun requestPerson(id : String, function: (person : Person) -> Unit) {
-        api.runRequestGet("/person/get/$id", this, 15, function as (Any) -> Unit);
+    fun requestPerson(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/person/get/${requestOptions.id}", this, 15, requestOptions);
     }
-    fun requestUserFavorites(id : String, function: (favorites : Favorites) -> Unit) {
-        api.runRequestGet("/user/get/favorites/$id", this, 16, function as (Any) -> Unit);
+    fun requestUserFavorites(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/favorites/${requestOptions.uid}", this, 16, requestOptions);
     }
-    fun requestUserWatchlist(id : String, function: (watchlist : Watchlist) -> Unit) {
-        api.runRequestGet("/user/get/watchlist/$id", this, 17, function as (Any) -> Unit);
+    fun requestUserWatchlist(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/watchlist/${requestOptions.uid}", this, 17, requestOptions);
     }
-    fun requestUserLists(id : String, function: (userLists : UserLists) -> Unit) {
-        api.runRequestGet("/user/get/lists/$id", this, 18, function as (Any) -> Unit);
+    fun requestUserLists(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/lists/${requestOptions.uid}", this, 18, requestOptions);
     }
-    fun requestMovieWatchProviders(id : String, function: (movieWatchProviders : MovieWatchProviders) -> Unit) {
-        api.runRequestGet("/movie/get/watch/providers/$id", this, 19, function as (Any) -> Unit);
+    fun requestMovieWatchProviders(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/get/watch/providers/${requestOptions.id}", this, 19, requestOptions);
     }
-    fun requestTvWatchProviders(id : String, function: (tvWatchProviders : TvWatchProviders) -> Unit) {
-        api.runRequestGet("/tv/get/watch/providers/$id", this, 20, function as (Any) -> Unit);
+    fun requestTvWatchProviders(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/get/watch/providers/${requestOptions.id}", this, 20, requestOptions);
     }
 
     /** All the POST requests */

@@ -6,11 +6,12 @@ import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.AccountInfoScene
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.ViewPageAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 /**
  * AccountInfoController manipulates the AccountInfoScene gui
@@ -21,9 +22,14 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     val tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem)
     init {
         initlizeTabAdapter()
-        accountInfoScene.auth.currentUser?.let { apiSystem.requestUserFavorites(it.uid, ::getUserFavorites) }
-        accountInfoScene.auth.currentUser?.let { apiSystem.requestUserWatchlist(it.uid, ::getUserWatchlist) }
+        accountInfoScene.auth.currentUser?.let { apiSystem.requestUserFavorites(RequestBaseOptions(null, it.uid,
+            ::getUserFavorites, ::onFailure)) }
+        accountInfoScene.auth.currentUser?.let { apiSystem.requestUserWatchlist(RequestBaseOptions(null, it.uid,
+            ::getUserFavorites , ::onFailure)) }
         //accountInfoScene.auth.currentUser?.let { apiSystem.requestUserLists(it.uid, ::getUserLists) }
+    }
+
+    fun onFailure(baseError: BaseError) {
 
     }
 

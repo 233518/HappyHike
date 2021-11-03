@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.UpcomingMovies
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.UpcomingMoviesScene
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.items.MediaItem
 import com.example.filmatory.utils.adapters.RecyclerViewAdapter
 
@@ -22,7 +24,11 @@ class UpcomingMoviesController(private val upcomingMoviesScene: UpcomingMoviesSc
     init {
         upcomingMoviesRecyclerView.layoutManager = GridLayoutManager(upcomingMoviesScene, 2)
         upcomingMoviesRecyclerView.adapter = upcomingMoviesAdapter
-        apiSystem.requestMovieUpcoming(::upcomingMoviesData)
+        apiSystem.requestMovieUpcoming(RequestBaseOptions(null, null, ::upcomingMoviesData, ::onFailure))
+    }
+
+    fun onFailure(baseError: BaseError){
+
     }
 
     /**

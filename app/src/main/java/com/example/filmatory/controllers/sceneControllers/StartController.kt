@@ -6,7 +6,9 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.tv.TvFrontpage
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.StartScene
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.items.MediaItem
 import com.example.filmatory.utils.adapters.SliderAdapter
 import com.example.filmatory.utils.adapters.TvSliderAdapter
@@ -19,14 +21,19 @@ import com.example.filmatory.utils.adapters.TvSliderAdapter
 class StartController(private val startScene: StartScene) : MainController(startScene) {
 
     init {
-        apiSystem.requestMovieFrontpage(::discoverMoviesData)
-        apiSystem.requestTvFrontpage(::discoverTvData)
-        apiSystem.requestMovieFrontpage(::recMovieData)
-        apiSystem.requestTvFrontpage(::recTvData)
-        snackbarSystem.showSnackbarFailure("Something unexpected happen!", ::test, "Retry")
+        apiSystem.requestMovieFrontpage(RequestBaseOptions(null, null, ::discoverMoviesData, ::onFailure))
+        apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::discoverTvData, ::onFailure))
+        apiSystem.requestMovieFrontpage(RequestBaseOptions(null, null, ::recMovieData, ::onFailure))
+        apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::recTvData, ::onFailure))
+        apiSystem.requestMovie(RequestBaseOptions("dwqdwqdwq", null, ::test, ::onFailure))
+        //snackbarSystem.showSnackbarFailure("Something unexpected happen!", ::test, "Retry")
     }
 
-    fun test() {
+    fun test(any: Any) {
+
+    }
+
+    fun onFailure(baseError: BaseError) {
 
     }
 

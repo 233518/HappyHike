@@ -1,6 +1,7 @@
 package com.example.filmatory.api
 
 import com.example.filmatory.BuildConfig
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import okhttp3.*
 import java.io.IOException
 
@@ -8,18 +9,20 @@ class Api {
     private val client = OkHttpClient()
     private val baseUrl = "https://filmatoryeksamen.herokuapp.com/en/api"
 
-    fun runRequestGet(url: String, callback : OnApiRequestFinishedListener, requestId: Int, function: (any : Any) -> Unit) {
+    fun runRequestGet(url: String, callback : OnApiRequestFinishedListener, requestId: Int, requestOptions: RequestBaseOptions) {
         val request = Request.Builder()
             .url(baseUrl + url)
             .build()
 
         client.newCall(request).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                callback.onSuccessRequestGet(response.body()?.string(), requestId, function)
+                callback.onSuccessRequestGet(response.body()?.string(), requestId,
+                    requestOptions.callbackSuccess as (Any) -> Unit
+                )
                 response.close();
             }
             override fun onFailure(call: Call, e: IOException) {
-                TODO("Not yet implemented")
+                println("FAILURE " + e.message)
             }
         })
     }

@@ -11,6 +11,8 @@ import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.PersonScene
 
 import android.net.Uri
+import com.example.filmatory.errors.BaseError
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 
 /**
  * PersonController manipulates the PersonScene gui
@@ -24,7 +26,7 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
     private val person_readless_btn = personScene.findViewById<Button>(R.id.person_readless)
     private val personData : MutableList<String> = ArrayList()
     init {
-        apiSystem.requestPerson(pId.toString(),::getPerson)
+        apiSystem.requestPerson(RequestBaseOptions(pId.toString(), null, ::getPerson, ::onFailure))
         person_readmore_btn.setOnClickListener {
             loadMoreBio(personData);
             person_readmore_btn.visibility = View.GONE
@@ -36,6 +38,11 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
             person_readless_btn.visibility = View.GONE
         }
     }
+
+    fun onFailure(baseError: BaseError) {
+
+    }
+
     /**
      * Update the gui with data from API
      *

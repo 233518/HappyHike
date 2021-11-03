@@ -11,7 +11,9 @@ import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.MovieScene
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.MovieSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
@@ -35,9 +37,9 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     private var movieIsFavorited : Boolean = false
 
     init {
-        apiSystem.requestMovie(mId.toString() ,::getMovie)
-        apiSystem.requestUserFavorites(movieScene.auth.currentUser!!.uid, ::checkIfFavorited)
-        apiSystem.requestUserWatchlist(movieScene.auth.currentUser!!.uid, ::checkIfWatchlist)
+        apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure))
+        apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
+        apiSystem.requestUserWatchlist(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
         favoriteBtn.setOnClickListener {
             if(!movieIsFavorited){
                 addToFavorites()
@@ -60,6 +62,10 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
         //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
         personsRecyclerView.adapter = personsAdapter
+    }
+
+    fun onFailure(baseError: BaseError) {
+
     }
 
     /*private fun getWatchprovider(movieWatchProviders: MovieWatchProviders){

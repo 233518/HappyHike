@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.lists.Lists
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.ListsScene
+import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.items.ListItem
 import com.example.filmatory.utils.adapters.ListsAdapter
 
@@ -22,7 +24,11 @@ class ListsController(private val listsScene: ListsScene) : MainController(lists
     init {
         listsRecyclerView.layoutManager = LinearLayoutManager(listsScene, LinearLayoutManager.VERTICAL, false)
         listsRecyclerView.adapter = listsAdapter
-        apiSystem.requestAllLists(::listsData)
+        apiSystem.requestAllLists(RequestBaseOptions(null, null, ::listsData, ::onFailure))
+    }
+
+    fun onFailure(baseError: BaseError) {
+
     }
 
     /**

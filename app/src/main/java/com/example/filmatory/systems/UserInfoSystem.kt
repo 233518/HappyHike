@@ -2,8 +2,6 @@ package com.example.filmatory.systems
 
 import android.content.ContentValues
 import android.util.Log
-import com.example.filmatory.api.data.user.Favorites
-import com.example.filmatory.utils.MediaItem
 
 class UserInfoSystem(private val apiSystem: ApiSystem) {
     fun updateUsername(uid : String, username: String){
