@@ -103,10 +103,9 @@
                 android:background="@color/white" />
     </RelativeLayout>
 
-    <include
-        layout="@layout/toolbar"
-        />
-    <include layout="@layout/nav_drawer" />
-
     <include layout="@layout/snackbar_coordinatorayout" />
+
+    <include layout="@layout/toolbar" />
+
+    <include layout="@layout/nav_drawer" />
 </androidx.drawerlayout.widget.DrawerLayout>
