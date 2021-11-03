@@ -1,8 +1,6 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
-import android.net.Uri
-import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,17 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
-import com.example.filmatory.api.data.movie.MovieWatchProviders
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.controllers.sceneControllers.auth.AuthController
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.systems.MovieSystem
-import com.example.filmatory.systems.UserInfoSystem
-import com.example.filmatory.utils.MediaItem
-import com.example.filmatory.utils.PersonItem
-import com.example.filmatory.utils.PersonRecyclerViewAdapter
+import com.example.filmatory.utils.items.PersonItem
+import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
 
 /**
  * MovieController manipulates the MovieScene gui

@@ -17,8 +17,8 @@ import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.TvScene
 import com.example.filmatory.systems.TvSystem
-import com.example.filmatory.utils.PersonItem
-import com.example.filmatory.utils.PersonRecyclerViewAdapter
+import com.example.filmatory.utils.items.PersonItem
+import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
 
 /**
  * TvController manipulates the TvScene gui
