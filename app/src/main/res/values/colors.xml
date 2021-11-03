@@ -23,4 +23,8 @@
     <color name="overlay_75per">#BF32292F</color>
     <color name="mint_cream">#F0F7F4</color>
     <color name="test_color">#CC32292F</color>
+    <color name="snackbar_success">#4BB543</color>
+    <color name="snackbar_failure">#df4759</color>
+    <color name="snackbar_info">#467fd0</color>
+    <color name="snackbar_warning">#ffc107</color>
 </resources>

@@ -145,5 +145,5 @@
 
     <include layout="@layout/nav_drawer" />
 
-
+    <include layout="@layout/snackbar_coordinatorayout" />
 </androidx.drawerlayout.widget.DrawerLayout>

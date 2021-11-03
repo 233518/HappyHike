@@ -23,6 +23,11 @@ class StartController(private val startScene: StartScene) : MainController(start
         apiSystem.requestTvFrontpage(::discoverTvData)
         apiSystem.requestMovieFrontpage(::recMovieData)
         apiSystem.requestTvFrontpage(::recTvData)
+        snackbarSystem.showSnackbarFailure("Something unexpected happen!", ::test, "Retry")
+    }
+
+    fun test() {
+
     }
 
     /**
