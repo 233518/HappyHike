@@ -123,7 +123,7 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun postUserAddTvFavorite(uid : String, tvId : String, function: (string : String?) -> Unit) {
         val formBody = FormBody.Builder()
             .add("uid", uid)
-            .add("movieId", tvId)
+            .add("tvId", tvId)
             .build()
         api.runRequestPostForm("/user/add/tv/favorite", formBody, this, 5, function as (Any) -> Unit)
     }
@@ -131,7 +131,7 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun postUserRemoveTvFavorite(uid : String, tvId : String, function: (string : String?) -> Unit) {
         val formBody = FormBody.Builder()
             .add("uid", uid)
-            .add("movieId", tvId)
+            .add("tvId", tvId)
             .build()
         api.runRequestPostForm("/user/remove/tv/favorite", formBody, this, 6, function as (Any) -> Unit)
     }
@@ -139,7 +139,7 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun postUserAddWatchlist(uid : String, mediaId : String, type : String, function: (string : String?) -> Unit) {
         val formBody = FormBody.Builder()
             .add("uid", uid)
-            .add("movieId", mediaId)
+            .add("mediaId", mediaId)
             .add("mediaType", type)
             .build()
         api.runRequestPostForm("/user/add/watchlist", formBody, this, 7, function as (Any) -> Unit)
@@ -148,7 +148,7 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun postUserRemoveWatchlist(uid : String, mediaId : String, type : String, function: (string : String?) -> Unit) {
         val formBody = FormBody.Builder()
             .add("uid", uid)
-            .add("movieId", mediaId)
+            .add("mediaId", mediaId)
             .add("mediaType", type)
             .build()
         api.runRequestPostForm("/user/remove/watchlist", formBody, this, 8, function as (Any) -> Unit)

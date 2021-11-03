@@ -1,8 +1,6 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
-import android.net.Uri
-import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
-import com.example.filmatory.api.data.movie.MovieWatchProviders
+import com.example.filmatory.api.data.user.Favorites
+import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.systems.MovieSystem
-import com.example.filmatory.systems.UserInfoSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
 
@@ -25,7 +23,6 @@ import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
  */
 class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     var intent: Intent = movieScene.intent
-    private val userInfoSystem = UserInfoSystem(apiSystem)
     private val movieSystem = MovieSystem(apiSystem)
     private val mId = intent.getIntExtra("movieId", 0)
     private val personsArrayList: MutableList<PersonItem> = ArrayList()
@@ -34,27 +31,38 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     private val favoriteBtn : ImageButton = movieScene.findViewById(R.id.movie_favorite_icon)
     private val watchlistBtn : ImageButton = movieScene.findViewById(R.id.movie_watchlist_icon)
     private val addToListBtn : TextView = movieScene.findViewById(R.id.movie_addtolist_btn)
+    private var movieIsWatched : Boolean  = false
+    private var movieIsFavorited : Boolean = false
 
     init {
-
+        apiSystem.requestMovie(mId.toString() ,::getMovie)
+        apiSystem.requestUserFavorites(movieScene.auth.currentUser!!.uid, ::checkIfFavorited)
+        apiSystem.requestUserWatchlist(movieScene.auth.currentUser!!.uid, ::checkIfWatchlist)
         favoriteBtn.setOnClickListener {
-
+            if(!movieIsFavorited){
+                addToFavorites()
+            } else{
+                removeFromFavorites()
+            }
         }
 
         watchlistBtn.setOnClickListener {
-            addToWatchlist()
+            if(!movieIsWatched){
+                addToWatchlist()
+            } else {
+                removeFromWatchlist()
+            }
         }
 
         addToListBtn.setOnClickListener {
             addToUserList()
         }
-        apiSystem.requestMovie(mId.toString() ,::getMovie)
-        apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
+        //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
         personsRecyclerView.adapter = personsAdapter
     }
 
-    private fun getWatchprovider(movieWatchProviders: MovieWatchProviders){
+    /*private fun getWatchprovider(movieWatchProviders: MovieWatchProviders){
         movieScene.runOnUiThread(Runnable {
             if(movieWatchProviders.results.NO != null){
                 if (!movieWatchProviders.results.NO.flatrate.isNullOrEmpty()) {
@@ -336,7 +344,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 }
             }
         })
-    }
+    }*/
 
     /**
      * Update the gui with data from API
@@ -344,7 +352,6 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
      * @param movie The response from API
      */
     private fun getMovie(movie: Movie){
-
         movieScene.runOnUiThread(Runnable {
             movieScene.findViewById<TextView>(R.id.m_title).text = movie.filminfo.title
             movieScene.findViewById<TextView>(R.id.m_date).text = movie.filminfo.release_date
@@ -363,14 +370,66 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
         })
     }
     private fun addToFavorites(){
+        movieScene.runOnUiThread(Runnable {
+            movieSystem.addMovieToFavorites(movieScene.auth.currentUser!!.uid, mId.toString())
+            movieIsFavorited = true
+            favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
+        })
+    }
 
+    private fun removeFromFavorites(){
+        movieScene.runOnUiThread(Runnable {
+            movieSystem.removeMovieFromFavorites(movieScene.auth.currentUser!!.uid, mId.toString())
+            movieIsFavorited = false
+            favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
+        })
     }
 
     private fun addToWatchlist(){
+        movieScene.runOnUiThread(Runnable {
+            movieSystem.addMovieToWatchlist(movieScene.auth.currentUser!!.uid, mId.toString())
+            movieIsWatched = true
+            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
+        })
+    }
 
+    private fun removeFromWatchlist(){
+        movieScene.runOnUiThread(Runnable {
+            movieSystem.removeMovieFromWatchlist(movieScene.auth.currentUser!!.uid, mId.toString())
+            movieIsWatched = false
+            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
+        })
     }
 
     private fun addToUserList(){
 
+    }
+
+    private fun checkIfFavorited(favorites: Favorites){
+        movieScene.runOnUiThread(Runnable {
+            for (item in favorites.userMovieFavorites) {
+                if (item.id == mId){
+                    movieIsFavorited = true
+                    favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
+                } else {
+                    movieIsFavorited = false
+                    favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
+                }
+            }
+        })
+    }
+
+    private fun checkIfWatchlist(watchlist: Watchlist){
+        movieScene.runOnUiThread(Runnable {
+            for(item in watchlist.userMovieWatched){
+                if(item.id == mId){
+                    movieIsWatched = true
+                    watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
+                } else {
+                    movieIsWatched = false
+                    watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
+                }
+            }
+        })
     }
 }

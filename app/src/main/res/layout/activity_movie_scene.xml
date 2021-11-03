@@ -67,19 +67,17 @@
                 android:padding="10dp"
                 android:gravity="center"
                 android:layout_below="@+id/m_date">
-
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/movie_favorite_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/favorite_icon_border"/>
+                    android:layout_marginEnd="15dp"/>
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/movie_watchlist_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@+id/movie_favorite_icon"
-                    android:src="@drawable/watchlist_icon_border"/>
+                    android:scaleType="fitXY"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/movie_addtolist_btn"
                     android:layout_width="wrap_content"
@@ -90,7 +88,6 @@
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@+id/movie_watchlist_icon"
                     android:text="Add to list"/>
-
             </RelativeLayout>
 
             <TextView

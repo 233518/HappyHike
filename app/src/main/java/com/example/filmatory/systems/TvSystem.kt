@@ -14,7 +14,7 @@ import com.example.filmatory.api.data.movie.MovieFrontpage
 class TvSystem(apiSystem: ApiSystem) {
     val apiSystem = apiSystem
 
-    fun addTvFavorites(uid : String, tvId : String){
+    fun addTvToFavorites(uid : String, tvId : String){
         apiSystem.postUserAddTvFavorite(uid, tvId, ::newUserResponse)
     }
 
@@ -22,7 +22,7 @@ class TvSystem(apiSystem: ApiSystem) {
         apiSystem.postUserRemoveTvFavorite(uid, tvId, ::newUserResponse)
     }
 
-    fun addMTvToWatchlist(uid : String, tvId : String){
+    fun addTvToWatchlist(uid : String, tvId : String){
         apiSystem.postUserAddWatchlist(uid, tvId, "tv", ::newUserResponse)
     }
 
