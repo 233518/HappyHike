@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
@@ -23,6 +25,16 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = listsAdapter
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val createListBtn : Button = view.findViewById(R.id.newListBtn)
+
+        createListBtn.setOnClickListener {
+            val listName : String = view.findViewById<TextView>(R.id.accinfoNewListTextField).text.toString()
+            listsArrayList.add(ListItem(listName, "Dybe", "http://placeimg.com/640/480/any", "12", "14", "1231"))
+        }
     }
 
     fun showUserLists(userLists: UserLists){
