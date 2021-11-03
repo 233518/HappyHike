@@ -3,6 +3,8 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +12,11 @@ import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.tv.Tv
 import com.example.filmatory.api.data.tv.TvWatchProviders
+import com.example.filmatory.api.data.user.Favorites
+import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.TvScene
+import com.example.filmatory.systems.TvSystem
 import com.example.filmatory.utils.PersonItem
 import com.example.filmatory.utils.PersonRecyclerViewAdapter
 
@@ -22,16 +27,46 @@ import com.example.filmatory.utils.PersonRecyclerViewAdapter
  */
 class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     var intent: Intent = tvScene.intent
+    private val tvSystem = TvSystem(apiSystem)
     private val tvId = intent.getIntExtra("tvId", 0)
     private val personsArrayList: MutableList<PersonItem> = ArrayList()
     private val personsRecyclerView: RecyclerView = tvScene.findViewById(R.id.m_person_slider)
     private val personsAdapter = PersonRecyclerViewAdapter(personsArrayList, tvScene)
+    private val favoriteBtn : ImageButton = tvScene.findViewById(R.id.movie_favorite_icon)
+    private val watchlistBtn : ImageButton = tvScene.findViewById(R.id.movie_watchlist_icon)
+    private val addToListBtn : TextView = tvScene.findViewById(R.id.movie_addtolist_btn)
+    private var tvIsWatched : Boolean = false
+    private var tvIsFavorited : Boolean = false
 
     init {
         apiSystem.requestTV(tvId.toString(), ::getTv)
-        apiSystem.requestTvWatchProviders(tvId.toString(), ::getWatchprovider)
+        apiSystem.requestUserFavorites(tvScene.auth.currentUser!!.uid, ::checkIfFavorited)
+        apiSystem.requestUserWatchlist(tvScene.auth.currentUser!!.uid, ::checkIfWatchlist)
+        favoriteBtn.setOnClickListener {
+            if(!tvIsFavorited){
+                addToFavorites()
+            } else{
+                removeFromFavorites()
+            }
+        }
+
+        watchlistBtn.setOnClickListener {
+            if(!tvIsWatched){
+                addToWatchlist()
+            } else {
+                removeFromWatchlist()
+            }
+        }
+
+        addToListBtn.setOnClickListener {
+            addToUserList()
+        }
+
+        personsRecyclerView.layoutManager = LinearLayoutManager(tvScene, LinearLayoutManager.HORIZONTAL, false)
+        personsRecyclerView.adapter = personsAdapter
+        //apiSystem.requestTvWatchProviders(tvId.toString(), ::getWatchprovider)
     }
-    private fun getWatchprovider(tvWatchProviders: TvWatchProviders){
+    /*private fun getWatchprovider(tvWatchProviders: TvWatchProviders){
         tvScene.runOnUiThread(Runnable {
             if(tvWatchProviders.results.NO != null){
                 if (!tvWatchProviders.results.NO.flatrate.isNullOrEmpty()) {
@@ -313,7 +348,7 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
                 }
             }
         })
-    }
+    }*/
 
     /**
      * Update the gui with data from API
@@ -332,11 +367,75 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
                 .centerCrop()
                 .into(tvScene.findViewById(R.id.m_img))
             tvScene.findViewById<TextView>(R.id.m_overview).text = tv.serieinfo.overview
-            for (item in tv.personer.cast){
+
+            for (item in tv.personer.cast.take(10)) {
                 personsArrayList.add(PersonItem(item.name,item.character,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,item.id))
+
             }
-            personsRecyclerView.layoutManager = LinearLayoutManager(tvScene, LinearLayoutManager.HORIZONTAL, false)
-            personsRecyclerView.adapter = personsAdapter
+            personsAdapter.notifyDataSetChanged()
+        })
+    }
+    private fun addToFavorites(){
+        tvScene.runOnUiThread(Runnable {
+            tvSystem.addTvToFavorites(tvScene.auth.currentUser!!.uid, tvId.toString())
+            tvIsFavorited = true
+            favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
+        })
+    }
+
+    private fun removeFromFavorites(){
+        tvScene.runOnUiThread(Runnable {
+            tvSystem.removeTvFromFavorites(tvScene.auth.currentUser!!.uid, tvId.toString())
+            tvIsFavorited = false
+            favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
+        })
+    }
+
+    private fun addToWatchlist(){
+        tvScene.runOnUiThread(Runnable {
+            tvSystem.addTvToWatchlist(tvScene.auth.currentUser!!.uid, tvId.toString())
+            tvIsWatched = true
+            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
+        })
+    }
+
+    private fun removeFromWatchlist(){
+        tvScene.runOnUiThread(Runnable {
+            tvSystem.removeTvFromWatchlist(tvScene.auth.currentUser!!.uid, tvId.toString())
+            tvIsWatched = false
+            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
+        })
+    }
+
+    private fun addToUserList(){
+
+    }
+
+    private fun checkIfFavorited(favorites: Favorites){
+        tvScene.runOnUiThread(Runnable {
+            for (item in favorites.userTvFavorites) {
+                if (item.id == tvId){
+                    tvIsFavorited = true
+                    favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
+                } else {
+                    tvIsFavorited = false
+                    favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
+                }
+            }
+        })
+    }
+
+    private fun checkIfWatchlist(watchlist: Watchlist){
+        tvScene.runOnUiThread(Runnable {
+            for(item in watchlist.userTvWatched){
+                if(item.id == tvId){
+                    tvIsWatched = true
+                    watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
+                } else {
+                    tvIsWatched = false
+                    watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
+                }
+            }
         })
     }
 }
