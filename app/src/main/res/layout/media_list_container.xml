@@ -27,7 +27,7 @@
         </LinearLayout>
 
     </LinearLayout>
-
+    <include layout="@layout/snackbar_coordinatorayout" />
     <include
         layout="@layout/toolbar"
         />

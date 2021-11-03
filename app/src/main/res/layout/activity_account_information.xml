@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/tab_layout" />
     </RelativeLayout>
-
+    <include layout="@layout/snackbar_coordinatorayout" />
     <include layout="@layout/toolbar" />
 
     <include layout="@layout/nav_drawer" />

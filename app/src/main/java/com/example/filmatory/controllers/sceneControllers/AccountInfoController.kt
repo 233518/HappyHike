@@ -22,11 +22,9 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     val tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem)
     init {
         initlizeTabAdapter()
-        accountInfoScene.auth.currentUser?.let { apiSystem.requestUserFavorites(RequestBaseOptions(null, it.uid,
-            ::getUserFavorites, ::onFailure)) }
-        accountInfoScene.auth.currentUser?.let { apiSystem.requestUserWatchlist(RequestBaseOptions(null, it.uid,
-            ::getUserFavorites , ::onFailure)) }
-        //accountInfoScene.auth.currentUser?.let { apiSystem.requestUserLists(it.uid, ::getUserLists) }
+        apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavorites, ::onFailure))
+        apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlist, ::onFailure))
+        //apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
     }
 
     fun onFailure(baseError: BaseError) {

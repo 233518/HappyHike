@@ -38,28 +38,29 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
 
     init {
         apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure))
-        apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser!!.uid, ::checkIfFavorited, ::onFailure))
-        apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser!!.uid, ::checkIfWatchlist, ::onFailure))
-        favoriteBtn.setOnClickListener {
-            if(!tvIsFavorited){
-                addToFavorites()
-            } else{
-                removeFromFavorites()
+        if(tvScene.auth.currentUser?.uid != null){
+            apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
+            apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
+            favoriteBtn.setOnClickListener {
+                if(!tvIsFavorited){
+                    addToFavorites()
+                } else{
+                    removeFromFavorites()
+                }
+            }
+
+            watchlistBtn.setOnClickListener {
+                if(!tvIsWatched){
+                    addToWatchlist()
+                } else {
+                    removeFromWatchlist()
+                }
+            }
+
+            addToListBtn.setOnClickListener {
+                addToUserList()
             }
         }
-
-        watchlistBtn.setOnClickListener {
-            if(!tvIsWatched){
-                addToWatchlist()
-            } else {
-                removeFromWatchlist()
-            }
-        }
-
-        addToListBtn.setOnClickListener {
-            addToUserList()
-        }
-
         personsRecyclerView.layoutManager = LinearLayoutManager(tvScene, LinearLayoutManager.HORIZONTAL, false)
         personsRecyclerView.adapter = personsAdapter
         //apiSystem.requestTvWatchProviders(tvId.toString(), ::getWatchprovider)

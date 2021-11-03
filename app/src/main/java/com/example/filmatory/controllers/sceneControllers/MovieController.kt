@@ -38,27 +38,31 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
 
     init {
         apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure))
-        apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
-        apiSystem.requestUserWatchlist(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
-        favoriteBtn.setOnClickListener {
-            if(!movieIsFavorited){
-                addToFavorites()
-            } else{
-                removeFromFavorites()
+        if(movieScene.auth.currentUser?.uid != null){
+            apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
+            apiSystem.requestUserWatchlist(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
+            favoriteBtn.setOnClickListener {
+                if(!movieIsFavorited){
+                    addToFavorites()
+                } else{
+                    removeFromFavorites()
+                }
+            }
+            watchlistBtn.setOnClickListener {
+                if(!movieIsWatched){
+                    addToWatchlist()
+                } else {
+                    removeFromWatchlist()
+                }
+            }
+            addToListBtn.setOnClickListener {
+                addToUserList()
             }
         }
 
-        watchlistBtn.setOnClickListener {
-            if(!movieIsWatched){
-                addToWatchlist()
-            } else {
-                removeFromWatchlist()
-            }
-        }
 
-        addToListBtn.setOnClickListener {
-            addToUserList()
-        }
+
+
         //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
         personsRecyclerView.adapter = personsAdapter

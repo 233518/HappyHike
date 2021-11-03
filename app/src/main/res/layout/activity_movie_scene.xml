@@ -71,11 +71,13 @@
                     android:id="@+id/movie_favorite_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/favorite_icon_border"
                     android:layout_marginEnd="15dp"/>
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/movie_watchlist_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/watchlist_icon_border"
                     android:layout_toEndOf="@+id/movie_favorite_icon"
                     android:scaleType="fitXY"/>
                 <androidx.appcompat.widget.AppCompatTextView
