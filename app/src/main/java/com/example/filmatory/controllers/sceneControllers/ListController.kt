@@ -8,8 +8,8 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.lists.List
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.ListScene
-import com.example.filmatory.utils.MediaItem
-import com.example.filmatory.utils.RecyclerViewAdapter
+import com.example.filmatory.utils.items.MediaItem
+import com.example.filmatory.utils.adapters.RecyclerViewAdapter
 
 /**
  * ListController manipulates the ListScene gui

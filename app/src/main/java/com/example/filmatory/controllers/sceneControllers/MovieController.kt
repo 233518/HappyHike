@@ -12,12 +12,11 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.movie.MovieWatchProviders
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.controllers.sceneControllers.auth.AuthController
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.systems.MovieSystem
 import com.example.filmatory.systems.UserInfoSystem
-import com.example.filmatory.utils.PersonItem
-import com.example.filmatory.utils.PersonRecyclerViewAdapter
+import com.example.filmatory.utils.items.PersonItem
+import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
 
 /**
  * MovieController manipulates the MovieScene gui

@@ -1,4 +1,4 @@
-package com.example.filmatory.utils
+package com.example.filmatory.utils.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.MovieScene
+import com.example.filmatory.utils.items.MediaItem
 
 
 class SliderAdapter(private val arrayList: MutableList<MediaItem>, private val context: Context) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {

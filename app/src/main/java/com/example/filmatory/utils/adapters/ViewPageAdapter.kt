@@ -1,4 +1,4 @@
-package com.example.filmatory.utils
+package com.example.filmatory.utils.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
