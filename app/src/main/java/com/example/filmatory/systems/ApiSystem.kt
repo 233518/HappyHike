@@ -17,6 +17,7 @@ import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.errors.BaseError
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
+import java.util.*
 
 /**
  * ApiSystem handles the interaction with the API
@@ -25,144 +26,158 @@ import okhttp3.FormBody
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()
 
+    abstract class BaseOptions {
+        abstract val id: String?
+        abstract val uid: String?
+        abstract val callbackSuccess: Any
+        abstract val callbackFailure: (baseError: BaseError) -> Unit
+    }
+
     data class RequestBaseOptions(
-        val id: String?,
-        val uid: String?,
-        val callbackSuccess: Any,
-        val callbackFailure: (baseError: BaseError) -> Unit
-    )
+        override val id: String?,
+        override val uid: String?,
+        override val callbackSuccess: Any,
+        override val callbackFailure: (baseError: BaseError) -> Unit,
+    ) : BaseOptions()
+
+    data class PostBaseOptions(
+        override val id: String?,
+        override val uid: String?,
+        val params : Map<String, String>?,
+        override val callbackSuccess: Any,
+        override val callbackFailure: (baseError: BaseError) -> Unit,
+    ) : BaseOptions()
 
     /** All the GET requests */
 
-    fun requestTest(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/test", this, 0, requestOptions)
+    fun requestTest(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/test", this, 0, requestBaseOptions)
     }
-    fun requestApprovedReviewById(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/review/approved/get/${requestOptions.id}", this, 1, requestOptions);
+    fun requestApprovedReviewById(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/review/approved/get/${requestBaseOptions.id}", this, 1, requestBaseOptions);
     }
-    fun requestDeniedReviewById(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/review/denied/get/${requestOptions.id}", this, 2, requestOptions);
+    fun requestDeniedReviewById(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/review/denied/get/${requestBaseOptions.id}", this, 2, requestBaseOptions);
     }
-    fun requestPendingReviewById(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/review/pending/get/${requestOptions.id}", this, 3, requestOptions);
+    fun requestPendingReviewById(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/review/pending/get/${requestBaseOptions.id}", this, 3, requestBaseOptions);
     }
-    fun requestUser(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/user/get/${requestOptions.uid}", this, 4, requestOptions);
+    fun requestUser(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/${requestBaseOptions.uid}", this, 4, requestBaseOptions);
     }
-    fun requestMovie(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/get/${requestOptions.id}", this, 5, requestOptions);
+    fun requestMovie(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/get/${requestBaseOptions.id}", this, 5, requestBaseOptions);
     }
-    fun requestMovieFrontpage(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/frontpage", this, 6, requestOptions);
+    fun requestMovieFrontpage(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/frontpage", this, 6, requestBaseOptions);
     }
-    fun requestTV(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/get/${requestOptions.id}", this, 7, requestOptions);
+    fun requestTV(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/get/${requestBaseOptions.id}", this, 7, requestBaseOptions);
     }
-    fun requestTvFrontpage(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/frontpage", this, 8, requestOptions);
+    fun requestTvFrontpage(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/frontpage", this, 8, requestBaseOptions);
     }
-    fun requestMovieUpcoming(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/upcomingmovies", this, 9, requestOptions);
+    fun requestMovieUpcoming(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/upcomingmovies", this, 9, requestBaseOptions);
     }
-    fun requestMovies(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/movies", this, 10, requestOptions);
+    fun requestMovies(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/movies", this, 10, requestBaseOptions);
     }
-    fun requestTvs(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/tvs", this, 11, requestOptions);
+    fun requestTvs(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/tvs", this, 11, requestBaseOptions);
     }
-    fun requestTvsUpcoming(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/upcomingtvs", this, 12, requestOptions);
+    fun requestTvsUpcoming(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/upcomingtvs", this, 12, requestBaseOptions);
     }
-    fun requestAllLists(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/lists/get", this, 13, requestOptions);
+    fun requestAllLists(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/lists/get", this, 13, requestBaseOptions);
     }
-    fun requestList(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/list/get/${requestOptions.id}", this, 14, requestOptions);
+    fun requestList(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/list/get/${requestBaseOptions.id}", this, 14, requestBaseOptions);
     }
-    fun requestPerson(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/person/get/${requestOptions.id}", this, 15, requestOptions);
+    fun requestPerson(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/person/get/${requestBaseOptions.id}", this, 15, requestBaseOptions);
     }
-    fun requestUserFavorites(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/user/get/favorites/${requestOptions.uid}", this, 16, requestOptions);
+    fun requestUserFavorites(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/favorites/${requestBaseOptions.uid}", this, 16, requestBaseOptions);
     }
-    fun requestUserWatchlist(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/user/get/watchlist/${requestOptions.uid}", this, 17, requestOptions);
+    fun requestUserWatchlist(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/watchlist/${requestBaseOptions.uid}", this, 17, requestBaseOptions);
     }
-    fun requestUserLists(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/user/get/lists/${requestOptions.uid}", this, 18, requestOptions);
+    fun requestUserLists(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/user/get/lists/${requestBaseOptions.uid}", this, 18, requestBaseOptions);
     }
-    fun requestMovieWatchProviders(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/get/watch/providers/${requestOptions.id}", this, 19, requestOptions);
+    fun requestMovieWatchProviders(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/movie/get/watch/providers/${requestBaseOptions.id}", this, 19, requestBaseOptions);
     }
-    fun requestTvWatchProviders(requestOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/get/watch/providers/${requestOptions.id}", this, 20, requestOptions);
+    fun requestTvWatchProviders(requestBaseOptions: RequestBaseOptions) {
+        api.runRequestGet("/tv/get/watch/providers/${requestBaseOptions.id}", this, 20, requestBaseOptions);
     }
 
     /** All the POST requests */
-
-    fun postUser(uid : String, function: (string : String?) -> Unit) {
+    fun postUser(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
+            .add("uid", postBaseOptions.uid)
             .build()
-        api.runRequestPostForm("/user/new", formBody,this, 1, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/new", formBody,this, 1, postBaseOptions)
     }
 
-    fun postUserUsername(uid : String, username : String, function: (string : String?) -> Unit) {
+    fun postUserUsername(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
-            .add("username", username)
+            .add("uid", postBaseOptions.uid)
+            .add("username", postBaseOptions.params?.get("username"))
             .build()
-        api.runRequestPostForm("/user/update/username", formBody, this, 2, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/update/username", formBody, this, 2, postBaseOptions)
     }
 
-    fun postUserAddMovieFavorite(uid : String, movieId : String, function: (string : String?) -> Unit) {
+    fun postUserAddMovieFavorite(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
-            .add("movieId", movieId)
+            .add("uid", postBaseOptions.uid)
+            .add("movieId", postBaseOptions.params?.get("movieId"))
             .build()
-        api.runRequestPostForm("/user/add/movie/favorite", formBody, this, 3, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/add/movie/favorite", formBody, this, 3, postBaseOptions)
     }
 
-    fun postUserRemoveMovieFavorite(uid : String, movieId : String, function: (string : String?) -> Unit) {
+    fun postUserRemoveMovieFavorite(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
-            .add("movieId", movieId)
+            .add("uid", postBaseOptions.uid)
+            .add("movieId", postBaseOptions.params?.get("movieId"))
             .build()
-        api.runRequestPostForm("/user/remove/movie/favorite", formBody, this, 4, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/remove/movie/favorite", formBody, this, 4, postBaseOptions)
     }
 
-    fun postUserAddTvFavorite(uid : String, tvId : String, function: (string : String?) -> Unit) {
+    fun postUserAddTvFavorite(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
-            .add("tvId", tvId)
+            .add("uid", postBaseOptions.uid)
+            .add("tvId", postBaseOptions.params?.get("tvId"))
             .build()
-        api.runRequestPostForm("/user/add/tv/favorite", formBody, this, 5, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/add/tv/favorite", formBody, this, 5, postBaseOptions)
     }
 
-    fun postUserRemoveTvFavorite(uid : String, tvId : String, function: (string : String?) -> Unit) {
+    fun postUserRemoveTvFavorite(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
-            .add("tvId", tvId)
+            .add("uid", postBaseOptions.uid)
+            .add("tvId", postBaseOptions.params?.get("tvId"))
             .build()
-        api.runRequestPostForm("/user/remove/tv/favorite", formBody, this, 6, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/remove/tv/favorite", formBody, this, 6, postBaseOptions)
     }
 
-    fun postUserAddWatchlist(uid : String, mediaId : String, type : String, function: (string : String?) -> Unit) {
+    fun postUserAddWatchlist(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
-            .add("mediaId", mediaId)
-            .add("mediaType", type)
+            .add("uid", postBaseOptions.uid)
+            .add("mediaId", postBaseOptions.params?.get("mediaId"))
+            .add("mediaType", postBaseOptions.params?.get("mediaType"))
             .build()
-        api.runRequestPostForm("/user/add/watchlist", formBody, this, 7, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/add/watchlist", formBody, this, 7, postBaseOptions)
     }
 
-    fun postUserRemoveWatchlist(uid : String, mediaId : String, type : String, function: (string : String?) -> Unit) {
+    fun postUserRemoveWatchlist(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("uid", uid)
-            .add("mediaId", mediaId)
-            .add("mediaType", type)
+            .add("uid", postBaseOptions.uid)
+            .add("mediaId", postBaseOptions.params?.get("mediaId"))
+            .add("mediaType", postBaseOptions.params?.get("mediaType"))
             .build()
-        api.runRequestPostForm("/user/remove/watchlist", formBody, this, 8, function as (Any) -> Unit)
+        api.runRequestPostForm("/user/remove/watchlist", formBody, this, 8, postBaseOptions)
     }
     override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
         val gson = GsonBuilder().create()

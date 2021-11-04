@@ -5,7 +5,9 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.filmatory.errors.BaseError
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 /**
  * AuthSystem takes care of authenticaton of users
@@ -97,7 +99,7 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
      * @param uid The uid for the user
      */
     private fun newUserInDatabase(uid : String) {
-        apiSystem.postUser(uid, ::newUserResponse)
+        apiSystem.postUser(ApiSystem.PostBaseOptions(null, uid, null, ::newUserResponse, ::onFailure))
     }
 
     /**
@@ -107,5 +109,9 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
      */
     private fun newUserResponse(string : String?) {
         Log.d(TAG, "$string")
+    }
+
+    private fun onFailure(baseError: BaseError) {
+        TODO("Handel error")
     }
 }

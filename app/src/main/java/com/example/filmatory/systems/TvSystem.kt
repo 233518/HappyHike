@@ -2,7 +2,8 @@ package com.example.filmatory.systems
 
 import android.content.ContentValues
 import android.util.Log
-import com.example.filmatory.api.data.movie.MovieFrontpage
+import com.example.filmatory.errors.BaseError
+import com.example.filmatory.systems.ApiSystem.PostBaseOptions
 
 /**
  * TvSystem handles interactions with tv-shows
@@ -15,22 +16,40 @@ class TvSystem(apiSystem: ApiSystem) {
     val apiSystem = apiSystem
 
     fun addTvToFavorites(uid : String, tvId : String){
-        apiSystem.postUserAddTvFavorite(uid, tvId, ::newUserResponse)
+        var params: HashMap<String, String> = HashMap()
+        params["tvId"] = tvId
+
+        apiSystem.postUserAddTvFavorite(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
     }
 
     fun removeTvFromFavorites(uid : String, tvId : String){
-        apiSystem.postUserRemoveTvFavorite(uid, tvId, ::newUserResponse)
+        var params: HashMap<String, String> = HashMap()
+        params["tvId"] = tvId
+
+        apiSystem.postUserRemoveTvFavorite(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
     }
 
     fun addTvToWatchlist(uid : String, tvId : String){
-        apiSystem.postUserAddWatchlist(uid, tvId, "tv", ::newUserResponse)
+        var params: HashMap<String, String> = HashMap()
+        params["mediaId"] = tvId
+        params["mediaType"] = "tv"
+
+        apiSystem.postUserAddWatchlist(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
     }
 
     fun removeTvFromWatchlist(uid : String, tvId : String){
-        apiSystem.postUserRemoveWatchlist(uid, tvId, "tv", ::newUserResponse)
+        var params: HashMap<String, String> = HashMap()
+        params["mediaId"] = tvId
+        params["mediaType"] = "tv"
+
+        apiSystem.postUserRemoveWatchlist(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
     }
 
     private fun newUserResponse(string : String?) {
         Log.d(ContentValues.TAG, "$string")
+    }
+
+    private fun onFailure(baseError: BaseError) {
+        TODO("Handel error")
     }
 }
