@@ -422,10 +422,11 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 if (item.id == mId){
                     movieIsFavorited = true
                     favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
-                } else {
-                    movieIsFavorited = false
-                    favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
                 }
+            }
+            if(!movieIsFavorited){
+                movieIsFavorited = false
+                favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
             }
         })
     }
@@ -436,10 +437,11 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 if(item.id == mId){
                     movieIsWatched = true
                     watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
-                } else {
-                    movieIsWatched = false
-                    watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
                 }
+            }
+            if(!movieIsWatched) {
+            movieIsWatched = false
+            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
             }
         })
     }

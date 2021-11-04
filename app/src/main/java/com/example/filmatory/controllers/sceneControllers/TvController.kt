@@ -422,10 +422,11 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
                 if (item.id == tvId){
                     tvIsFavorited = true
                     favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
-                } else {
-                    tvIsFavorited = false
-                    favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
                 }
+            }
+            if(!tvIsFavorited){
+                tvIsFavorited = false
+                favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
             }
         })
     }
@@ -436,10 +437,11 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
                 if(item.id == tvId){
                     tvIsWatched = true
                     watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
-                } else {
-                    tvIsWatched = false
-                    watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
                 }
+            }
+            if(!tvIsWatched){
+                tvIsWatched = false
+                watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
             }
         })
     }
