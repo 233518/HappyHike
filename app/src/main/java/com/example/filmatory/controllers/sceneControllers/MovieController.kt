@@ -37,6 +37,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     private var movieIsFavorited : Boolean = false
 
     init {
+        println("MOVIEID: $mId");
         apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure))
         if(movieScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))

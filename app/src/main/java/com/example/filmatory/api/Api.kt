@@ -1,6 +1,10 @@
 package com.example.filmatory.api
 
 import com.example.filmatory.BuildConfig
+import com.example.filmatory.errors.Api400Error
+import com.example.filmatory.errors.Api404Error
+import com.example.filmatory.errors.Api503Error
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import okhttp3.*
 import java.io.IOException
@@ -16,13 +20,20 @@ class Api {
 
         client.newCall(request).enqueue(object: Callback {
             override fun onResponse(call: Call, response: Response) {
-                callback.onSuccessRequestGet(response.body()?.string(), requestId,
-                    requestOptions.callbackSuccess as (Any) -> Unit
-                )
+                if(response.isSuccessful) {
+                    callback.onSuccessRequestGet(response.body()?.string(), requestId,
+                        requestOptions.callbackSuccess as (Any) -> Unit
+                    )
+                } else {
+                    when(response.networkResponse()!!.code()) {
+                        400 -> requestOptions.callbackFailure(Api400Error(response.body()!!.string()))
+                        404 -> requestOptions.callbackFailure(Api404Error(response.body()!!.string()))
+                    }
+                }
                 response.close();
             }
             override fun onFailure(call: Call, e: IOException) {
-                println("FAILURE " + e.message)
+                requestOptions.callbackFailure(Api503Error("The server is not ready to handle the request"))
             }
         })
     }

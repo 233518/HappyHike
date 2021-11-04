@@ -1,4 +1,6 @@
 package com.example.filmatory.errors
 
-class Api400Error(name: String) : BaseError(name) {
-}
+data class Api400Error(
+    override val message: String,
+    val name: HttpStatusCodes = HttpStatusCodes.BAD_REQUEST,
+) : BaseError(name)

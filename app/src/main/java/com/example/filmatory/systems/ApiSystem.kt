@@ -34,6 +34,9 @@ class ApiSystem : OnApiRequestFinishedListener {
 
     /** All the GET requests */
 
+    fun requestTest(requestOptions: RequestBaseOptions) {
+        api.runRequestGet("/test", this, 0, requestOptions)
+    }
     fun requestApprovedReviewById(requestOptions: RequestBaseOptions) {
         api.runRequestGet("/review/approved/get/${requestOptions.id}", this, 1, requestOptions);
     }
@@ -164,6 +167,7 @@ class ApiSystem : OnApiRequestFinishedListener {
     override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
         val gson = GsonBuilder().create()
         when (requestId) {
+            0 -> function("Test")
             1 -> function(gson.fromJson(result, ApprovedReview::class.java))
             2 -> function(gson.fromJson(result, DeniedReview::class.java))
             3 -> function(gson.fromJson(result, PendingReview::class.java))

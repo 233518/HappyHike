@@ -25,7 +25,7 @@ class StartController(private val startScene: StartScene) : MainController(start
         apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::discoverTvData, ::onFailure))
         apiSystem.requestMovieFrontpage(RequestBaseOptions(null, null, ::recMovieData, ::onFailure))
         apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::recTvData, ::onFailure))
-        //apiSystem.requestMovie(RequestBaseOptions("dwqdwqdwq", null, ::test, ::onFailure))
+        apiSystem.requestTest(RequestBaseOptions(null, null, ::test, ::onFailure))
         //snackbarSystem.showSnackbarFailure("Something unexpected happen!", ::test, "Retry")
     }
 
@@ -34,7 +34,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     }
 
     fun onFailure(baseError: BaseError) {
-
+        println(baseError.message)
     }
 
     /**
