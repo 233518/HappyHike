@@ -59,4 +59,7 @@
     <string name="change_username">Changer de nom d\'utilisateur</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="confirm_btn">Confirmer</string>
+    <string name="forgotPassword">Forgotten password?</string>
+    <string name="recover">Recover</string>
+    <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
 </resources>

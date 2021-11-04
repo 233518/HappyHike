@@ -59,4 +59,7 @@
     <string name="change_username">更改用户名</string>
     <string name="username">用户名</string>
     <string name="confirm_btn">确认</string>
+    <string name="forgotPassword">Forgotten password?</string>
+    <string name="recover">Recover</string>
+    <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
 </resources>

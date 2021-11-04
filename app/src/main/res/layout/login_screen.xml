@@ -101,6 +101,16 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/regHereBtn"
                 android:background="@color/white" />
+
+        <TextView
+            android:id="@+id/forgotPasswordBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/regHereBtn"
+            android:text="@string/forgotPassword"
+            android:textSize="16sp"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
     <include layout="@layout/snackbar_coordinatorayout" />
