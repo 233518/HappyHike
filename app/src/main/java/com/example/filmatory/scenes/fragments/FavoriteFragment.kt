@@ -40,12 +40,16 @@ class FavoriteFragment : Fragment() {
     }
 
     fun showFavorites(favorites: Favorites){
-        for(item in favorites.userAllFavorites){
-            if(item.type == "tv"){
-                tvFavoritesArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
-            } else {
-                movieFavoritesArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+        requireActivity().runOnUiThread(Runnable {
+            for(item in favorites.userAllFavorites){
+                if(item.type == "tv"){
+                    tvFavoritesArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                } else {
+                    movieFavoritesArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                }
             }
-        }
+            movieAdapter.notifyDataSetChanged()
+            tvAdapter.notifyDataSetChanged()
+        })
     }
 }

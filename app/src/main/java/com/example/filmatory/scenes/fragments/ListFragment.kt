@@ -38,8 +38,11 @@ class ListFragment : Fragment() {
     }
 
     fun showUserLists(userLists: UserLists){
-        userLists.forEach{
-                item -> listsArrayList.add(ListItem(item.name, "item.userId", "http://placeimg.com/640/480/any", "19", "42", "item._id"))
-        }
+        requireActivity().runOnUiThread(Runnable {
+            userLists.forEach{
+                    item -> listsArrayList.add(ListItem(item.name, "item.userId", "http://placeimg.com/640/480/any", "19", "42", "item._id"))
+            }
+        })
+        listsAdapter.notifyDataSetChanged()
     }
 }

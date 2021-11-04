@@ -35,12 +35,16 @@ class WatchlistFragment : Fragment() {
     }
 
     fun showWatchlist(watchlist: Watchlist){
-        for(item in watchlist.userAllWatched){
-            if(item.type == "tv"){
-                tvWatchlistArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
-            } else {
-                movieWatchlistArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+        requireActivity().runOnUiThread(Runnable {
+            for(item in watchlist.userAllWatched){
+                if(item.type == "tv"){
+                    tvWatchlistArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                } else {
+                    movieWatchlistArraylist.add(MediaItem(item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                }
             }
-        }
+        })
+        tvAdapter.notifyDataSetChanged()
+        movieAdapter.notifyDataSetChanged()
     }
 }
