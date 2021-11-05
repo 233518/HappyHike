@@ -17,8 +17,7 @@ class SnackbarSystem(private var view : View) {
     //Custom
     private var length = Snackbar.LENGTH_LONG
         set(value) {field = value}
-    private var duration = 5000
-        set(value) {field = value}
+    var duration = 5000
     private var messageTextColor = context.getColor(R.color.white)
 
     data class ActionSnack(
