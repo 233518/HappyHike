@@ -25,7 +25,7 @@ import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
  */
 class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     var intent: Intent = movieScene.intent
-    private val movieSystem = MovieSystem(apiSystem)
+    private val movieSystem = MovieSystem(apiSystem, snackbarSystem, movieScene)
     private val mId = intent.getIntExtra("movieId", 0)
     private val personsArrayList: MutableList<PersonItem> = ArrayList()
     private val personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)

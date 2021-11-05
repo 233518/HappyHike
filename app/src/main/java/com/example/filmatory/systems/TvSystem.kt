@@ -1,8 +1,11 @@
 package com.example.filmatory.systems
 
 import android.content.ContentValues
+import android.content.Intent
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.errors.BaseError
+import com.example.filmatory.scenes.activities.StartScene
 import com.example.filmatory.systems.ApiSystem.PostBaseOptions
 
 /**
@@ -12,8 +15,7 @@ import com.example.filmatory.systems.ApiSystem.PostBaseOptions
  *
  * @param apiSystem The ApiSystem to use
  */
-class TvSystem(apiSystem: ApiSystem) {
-    val apiSystem = apiSystem
+class TvSystem(private val apiSystem: ApiSystem, private val snackbarSystem: SnackbarSystem, private val scene: AppCompatActivity) {
 
     fun addTvToFavorites(uid : String, tvId : String){
         var params: HashMap<String, String> = HashMap()
@@ -46,10 +48,15 @@ class TvSystem(apiSystem: ApiSystem) {
     }
 
     private fun newUserResponse(string : String?) {
-        Log.d(ContentValues.TAG, "$string")
+        snackbarSystem.duration = 2000
+        snackbarSystem.showSnackbarSuccess(string!!)
     }
 
     private fun onFailure(baseError: BaseError) {
-        TODO("Handel error")
+        snackbarSystem.showSnackbarFailure(baseError.message!!, ::retry, "Retry")
+    }
+    private fun retry() {
+        val intent = Intent(scene, StartScene::class.java)
+        scene.startActivity(intent)
     }
 }
