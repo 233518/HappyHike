@@ -24,7 +24,7 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         initlizeTabAdapter()
         apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavorites, ::onFailure))
         apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlist, ::onFailure))
-        //apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
+        apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
     }
 
     fun onFailure(baseError: BaseError) {
@@ -32,21 +32,15 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     }
 
     private fun getUserFavorites(favorites: Favorites){
-        accountInfoScene.runOnUiThread(Runnable{
-            tabAdapter.favoriteFragment.showFavorites(favorites)
-        })
+        tabAdapter.favoriteFragment.showFavorites(favorites)
     }
 
     private fun getUserWatchlist(watchlist: Watchlist){
-        accountInfoScene.runOnUiThread(Runnable{
-            tabAdapter.watchlistFragment.showWatchlist(watchlist)
-        })
+        tabAdapter.watchlistFragment.showWatchlist(watchlist)
     }
 
     private fun getUserLists(userLists: UserLists){
-        accountInfoScene.runOnUiThread(Runnable{
-            tabAdapter.listFragment.showUserLists(userLists)
-        })
+        tabAdapter.listFragment.showUserLists(userLists)
     }
 
     private fun initlizeTabAdapter(){

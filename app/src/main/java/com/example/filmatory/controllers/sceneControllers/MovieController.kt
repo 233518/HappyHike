@@ -3,20 +3,30 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.user.Favorites
+import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.MovieScene
+import com.example.filmatory.scenes.activities.StartScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.MovieSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
+import com.example.filmatory.utils.items.ListItem
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.yariksoffice.lingver.Lingver
+import java.util.ArrayList
+
+
+
 
 /**
  * MovieController manipulates the MovieScene gui
@@ -35,6 +45,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     private val addToListBtn : TextView = movieScene.findViewById(R.id.movie_addtolist_btn)
     private var movieIsWatched : Boolean  = false
     private var movieIsFavorited : Boolean = false
+    private var userArrayList = arrayOf<String>()
 
     init {
         println("MOVIEID: $mId");
@@ -42,6 +53,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
         if(movieScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
             apiSystem.requestUserWatchlist(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
+            apiSystem.requestUserLists(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
             favoriteBtn.setOnClickListener {
                 if(!movieIsFavorited){
                     addToFavorites()
@@ -60,9 +72,6 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 addToUserList()
             }
         }
-
-
-
 
         //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
@@ -413,7 +422,48 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     }
 
     private fun addToUserList(){
+        var checkedList = -1
+        var chosenList : Int? = null
+        MaterialAlertDialogBuilder(movieScene)
+            .setTitle(movieScene.resources.getString(R.string.mylists))
+            .setNeutralButton(movieScene.resources.getString(R.string.cancel_btn)) { dialog, which ->
 
+            }
+            .setPositiveButton(movieScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                // Respond to positive button press
+                println(chosenList)
+
+                //Legg til film i liste
+
+            }
+            .setSingleChoiceItems(userArrayList, checkedList) { dialog, which ->
+                // Respond to item chosen
+                when(which){
+                    0 -> {
+                        println("Selected " + userArrayList[0])
+                        chosenList = 0
+                    }
+                    1 -> {
+                        println("Selected " + userArrayList[1])
+                        chosenList = 1
+                    }
+                    else -> {
+                        println("Error her")
+                    }
+                }
+
+            }
+            .show()
+    }
+
+    private fun getUserLists(userLists: UserLists){
+        if(userLists.size != 0){
+            for(item in userLists){
+                userArrayList += arrayOf(item.listname)
+            }
+        } else {
+            println("User does not have any lists")
+        }
     }
 
     private fun checkIfFavorited(favorites: Favorites){
