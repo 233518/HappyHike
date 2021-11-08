@@ -446,16 +446,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 for (item in userLists) {
                     listNameArray += arrayOf(item.listname)
                     listArrayList.add(
-                        ListItem(
-                            item.listname,
-                            item.listUserId,
-                            "",
-                            "",
-                            "",
-                            item.listId
-                        )
-                    )
-                }
+                        ListItem(item.listname, item.listUserId, "", "", "", item.listId)) }
             } else {
                 println("User does not have any lists")
             }

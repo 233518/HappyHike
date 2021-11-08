@@ -46,7 +46,7 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     private fun initlizeTabAdapter(){
         val tabLayout: TabLayout = accountInfoScene.findViewById(R.id.tab_layout)
         val viewPager2: ViewPager2 = accountInfoScene.findViewById(R.id.tab_viewpager)
-
+        viewPager2.offscreenPageLimit = 2
         viewPager2.adapter = tabAdapter
 
         val defaultPage = 0

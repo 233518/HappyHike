@@ -10,7 +10,7 @@ import com.example.filmatory.scenes.SuperScene
  *
  */
 class AccountInfoScene : SuperScene() {
-    lateinit var accountInfoController: AccountInfoController
+    private lateinit var accountInfoController: AccountInfoController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_information)

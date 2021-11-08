@@ -45,7 +45,6 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     init {
         apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure))
         if(tvScene.auth.currentUser?.uid != null){
-
             apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
             apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
             apiSystem.requestUserLists(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
@@ -433,7 +432,6 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
                 } else {
                     snackbarSystem.showSnackbarWarning("No list was selected")
                 }
-
             }
             .setSingleChoiceItems(listNameArrayList, chosenList) { dialog, which ->
                 chosenList = which
@@ -442,10 +440,8 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     }
 
     private fun getUserLists(userLists: UserLists){
-        println("KJØR")
         if(userLists.size != 0){
             for(item in userLists){
-                println(item.listname)
                 listNameArrayList += arrayOf(item.listname)
                 listArrayList.add(ListItem(item.listname, item.listUserId, "", "", "", item.listId))
             }
