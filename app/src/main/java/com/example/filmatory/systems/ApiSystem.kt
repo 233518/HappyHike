@@ -179,6 +179,39 @@ class ApiSystem : OnApiRequestFinishedListener {
             .build()
         api.runRequestPostForm("/user/remove/watchlist", formBody, this, 8, postBaseOptions)
     }
+
+    fun postListAddMovie(postBaseOptions: PostBaseOptions) {
+        val formBody = FormBody.Builder()
+            .add("movieId", postBaseOptions.params?.get("movieId"))
+            .add("listId", postBaseOptions.params?.get("listId"))
+            .build()
+        api.runRequestPostForm("/list/add/movie", formBody, this, 9, postBaseOptions)
+    }
+
+    fun postListRemoveMovie(postBaseOptions: PostBaseOptions) {
+        val formBody = FormBody.Builder()
+            .add("movieId", postBaseOptions.params?.get("movieId"))
+            .add("listId", postBaseOptions.params?.get("listId"))
+            .build()
+        api.runRequestPostForm("/list/remove/movie", formBody, this, 10, postBaseOptions)
+    }
+
+    fun postListAddTv(postBaseOptions: PostBaseOptions) {
+        val formBody = FormBody.Builder()
+            .add("tvId", postBaseOptions.params?.get("tvId"))
+            .add("listId", postBaseOptions.params?.get("listId"))
+            .build()
+        api.runRequestPostForm("/list/add/tv", formBody, this, 11, postBaseOptions)
+    }
+
+    fun postListRemoveTv(postBaseOptions: PostBaseOptions) {
+        val formBody = FormBody.Builder()
+            .add("tvId", postBaseOptions.params?.get("tvId"))
+            .add("listId", postBaseOptions.params?.get("listId"))
+            .build()
+        api.runRequestPostForm("/list/remove/tv", formBody, this, 12, postBaseOptions)
+    }
+
     override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
         val gson = GsonBuilder().create()
         when (requestId) {
@@ -219,6 +252,10 @@ class ApiSystem : OnApiRequestFinishedListener {
             6 -> function(result as (Any))
             7 -> function(result as (Any))
             8 -> function(result as (Any))
+            9 -> function(result as (Any))
+            10 -> function(result as (Any))
+            11 -> function(result as (Any))
+            12 -> function(result as (Any))
             else -> {
                 print("Something went wrong, cant find requestId")
             }

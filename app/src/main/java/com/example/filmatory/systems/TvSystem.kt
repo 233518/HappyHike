@@ -17,6 +17,10 @@ import com.example.filmatory.systems.ApiSystem.PostBaseOptions
  */
 class TvSystem(private val apiSystem: ApiSystem, private val snackbarSystem: SnackbarSystem, private val scene: AppCompatActivity) {
 
+    fun getTvFavorites(uid : String, tvId : String){
+
+    }
+
     fun addTvToFavorites(uid : String, tvId : String){
         var params: HashMap<String, String> = HashMap()
         params["tvId"] = tvId
@@ -45,6 +49,22 @@ class TvSystem(private val apiSystem: ApiSystem, private val snackbarSystem: Sna
         params["mediaType"] = "tv"
 
         apiSystem.postUserRemoveWatchlist(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
+    }
+
+    fun addTvToList(listId : String, tvId : String){
+        var params : HashMap<String, String> = HashMap()
+        params["listId"] = listId
+        params["tvId"] = tvId
+
+        apiSystem.postListAddTv(PostBaseOptions(null, null, params, ::newUserResponse, ::onFailure))
+    }
+
+    fun removeTvFromList(listId: String, tvId: String){
+        var params : HashMap<String, String> = HashMap()
+        params["listId"] = listId
+        params["tvId"] = tvId
+
+        apiSystem.postListRemoveTv(PostBaseOptions(null, null, params, ::newUserResponse, ::onFailure))
     }
 
     private fun newUserResponse(string : String?) {

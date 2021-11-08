@@ -3,7 +3,7 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,17 +15,14 @@ import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.MovieScene
-import com.example.filmatory.scenes.activities.StartScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.MovieSystem
+import com.example.filmatory.systems.SnackbarSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
 import com.example.filmatory.utils.items.ListItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.yariksoffice.lingver.Lingver
 import java.util.ArrayList
-
-
 
 
 /**
@@ -45,10 +42,11 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     private val addToListBtn : TextView = movieScene.findViewById(R.id.movie_addtolist_btn)
     private var movieIsWatched : Boolean  = false
     private var movieIsFavorited : Boolean = false
-    private var userArrayList = arrayOf<String>()
+    private var listNameArray = arrayOf<String>()
+    private val listArrayList: MutableList<ListItem> = ArrayList()
+
 
     init {
-        println("MOVIEID: $mId");
         apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure))
         if(movieScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
@@ -72,7 +70,6 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 addToUserList()
             }
         }
-
         //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
         personsRecyclerView.adapter = personsAdapter
@@ -384,7 +381,7 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 .into(movieScene.findViewById(R.id.m_img))
             movieScene.findViewById<TextView>(R.id.m_overview).text = movie.filminfo.overview
             movie.cast.cast.take(10).forEach {
-                item -> personsArrayList.add(PersonItem(item.name,item.character,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,item.id))
+                    item -> personsArrayList.add(PersonItem(item.name,item.character,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,item.id))
             }
             personsAdapter.notifyDataSetChanged()
         })
@@ -422,48 +419,47 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     }
 
     private fun addToUserList(){
-        var checkedList = -1
-        var chosenList : Int? = null
-        MaterialAlertDialogBuilder(movieScene)
-            .setTitle(movieScene.resources.getString(R.string.mylists))
-            .setNeutralButton(movieScene.resources.getString(R.string.cancel_btn)) { dialog, which ->
+        movieScene.runOnUiThread(Runnable {
+            var chosenList: Int = -1
+            MaterialAlertDialogBuilder(movieScene)
+                .setTitle(movieScene.resources.getString(R.string.mylists))
+                .setNeutralButton(movieScene.resources.getString(R.string.cancel_btn)) { dialog, which ->
 
-            }
-            .setPositiveButton(movieScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
-                // Respond to positive button press
-                println(chosenList)
-
-                //Legg til film i liste
-
-            }
-            .setSingleChoiceItems(userArrayList, checkedList) { dialog, which ->
-                // Respond to item chosen
-                when(which){
-                    0 -> {
-                        println("Selected " + userArrayList[0])
-                        chosenList = 0
-                    }
-                    1 -> {
-                        println("Selected " + userArrayList[1])
-                        chosenList = 1
-                    }
-                    else -> {
-                        println("Error her")
+                }
+                .setPositiveButton(movieScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    if(which != -1){
+                        movieSystem.addMovieToList(listArrayList[chosenList].list_id, mId.toString())
+                    } else {
+                        snackbarSystem.showSnackbarWarning("No list was selected")
                     }
                 }
-
-            }
+                .setSingleChoiceItems(listNameArray, chosenList) { dialog, which ->
+                    chosenList = which
+                }
             .show()
+        })
     }
 
     private fun getUserLists(userLists: UserLists){
-        if(userLists.size != 0){
-            for(item in userLists){
-                userArrayList += arrayOf(item.listname)
+        movieScene.runOnUiThread(Runnable {
+            if (userLists.size != 0) {
+                for (item in userLists) {
+                    listNameArray += arrayOf(item.listname)
+                    listArrayList.add(
+                        ListItem(
+                            item.listname,
+                            item.listUserId,
+                            "",
+                            "",
+                            "",
+                            item.listId
+                        )
+                    )
+                }
+            } else {
+                println("User does not have any lists")
             }
-        } else {
-            println("User does not have any lists")
-        }
+        })
     }
 
     private fun checkIfFavorited(favorites: Favorites){
@@ -490,8 +486,8 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
                 }
             }
             if(!movieIsWatched) {
-            movieIsWatched = false
-            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
+                movieIsWatched = false
+                watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
             }
         })
     }

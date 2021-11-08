@@ -51,6 +51,22 @@ class MovieSystem(private val apiSystem: ApiSystem, private val snackbarSystem: 
         apiSystem.postUserRemoveWatchlist(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
     }
 
+    fun addMovieToList(listId : String, movieId : String){
+        var params : HashMap<String, String> = HashMap()
+        params["listId"] = listId
+        params["movieId"] = movieId
+
+        apiSystem.postListAddMovie(PostBaseOptions(null, null, params, ::newUserResponse, ::onFailure))
+    }
+
+    fun removeMovieFromList(listId: String, movieId: String){
+        var params : HashMap<String, String> = HashMap()
+        params["listId"] = listId
+        params["movieId"] = movieId
+
+        apiSystem.postListRemoveMovie(PostBaseOptions(null, null, params, ::newUserResponse, ::onFailure))
+    }
+
     private fun newUserResponse(string : String?) {
         snackbarSystem.duration = 2000
         snackbarSystem.showSnackbarSuccess(string!!)

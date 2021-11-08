@@ -3,6 +3,7 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -18,6 +19,7 @@ import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.TvSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
+import com.example.filmatory.utils.items.ListItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -37,18 +39,20 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     private val addToListBtn : TextView = tvScene.findViewById(R.id.movie_addtolist_btn)
     private var tvIsWatched : Boolean = false
     private var tvIsFavorited : Boolean = false
-    private var userArrayList = arrayOf<String>()
+    private var listNameArrayList = arrayOf<String>()
+    private var listArrayList : MutableList<ListItem> = ArrayList()
 
     init {
         apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure))
         if(tvScene.auth.currentUser?.uid != null){
+
             apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
             apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
             apiSystem.requestUserLists(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
             favoriteBtn.setOnClickListener {
                 if(!tvIsFavorited){
                     addToFavorites()
-                } else{
+                } else {
                     removeFromFavorites()
                 }
             }
@@ -417,43 +421,33 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     }
 
     private fun addToUserList(){
-        var checkedList = -1
-        var chosenList : Int? = null
+        var chosenList : Int = -1
         MaterialAlertDialogBuilder(tvScene)
             .setTitle(tvScene.resources.getString(R.string.mylists))
             .setNeutralButton(tvScene.resources.getString(R.string.cancel_btn)) { dialog, which ->
 
             }
             .setPositiveButton(tvScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
-                // Respond to positive button press
-                println(chosenList)
-                //Legg til tv i liste
-
-            }
-            .setSingleChoiceItems(userArrayList, checkedList) { dialog, which ->
-                // Respond to item chosen
-                when(which){
-                    0 -> {
-                        println("Selected " + userArrayList[0])
-                        chosenList = 0
-                    }
-                    1 -> {
-                        println("Selected " + userArrayList[1])
-                        chosenList = 1
-                    }
-                    else -> {
-                        println("Error her")
-                    }
+                if(chosenList != -1){
+                    tvSystem.addTvToList(listArrayList[chosenList].list_id, tvId.toString())
+                } else {
+                    snackbarSystem.showSnackbarWarning("No list was selected")
                 }
 
             }
-            .show()
+            .setSingleChoiceItems(listNameArrayList, chosenList) { dialog, which ->
+                chosenList = which
+            }
+        .show()
     }
 
     private fun getUserLists(userLists: UserLists){
+        println("KJØR")
         if(userLists.size != 0){
             for(item in userLists){
-                userArrayList += arrayOf(item.listname)
+                println(item.listname)
+                listNameArrayList += arrayOf(item.listname)
+                listArrayList.add(ListItem(item.listname, item.listUserId, "", "", "", item.listId))
             }
         } else {
             println("User does not have any lists")
