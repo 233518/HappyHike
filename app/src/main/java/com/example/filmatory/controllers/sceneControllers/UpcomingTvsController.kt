@@ -8,8 +8,8 @@ import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.UpcomingTvsScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
-import com.example.filmatory.utils.items.MediaItem
-import com.example.filmatory.utils.adapters.TvRecyclerViewAdapter
+import com.example.filmatory.utils.adapters.DataAdapter
+import com.example.filmatory.utils.items.MediaModel
 
 /**
  * UpcomingTvsController manipulates the UpcomingTvs gui
@@ -17,14 +17,14 @@ import com.example.filmatory.utils.adapters.TvRecyclerViewAdapter
  * @param upcomingTvsScene The UpcomingTvsScene to use
  */
 class UpcomingTvsController(private val upcomingTvsScene: UpcomingTvsScene) : MainController(upcomingTvsScene) {
-    private val upcomingTvsArraylist: MutableList<MediaItem> = ArrayList()
+    private val upcomingTvsArraylist : ArrayList<MediaModel> = ArrayList()
     private var upcomingTvsRecyclerView: RecyclerView = upcomingTvsScene.findViewById(R.id.recyclerView)
-    private val upcomingTvsAdapter = TvRecyclerViewAdapter(upcomingTvsArraylist, upcomingTvsScene)
+    private val upcomingTvsAdapter = DataAdapter(upcomingTvsScene, upcomingTvsArraylist)
 
     init {
+        apiSystem.requestTvsUpcoming(RequestBaseOptions(null, null, ::upcomingTvsData, ::onFailure))
         upcomingTvsRecyclerView.layoutManager = GridLayoutManager(upcomingTvsScene, 2)
         upcomingTvsRecyclerView.adapter = upcomingTvsAdapter
-        apiSystem.requestTvsUpcoming(RequestBaseOptions(null, null, ::upcomingTvsData, ::onFailure))
     }
 
     fun onFailure(baseError: BaseError) {
@@ -39,7 +39,7 @@ class UpcomingTvsController(private val upcomingTvsScene: UpcomingTvsScene) : Ma
     private fun upcomingTvsData(upcomingTvs: UpcomingTvs){
         upcomingTvsScene.runOnUiThread(Runnable {
             upcomingTvs.forEach{
-                item -> upcomingTvsArraylist.add(MediaItem(item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                item -> upcomingTvsArraylist.add(MediaModel(DataAdapter.TYPE_TV, item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
             }
             upcomingTvsAdapter.notifyDataSetChanged()
         })

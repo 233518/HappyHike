@@ -8,8 +8,8 @@ import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.MoviesScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
-import com.example.filmatory.utils.items.MediaItem
-import com.example.filmatory.utils.adapters.RecyclerViewAdapter
+import com.example.filmatory.utils.adapters.DataAdapter
+import com.example.filmatory.utils.items.MediaModel
 
 /**
  * MoviesController manipulates the MoviesScene gui
@@ -17,14 +17,14 @@ import com.example.filmatory.utils.adapters.RecyclerViewAdapter
  * @param moviesScene The MoviesScene to use
  */
 class MoviesController(private val moviesScene: MoviesScene) : MainController(moviesScene) {
-    private val moviesArrayList: MutableList<MediaItem> = ArrayList()
+    private val moviesArrayList : ArrayList<MediaModel> = ArrayList()
     private val moviesRecyclerView: RecyclerView = moviesScene.findViewById(R.id.recyclerView)
-    private val moviesAdapter = RecyclerViewAdapter(moviesArrayList, moviesScene)
+    private val moviesAdapter = DataAdapter(moviesScene, moviesArrayList)
 
     init {
+        apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesData, ::onFailure))
         moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
         moviesRecyclerView.adapter = moviesAdapter
-        apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesData, ::onFailure))
     }
 
     fun onFailure(baseError: BaseError) {
@@ -39,7 +39,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     private fun moviesData(movies: Movies){
         moviesScene.runOnUiThread(Runnable {
             movies.forEach{
-                    item -> moviesArrayList.add(MediaItem(item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                    item -> moviesArrayList.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
             }
             moviesAdapter.notifyDataSetChanged()
         })

@@ -11,9 +11,8 @@ import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.ListScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
-import com.example.filmatory.utils.items.MediaItem
-import com.example.filmatory.utils.adapters.RecyclerViewAdapter
-import com.example.filmatory.utils.adapters.TvRecyclerViewAdapter
+import com.example.filmatory.utils.adapters.DataAdapter
+import com.example.filmatory.utils.items.MediaModel
 
 /**
  * ListController manipulates the ListScene gui
@@ -25,17 +24,17 @@ class ListController(private val listScene: ListScene) : MainController(listScen
     private val listId = intent.getStringExtra("listId")
     private val listName = intent.getStringExtra("listName")
     private var listRecyclerView: RecyclerView = listScene.findViewById(R.id.listRecyclerView)
-    private var listArrayList: MutableList<MediaItem> = ArrayList()
-    private var tvListArrayList: MutableList<MediaItem> = ArrayList()
-    private var listAdapter = RecyclerViewAdapter(listArrayList, listScene)
-    private var tvListAdapter = TvRecyclerViewAdapter(tvListArrayList, listScene)
+    private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
+    private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
+    private var movieListAdapter = DataAdapter(listScene, movieListArrayList)
+    private var tvListAdapter = DataAdapter(listScene, tvListArrayList)
 
     init {
         if (listId != null) {
             apiSystem.requestList(RequestBaseOptions(listId, null, ::getList, ::onFailure))
         }
         listRecyclerView.layoutManager = GridLayoutManager(listScene, 2)
-        val concatAdapter = ConcatAdapter(listAdapter, tvListAdapter)
+        val concatAdapter = ConcatAdapter(movieListAdapter, tvListAdapter)
         listRecyclerView.adapter = concatAdapter
     }
 
@@ -53,13 +52,13 @@ class ListController(private val listScene: ListScene) : MainController(listScen
             listScene.findViewById<TextView>(R.id.l_title).text = listName
             for (item in list) {
                 if(item.type == "tv"){
-                    tvListArrayList.add(MediaItem(item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                    tvListArrayList.add(MediaModel(DataAdapter.TYPE_TV ,item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
                 } else {
-                    listArrayList.add(MediaItem(item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                    movieListArrayList.add(MediaModel(DataAdapter.TYPE_MOVIE ,item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
                 }
             }
             tvListAdapter.notifyDataSetChanged()
-            listAdapter.notifyDataSetChanged()
+            movieListAdapter.notifyDataSetChanged()
         })
     }
 }
