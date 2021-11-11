@@ -25,6 +25,8 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavorites, ::onFailure))
         apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlist, ::onFailure))
         apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
+        apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavoritesStats, ::onFailure))
+        apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlistStats, ::onFailure))
     }
 
     fun onFailure(baseError: BaseError) {
@@ -42,6 +44,16 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     private fun getUserLists(userLists: UserLists){
         tabAdapter.listFragment.showUserLists(userLists)
     }
+
+    private fun getUserFavoritesStats(favorites: Favorites){
+        tabAdapter.statisticsFragment.statisticsFavorites(favorites)
+    }
+
+    private fun getUserWatchlistStats(watchlist: Watchlist){
+        tabAdapter.statisticsFragment.statisticsWatchlist(watchlist)
+    }
+
+
 
     private fun initlizeTabAdapter(){
         val tabLayout: TabLayout = accountInfoScene.findViewById(R.id.tab_layout)
@@ -66,6 +78,9 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
                 }
                 3 -> {
                     tab.text = accountInfoScene.getString(R.string.mylists)
+                }
+                4 -> {
+                    tab.text = accountInfoScene.getString(R.string.statistics)
                 }
             }
         }.attach()

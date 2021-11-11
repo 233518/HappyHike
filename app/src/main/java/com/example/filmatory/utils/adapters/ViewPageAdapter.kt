@@ -5,10 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.filmatory.scenes.activities.AccountInfoScene
-import com.example.filmatory.scenes.fragments.AccinfoFragment
-import com.example.filmatory.scenes.fragments.FavoriteFragment
-import com.example.filmatory.scenes.fragments.ListFragment
-import com.example.filmatory.scenes.fragments.WatchlistFragment
+import com.example.filmatory.scenes.fragments.*
 import com.example.filmatory.systems.ApiSystem
 import com.google.protobuf.Api
 
@@ -17,9 +14,10 @@ class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, ac
     var favoriteFragment = FavoriteFragment()
     var watchlistFragment = WatchlistFragment()
     var listFragment = ListFragment()
+    var statisticsFragment = StatisticsFragment()
     var accinfoFragment = AccinfoFragment(apiSystem, accountInfoScene)
     override fun getItemCount(): Int {
-        return 4
+        return 5
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -36,6 +34,9 @@ class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, ac
             3 ->{
                 return listFragment
             }
+            4 -> {
+                 return statisticsFragment
+             }
             else->{
                 return Fragment()
             }

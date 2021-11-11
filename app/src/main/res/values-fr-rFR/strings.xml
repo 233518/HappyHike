@@ -63,4 +63,7 @@
     <string name="recover">Recover</string>
     <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
     <string name="accinfo_mediamenu">Media Menu</string>
+    <string name="statistics">Statistics</string>
+    <string name="mediatype">Media Type</string>
+    <string name="favoriteandwatchlist">Favorites and Watchlist</string>
 </resources>
