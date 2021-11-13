@@ -30,7 +30,7 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     }
 
     fun onFailure(baseError: BaseError) {
-
+        snackbarSystem.showSnackbarWarning(baseError.message)
     }
 
     private fun getUserFavorites(favorites: Favorites){

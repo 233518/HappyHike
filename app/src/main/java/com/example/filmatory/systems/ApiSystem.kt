@@ -9,6 +9,7 @@ import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.api.data.review.DeniedReview
 import com.example.filmatory.api.data.review.PendingReview
+import com.example.filmatory.api.data.search.Search
 import com.example.filmatory.api.data.tv.*
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.User
@@ -112,6 +113,9 @@ class ApiSystem : OnApiRequestFinishedListener {
     }
     fun requestTvWatchProviders(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/tv/get/watch/providers/${requestBaseOptions.id}", this, 20, requestBaseOptions);
+    }
+    fun requestSearch(requestBaseOptions: RequestBaseOptions, title: String) {
+        api.runRequestGet("/search/get/title", this, 21, requestBaseOptions);
     }
 
     /** All the POST requests */
@@ -236,6 +240,7 @@ class ApiSystem : OnApiRequestFinishedListener {
             18 -> function(gson.fromJson(result, UserLists::class.java))
             19 -> function(gson.fromJson(result, MovieWatchProviders::class.java))
             20 -> function(gson.fromJson(result, TvWatchProviders::class.java))
+            21 -> function(gson.fromJson(result, Search::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")
             }
@@ -260,9 +265,5 @@ class ApiSystem : OnApiRequestFinishedListener {
                 print("Something went wrong, cant find requestId")
             }
         }
-    }
-
-    override fun onErrorRequest() {
-        TODO("Not yet implemented")
     }
 }
