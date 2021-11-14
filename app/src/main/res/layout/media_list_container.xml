@@ -15,16 +15,26 @@
         android:background="@color/overlay_75per"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="75dp">
+            android:layout_marginTop="60dp">
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/filter_spinner"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="25dp"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginLeft="15dp"
                 android:layout_width="match_parent"
+                android:layout_below="@+id/filter_spinner"
                 android:layout_height="wrap_content"
                 android:id="@+id/recyclerView" />
-        </LinearLayout>
+        </RelativeLayout>
+
 
     </LinearLayout>
     <include layout="@layout/snackbar_coordinatorayout" />

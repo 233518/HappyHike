@@ -71,4 +71,12 @@
         <item>Movie</item>
         <item>TV</item>
     </string-array>
+    <string-array name="filter_array">
+        <item>Popularity Descending</item>
+        <item>Popularity Ascending</item>
+        <item>Release Date Descending</item>
+        <item>Release Date Ascending</item>
+        <item>Title (A-Z)</item>
+        <item>Title (Z-A)</item>
+    </string-array>
 </resources>

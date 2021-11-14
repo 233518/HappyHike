@@ -67,4 +67,17 @@
     <string name="statistics">Statistics</string>
     <string name="mediatype">Media Type</string>
     <string name="favoriteandwatchlist">Favorites and Watchlist</string>
+    <string-array name="media_array">
+        <item>All</item>
+        <item>Movie</item>
+        <item>TV</item>
+    </string-array>
+    <string-array name="filter_array">
+        <item>Popularity Descending</item>
+        <item>Popularity Ascending</item>
+        <item>Release Date Descending</item>
+        <item>Release Date Ascending</item>
+        <item>Title (A-Z)</item>
+        <item>Title (Z-A)</item>
+    </string-array>
 </resources>
