@@ -7,8 +7,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.scenes.fragments.*
 import com.example.filmatory.systems.ApiSystem
-import com.google.protobuf.Api
-
 
 class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, accountInfoScene: AccountInfoScene, apiSystem: ApiSystem) : FragmentStateAdapter(fragmentManager, lifecycle) {
     var favoriteFragment = FavoriteFragment()

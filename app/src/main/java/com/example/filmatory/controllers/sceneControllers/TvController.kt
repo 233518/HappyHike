@@ -43,11 +43,11 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     private var listArrayList : MutableList<ListItem> = ArrayList()
 
     init {
-        apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure))
+        apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure), languageCode)
         if(tvScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
             apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
-            apiSystem.requestUserLists(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
+            apiSystem.requestUserLists(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
             favoriteBtn.setOnClickListener {
                 if(!tvIsFavorited){
                     addToFavorites()

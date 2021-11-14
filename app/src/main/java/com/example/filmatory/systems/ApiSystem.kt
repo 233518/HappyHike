@@ -66,17 +66,17 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestUser(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/user/get/${requestBaseOptions.uid}", this, 4, requestBaseOptions);
     }
-    fun requestMovie(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/get/${requestBaseOptions.id}", this, 5, requestBaseOptions);
+    fun requestMovie(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/movie/get/${requestBaseOptions.id}?languageCode=$language", this, 5, requestBaseOptions);
     }
-    fun requestMovieFrontpage(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/frontpage", this, 6, requestBaseOptions);
+    fun requestMovieFrontpage(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/movie/frontpage?languageCode=$language", this, 6, requestBaseOptions);
     }
-    fun requestTV(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/get/${requestBaseOptions.id}", this, 7, requestBaseOptions);
+    fun requestTV(requestBaseOptions: RequestBaseOptions,language: String?) {
+        api.runRequestGet("/tv/get/${requestBaseOptions.id}?languageCode=$language", this, 7, requestBaseOptions);
     }
-    fun requestTvFrontpage(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/frontpage", this, 8, requestBaseOptions);
+    fun requestTvFrontpage(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/tv/frontpage?languageCode=$language", this, 8, requestBaseOptions);
     }
     fun requestMovieUpcoming(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/movie/upcomingmovies", this, 9, requestBaseOptions);
@@ -96,8 +96,8 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestList(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/list/get/${requestBaseOptions.id}", this, 14, requestBaseOptions);
     }
-    fun requestPerson(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/person/get/${requestBaseOptions.id}", this, 15, requestBaseOptions);
+    fun requestPerson(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/person/get/${requestBaseOptions.id}?languageCode=$language", this, 15, requestBaseOptions);
     }
     fun requestUserFavorites(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/user/get/favorites/${requestBaseOptions.uid}", this, 16, requestBaseOptions);
@@ -105,8 +105,8 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestUserWatchlist(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/user/get/watchlist/${requestBaseOptions.uid}", this, 17, requestBaseOptions);
     }
-    fun requestUserLists(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/user/get/lists/${requestBaseOptions.uid}", this, 18, requestBaseOptions);
+    fun requestUserLists(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/user/get/lists/${requestBaseOptions.uid}?languageCode=$language", this, 18, requestBaseOptions);
     }
     fun requestMovieWatchProviders(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/movie/get/watch/providers/${requestBaseOptions.id}", this, 19, requestBaseOptions);
@@ -114,8 +114,8 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestTvWatchProviders(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/tv/get/watch/providers/${requestBaseOptions.id}", this, 20, requestBaseOptions);
     }
-    fun requestSearch(requestBaseOptions: RequestBaseOptions, title: String) {
-        api.runRequestGet("/search/get/$title", this, 21, requestBaseOptions);
+    fun requestSearch(requestBaseOptions: RequestBaseOptions, title: String, language: String?) {
+        api.runRequestGet("/search/get/$title?languageCode=$language", this, 21, requestBaseOptions);
     }
 
     /** All the POST requests */
