@@ -69,14 +69,20 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestMovie(requestBaseOptions: RequestBaseOptions, language: String?) {
         api.runRequestGet("/movie/get/${requestBaseOptions.id}?languageCode=$language", this, 5, requestBaseOptions);
     }
-    fun requestMovieFrontpage(requestBaseOptions: RequestBaseOptions, language: String?) {
-        api.runRequestGet("/movie/frontpage?languageCode=$language", this, 6, requestBaseOptions);
+    fun requestMovieFrontpageRecommend(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/movie/frontpage/recommend?uid=${requestBaseOptions.uid}&languageCode=$language", this, 6, requestBaseOptions);
+    }
+    fun requestMovieFrontpageDiscover(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/movie/frontpage/discover?languageCode=$language", this, 6, requestBaseOptions);
     }
     fun requestTV(requestBaseOptions: RequestBaseOptions,language: String?) {
         api.runRequestGet("/tv/get/${requestBaseOptions.id}?languageCode=$language", this, 7, requestBaseOptions);
     }
-    fun requestTvFrontpage(requestBaseOptions: RequestBaseOptions, language: String?) {
-        api.runRequestGet("/tv/frontpage?languageCode=$language", this, 8, requestBaseOptions);
+    fun requestTvFrontpageRecommend(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/tv/frontpage/recommend?uid=${requestBaseOptions.uid}&languageCode=$language", this, 8, requestBaseOptions);
+    }
+    fun requestTvFrontpageDiscover(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/tv/frontpage/discover?languageCode=$language", this, 8, requestBaseOptions);
     }
     fun requestMovieUpcoming(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/movie/upcomingmovies", this, 9, requestBaseOptions);
