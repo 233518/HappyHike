@@ -119,5 +119,11 @@
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden" >
         </activity>
+        <activity
+            android:name=".scenes.activities.SearchScene"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+        </activity>
     </application>
 </manifest>

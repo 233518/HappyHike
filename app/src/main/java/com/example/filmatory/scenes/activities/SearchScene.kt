@@ -11,7 +11,7 @@ class SearchScene : SuperScene(), AdapterView.OnItemSelectedListener {
     private lateinit var searchController : SearchController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.media_list_container)
+        setContentView(R.layout.lists_container)
         searchController = SearchController(this)
     }
 

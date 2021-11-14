@@ -3,8 +3,10 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.search.Search
@@ -19,9 +21,8 @@ import com.example.filmatory.utils.items.MediaModel
 class SearchController(private val searchScene : SearchScene) : MainController(searchScene) {
     var intent: Intent = searchScene.intent
     private val title = intent.getStringExtra("title")
-
-    private var spinner: Spinner = searchScene.findViewById(R.id.test_layout) //TODO: ID
-    private var resultRecyclerView: RecyclerView = searchScene.findViewById(R.id.test_layout) //TODO: ID
+    //private var spinner: Spinner = searchScene.findViewById(R.id.test_layout) //TODO: ID
+    private var resultRecyclerView: RecyclerView = searchScene.findViewById(R.id.recyclerView)
     private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
     private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
     private var movieListAdapter = DataAdapter(searchScene, movieListArrayList)
@@ -31,12 +32,12 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
     private inner class MediaSorted(val movieArray: ArrayList<SearchItem>, val tvArray: ArrayList<SearchItem>)
 
     init {
-        resultRecyclerView.layoutManager = GridLayoutManager(searchScene, 2)
+        resultRecyclerView.layoutManager = LinearLayoutManager(searchScene, LinearLayoutManager.VERTICAL, false)
         val concatAdapter = ConcatAdapter(movieListAdapter, tvListAdapter)
         resultRecyclerView.adapter = concatAdapter
 
         //Spinner
-        ArrayAdapter.createFromResource(
+/*        ArrayAdapter.createFromResource(
             searchScene,
             R.array.media_array,
             android.R.layout.simple_spinner_item //TODO: Spinner layout
@@ -48,7 +49,7 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
         }
 
         //Pass the scene to the listener that implements OnItemSelectedListener
-        spinner.onItemSelectedListener = searchScene;
+        spinner.onItemSelectedListener = searchScene*/
 
         apiSystem.requestSearch(ApiSystem.RequestBaseOptions(null, null, ::onSearch, ::onFailure), title!!)
     }
@@ -60,11 +61,11 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
     private fun onSearch(search: Search) {
         val mediaSorted = sortResult(search)
         for(movie in mediaSorted.movieArray) {
-            movieListArrayList.add(MediaModel(DataAdapter.TYPE_MOVIE , movie.title, "","https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + movie.poster_path, movie.id))
+            movieListArrayList.add(MediaModel(DataAdapter.TYPE_SEARCH_MOVIE , movie.title, movie.overview,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + movie.poster_path, movie.id))
         }
 
         for(tv in mediaSorted.tvArray) {
-            tvListArrayList.add(MediaModel(DataAdapter.TYPE_TV , tv.title, "","https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + tv.poster_path, tv.id))
+            tvListArrayList.add(MediaModel(DataAdapter.TYPE_SEARCH_TV , tv.title, tv.overview,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + tv.poster_path, tv.id))
         }
 
         searchScene.runOnUiThread(Runnable {

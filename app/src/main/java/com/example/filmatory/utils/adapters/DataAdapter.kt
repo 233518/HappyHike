@@ -25,6 +25,8 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
         const val TYPE_TV_SLIDER = 4
         const val TYPE_ACCINFO_MOVIE = 5
         const val TYPE_ACCINFO_TV = 6
+        const val TYPE_SEARCH_MOVIE = 7
+        const val TYPE_SEARCH_TV = 8
     }
 
     private inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -205,6 +207,54 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
         }
     }
 
+    private inner class MovieSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemImage: ImageView = itemView.findViewById(R.id.search_image)
+        val itemTitle: TextView = itemView.findViewById(R.id.search_title)
+        val itemOverview: TextView = itemView.findViewById(R.id.search_overview)
+        var movieId: Int? = null
+        fun bind(position: Int) {
+            val viewmodel = arrayList[position]
+            itemTitle.text = viewmodel.itemTitle
+            itemOverview.text = viewmodel.itemDate
+            movieId = viewmodel.itemId
+            Glide.with(context)
+                .load(viewmodel.itemImage)
+                .error(R.drawable.placeholder_image)
+                .fallback(R.drawable.placeholder_image)
+                .placeholder(R.drawable.placeholder_image)
+                .into(itemImage)
+            itemView.setOnClickListener {
+                val intent = Intent(context, MovieScene::class.java)
+                intent.putExtra("movieId", movieId)
+                context.startActivity(intent)
+            }
+        }
+    }
+
+    private inner class TvSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemImage: ImageView = itemView.findViewById(R.id.search_image)
+        val itemTitle: TextView = itemView.findViewById(R.id.search_title)
+        val itemOverview: TextView = itemView.findViewById(R.id.search_overview)
+        var tvId: Int? = null
+        fun bind(position: Int) {
+            val viewmodel = arrayList[position]
+            itemTitle.text = viewmodel.itemTitle
+            itemOverview.text = viewmodel.itemDate
+            tvId = viewmodel.itemId
+            Glide.with(context)
+                .load(viewmodel.itemImage)
+                .error(R.drawable.placeholder_image)
+                .fallback(R.drawable.placeholder_image)
+                .placeholder(R.drawable.placeholder_image)
+                .into(itemImage)
+            itemView.setOnClickListener {
+                val intent = Intent(context, TvScene::class.java)
+                intent.putExtra("tvId", tvId)
+                context.startActivity(intent)
+            }
+        }
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
@@ -214,6 +264,8 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
             TYPE_TV_SLIDER -> TvSliderViewHolder(LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false))
             TYPE_ACCINFO_MOVIE -> MovieAccinfoViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
             TYPE_ACCINFO_TV -> TvAccinfoViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
+            TYPE_SEARCH_MOVIE -> MovieSearchViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_search_item, parent, false))
+            TYPE_SEARCH_TV -> TvSearchViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_search_item, parent, false))
             else -> {
                 TvViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
             }
@@ -232,6 +284,8 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
             TYPE_TV_SLIDER -> (holder as TvSliderViewHolder).bind(position)
             TYPE_ACCINFO_MOVIE -> (holder as MovieAccinfoViewHolder).bind(position)
             TYPE_ACCINFO_TV -> (holder as TvAccinfoViewHolder).bind(position)
+            TYPE_SEARCH_MOVIE -> (holder as MovieSearchViewHolder).bind(position)
+            TYPE_SEARCH_TV -> (holder as TvSearchViewHolder).bind(position)
         }
     }
 
