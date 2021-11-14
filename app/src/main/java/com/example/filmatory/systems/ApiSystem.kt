@@ -115,7 +115,7 @@ class ApiSystem : OnApiRequestFinishedListener {
         api.runRequestGet("/tv/get/watch/providers/${requestBaseOptions.id}", this, 20, requestBaseOptions);
     }
     fun requestSearch(requestBaseOptions: RequestBaseOptions, title: String) {
-        api.runRequestGet("/search/get/title", this, 21, requestBaseOptions);
+        api.runRequestGet("/search/get/$title", this, 21, requestBaseOptions);
     }
 
     /** All the POST requests */
