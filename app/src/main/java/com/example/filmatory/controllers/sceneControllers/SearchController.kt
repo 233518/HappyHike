@@ -17,17 +17,17 @@ import com.example.filmatory.scenes.activities.SearchScene
 import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
+import com.yariksoffice.lingver.Lingver
 
 class SearchController(private val searchScene : SearchScene) : MainController(searchScene) {
     var intent: Intent = searchScene.intent
     private val title = intent.getStringExtra("title")
-    //private var spinner: Spinner = searchScene.findViewById(R.id.test_layout) //TODO: ID
+    private var dropdown: Spinner = searchScene.findViewById(R.id.spinner1)
     private var resultRecyclerView: RecyclerView = searchScene.findViewById(R.id.recyclerView)
     private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
     private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
     private var movieListAdapter = DataAdapter(searchScene, movieListArrayList)
     private var tvListAdapter = DataAdapter(searchScene, tvListArrayList)
-
 
     private inner class MediaSorted(val movieArray: ArrayList<SearchItem>, val tvArray: ArrayList<SearchItem>)
 
@@ -36,20 +36,18 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
         val concatAdapter = ConcatAdapter(movieListAdapter, tvListAdapter)
         resultRecyclerView.adapter = concatAdapter
 
+
         //Spinner
-/*        ArrayAdapter.createFromResource(
-            searchScene,
-            R.array.media_array,
-            android.R.layout.simple_spinner_item //TODO: Spinner layout
-        ).also { adapter ->
+
+        ArrayAdapter.createFromResource(searchScene, R.array.media_array, android.R.layout.simple_spinner_dropdown_item).also { adapter ->
             // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) //TODO: LAYOUT
+            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
-            spinner.adapter = adapter
+            dropdown.adapter = adapter
         }
 
         //Pass the scene to the listener that implements OnItemSelectedListener
-        spinner.onItemSelectedListener = searchScene*/
+        dropdown.onItemSelectedListener = searchScene
 
         apiSystem.requestSearch(ApiSystem.RequestBaseOptions(null, null, ::onSearch, ::onFailure), title!!)
     }
