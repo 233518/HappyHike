@@ -14,6 +14,7 @@ class Api {
     private val baseUrl = "https://filmatoryeksamen.herokuapp.com/en/api"
 
     fun runRequestGet(url: String, callback : OnApiRequestFinishedListener, requestId: Int, requestOptions: RequestBaseOptions) {
+        println("API REQUEST TO $url")
         val request = Request.Builder()
             .url(baseUrl + url)
             .build()

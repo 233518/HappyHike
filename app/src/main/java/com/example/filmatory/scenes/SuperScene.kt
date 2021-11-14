@@ -2,6 +2,7 @@ package com.example.filmatory.scenes
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -13,6 +14,12 @@ import com.example.filmatory.scenes.activities.SearchScene
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.android.material.navigation.NavigationView
+import androidx.core.os.ConfigurationCompat
+
+import java.util.Locale
+
+
+
 
 /**
  * SuperScene is the main scene for all the scenes. Every scene will extend this class

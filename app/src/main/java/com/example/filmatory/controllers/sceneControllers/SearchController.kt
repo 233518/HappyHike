@@ -49,7 +49,7 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
         //Pass the scene to the listener that implements OnItemSelectedListener
         dropdown.onItemSelectedListener = searchScene
 
-        apiSystem.requestSearch(ApiSystem.RequestBaseOptions(null, null, ::onSearch, ::onFailure), title!!)
+        apiSystem.requestSearch(ApiSystem.RequestBaseOptions(null, null, ::onSearch, ::onFailure), title!!, languageCode)
     }
 
     fun onFailure(baseError: BaseError) {

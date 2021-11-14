@@ -24,7 +24,7 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         initlizeTabAdapter()
         apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavorites, ::onFailure))
         apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlist, ::onFailure))
-        apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
+        apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
         apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavoritesStats, ::onFailure))
         apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlistStats, ::onFailure))
     }

@@ -20,10 +20,10 @@ import com.example.filmatory.utils.items.MediaModel
 class StartController(private val startScene: StartScene) : MainController(startScene) {
 
     init {
-        apiSystem.requestMovieFrontpage(RequestBaseOptions(null, null, ::discoverMoviesData, ::onFailure))
-        apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::discoverTvData, ::onFailure))
-        apiSystem.requestMovieFrontpage(RequestBaseOptions(null, null, ::recMovieData, ::onFailure))
-        apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::recTvData, ::onFailure))
+        apiSystem.requestMovieFrontpage(RequestBaseOptions(null, null, ::discoverMoviesData, ::onFailure), languageCode)
+        apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::discoverTvData, ::onFailure), languageCode)
+        apiSystem.requestMovieFrontpage(RequestBaseOptions(null, null, ::recMovieData, ::onFailure), languageCode)
+        apiSystem.requestTvFrontpage(RequestBaseOptions(null, null, ::recTvData, ::onFailure), languageCode)
         apiSystem.requestTest(RequestBaseOptions(null, null, ::test, ::onFailure))
         //snackbarSystem.showSnackbarFailure("Something unexpected happen!", ::test, "Retry")
     }

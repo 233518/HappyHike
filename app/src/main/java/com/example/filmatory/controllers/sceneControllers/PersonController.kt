@@ -26,7 +26,7 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
     private val person_readless_btn = personScene.findViewById<Button>(R.id.person_readless)
     private val personData : MutableList<String> = ArrayList()
     init {
-        apiSystem.requestPerson(RequestBaseOptions(pId.toString(), null, ::getPerson, ::onFailure))
+        apiSystem.requestPerson(RequestBaseOptions(pId.toString(), null, ::getPerson, ::onFailure), languageCode)
         person_readmore_btn.setOnClickListener {
             loadMoreBio(personData);
             person_readmore_btn.visibility = View.GONE

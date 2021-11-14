@@ -45,13 +45,12 @@ class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
     private var listNameArray = arrayOf<String>()
     private val listArrayList: MutableList<ListItem> = ArrayList()
 
-
     init {
-        apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure))
+        apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure), languageCode)
         if(movieScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
             apiSystem.requestUserWatchlist(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
-            apiSystem.requestUserLists(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::getUserLists, ::onFailure))
+            apiSystem.requestUserLists(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
             favoriteBtn.setOnClickListener {
                 if(!movieIsFavorited){
                     addToFavorites()
