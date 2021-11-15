@@ -57,7 +57,6 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
             .position("center-bottom")
             .itemsLayout(LegendLayout.HORIZONTAL)
             .align(Align.CENTER)
-
         anyChartView.setChart(pie)
     }
 

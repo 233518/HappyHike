@@ -10,11 +10,20 @@ class UserInfoSystem(private val apiSystem: ApiSystem) {
         updateUsernameInDatabase(uid, username)
     }
 
-    private fun updateUsernameInDatabase(uid : String, username : String){
-        var params: HashMap<String, String> = HashMap()
-        params["username"] = username
+    fun createList(uid : String, listName: String){
+        createListInDatabase(uid, listName)
+    }
 
+    private fun updateUsernameInDatabase(uid : String, username : String){
+        val params: HashMap<String, String> = HashMap()
+        params["username"] = username
         apiSystem.postUserUsername(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
+    }
+
+    private fun createListInDatabase(uid : String, listName: String){
+        val params: HashMap<String, String> = HashMap()
+        params["listName"] = listName
+        apiSystem.postListCreate(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
     }
 
     /**

@@ -9,12 +9,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.UserLists
+import com.example.filmatory.scenes.activities.AccountInfoScene
+import com.example.filmatory.systems.ApiSystem
+import com.example.filmatory.systems.UserInfoSystem
 import com.example.filmatory.utils.items.ListItem
 import com.example.filmatory.utils.adapters.ListsAdapter
 
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene) : Fragment(R.layout.fragment_list) {
     private val listsArrayList: MutableList<ListItem> = ArrayList()
     private lateinit var listsAdapter : ListsAdapter
+    var userInfoSystem = UserInfoSystem(apiSystem)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,7 +29,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         recyclerView.adapter = listsAdapter
         createListBtn.setOnClickListener {
             val listName : String = view.findViewById<TextView>(R.id.accinfoNewListTextField).text.toString()
-            listsArrayList.add(ListItem(listName, "Dybe", "http://placeimg.com/640/480/any", "12", "14", "1231"))
+            userInfoSystem.createList(accountInfoScene.auth.currentUser!!.uid, listName)
         }
     }
 
