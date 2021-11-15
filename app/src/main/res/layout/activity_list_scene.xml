@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/l_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Title"
@@ -28,18 +28,24 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
             android:textAppearance="?attr/textAppearanceHeadline6" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/l_title"
-            android:layout_marginTop="30dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginStart="15dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/listRecyclerView" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/list_delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:text="@string/delete_list"
+            android:visibility="invisible"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/l_title"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginStart="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/l_title"
+            android:id="@+id/listRecyclerView" />
 
     </RelativeLayout>
 

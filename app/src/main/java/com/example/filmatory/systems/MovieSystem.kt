@@ -1,13 +1,10 @@
 package com.example.filmatory.systems
 
-import android.content.ContentValues
-import android.content.ContentValues.TAG
+
 import android.content.Intent
-import android.util.Log
+
 import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.errors.BaseError
-import com.example.filmatory.errors.HttpStatusCodes
-import com.example.filmatory.scenes.activities.MoviesScene
 import com.example.filmatory.scenes.activities.StartScene
 import com.example.filmatory.systems.ApiSystem.PostBaseOptions
 
