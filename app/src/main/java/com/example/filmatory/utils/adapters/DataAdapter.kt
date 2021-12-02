@@ -1,6 +1,5 @@
 package com.example.filmatory.utils.adapters
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
+import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.scenes.activities.TvScene
 import com.example.filmatory.utils.items.MediaModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DataAdapter(var scene: SuperScene, var arrayList: ArrayList<MediaModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var context = scene.baseContext
 
     companion object {
         const val TYPE_MOVIE = 1
@@ -48,6 +50,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
                 val intent = Intent(context, MovieScene::class.java)
                 intent.putExtra("movieId", movieId)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                scene.finish()
                 context.startActivity(intent)
             }
         }
@@ -73,6 +76,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
                 val intent = Intent(context, TvScene::class.java)
                 intent.putExtra("tvId", tvId)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                scene.finish()
                 context.startActivity(intent)
             }
         }
@@ -98,6 +102,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
                 val intent = Intent(context, TvScene::class.java)
                 intent.putExtra("tvId", tvId)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                scene.finish()
                 context.startActivity(intent)
             }
         }
@@ -122,6 +127,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
                 movieId = viewmodel.itemId
                 val intent = Intent(context, MovieScene::class.java)
                 intent.putExtra("movieId", movieId)
+                scene.finish()
                 context.startActivity(intent)
             }
         }
@@ -146,6 +152,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
             itemView.setOnClickListener {
                 val intent = Intent(context, MovieScene::class.java)
                 intent.putExtra("movieId", movieId)
+                scene.finish()
                 context.startActivity(intent)
             }
             itemView.setOnLongClickListener {
@@ -187,6 +194,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
             itemView.setOnClickListener {
                 val intent = Intent(context, TvScene::class.java)
                 intent.putExtra("tvId", tvId)
+                scene.finish()
                 context.startActivity(intent)
             }
             itemView.setOnLongClickListener {
@@ -228,6 +236,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
             itemView.setOnClickListener {
                 val intent = Intent(context, MovieScene::class.java)
                 intent.putExtra("movieId", movieId)
+                scene.finish()
                 context.startActivity(intent)
             }
         }
@@ -252,6 +261,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
             itemView.setOnClickListener {
                 val intent = Intent(context, TvScene::class.java)
                 intent.putExtra("tvId", tvId)
+                scene.finish()
                 context.startActivity(intent)
             }
         }
