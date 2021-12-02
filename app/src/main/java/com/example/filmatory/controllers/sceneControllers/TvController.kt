@@ -3,7 +3,6 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide

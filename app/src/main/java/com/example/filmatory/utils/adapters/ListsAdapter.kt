@@ -25,7 +25,7 @@ class ListsAdapter(private val arrayList: MutableList<ListItem>, private val con
         holder.itemAuthor.text = arrayList[position].list_author
         holder.itemMovies.text = arrayList[position].list_total_movies
         holder.itemTvs.text = arrayList[position].list_total_tv
-        Glide.with(this.context)
+        Glide.with(context)
             .load(arrayList[position].image)
             .error(R.drawable.placeholder_image)
             .fallback(R.drawable.placeholder_image)
@@ -40,6 +40,7 @@ class ListsAdapter(private val arrayList: MutableList<ListItem>, private val con
             val intent = Intent(context, ListScene::class.java)
             intent.putExtra("listId", listId)
             intent.putExtra("listName", listName)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context.startActivity(intent)
         }
     }

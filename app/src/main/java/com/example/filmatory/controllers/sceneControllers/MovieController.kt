@@ -30,7 +30,7 @@ import java.util.ArrayList
  *
  * @param movieScene The MovieScene to use
  */
-class MovieController(val movieScene: MovieScene) : MainController(movieScene) {
+class MovieController(private val movieScene: MovieScene) : MainController(movieScene) {
     var intent: Intent = movieScene.intent
     private val movieSystem = MovieSystem(apiSystem, snackbarSystem, movieScene)
     private val mId = intent.getIntExtra("movieId", 0)

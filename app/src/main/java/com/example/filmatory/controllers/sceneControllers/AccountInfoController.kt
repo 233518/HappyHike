@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @property accountInfoScene The AccountInfoScene to use
  */
 class AccountInfoController(private val accountInfoScene: AccountInfoScene) : MainController(accountInfoScene) {
-    val tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem)
+    private val tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem)
     init {
         initlizeTabAdapter()
         apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavorites, ::onFailure))
@@ -85,4 +85,6 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
             }
         }.attach()
     }
+
+
 }

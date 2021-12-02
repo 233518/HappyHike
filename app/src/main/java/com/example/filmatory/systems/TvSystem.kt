@@ -1,8 +1,6 @@
 package com.example.filmatory.systems
 
-import android.content.ContentValues
 import android.content.Intent
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.StartScene
@@ -73,6 +71,8 @@ class TvSystem(private val apiSystem: ApiSystem, private val snackbarSystem: Sna
     }
     private fun retry() {
         val intent = Intent(scene, StartScene::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        scene.finish()
         scene.startActivity(intent)
     }
 }

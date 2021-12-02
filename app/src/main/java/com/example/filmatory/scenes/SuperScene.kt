@@ -2,23 +2,19 @@ package com.example.filmatory.scenes
 
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import com.anychart.APIlib
+import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.SearchScene
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.android.material.navigation.NavigationView
-import androidx.core.os.ConfigurationCompat
-
-import java.util.Locale
-
-
 
 
 /**
@@ -42,10 +38,9 @@ open class SuperScene : AppCompatActivity() {
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val intent = Intent(applicationContext, SearchScene::class.java)
+                val intent = Intent(this@SuperScene, SearchScene::class.java)
                 intent.putExtra("title", query)
-                applicationContext.startActivity(intent)
-                println(query)
+                this@SuperScene.startActivity(intent)
                 return false
             }
         })
@@ -65,5 +60,11 @@ open class SuperScene : AppCompatActivity() {
             navigationView.menu.clear()
             navigationView.inflateMenu(R.menu.nav_menu_logged_out)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Glide.get(this).clearMemory();
+        APIlib.getInstance().setActiveAnyChartView(null)
     }
 }

@@ -17,7 +17,7 @@ import com.example.filmatory.systems.UserInfoSystem
 import com.google.android.material.textfield.TextInputEditText
 
 
-class AccinfoFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene) : Fragment() {
+class AccinfoFragment(apiSystem: ApiSystem, var accountInfoScene: AccountInfoScene) : Fragment() {
     lateinit var changeUsernameBtn : Button
     lateinit var changePwBtn : Button
     var userInfoSystem = UserInfoSystem(apiSystem)

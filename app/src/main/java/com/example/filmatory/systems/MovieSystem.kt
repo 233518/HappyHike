@@ -73,6 +73,8 @@ class MovieSystem(private val apiSystem: ApiSystem, private val snackbarSystem: 
     }
     private fun retry() {
         val intent = Intent(scene, StartScene::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        scene.finish()
         scene.startActivity(intent)
     }
 }

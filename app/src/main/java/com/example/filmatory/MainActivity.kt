@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         Lingver.init(application, "en")
         setContentView(R.layout.activity_main)
         val intent = Intent(this, StartScene::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        finish()
         startActivity(intent)
     }
 }

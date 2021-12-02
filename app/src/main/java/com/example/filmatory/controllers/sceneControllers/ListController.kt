@@ -48,6 +48,8 @@ class ListController(private val listScene: ListScene) : MainController(listScen
                     listSystem.deleteList(listId)
                 }
                 val intent = Intent(listScene, ListsScene::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                listScene.finish()
                 listScene.startActivity(intent)
             }
         }

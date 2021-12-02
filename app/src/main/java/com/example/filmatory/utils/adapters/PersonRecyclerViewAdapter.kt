@@ -23,7 +23,7 @@ class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
         holder.itemRealName.text = arrayList[position].realName
         holder.itemCharName.text = arrayList[position].charName
-        Glide.with(this.context)
+        Glide.with(context)
             .load(arrayList[position].image)
             .error(R.drawable.placeholder_image)
             .fallback(R.drawable.placeholder_image)
@@ -36,6 +36,7 @@ class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, 
             val personId: Int = model.id
             val intent = Intent(context, PersonScene::class.java)
             intent.putExtra("personId", personId)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context.startActivity(intent)
         }
     }
@@ -50,5 +51,4 @@ class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, 
         val itemCharName: TextView = view.findViewById(R.id.slider_date)
         var itemId: Int? = null
     }
-
 }

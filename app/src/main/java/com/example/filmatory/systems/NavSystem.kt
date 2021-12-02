@@ -50,54 +50,78 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
             when(it.itemId){
                 R.id.nav_home -> {
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_movies -> {
                     val intent = Intent(appCompatActivity, MoviesScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_series -> {
                     val intent = Intent(appCompatActivity, TvsScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_upcoming_movies -> {
                     val intent = Intent(appCompatActivity, UpcomingMoviesScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_upcoming_tvshows -> {
                     val intent = Intent(appCompatActivity, UpcomingTvsScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_lists -> {
                     val intent = Intent(appCompatActivity, ListsScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_profile -> {
                     val intent = Intent(appCompatActivity, AccountScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_favorites -> {
                     val intent = Intent(appCompatActivity, AccountInfoScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     intent.putExtra("position", 1)
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_watchlist -> {
                     val intent = Intent(appCompatActivity, AccountInfoScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     intent.putExtra("position", 2)
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_my_lists -> {
                     val intent = Intent(appCompatActivity, AccountInfoScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     intent.putExtra("position", 3)
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_logout -> {
                     Firebase.auth.signOut()
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 R.id.nav_user_login -> {
                     val intent = Intent(appCompatActivity, LoginScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
             }
@@ -114,31 +138,37 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
                 0 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "en")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     appCompatActivity.startActivity(intent)
                 }
                 1 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "no")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     appCompatActivity.startActivity(intent)
                 }
                 2 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "de")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     appCompatActivity.startActivity(intent)
                 }
                 3 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "fr")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     appCompatActivity.startActivity(intent)
                 }
                 4 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "es")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     appCompatActivity.startActivity(intent)
                 }
                 5 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "zh")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     appCompatActivity.startActivity(intent)
                 }
 

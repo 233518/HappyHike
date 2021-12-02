@@ -3,7 +3,6 @@ package com.example.filmatory.utils.adapters
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -48,6 +47,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
                 movieId = viewmodel.itemId
                 val intent = Intent(context, MovieScene::class.java)
                 intent.putExtra("movieId", movieId)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 context.startActivity(intent)
             }
         }
@@ -72,6 +72,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
                 tvId = viewmodel.itemId
                 val intent = Intent(context, TvScene::class.java)
                 intent.putExtra("tvId", tvId)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 context.startActivity(intent)
             }
         }
@@ -96,6 +97,7 @@ class DataAdapter(var context: Context, var arrayList: ArrayList<MediaModel>) : 
                 tvId = viewmodel.itemId
                 val intent = Intent(context, TvScene::class.java)
                 intent.putExtra("tvId", tvId)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 context.startActivity(intent)
             }
         }

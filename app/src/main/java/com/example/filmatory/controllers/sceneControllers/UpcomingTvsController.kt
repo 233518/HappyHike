@@ -37,11 +37,19 @@ class UpcomingTvsController(private val upcomingTvsScene: UpcomingTvsScene) : Ma
      * @param upcomingTvs The response from API
      */
     private fun upcomingTvsData(upcomingTvs: UpcomingTvs){
-        upcomingTvsScene.runOnUiThread(Runnable {
-            upcomingTvs.forEach{
-                item -> upcomingTvsArraylist.add(MediaModel(DataAdapter.TYPE_TV, item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+        upcomingTvsScene.runOnUiThread {
+            upcomingTvs.forEach { item ->
+                upcomingTvsArraylist.add(
+                    MediaModel(
+                        DataAdapter.TYPE_TV,
+                        item.title,
+                        item.releaseDate,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                        item.id
+                    )
+                )
             }
             upcomingTvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 }
