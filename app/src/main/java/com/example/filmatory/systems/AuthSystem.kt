@@ -57,6 +57,8 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
                     newUserInDatabase(user!!.uid)
+                    val intent = Intent(scene, StartScene::class.java)
+                    scene.startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
