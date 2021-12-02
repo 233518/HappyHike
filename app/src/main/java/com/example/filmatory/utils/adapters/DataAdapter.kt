@@ -1,5 +1,6 @@
 package com.example.filmatory.utils.adapters
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +16,9 @@ import com.example.filmatory.scenes.activities.TvScene
 import com.example.filmatory.utils.items.MediaModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class DataAdapter(var scene: SuperScene, var arrayList: ArrayList<MediaModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DataAdapter(var scene: SuperScene, private var context : Context, var arrayList: ArrayList<MediaModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var context = scene.baseContext
+    var uid = scene.auth.uid
 
     companion object {
         const val TYPE_MOVIE = 1

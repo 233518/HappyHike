@@ -44,7 +44,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     private fun discoverMoviesData(movieFrontpage: MovieFrontpage){
         startScene.runOnUiThread(Runnable {
             val discoverMoviesArraylist: ArrayList<MediaModel> = ArrayList()
-            val discoverMoviesAdapter = DataAdapter(startScene,discoverMoviesArraylist)
+            val discoverMoviesAdapter = DataAdapter(startScene,startScene, discoverMoviesArraylist)
             val discoverMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view)
             movieFrontpage.forEach{
                     item -> discoverMoviesArraylist.add(MediaModel(DataAdapter.TYPE_MOVIE_SLIDER ,item.original_title, item.release_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
@@ -62,7 +62,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     private fun discoverTvData(tvFrontpage: TvFrontpage){
         startScene.runOnUiThread(Runnable {
             val discoverTvsArrayList: ArrayList<MediaModel> = ArrayList()
-            val discoverTvsAdapter = DataAdapter(startScene, discoverTvsArrayList)
+            val discoverTvsAdapter = DataAdapter(startScene, startScene, discoverTvsArrayList)
             val discoverTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view2)
             tvFrontpage.forEach{
                     item -> discoverTvsArrayList.add(MediaModel(DataAdapter.TYPE_TV_SLIDER ,item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
@@ -80,7 +80,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     private fun recMovieData(movieFrontpage: MovieFrontpage){
         startScene.runOnUiThread(Runnable {
             val recMoviesArrayList: ArrayList<MediaModel> = ArrayList()
-            val redMoviesAdapter = DataAdapter(startScene, recMoviesArrayList)
+            val redMoviesAdapter = DataAdapter(startScene, startScene, recMoviesArrayList)
             val recMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view3)
             movieFrontpage.forEach{
                     item -> recMoviesArrayList.add(MediaModel(DataAdapter.TYPE_MOVIE_SLIDER, item.original_title, item.release_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
@@ -98,7 +98,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     private fun recTvData(tvFrontpage: TvFrontpage){
         startScene.runOnUiThread(Runnable {
             val recTvsArrayList: ArrayList<MediaModel> = ArrayList()
-            val recTvsAdapter = DataAdapter(startScene, recTvsArrayList)
+            val recTvsAdapter = DataAdapter(startScene, startScene, recTvsArrayList)
             val recTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view4)
             tvFrontpage.forEach{
                     item -> recTvsArrayList.add(MediaModel(DataAdapter.TYPE_TV_SLIDER, item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))

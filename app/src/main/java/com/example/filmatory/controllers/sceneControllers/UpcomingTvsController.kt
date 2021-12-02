@@ -19,7 +19,7 @@ import com.example.filmatory.utils.items.MediaModel
 class UpcomingTvsController(private val upcomingTvsScene: UpcomingTvsScene) : MainController(upcomingTvsScene) {
     private val upcomingTvsArraylist : ArrayList<MediaModel> = ArrayList()
     private var upcomingTvsRecyclerView: RecyclerView = upcomingTvsScene.findViewById(R.id.recyclerView)
-    private val upcomingTvsAdapter = DataAdapter(upcomingTvsScene, upcomingTvsArraylist)
+    private val upcomingTvsAdapter = DataAdapter(upcomingTvsScene, upcomingTvsScene, upcomingTvsArraylist)
 
     init {
         apiSystem.requestTvsUpcoming(RequestBaseOptions(null, null, ::upcomingTvsData, ::onFailure))

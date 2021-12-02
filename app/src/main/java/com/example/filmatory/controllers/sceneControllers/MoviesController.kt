@@ -68,7 +68,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         moviesPopularAsc.reverse()
 
         moviesScene.runOnUiThread(Runnable {
-            val moviesAdapter = DataAdapter(moviesScene, moviesPopularDesc)
+            val moviesAdapter = DataAdapter(moviesScene, moviesScene,moviesPopularDesc)
             moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
@@ -106,7 +106,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      *
      */
     private fun moviesPopularDesc(){
-        val moviesAdapter = DataAdapter(moviesScene, moviesPopularDesc)
+        val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesPopularDesc)
         moviesScene.runOnUiThread(Runnable {
             moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesRecyclerView.adapter = moviesAdapter
@@ -119,7 +119,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      *
      */
     private fun moviesPopularAsc(){
-        val moviesAdapter = DataAdapter(moviesScene, moviesPopularAsc)
+        val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesPopularAsc)
         moviesScene.runOnUiThread(Runnable {
             moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesRecyclerView.adapter = moviesAdapter
@@ -132,7 +132,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      *
      */
     private fun moviesTitleAZ(){
-        val moviesAdapter = DataAdapter(moviesScene, moviesFilteredAZ)
+        val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredAZ)
         moviesScene.runOnUiThread(Runnable {
             moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesRecyclerView.adapter = moviesAdapter
@@ -145,7 +145,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      *
      */
     private fun moviesTitleZA(){
-        val moviesAdapter = DataAdapter(moviesScene, moviesFilteredZA)
+        val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredZA)
         moviesScene.runOnUiThread(Runnable {
             moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesRecyclerView.adapter = moviesAdapter
@@ -158,7 +158,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      *
      */
     private fun moviesDateAsc(){
-        val moviesAdapter = DataAdapter(moviesScene, moviesFilteredDateAsc)
+        val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredDateAsc)
         moviesScene.runOnUiThread(Runnable {
             moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesRecyclerView.adapter = moviesAdapter
@@ -171,7 +171,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      *
      */
     private fun moviesDateDesc(){
-        val moviesAdapter = DataAdapter(moviesScene, moviesFilteredDateDesc)
+        val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredDateDesc)
         moviesScene.runOnUiThread(Runnable {
             moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesRecyclerView.adapter = moviesAdapter

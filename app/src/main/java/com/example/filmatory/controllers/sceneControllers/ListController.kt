@@ -31,8 +31,8 @@ class ListController(private val listScene: ListScene) : MainController(listScen
     private var listRecyclerView: RecyclerView = listScene.findViewById(R.id.listRecyclerView)
     private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
     private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
-    private var movieListAdapter = DataAdapter(listScene, movieListArrayList)
-    private var tvListAdapter = DataAdapter(listScene, tvListArrayList)
+    private var movieListAdapter = DataAdapter(listScene, listScene, movieListArrayList)
+    private var tvListAdapter = DataAdapter(listScene, listScene, tvListArrayList)
     private var userIsOwner : Boolean  = false
     private val deleteListBtn : Button = listScene.findViewById(R.id.list_delete_btn)
     private var listSystem = ListSystem(apiSystem, snackbarSystem, listScene)

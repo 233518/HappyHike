@@ -8,24 +8,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.Favorites
+import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
-
-class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
+class FavoriteFragment(private var scene: SuperScene) : Fragment(R.layout.fragment_favorite) {
     private val movieFavoritesArraylist: ArrayList<MediaModel> = ArrayList()
     private val tvFavoritesArraylist: ArrayList<MediaModel> = ArrayList()
     private var allFavoritesArraylist: ArrayList<MediaModel> = ArrayList()
     private lateinit var movieAdapter: DataAdapter
     private lateinit var tvAdapter: DataAdapter
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView : RecyclerView = view.findViewById(R.id.favorite_rv)
         allFavoritesArraylist = (tvFavoritesArraylist + movieFavoritesArraylist) as ArrayList<MediaModel>
-        movieAdapter =  DataAdapter(requireActivity(), movieFavoritesArraylist)
-        tvAdapter =  DataAdapter(requireActivity(), tvFavoritesArraylist)
+        movieAdapter =  DataAdapter(scene, requireActivity(), movieFavoritesArraylist)
+        tvAdapter =  DataAdapter(scene, requireActivity(), tvFavoritesArraylist)
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         val concatAdapter = ConcatAdapter(movieAdapter, tvAdapter)
         recyclerView.adapter = concatAdapter
