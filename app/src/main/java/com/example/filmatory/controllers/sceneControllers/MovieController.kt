@@ -426,7 +426,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
 
                 }
                 .setPositiveButton(movieScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
-                    if(which != -1){
+                    if(chosenList != -1){
                         movieSystem.addMovieToList(listArrayList[chosenList].list_id, mId.toString())
                     } else {
                         snackbarSystem.showSnackbarWarning("No list was selected")
