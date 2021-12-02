@@ -59,25 +59,31 @@
     <string name="change_username">Changer de nom d\'utilisateur</string>
     <string name="username">Nom d\'utilisateur</string>
     <string name="confirm_btn">Confirmer</string>
-    <string name="forgotPassword">Forgotten password?</string>
-    <string name="recover">Recover</string>
-    <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
-    <string name="accinfo_mediamenu">Media Menu</string>
-    <string name="statistics">Statistics</string>
-    <string name="mediatype">Media Type</string>
-    <string name="favoriteandwatchlist">Favorites and Watchlist</string>
-    <string name="delete_list">Delete List</string>
+    <string name="forgotPassword">Mot de passe oublié?</string>
+    <string name="recover">Se remettre</string>
+    <string name="recover_password_info">Pour réinitialiser votre mot de passe, entrez votre adresse e-mail et vérifiez votre boîte de réception.</string>
+    <string name="accinfo_mediamenu">Menu média</string>
+    <string name="statistics">Statistiques</string>
+    <string name="mediatype">Type de support</string>
+    <string name="favoriteandwatchlist">Favoris et liste de surveillance</string>
+    <string name="delete_list">Supprimer la liste</string>
+    <string name="start_scene_title">Rejoignez Filmatory aujourd\'hui</string>
+    <string name="start_scene_text">Avec un abonnement, vous pourrez évaluer les films et créer vos propres listes. L\'inscription est simple, gratuite et amusante.</string>
+    <string name="start_scene_social">\u2022 Social</string>
+    <string name="start_scene_free">\u2022 Libérer</string>
+    <string name="start_scene_secure">\u2022 Sécurise</string>
+    <string name="header_text">Des millions de films, d\'émissions de télévision et de personnes à découvrir. Explorez maintenant.</string>
     <string-array name="media_array">
-        <item>All</item>
-        <item>Movie</item>
-        <item>TV</item>
+        <item>Tout</item>
+        <item>Film</item>
+        <item>la télé</item>
     </string-array>
     <string-array name="filter_array">
-        <item>Popularity Descending</item>
-        <item>Popularity Ascending</item>
-        <item>Release Date Descending</item>
-        <item>Release Date Ascending</item>
-        <item>Title (A-Z)</item>
-        <item>Title (Z-A)</item>
+        <item>Popularité décroissante</item>
+        <item>Popularité croissante</item>
+        <item>Date de sortie décroissante</item>
+        <item>Date de sortie croissante</item>
+        <item>Titre (A-Z)</item>
+        <item>Titre (Z-A)</item>
     </string-array>
 </resources>

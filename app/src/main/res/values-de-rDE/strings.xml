@@ -59,25 +59,31 @@
     <string name="change_username">Benutzernamen ändern</string>
     <string name="username">Nutzername</string>
     <string name="confirm_btn">Bestätigt</string>
-    <string name="forgotPassword">Forgotten password?</string>
-    <string name="recover">Recover</string>
-    <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
-    <string name="accinfo_mediamenu">Media Menu</string>
-    <string name="statistics">Statistics</string>
-    <string name="mediatype">Media Type</string>
-    <string name="favoriteandwatchlist">Favorites and Watchlist</string>
-    <string name="delete_list">Delete List</string>
+    <string name="forgotPassword">Passwort vergessen?</string>
+    <string name="recover">Wiederherstellen</string>
+    <string name="recover_password_info">Um dein Passwort zurückzusetzen, gib deine E-Mail-Adresse ein und überprüfe deinen Posteingang.</string>
+    <string name="accinfo_mediamenu">Medienmenü</string>
+    <string name="statistics">Statistik</string>
+    <string name="mediatype">Medientyp</string>
+    <string name="favoriteandwatchlist">Favoriten und Watchlist</string>
+    <string name="delete_list">Liste löschen</string>
+    <string name="start_scene_title">Treten Sie noch heute bei Filmatory ein!</string>
+    <string name="start_scene_text">Mit einer Mitgliedschaft kannst du Filme bewerten und deine eigenen Listen erstellen. Die Anmeldung ist einfach, kostenlos und macht Spaß.</string>
+    <string name="start_scene_social">\u2022 Sozial</string>
+    <string name="start_scene_free">\u2022 Kostenlos</string>
+    <string name="start_scene_secure">\u2022 Sicher</string>
+    <string name="header_text">Millionen Filme, Fernsehsendungen und Menschen, die es zu entdecken gilt. Jetzt erkunden.</string>
     <string-array name="media_array">
-        <item>All</item>
-        <item>Movie</item>
-        <item>TV</item>
+        <item>Alle</item>
+        <item>Film</item>
+        <item>Fernseher</item>
     </string-array>
     <string-array name="filter_array">
-        <item>Popularity Descending</item>
-        <item>Popularity Ascending</item>
-        <item>Release Date Descending</item>
-        <item>Release Date Ascending</item>
-        <item>Title (A-Z)</item>
-        <item>Title (Z-A)</item>
+        <item>Popularität absteigend</item>
+        <item>Beliebtheit aufsteigend</item>
+        <item>Veröffentlichungsdatum absteigend</item>
+        <item>Veröffentlichungsdatum aufsteigend</item>
+        <item>Titel (A-Z)</item>
+        <item>Titel (Z-A)</item>
     </string-array>
 </resources>

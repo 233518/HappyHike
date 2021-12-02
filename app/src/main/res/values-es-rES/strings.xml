@@ -59,25 +59,31 @@
     <string name="change_username">Cambie el nombre de usuario</string>
     <string name="username">Nombre de usuario</string>
     <string name="confirm_btn">Confirmado</string>
-    <string name="forgotPassword">Forgotten password?</string>
-    <string name="recover">Recover</string>
-    <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
-    <string name="accinfo_mediamenu">Media Menu</string>
-    <string name="statistics">Statistics</string>
-    <string name="mediatype">Media Type</string>
-    <string name="favoriteandwatchlist">Favorites and Watchlist</string>
-    <string name="delete_list">Delete List</string>
-    <string-array name="media_array">
-        <item>All</item>
-        <item>Movie</item>
-        <item>TV</item>
+    <string name="forgotPassword"> ¿Olvidó la contraseña? </string>
+    <string name="recover"> Recuperar </string>
+    <string name="recover_password_info"> Para restablecer su contraseña, ingrese su dirección de correo electrónico y revise su bandeja de entrada. </string>
+    <string name="accinfo_mediamenu"> Menú multimedia </string>
+    <string name="statistics"> Estadísticas </string>
+    <string name="mediatype"> Tipo de medio </string>
+    <string name="favoriteandwatchlist"> Favoritos y lista de observación </string>
+    <string name="delete_list"> Eliminar lista </string>
+    <string name="start_scene_title"> ¡Únase a Filmatorio hoy! </string>
+    <string name="start_scene_text"> Con una membresía, podrá calificar películas y hacer sus propias listas. Registrarse es fácil, gratis y divertido. </string>
+    <string name="start_scene_social"> \ u2022 Social </string>
+    <string name="start_scene_free"> \ u2022 Gratis </string>
+    <string name="start_scene_secure"> \ u2022 Seguro </string>
+    <string name="header_text"> Millones de películas, programas de televisión y personas por descubrir. Explore ahora. </string>
+    <string-array name = "media_array">
+        <item> Todo </item>
+        <item> Película </item>
+        <item> TV </item>
     </string-array>
-    <string-array name="filter_array">
-        <item>Popularity Descending</item>
-        <item>Popularity Ascending</item>
-        <item>Release Date Descending</item>
-        <item>Release Date Ascending</item>
-        <item>Title (A-Z)</item>
-        <item>Title (Z-A)</item>
+    <string-array name = "filter_array">
+        <item> Popularidad descendente </item>
+        <item> Popularidad ascendente </item>
+        <item> Fecha de lanzamiento descendente </item>
+        <item> Fecha de lanzamiento ascendente </item>
+        <item> Título (A-Z) </item>
+        <item> Título (Z-A) </item>
     </string-array>
 </resources>

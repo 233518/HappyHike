@@ -60,25 +60,31 @@
     <string name="change_username">Bytt Brukernavn</string>
     <string name="username">Brukernavn</string>
     <string name="confirm_btn">Bekreft</string>
-    <string name="forgotPassword">Forgotten password?</string>
-    <string name="recover">Recover</string>
-    <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
-    <string name="accinfo_mediamenu">Media Menu</string>
-    <string name="statistics">Statistics</string>
-    <string name="mediatype">Media Type</string>
-    <string name="favoriteandwatchlist">Favorites and Watchlist</string>
-    <string name="delete_list">Delete List</string>
+    <string name="forgotPassword">Glemt passord?</string>
+    <string name="recover">Gjenopprett</string>
+    <string name="recover_password_info">For å tilbakestille passordet, skriv inn e-postadressen din og sjekk innboksen.</string>
+    <string name="accinfo_mediamenu">Mediameny</string>
+    <string name="statistics">Statistikk</string>
+    <string name="mediatype">Mediatype</string>
+    <string name="favoriteandwatchlist">Favoritter og settliste</string>
+    <string name="delete_list">Slett liste</string>
+    <string name="start_scene_title">Bli med i Filmatory i dag!</string>
+    <string name="start_scene_text">Med et medlemskap vil du kunne rangere filmer og lage dine egne lister. Å registrere seg er enkelt, gratis og morsomt.</string>
+    <string name="start_scene_social">\u2022 Sosialt</string>
+    <string name="start_scene_free">\u2022 Gratis</string>
+    <string name="start_scene_secure">\u2022 Trygt</string>
+    <string name="header_text">Millioner av filmer, TV-serier og folk å oppdage. Utforsk nå.</string>
     <string-array name="media_array">
-        <item>All</item>
-        <item>Movie</item>
+        <item>Alt</item>
+        <item>Film</item>
         <item>TV</item>
     </string-array>
     <string-array name="filter_array">
-        <item>Popularity Descending</item>
-        <item>Popularity Ascending</item>
-        <item>Release Date Descending</item>
-        <item>Release Date Ascending</item>
-        <item>Title (A-Z)</item>
-        <item>Title (Z-A)</item>
+        <item>Popularitet synkende</item>
+        <item>Popularitet stigende</item>
+        <item>Utgivelsesdato synkende</item>
+        <item>Utgivelsesdato stigende</item>
+        <item>Tittel (A-Z)</item>
+        <item>Tittel (Z-A)</item>
     </string-array>
 </resources>

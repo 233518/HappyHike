@@ -59,25 +59,31 @@
     <string name="change_username">更改用户名</string>
     <string name="username">用户名</string>
     <string name="confirm_btn">确认</string>
-    <string name="forgotPassword">Forgotten password?</string>
-    <string name="recover">Recover</string>
-    <string name="recover_password_info">To reset your password, enter your email address and check your inbox.</string>
-    <string name="accinfo_mediamenu">Media Menu</string>
-    <string name="statistics">Statistics</string>
-    <string name="mediatype">Media Type</string>
-    <string name="favoriteandwatchlist">Favorites and Watchlist</string>
-    <string name="delete_list">Delete List</string>
+    <string name="forgotPassword">忘记密码？</string>
+    <string name="recover">恢复</string>
+    <string name="recover_password_info">要重置您的密码，请输入您的电子邮件地址并检查您的收件箱。</string>
+    <string name="accinfo_mediamenu">媒体菜单</string>
+    <string name="statistics">统计数据</string>
+    <string name="mediatype">媒体类型</string>
+    <string name="favoriteandwatchlist">收藏夹和关注列表</string>
+    <string name="delete_list">删除列表</string>
+    <string name="start_scene_title">今天就加入 Filmatory！</string>
+    <string name="start_scene_text">拥有会员资格，您将能够对电影进行评分并制作您自己的列表。注册简单、免费且有趣。</string>
+    <string name="start_scene_social">\u2022 社交</string>
+    <string name="start_scene_free">\u2022 免费</string>
+    <string name="start_scene_secure">\u2022 安全</string>
+    <string name="header_text">数以百万计的电影、电视节目和人物等待您去发现。立即探索。</string>
     <string-array name="media_array">
-        <item>All</item>
-        <item>Movie</item>
-        <item>TV</item>
+        <item>全部</item>
+        <item>电影</item>
+        <item>电视</item>
     </string-array>
     <string-array name="filter_array">
-        <item>Popularity Descending</item>
-        <item>Popularity Ascending</item>
-        <item>Release Date Descending</item>
-        <item>Release Date Ascending</item>
-        <item>Title (A-Z)</item>
-        <item>Title (Z-A)</item>
+        <item>人气下降</item>
+        <item>人气上升</item>
+        <item>发布日期降序</item>
+        <item>发布日期升序</item>
+        <item>标题（A-Z）</item>
+        <item>标题 (Z-A)</item>
     </string-array>
 </resources>
