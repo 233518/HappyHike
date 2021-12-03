@@ -11,35 +11,39 @@ class FavoriteSystem(private var superScene: SuperScene, private var movieSystem
         }
         return true
     }
+
     fun removeMovieFromFavorites(mId: String) : Boolean {
         superScene.runOnUiThread {
             movieSystem?.removeMovieFromFavorites(superScene.auth.currentUser!!.uid, mId)
         }
         return true
     }
+
     fun checkIfMovieFavorited(favorites : Favorites, mId: Int) : Boolean {
         for (item in favorites.userMovieFavorites) {
             if (item.id == mId) return true
         }
         return false
     }
-    fun addTvToFavorites(mId: String) : Boolean {
+
+    fun addTvToFavorites(tId: String) : Boolean {
         superScene.runOnUiThread {
-            tvSystem?.addTvToFavorites(superScene.auth.currentUser!!.uid, mId)
+            tvSystem?.addTvToFavorites(superScene.auth.currentUser!!.uid, tId)
         }
         return true
     }
-    fun removeTvFromFavorites(mId: String) : Boolean {
+
+    fun removeTvFromFavorites(tId: String) : Boolean {
         superScene.runOnUiThread {
-            tvSystem?.removeTvFromFavorites(superScene.auth.currentUser!!.uid, mId)
+            tvSystem?.removeTvFromFavorites(superScene.auth.currentUser!!.uid, tId)
         }
         return true
     }
-    fun checkIfTvFavorited(favorites : Favorites, mId: Int) : Boolean {
+
+    fun checkIfTvFavorited(favorites : Favorites, tId: Int) : Boolean {
         for (item in favorites.userTvFavorites) {
-            if (item.id == mId) return true
+            if (item.id == tId) return true
         }
         return false
     }
-
 }

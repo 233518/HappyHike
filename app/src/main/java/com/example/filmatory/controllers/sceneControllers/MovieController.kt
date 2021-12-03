@@ -31,7 +31,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
     private var intent: Intent = movieScene.intent
     private val movieSystem = MovieSystem(apiSystem, snackbarSystem, movieScene)
     private val favoriteSystem = FavoriteSystem(movieScene, movieSystem, null)
-    private val watchlistSystem = WatchlistSystem(movieScene, movieSystem)
+    private val watchlistSystem = WatchlistSystem(movieScene, movieSystem, null)
 
     private val mId = intent.getIntExtra("movieId", 0)
     private val personsArrayList: MutableList<PersonItem> = ArrayList()
@@ -379,12 +379,12 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
     }
 
     fun addToWatchlist(){
-        movieIsWatched = watchlistSystem.addToWatchlist(mId.toString())
+        movieIsWatched = watchlistSystem.addMovieToWatchlist(mId.toString())
         movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
     }
 
     fun removeFromWatchlist(){
-        movieIsWatched = watchlistSystem.removeFromWatchlist(mId.toString())
+        movieIsWatched = watchlistSystem.removeMovieFromWatchlist(mId.toString())
         movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
     }
 
@@ -393,9 +393,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
             var chosenList: Int = -1
             MaterialAlertDialogBuilder(movieScene)
                 .setTitle(movieScene.resources.getString(R.string.mylists))
-                .setNeutralButton(movieScene.resources.getString(R.string.cancel_btn)) { dialog, which ->
-
-                }
+                .setNeutralButton(movieScene.resources.getString(R.string.cancel_btn)) { dialog, which -> }
                 .setPositiveButton(movieScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
                     if (chosenList != -1) {
                         movieSystem.addMovieToList(
@@ -438,7 +436,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
     }
 
     private fun checkIfWatchlist(watchlist: Watchlist){
-        movieIsWatched = watchlistSystem.checkIfWatchlist(watchlist, mId)
+        movieIsWatched = watchlistSystem.checkIfMovieWatchlist(watchlist, mId)
         if(!movieIsWatched) {
             movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
         } else {

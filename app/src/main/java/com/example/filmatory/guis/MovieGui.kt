@@ -12,13 +12,16 @@ import com.example.filmatory.scenes.activities.MovieScene
 
 class MovieGui(private var movieScene: MovieScene, private var movieController : MovieController) {
     var personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
+
     var favoriteBtn : ImageButton = movieScene.findViewById(R.id.movie_favorite_icon)
     var watchlistBtn : ImageButton = movieScene.findViewById(R.id.movie_watchlist_icon)
+
     var addToListBtn : TextView = movieScene.findViewById(R.id.movie_addtolist_btn)
     var movieTitle: TextView = movieScene.findViewById(R.id.m_title)
     var movieDate: TextView = movieScene.findViewById(R.id.m_date)
-    var movieImage: ImageView = movieScene.findViewById(R.id.m_img)
     var movieOverview: TextView = movieScene.findViewById(R.id.m_overview)
+
+    var movieImage: ImageView = movieScene.findViewById(R.id.m_img)
 
     init {
         favoriteBtn.setOnClickListener {
