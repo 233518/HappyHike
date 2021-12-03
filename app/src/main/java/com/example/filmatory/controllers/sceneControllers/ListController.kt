@@ -12,6 +12,7 @@ import com.example.filmatory.api.data.lists.List
 import com.example.filmatory.api.data.user.User
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
+import com.example.filmatory.guis.ListGui
 import com.example.filmatory.scenes.activities.ListScene
 import com.example.filmatory.scenes.activities.ListsScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
@@ -25,17 +26,19 @@ import com.example.filmatory.utils.items.MediaModel
  * @property listScene The ListScene to use
  */
 class ListController(private val listScene: ListScene) : MainController(listScene) {
-    var intent: Intent = listScene.intent
-    private val listId = intent.getStringExtra("listId")
+    val listSystem = ListSystem(apiSystem, snackbarSystem, listScene)
+    val listGui = ListGui(listScene, this)
+
+    private val intent: Intent = listScene.intent
     private val listName = intent.getStringExtra("listName")
-    private var listRecyclerView: RecyclerView = listScene.findViewById(R.id.listRecyclerView)
+
     private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
     private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
     private var movieListAdapter = DataAdapter(listScene, listScene, movieListArrayList)
     private var tvListAdapter = DataAdapter(listScene, listScene, tvListArrayList)
     private var userIsOwner : Boolean  = false
-    private val deleteListBtn : Button = listScene.findViewById(R.id.list_delete_btn)
-    private var listSystem = ListSystem(apiSystem, snackbarSystem, listScene)
+
+    val listId = intent.getStringExtra("listId")
 
     init {
         if (listId != null) {
@@ -43,19 +46,11 @@ class ListController(private val listScene: ListScene) : MainController(listScen
         }
         if(listScene.auth.currentUser?.uid != null){
             apiSystem.requestUser(RequestBaseOptions(null, listScene.auth.currentUser!!.uid, ::checkIfOwner, ::onFailure))
-            deleteListBtn.setOnClickListener {
-                if (listId != null) {
-                    listSystem.deleteList(listId)
-                }
-                val intent = Intent(listScene, ListsScene::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                listScene.finish()
-                listScene.startActivity(intent)
-            }
+
         }
-        listRecyclerView.layoutManager = GridLayoutManager(listScene, 2)
+        listGui.listRecyclerView.layoutManager = GridLayoutManager(listScene, 2)
         val concatAdapter = ConcatAdapter(movieListAdapter, tvListAdapter)
-        listRecyclerView.adapter = concatAdapter
+        listGui.listRecyclerView.adapter = concatAdapter
     }
 
     fun onFailure(baseError: BaseError) {
@@ -103,7 +98,7 @@ class ListController(private val listScene: ListScene) : MainController(listScen
             for (item in user.lists) {
                 if (item == listId) {
                     userIsOwner = true
-                    deleteListBtn.visibility = View.VISIBLE
+                    listGui.deleteListBtn.visibility = View.VISIBLE
                 }
             }
         }

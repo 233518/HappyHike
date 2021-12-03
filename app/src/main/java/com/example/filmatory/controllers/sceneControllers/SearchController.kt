@@ -3,9 +3,7 @@ package com.example.filmatory.controllers.sceneControllers
 import android.content.Intent
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
@@ -17,7 +15,6 @@ import com.example.filmatory.scenes.activities.SearchScene
 import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
-import com.yariksoffice.lingver.Lingver
 
 class SearchController(private val searchScene : SearchScene) : MainController(searchScene) {
     var intent: Intent = searchScene.intent

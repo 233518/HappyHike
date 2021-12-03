@@ -17,36 +17,6 @@ class AccountScene : SuperScene() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
         accountController = AccountController(this)
-
-        var accountCardView = findViewById<CardView>(R.id.account_cardOne)
-        var favoriteCardView = findViewById<CardView>(R.id.account_cardTwo)
-        var watchlistCardView = findViewById<CardView>(R.id.account_cardThree)
-        var mylistsCardView = findViewById<CardView>(R.id.account_cardFour)
-
-        accountCardView.setOnClickListener {
-            val intent = Intent(this, AccountInfoScene::class.java)
-            intent.putExtra("position", 0)
-            finish()
-            startActivity(intent)
-        }
-        favoriteCardView.setOnClickListener {
-            val intent = Intent(this, AccountInfoScene::class.java)
-            intent.putExtra("position", 1)
-            finish()
-            startActivity(intent)
-        }
-        watchlistCardView.setOnClickListener {
-            val intent = Intent(this, AccountInfoScene::class.java)
-            intent.putExtra("position", 2)
-            finish()
-            startActivity(intent)
-        }
-        mylistsCardView.setOnClickListener {
-            val intent = Intent(this, AccountInfoScene::class.java)
-            intent.putExtra("position", 3)
-            finish()
-            startActivity(intent)
-        }
     }
 }
 
