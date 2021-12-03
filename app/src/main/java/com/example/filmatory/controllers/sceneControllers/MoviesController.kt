@@ -1,22 +1,15 @@
 package com.example.filmatory.controllers.sceneControllers
 
-import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movies
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
+import com.example.filmatory.guis.MoviesGui
 import com.example.filmatory.scenes.activities.MoviesScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 import kotlin.collections.ArrayList
-
-
-
 
 /**
  * MoviesController manipulates the MoviesScene gui
@@ -24,31 +17,20 @@ import kotlin.collections.ArrayList
  * @param moviesScene The MoviesScene to use
  */
 class MoviesController(private val moviesScene: MoviesScene) : MainController(moviesScene) {
+    private val moviesGui = MoviesGui(moviesScene, this)
+
     private val moviesPopularDesc : ArrayList<MediaModel> = ArrayList()
     private val moviesFilteredAZ : ArrayList<MediaModel> = ArrayList()
     private val moviesFilteredDateAsc : ArrayList<MediaModel> = ArrayList()
-    private lateinit var moviesPopularAsc: ArrayList<MediaModel>
-    private lateinit var moviesFilteredZA: ArrayList<MediaModel>
-    private lateinit var moviesFilteredDateDesc: ArrayList<MediaModel>
-    private val moviesRecyclerView: RecyclerView = moviesScene.findViewById(R.id.recyclerView)
 
-    private val spinner : Spinner = moviesScene.findViewById(R.id.filter_spinner)
+    private var moviesPopularAsc: ArrayList<MediaModel> = ArrayList()
+    private var moviesFilteredZA: ArrayList<MediaModel> = ArrayList()
+    private var moviesFilteredDateDesc: ArrayList<MediaModel> = ArrayList()
 
     init {
         apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesData, ::onFailure))
         apiSystem.requestMoviesFilterTitleAZ(RequestBaseOptions(null, null, ::moviesDataFilterTitle, ::onFailure))
         apiSystem.requestMoviesFilterDateDesc(RequestBaseOptions(null, null, ::moviesDataFilterDate, ::onFailure))
-
-        ArrayAdapter.createFromResource(moviesScene, R.array.filter_array, android.R.layout.simple_spinner_dropdown_item).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.visibility = View.VISIBLE
-            spinner.adapter = adapter
-        }
-
-        //Pass the scene to the listener that implements OnItemSelectedListener
-        spinner.onItemSelectedListener = moviesScene
     }
 
     fun onFailure(baseError: BaseError) {
@@ -69,8 +51,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
 
         moviesScene.runOnUiThread {
             val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesPopularDesc)
-            moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesRecyclerView.adapter = moviesAdapter
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
         }
     }
@@ -108,8 +90,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     private fun moviesPopularDesc(){
         val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesPopularDesc)
         moviesScene.runOnUiThread {
-            moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesRecyclerView.adapter = moviesAdapter
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
         }
     }
@@ -121,8 +103,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     private fun moviesPopularAsc(){
         val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesPopularAsc)
         moviesScene.runOnUiThread {
-            moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesRecyclerView.adapter = moviesAdapter
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
         }
     }
@@ -134,8 +116,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     private fun moviesTitleAZ(){
         val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredAZ)
         moviesScene.runOnUiThread {
-            moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesRecyclerView.adapter = moviesAdapter
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
         }
     }
@@ -147,8 +129,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     private fun moviesTitleZA(){
         val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredZA)
         moviesScene.runOnUiThread {
-            moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesRecyclerView.adapter = moviesAdapter
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
         }
     }
@@ -160,8 +142,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     private fun moviesDateAsc(){
         val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredDateAsc)
         moviesScene.runOnUiThread {
-            moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesRecyclerView.adapter = moviesAdapter
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
         }
     }
@@ -173,8 +155,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     private fun moviesDateDesc(){
         val moviesAdapter = DataAdapter(moviesScene, moviesScene, moviesFilteredDateDesc)
         moviesScene.runOnUiThread {
-            moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesRecyclerView.adapter = moviesAdapter
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
             moviesAdapter.notifyDataSetChanged()
         }
     }
@@ -185,7 +167,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      * @param itemAtPosition Chosen item in spinner
      */
     fun onNewSelected(itemAtPosition: Any) {
-        when(spinner.selectedItemPosition){
+        when(moviesGui.spinner.selectedItemPosition){
             0 -> moviesPopularDesc()
             1 -> moviesPopularAsc()
             2 -> moviesDateAsc()

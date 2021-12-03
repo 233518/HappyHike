@@ -9,6 +9,7 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.tv.Tvs
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
+import com.example.filmatory.guis.TvsGui
 import com.example.filmatory.scenes.activities.TvsScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.DataAdapter
@@ -20,29 +21,20 @@ import com.example.filmatory.utils.items.MediaModel
  * @param tvsScene The TvsScene to use
  */
 class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
+    private val tvsGui = TvsGui(tvsScene, this)
+
     private val tvsPopularDesc : ArrayList<MediaModel> = ArrayList()
     private val tvsFilteredAZ : ArrayList<MediaModel> = ArrayList()
     private val tvsFilteredDateAsc : ArrayList<MediaModel> = ArrayList()
+
     private lateinit var tvsPopularAsc: ArrayList<MediaModel>
     private lateinit var tvsFilteredZA: ArrayList<MediaModel>
     private lateinit var tvsFilteredDateDesc: ArrayList<MediaModel>
-    private var tvsRecyclerView: RecyclerView = tvsScene.findViewById(R.id.recyclerView)
-    private val spinner : Spinner = tvsScene.findViewById(R.id.filter_spinner)
 
     init {
         apiSystem.requestTvs(RequestBaseOptions(null, null, ::tvsData, ::onFailure))
         apiSystem.requestTvsFilterTitleAZ(RequestBaseOptions(null, null, ::tvsDataFilterTitle, ::onFailure))
         apiSystem.requestTvsFilterDateDesc(RequestBaseOptions(null, null, ::tvsDataFilterDate, ::onFailure))
-        ArrayAdapter.createFromResource(tvsScene, R.array.filter_array, android.R.layout.simple_spinner_dropdown_item).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.visibility = View.VISIBLE
-            spinner.adapter = adapter
-        }
-
-        //Pass the scene to the listener that implements OnItemSelectedListener
-        spinner.onItemSelectedListener = tvsScene
     }
     fun onFailure(baseError: BaseError) {
 
@@ -62,8 +54,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
 
         tvsScene.runOnUiThread {
             val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularDesc)
-            tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsRecyclerView.adapter = tvsAdapter
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
         }
     }
@@ -101,8 +93,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private fun tvsPopularDesc(){
         tvsScene.runOnUiThread {
             val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularDesc)
-            tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsRecyclerView.adapter = tvsAdapter
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
         }
     }
@@ -114,8 +106,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private fun tvsPopularAsc(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularAsc)
         tvsScene.runOnUiThread {
-            tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsRecyclerView.adapter = tvsAdapter
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
         }
     }
@@ -127,8 +119,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private fun tvsTitleAZ(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredAZ)
         tvsScene.runOnUiThread {
-            tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsRecyclerView.adapter = tvsAdapter
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
         }
     }
@@ -140,8 +132,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private fun tvsTitleZA(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredZA)
         tvsScene.runOnUiThread {
-            tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsRecyclerView.adapter = tvsAdapter
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
         }
     }
@@ -153,8 +145,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private fun tvsDateAsc(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredDateAsc)
         tvsScene.runOnUiThread {
-            tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsRecyclerView.adapter = tvsAdapter
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
         }
     }
@@ -166,8 +158,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private fun tvsDateDesc(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredDateDesc)
         tvsScene.runOnUiThread {
-            tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsRecyclerView.adapter = tvsAdapter
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
         }
     }
@@ -178,7 +170,7 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      * @param itemAtPosition Chosen item in spinner
      */
     fun onNewSelected(itemAtPosition: Any) {
-        when(spinner.selectedItemPosition){
+        when(tvsGui.spinner.selectedItemPosition){
             0 -> tvsPopularDesc()
             1 -> tvsPopularAsc()
             2 -> tvsDateAsc()
