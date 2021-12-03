@@ -1,13 +1,7 @@
 package com.example.filmatory.controllers.sceneControllers.auth
 
-import android.content.Intent
-import android.widget.Button
-import android.widget.TextView
-import com.example.filmatory.R
+import com.example.filmatory.guis.auth.LoginGui
 import com.example.filmatory.scenes.activities.auth.LoginScene
-import com.example.filmatory.scenes.activities.auth.RegisterScene
-import com.example.filmatory.scenes.activities.auth.ResetPasswordScene
-import com.google.android.material.textfield.TextInputEditText
 
 /**
  * LoginController manipulates the LoginScene gui
@@ -15,6 +9,8 @@ import com.google.android.material.textfield.TextInputEditText
  * @property loginScene The LoginScene to use
  */
 class LoginController(private val loginScene: LoginScene) : AuthController(loginScene) {
+    private var loginGui = LoginGui(loginScene, authSystem)
+    /*
     private var regBtn = loginScene.findViewById<TextView>(R.id.regHereBtn)
     private var logBtn = loginScene.findViewById<Button>(R.id.login_btn)
     private var resetBtn = loginScene.findViewById<TextView>(R.id.forgotPasswordBtn)
@@ -34,4 +30,5 @@ class LoginController(private val loginScene: LoginScene) : AuthController(login
             loginScene.startActivity(intent)
         }
     }
+     */
 }

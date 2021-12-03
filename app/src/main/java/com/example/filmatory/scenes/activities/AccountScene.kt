@@ -3,7 +3,6 @@ package com.example.filmatory.scenes.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.cardview.widget.CardView
-import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.AccountController
 import com.example.filmatory.scenes.SuperScene
@@ -27,28 +26,24 @@ class AccountScene : SuperScene() {
         accountCardView.setOnClickListener {
             val intent = Intent(this, AccountInfoScene::class.java)
             intent.putExtra("position", 0)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             finish()
             startActivity(intent)
         }
         favoriteCardView.setOnClickListener {
             val intent = Intent(this, AccountInfoScene::class.java)
             intent.putExtra("position", 1)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             finish()
             startActivity(intent)
         }
         watchlistCardView.setOnClickListener {
             val intent = Intent(this, AccountInfoScene::class.java)
             intent.putExtra("position", 2)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             finish()
             startActivity(intent)
         }
         mylistsCardView.setOnClickListener {
             val intent = Intent(this, AccountInfoScene::class.java)
             intent.putExtra("position", 3)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             finish()
             startActivity(intent)
         }

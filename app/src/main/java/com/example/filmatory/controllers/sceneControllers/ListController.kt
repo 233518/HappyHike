@@ -68,28 +68,44 @@ class ListController(private val listScene: ListScene) : MainController(listScen
      * @param list The respons from API
      */
     private fun getList(list: List){
-        listScene.runOnUiThread(Runnable {
+        listScene.runOnUiThread {
             listScene.findViewById<TextView>(R.id.l_title).text = listName
             for (item in list) {
-                if(item.type == "tv"){
-                    tvListArrayList.add(MediaModel(DataAdapter.TYPE_TV ,item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                if (item.type == "tv") {
+                    tvListArrayList.add(
+                        MediaModel(
+                            DataAdapter.TYPE_TV,
+                            item.title,
+                            item.releaseDate,
+                            "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                            item.id
+                        )
+                    )
                 } else {
-                    movieListArrayList.add(MediaModel(DataAdapter.TYPE_MOVIE ,item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                    movieListArrayList.add(
+                        MediaModel(
+                            DataAdapter.TYPE_MOVIE,
+                            item.title,
+                            item.releaseDate,
+                            "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                            item.id
+                        )
+                    )
                 }
             }
             tvListAdapter.notifyDataSetChanged()
             movieListAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     private fun checkIfOwner(user : User){
-        listScene.runOnUiThread(Runnable{
-            for(item in user.lists){
-                if(item == listId){
+        listScene.runOnUiThread {
+            for (item in user.lists) {
+                if (item == listId) {
                     userIsOwner = true
                     deleteListBtn.visibility = View.VISIBLE
                 }
             }
-        })
+        }
     }
 }

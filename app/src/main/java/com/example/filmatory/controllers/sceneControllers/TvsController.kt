@@ -6,7 +6,6 @@ import android.widget.Spinner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
-import com.example.filmatory.api.data.movie.Movies
 import com.example.filmatory.api.data.tv.Tvs
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
@@ -61,12 +60,12 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         tvsPopularAsc = ArrayList(tvsPopularDesc)
         tvsPopularAsc.reverse()
 
-        tvsScene.runOnUiThread(Runnable {
+        tvsScene.runOnUiThread {
             val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularDesc)
             tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**
@@ -100,12 +99,12 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      *
      */
     private fun tvsPopularDesc(){
-        tvsScene.runOnUiThread(Runnable {
+        tvsScene.runOnUiThread {
             val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularDesc)
             tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**
@@ -114,11 +113,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      */
     private fun tvsPopularAsc(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularAsc)
-        tvsScene.runOnUiThread(Runnable {
+        tvsScene.runOnUiThread {
             tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**
@@ -127,11 +126,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      */
     private fun tvsTitleAZ(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredAZ)
-        tvsScene.runOnUiThread(Runnable {
+        tvsScene.runOnUiThread {
             tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**
@@ -140,11 +139,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      */
     private fun tvsTitleZA(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredZA)
-        tvsScene.runOnUiThread(Runnable {
+        tvsScene.runOnUiThread {
             tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**
@@ -153,11 +152,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      */
     private fun tvsDateAsc(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredDateAsc)
-        tvsScene.runOnUiThread(Runnable {
+        tvsScene.runOnUiThread {
             tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**
@@ -166,11 +165,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      */
     private fun tvsDateDesc(){
         val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredDateDesc)
-        tvsScene.runOnUiThread(Runnable {
+        tvsScene.runOnUiThread {
             tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**

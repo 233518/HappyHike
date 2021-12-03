@@ -2,7 +2,6 @@ package com.example.filmatory.scenes.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,13 +31,29 @@ class WatchlistFragment(private var scene: SuperScene) : Fragment(R.layout.fragm
     }
 
     fun showWatchlist(watchlist: Watchlist){
-        activity?.runOnUiThread(Runnable {
-            if(isAdded){
-                for(item in watchlist.userAllWatched){
-                    if(item.type == "tv"){
-                        tvWatchlistArraylist.add(MediaModel(DataAdapter.TYPE_ACCINFO_TV, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+        activity?.runOnUiThread {
+            if (isAdded) {
+                for (item in watchlist.userAllWatched) {
+                    if (item.type == "tv") {
+                        tvWatchlistArraylist.add(
+                            MediaModel(
+                                DataAdapter.TYPE_ACCINFO_TV,
+                                item.title,
+                                item.releaseDate,
+                                "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                                item.id
+                            )
+                        )
                     } else {
-                        movieWatchlistArraylist.add(MediaModel(DataAdapter.TYPE_ACCINFO_MOVIE, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+                        movieWatchlistArraylist.add(
+                            MediaModel(
+                                DataAdapter.TYPE_ACCINFO_MOVIE,
+                                item.title,
+                                item.releaseDate,
+                                "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                                item.id
+                            )
+                        )
                     }
                 }
                 movieAdapter.notifyDataSetChanged()
@@ -46,6 +61,6 @@ class WatchlistFragment(private var scene: SuperScene) : Fragment(R.layout.fragm
             } else {
                 println("Could not retrieve user watchlist, not attached to activity")
             }
-        })
+        }
     }
 }

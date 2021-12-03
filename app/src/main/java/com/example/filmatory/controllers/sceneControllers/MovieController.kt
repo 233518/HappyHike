@@ -1,12 +1,7 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
 import com.example.filmatory.api.data.user.Favorites
@@ -14,10 +9,12 @@ import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
+import com.example.filmatory.guis.MovieGui
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
+import com.example.filmatory.systems.FavoriteSystem
 import com.example.filmatory.systems.MovieSystem
-import com.example.filmatory.systems.SnackbarSystem
+import com.example.filmatory.systems.WatchlistSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
 import com.example.filmatory.utils.items.ListItem
@@ -31,47 +28,35 @@ import java.util.ArrayList
  * @param movieScene The MovieScene to use
  */
 class MovieController(private val movieScene: MovieScene) : MainController(movieScene) {
-    var intent: Intent = movieScene.intent
+    private var intent: Intent = movieScene.intent
     private val movieSystem = MovieSystem(apiSystem, snackbarSystem, movieScene)
+    private val favoriteSystem = FavoriteSystem(movieScene, movieSystem, null)
+    private val watchlistSystem = WatchlistSystem(movieScene, movieSystem)
+
     private val mId = intent.getIntExtra("movieId", 0)
     private val personsArrayList: MutableList<PersonItem> = ArrayList()
-    private val personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
     private val personsAdapter = PersonRecyclerViewAdapter(personsArrayList, movieScene)
-    private val favoriteBtn : ImageButton = movieScene.findViewById(R.id.movie_favorite_icon)
-    private val watchlistBtn : ImageButton = movieScene.findViewById(R.id.movie_watchlist_icon)
-    private val addToListBtn : TextView = movieScene.findViewById(R.id.movie_addtolist_btn)
-    private var movieIsWatched : Boolean  = false
-    private var movieIsFavorited : Boolean = false
     private var listNameArray = arrayOf<String>()
     private val listArrayList: MutableList<ListItem> = ArrayList()
 
+    var movieIsWatched : Boolean  = false
+        private set
+    var movieIsFavorited : Boolean = false
+        private set
+
+    private val movieGui = MovieGui(movieScene, this)
+
     init {
         apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure), languageCode)
+
         if(movieScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
             apiSystem.requestUserWatchlist(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
             apiSystem.requestUserLists(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
-            favoriteBtn.setOnClickListener {
-                if(!movieIsFavorited){
-                    addToFavorites()
-                } else{
-                    removeFromFavorites()
-                }
-            }
-            watchlistBtn.setOnClickListener {
-                if(!movieIsWatched){
-                    addToWatchlist()
-                } else {
-                    removeFromWatchlist()
-                }
-            }
-            addToListBtn.setOnClickListener {
-                addToUserList()
-            }
         }
         //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
-        personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
-        personsRecyclerView.adapter = personsAdapter
+        movieGui.personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
+        movieGui.personsRecyclerView.adapter = personsAdapter
     }
 
     fun onFailure(baseError: BaseError) {
@@ -277,7 +262,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
                                         Intent.ACTION_VIEW,
                                         Uri.parse(movieWatchProviders.results.NO.link)
                                     )
-                                )
+                                )MovieScene
                             }
                         }
                         if (item.provider_name == "HBO Max") {
@@ -368,57 +353,43 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
      * @param movie The response from API
      */
     private fun getMovie(movie: Movie){
-        movieScene.runOnUiThread(Runnable {
-            movieScene.findViewById<TextView>(R.id.m_title).text = movie.filminfo.title
-            movieScene.findViewById<TextView>(R.id.m_date).text = movie.filminfo.release_date
-            Glide.with(movieScene)
-                .load("https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + movie.filminfo.poster_path)
-                .placeholder(R.drawable.placeholder_image)
-                .fallback(R.drawable.placeholder_image)
-                .error(R.drawable.placeholder_image)
-                .centerCrop()
-                .into(movieScene.findViewById(R.id.m_img))
-            movieScene.findViewById<TextView>(R.id.m_overview).text = movie.filminfo.overview
-            movie.cast.cast.take(10).forEach {
-                    item -> personsArrayList.add(PersonItem(item.name,item.character,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,item.id))
-            }
+        movieGui.setMovieInfo(movie)
+        movie.cast.cast.take(10).forEach { item ->
+            personsArrayList.add(
+                PersonItem(
+                    item.name,
+                    item.character,
+                    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,
+                    item.id
+                )
+            )
+        }
+        movieScene.runOnUiThread{
             personsAdapter.notifyDataSetChanged()
-        })
+        }
     }
-    private fun addToFavorites(){
-        movieScene.runOnUiThread(Runnable {
-            movieSystem.addMovieToFavorites(movieScene.auth.currentUser!!.uid, mId.toString())
-            movieIsFavorited = true
-            favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
-        })
+    fun addToFavorites(){
+        movieIsFavorited = favoriteSystem.addMovieToFavorites(mId.toString())
+        movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
     }
 
-    private fun removeFromFavorites(){
-        movieScene.runOnUiThread(Runnable {
-            movieSystem.removeMovieFromFavorites(movieScene.auth.currentUser!!.uid, mId.toString())
-            movieIsFavorited = false
-            favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
-        })
+    fun removeFromFavorites(){
+        movieIsFavorited = favoriteSystem.removeMovieFromFavorites(mId.toString())
+        movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
     }
 
-    private fun addToWatchlist(){
-        movieScene.runOnUiThread(Runnable {
-            movieSystem.addMovieToWatchlist(movieScene.auth.currentUser!!.uid, mId.toString())
-            movieIsWatched = true
-            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
-        })
+    fun addToWatchlist(){
+        movieIsWatched = watchlistSystem.addToWatchlist(mId.toString())
+        movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
     }
 
-    private fun removeFromWatchlist(){
-        movieScene.runOnUiThread(Runnable {
-            movieSystem.removeMovieFromWatchlist(movieScene.auth.currentUser!!.uid, mId.toString())
-            movieIsWatched = false
-            watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
-        })
+    fun removeFromWatchlist(){
+        movieIsWatched = watchlistSystem.removeFromWatchlist(mId.toString())
+        movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
     }
 
-    private fun addToUserList(){
-        movieScene.runOnUiThread(Runnable {
+    fun addToUserList(){
+        movieScene.runOnUiThread {
             var chosenList: Int = -1
             MaterialAlertDialogBuilder(movieScene)
                 .setTitle(movieScene.resources.getString(R.string.mylists))
@@ -426,8 +397,11 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
 
                 }
                 .setPositiveButton(movieScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
-                    if(chosenList != -1){
-                        movieSystem.addMovieToList(listArrayList[chosenList].list_id, mId.toString())
+                    if (chosenList != -1) {
+                        movieSystem.addMovieToList(
+                            listArrayList[chosenList].list_id,
+                            mId.toString()
+                        )
                     } else {
                         snackbarSystem.showSnackbarWarning("No list was selected")
                     }
@@ -435,50 +409,40 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
                 .setSingleChoiceItems(listNameArray, chosenList) { dialog, which ->
                     chosenList = which
                 }
-            .show()
-        })
+                .show()
+        }
     }
 
     private fun getUserLists(userLists: UserLists){
-        movieScene.runOnUiThread(Runnable {
+        movieScene.runOnUiThread {
             if (userLists.size != 0) {
                 for (item in userLists) {
                     listNameArray += arrayOf(item.listname)
                     listArrayList.add(
-                        ListItem(item.listname, item.listUserId, "", "", "", item.listId)) }
+                        ListItem(item.listname, item.listUserId, "", "", "", item.listId)
+                    )
+                }
             } else {
                 println("User does not have any lists")
             }
-        })
+        }
     }
 
     private fun checkIfFavorited(favorites: Favorites){
-        movieScene.runOnUiThread(Runnable {
-            for (item in favorites.userMovieFavorites) {
-                if (item.id == mId){
-                    movieIsFavorited = true
-                    favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
-                }
-            }
-            if(!movieIsFavorited){
-                movieIsFavorited = false
-                favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
-            }
-        })
+        movieIsFavorited = favoriteSystem.checkIfMovieFavorited(favorites, mId)
+        if(!movieIsFavorited) {
+            movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
+        } else {
+            movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
+        }
     }
 
     private fun checkIfWatchlist(watchlist: Watchlist){
-        movieScene.runOnUiThread(Runnable {
-            for(item in watchlist.userMovieWatched){
-                if(item.id == mId){
-                    movieIsWatched = true
-                    watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
-                }
-            }
-            if(!movieIsWatched) {
-                movieIsWatched = false
-                watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
-            }
-        })
+        movieIsWatched = watchlistSystem.checkIfWatchlist(watchlist, mId)
+        if(!movieIsWatched) {
+            movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
+        } else {
+            movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
+        }
     }
 }

@@ -33,9 +33,6 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     private val personsArrayList: MutableList<PersonItem> = ArrayList()
     private val personsRecyclerView: RecyclerView = tvScene.findViewById(R.id.m_person_slider)
     private val personsAdapter = PersonRecyclerViewAdapter(personsArrayList, tvScene)
-    private val favoriteBtn : ImageButton = tvScene.findViewById(R.id.movie_favorite_icon)
-    private val watchlistBtn : ImageButton = tvScene.findViewById(R.id.movie_watchlist_icon)
-    private val addToListBtn : TextView = tvScene.findViewById(R.id.movie_addtolist_btn)
     private var tvIsWatched : Boolean = false
     private var tvIsFavorited : Boolean = false
     private var listNameArrayList = arrayOf<String>()
@@ -306,7 +303,7 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
                         }
                         if (item.provider_name == "Disney Plus") {
                             tvScene.findViewById<TextView>(R.id.m_buy_on).visibility = View.VISIBLE
-                            tvScene.findViewById<View>(R.id.m_b_disneyplus_logo).visibility =
+                            tvSceneitemAtPosition.findViewById<View>(R.id.m_b_disneyplus_logo).visibility =
                                 View.VISIBLE
                             tvScene.findViewById<View>(R.id.m_b_disneyplus_logo).setOnClickListener {
                                 tvScene.startActivity(
@@ -367,7 +364,7 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
      * @param tv The response from API
      */
     private fun getTv(tv : Tv){
-        tvScene.runOnUiThread(Runnable {
+        tvScene.runOnUiThread {
             tvScene.findViewById<TextView>(R.id.m_title).text = tv.serieinfo.name
             tvScene.findViewById<TextView>(R.id.m_date).text = tv.serieinfo.first_air_date
             Glide.with(tvScene)
@@ -380,42 +377,49 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
             tvScene.findViewById<TextView>(R.id.m_overview).text = tv.serieinfo.overview
 
             for (item in tv.personer.cast.take(10)) {
-                personsArrayList.add(PersonItem(item.name,item.character,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,item.id))
+                personsArrayList.add(
+                    PersonItem(
+                        item.name,
+                        item.character,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,
+                        item.id
+                    )
+                )
 
             }
             personsAdapter.notifyDataSetChanged()
-        })
+        }
     }
     private fun addToFavorites(){
-        tvScene.runOnUiThread(Runnable {
+        tvScene.runOnUiThread {
             tvSystem.addTvToFavorites(tvScene.auth.currentUser!!.uid, tvId.toString())
             tvIsFavorited = true
             favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
-        })
+        }
     }
 
     private fun removeFromFavorites(){
-        tvScene.runOnUiThread(Runnable {
+        tvScene.runOnUiThread {
             tvSystem.removeTvFromFavorites(tvScene.auth.currentUser!!.uid, tvId.toString())
             tvIsFavorited = false
             favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
-        })
+        }
     }
 
     private fun addToWatchlist(){
-        tvScene.runOnUiThread(Runnable {
+        tvScene.runOnUiThread {
             tvSystem.addTvToWatchlist(tvScene.auth.currentUser!!.uid, tvId.toString())
             tvIsWatched = true
             watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
-        })
+        }
     }
 
     private fun removeFromWatchlist(){
-        tvScene.runOnUiThread(Runnable {
+        tvScene.runOnUiThread {
             tvSystem.removeTvFromWatchlist(tvScene.auth.currentUser!!.uid, tvId.toString())
             tvIsWatched = false
             watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
-        })
+        }
     }
 
     private fun addToUserList(){
@@ -450,32 +454,32 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     }
 
     private fun checkIfFavorited(favorites: Favorites){
-        tvScene.runOnUiThread(Runnable {
+        tvScene.runOnUiThread {
             for (item in favorites.userTvFavorites) {
-                if (item.id == tvId){
+                if (item.id == tvId) {
                     tvIsFavorited = true
                     favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_filled)
                 }
             }
-            if(!tvIsFavorited){
+            if (!tvIsFavorited) {
                 tvIsFavorited = false
                 favoriteBtn.setBackgroundResource(R.drawable.favorite_icon_border)
             }
-        })
+        }
     }
 
     private fun checkIfWatchlist(watchlist: Watchlist){
-        tvScene.runOnUiThread(Runnable {
-            for(item in watchlist.userTvWatched){
-                if(item.id == tvId){
+        tvScene.runOnUiThread {
+            for (item in watchlist.userTvWatched) {
+                if (item.id == tvId) {
                     tvIsWatched = true
                     watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_filled)
                 }
             }
-            if(!tvIsWatched){
+            if (!tvIsWatched) {
                 tvIsWatched = false
                 watchlistBtn.setBackgroundResource(R.drawable.watchlist_icon_border)
             }
-        })
+        }
     }
 }

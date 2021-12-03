@@ -66,10 +66,10 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
             tvListArrayList.add(MediaModel(DataAdapter.TYPE_SEARCH_TV , tv.title, tv.overview,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + tv.poster_path, tv.id))
         }
 
-        searchScene.runOnUiThread(Runnable {
+        searchScene.runOnUiThread {
             tvListAdapter.notifyDataSetChanged()
             movieListAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     fun onNewSelected(itemAtPosition: Any) {

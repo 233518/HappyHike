@@ -78,16 +78,26 @@ class StartController(private val startScene: StartScene) : MainController(start
      * @param movieFrontpage The respons from API
      */
     private fun recMovieData(movieFrontpage: MovieFrontpage){
-        startScene.runOnUiThread(Runnable {
+        startScene.runOnUiThread {
             val recMoviesArrayList: ArrayList<MediaModel> = ArrayList()
             val redMoviesAdapter = DataAdapter(startScene, startScene, recMoviesArrayList)
-            val recMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view3)
-            movieFrontpage.forEach{
-                    item -> recMoviesArrayList.add(MediaModel(DataAdapter.TYPE_MOVIE_SLIDER, item.original_title, item.release_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
+            val recMoviesRecyclerView: RecyclerView =
+                startScene.findViewById(R.id.slider_recycler_view3)
+            movieFrontpage.forEach { item ->
+                recMoviesArrayList.add(
+                    MediaModel(
+                        DataAdapter.TYPE_MOVIE_SLIDER,
+                        item.original_title,
+                        item.release_date,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path,
+                        item.id
+                    )
+                )
             }
-            recMoviesRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
+            recMoviesRecyclerView.layoutManager =
+                LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             recMoviesRecyclerView.adapter = redMoviesAdapter
-        })
+        }
     }
 
     /**
@@ -96,15 +106,25 @@ class StartController(private val startScene: StartScene) : MainController(start
      * @param tvFrontpage The respons from API
      */
     private fun recTvData(tvFrontpage: TvFrontpage){
-        startScene.runOnUiThread(Runnable {
+        startScene.runOnUiThread {
             val recTvsArrayList: ArrayList<MediaModel> = ArrayList()
             val recTvsAdapter = DataAdapter(startScene, startScene, recTvsArrayList)
-            val recTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view4)
-            tvFrontpage.forEach{
-                    item -> recTvsArrayList.add(MediaModel(DataAdapter.TYPE_TV_SLIDER, item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
+            val recTvsRecyclerView: RecyclerView =
+                startScene.findViewById(R.id.slider_recycler_view4)
+            tvFrontpage.forEach { item ->
+                recTvsArrayList.add(
+                    MediaModel(
+                        DataAdapter.TYPE_TV_SLIDER,
+                        item.name,
+                        item.first_air_date,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path,
+                        item.id
+                    )
+                )
             }
-            recTvsRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
+            recTvsRecyclerView.layoutManager =
+                LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             recTvsRecyclerView.adapter = recTvsAdapter
-        })
+        }
     }
 }

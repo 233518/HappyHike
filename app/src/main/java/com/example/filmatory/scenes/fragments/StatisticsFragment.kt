@@ -3,17 +3,12 @@ package com.example.filmatory.scenes.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
 import com.anychart.chart.common.listener.ListenersInterface
 import com.anychart.charts.Pie
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.Watchlist
-import com.example.filmatory.utils.adapters.DataAdapter
-import com.example.filmatory.utils.items.MediaModel
 import android.widget.Toast
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry

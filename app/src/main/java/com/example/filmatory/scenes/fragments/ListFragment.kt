@@ -34,15 +34,24 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
     }
 
     fun showUserLists(userLists: UserLists){
-        activity?.runOnUiThread(Runnable {
-            if(isAdded){
-                for(item in userLists){
-                    listsArrayList.add(ListItem(item.listname, item.listUserId, "http://placeimg.com/189/124/arch?t=1638523644997", item.tvs.size.toString(), item.movies.size.toString(), item.listId))
+        activity?.runOnUiThread {
+            if (isAdded) {
+                for (item in userLists) {
+                    listsArrayList.add(
+                        ListItem(
+                            item.listname,
+                            item.listUserId,
+                            "http://placeimg.com/189/124/arch?t=1638523644997",
+                            item.tvs.size.toString(),
+                            item.movies.size.toString(),
+                            item.listId
+                        )
+                    )
                 }
                 listsAdapter.notifyDataSetChanged()
             } else {
                 println("Could not retrieve user lists, not attached to activity")
             }
-        })
+        }
     }
 }

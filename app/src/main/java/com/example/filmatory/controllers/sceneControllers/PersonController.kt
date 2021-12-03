@@ -69,40 +69,66 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
         if (person.personinfo.deathday != null) {
             status = "Died " + person.personinfo.deathday;
         }
-        personScene.runOnUiThread(Runnable {
-            if (person.shortBio == person.personinfo.biography){
+        personScene.runOnUiThread {
+            if (person.shortBio == person.personinfo.biography) {
                 person_readmore_btn.visibility = View.GONE
             }
-            if (person.links.imdb_id != null){
+            if (person.links.imdb_id != null) {
                 personScene.findViewById<View>(R.id.person_imdbLogo).visibility = View.VISIBLE
                 personScene.findViewById<View>(R.id.person_imdbLogo).setOnClickListener {
-                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.imdb.com/name/" + person.links.imdb_id)))
+                    personScene.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://www.imdb.com/name/" + person.links.imdb_id)
+                        )
+                    )
                 }
             }
-            if (person.links.facebook_id != null){
+            if (person.links.facebook_id != null) {
                 personScene.findViewById<View>(R.id.person_facebook_logo).visibility = View.VISIBLE
                 personScene.findViewById<View>(R.id.person_facebook_logo).setOnClickListener {
-                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + person.links.facebook_id)))
+                    personScene.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://www.facebook.com/" + person.links.facebook_id)
+                        )
+                    )
                 }
             }
-            if (person.links.instagram_id != null){
+            if (person.links.instagram_id != null) {
                 personScene.findViewById<View>(R.id.person_instagram_logo).visibility = View.VISIBLE
                 personScene.findViewById<View>(R.id.person_instagram_logo).setOnClickListener {
-                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/" + person.links.instagram_id)))
+                    personScene.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://www.instagram.com/" + person.links.instagram_id)
+                        )
+                    )
                 }
             }
-            if (person.links.twitter_id != null){
+            if (person.links.twitter_id != null) {
                 personScene.findViewById<View>(R.id.person_twitter_logo).visibility = View.VISIBLE
                 personScene.findViewById<View>(R.id.person_twitter_logo).setOnClickListener {
-                    personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/" + person.links.twitter_id)))
+                    personScene.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://twitter.com/" + person.links.twitter_id)
+                        )
+                    )
                 }
             }
             personScene.findViewById<View>(R.id.person_tmdb_logo).setOnClickListener {
-                personScene.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/person/" + person.links.id)))
+                personScene.startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://www.themoviedb.org/person/" + person.links.id)
+                    )
+                )
             }
             personScene.findViewById<TextView>(R.id.person_biography).text = person.shortBio
             personScene.findViewById<TextView>(R.id.person_name).text = person.personinfo.name
-            personScene.findViewById<TextView>(R.id.person_data_birthplace).text = person.personinfo.place_of_birth
+            personScene.findViewById<TextView>(R.id.person_data_birthplace).text =
+                person.personinfo.place_of_birth
             personScene.findViewById<TextView>(R.id.person_data_gender).text = gender
             personScene.findViewById<TextView>(R.id.person_data_status).text = status
             Glide.with(personScene)
@@ -112,6 +138,6 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
                 .error(R.drawable.placeholder_image)
                 .centerCrop()
                 .into(personScene.findViewById(R.id.person_img))
-        })
+        }
     }
 }

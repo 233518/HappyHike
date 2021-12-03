@@ -37,11 +37,20 @@ class ListsController(private val listsScene: ListsScene) : MainController(lists
      * @param lists The response from API
      */
     private fun listsData(lists: Lists){
-        listsScene.runOnUiThread(Runnable {
-            lists.forEach{
-                    item -> listsArrayList.add(ListItem(item.listName, item.userName, "http://placeimg.com/189/124/arch?t=1638523644997", item.numberOfTvShows.toString(), item.numberOfMovies.toString(), item.listId))
+        listsScene.runOnUiThread {
+            lists.forEach { item ->
+                listsArrayList.add(
+                    ListItem(
+                        item.listName,
+                        item.userName,
+                        "http://placeimg.com/189/124/arch?t=1638523644997",
+                        item.numberOfTvShows.toString(),
+                        item.numberOfMovies.toString(),
+                        item.listId
+                    )
+                )
             }
             listsAdapter.notifyDataSetChanged()
-        })
+        }
     }
 }

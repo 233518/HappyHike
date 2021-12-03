@@ -32,12 +32,20 @@ class UpcomingMoviesController(private val upcomingMoviesScene: UpcomingMoviesSc
     }
 
     private fun upcomingMoviesData(upcomingMovies: UpcomingMovies){
-        upcomingMoviesScene.runOnUiThread(Runnable {
-            upcomingMovies.forEach{
-                    item -> upcomingMoviesArrayList.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+        upcomingMoviesScene.runOnUiThread {
+            upcomingMovies.forEach { item ->
+                upcomingMoviesArrayList.add(
+                    MediaModel(
+                        DataAdapter.TYPE_MOVIE,
+                        item.title,
+                        item.releaseDate,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                        item.id
+                    )
+                )
             }
             upcomingMoviesAdapter.notifyDataSetChanged()
-        })
+        }
     }
 
     /**
