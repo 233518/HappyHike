@@ -37,7 +37,7 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
         activity?.runOnUiThread(Runnable {
             if(isAdded){
                 for(item in userLists){
-                    listsArrayList.add(ListItem(item.listname, item.listUserId, "http://placeimg.com/640/480/any", "55", "", item.listId))
+                    listsArrayList.add(ListItem(item.listname, item.listUserId, "http://placeimg.com/189/124/arch?t=1638523644997", item.tvs.size.toString(), item.movies.size.toString(), item.listId))
                 }
                 listsAdapter.notifyDataSetChanged()
             } else {
