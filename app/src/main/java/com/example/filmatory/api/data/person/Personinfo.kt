@@ -5,7 +5,7 @@ data class Personinfo(
     val also_known_as: List<String>,
     val biography: String,
     val birthday: String,
-    val deathday: Any,
+    val deathday: Any?,
     val gender: Int,
     val homepage: Any,
     val id: Int,

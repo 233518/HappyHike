@@ -1,26 +1,22 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.filmatory.R
 import com.example.filmatory.api.data.search.Search
 import com.example.filmatory.api.data.search.SearchItem
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.errors.BaseError
+import com.example.filmatory.guis.SearchGui
 import com.example.filmatory.scenes.activities.SearchScene
 import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
 class SearchController(private val searchScene : SearchScene) : MainController(searchScene) {
-    var intent: Intent = searchScene.intent
+    private val searchGui = SearchGui(searchScene, this)
+    private val intent: Intent = searchScene.intent
     private val title = intent.getStringExtra("title")
-    private var dropdown: Spinner = searchScene.findViewById(R.id.spinner1)
-    private var resultRecyclerView: RecyclerView = searchScene.findViewById(R.id.recyclerView)
+
     private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
     private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
     private var movieListAdapter = DataAdapter(searchScene, searchScene, movieListArrayList)
@@ -29,22 +25,9 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
     private inner class MediaSorted(val movieArray: ArrayList<SearchItem>, val tvArray: ArrayList<SearchItem>)
 
     init {
-        resultRecyclerView.layoutManager = LinearLayoutManager(searchScene, LinearLayoutManager.VERTICAL, false)
+        searchGui.resultRecyclerView.layoutManager = LinearLayoutManager(searchScene, LinearLayoutManager.VERTICAL, false)
         val concatAdapter = ConcatAdapter(movieListAdapter, tvListAdapter)
-        resultRecyclerView.adapter = concatAdapter
-
-
-        //Spinner
-
-        ArrayAdapter.createFromResource(searchScene, R.array.media_array, android.R.layout.simple_spinner_dropdown_item).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            dropdown.adapter = adapter
-        }
-
-        //Pass the scene to the listener that implements OnItemSelectedListener
-        dropdown.onItemSelectedListener = searchScene
+        searchGui.resultRecyclerView.adapter = concatAdapter
 
         apiSystem.requestSearch(ApiSystem.RequestBaseOptions(null, null, ::onSearch, ::onFailure), title!!, languageCode)
     }
