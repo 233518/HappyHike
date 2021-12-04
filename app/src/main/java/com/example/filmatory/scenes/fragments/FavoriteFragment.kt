@@ -31,36 +31,36 @@ class FavoriteFragment(private var scene: SuperScene) : Fragment(R.layout.fragme
     }
 
     fun showFavorites(favorites: Favorites){
-        activity?.runOnUiThread {
-            if (isAdded) {
-                for (item in favorites.userAllFavorites) {
-                    if (item.type == "tv") {
-                        tvFavoritesArraylist.add(
-                            MediaModel(
-                                DataAdapter.TYPE_ACCINFO_TV,
-                                item.title,
-                                item.releaseDate,
-                                "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
-                                item.id
-                            )
+        if (isAdded) {
+            for (item in favorites.userAllFavorites) {
+                if (item.type == "tv") {
+                    tvFavoritesArraylist.add(
+                        MediaModel(
+                            DataAdapter.TYPE_ACCINFO_TV,
+                            item.title,
+                            item.releaseDate,
+                            "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                            item.id
                         )
-                    } else {
-                        movieFavoritesArraylist.add(
-                            MediaModel(
-                                DataAdapter.TYPE_ACCINFO_MOVIE,
-                                item.title,
-                                item.releaseDate,
-                                "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
-                                item.id
-                            )
+                    )
+                } else {
+                    movieFavoritesArraylist.add(
+                        MediaModel(
+                            DataAdapter.TYPE_ACCINFO_MOVIE,
+                            item.title,
+                            item.releaseDate,
+                            "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                            item.id
                         )
-                    }
+                    )
                 }
-                movieAdapter.notifyDataSetChanged()
-                tvAdapter.notifyDataSetChanged()
-            } else {
-                println("Could not retrieve user favorites, not attached to activity")
             }
+        } else {
+            println("Could not retrieve user favorites, not attached to activity")
+        }
+        scene.runOnUiThread {
+            movieAdapter.notifyDataSetChanged()
+            tvAdapter.notifyDataSetChanged()
         }
     }
 }

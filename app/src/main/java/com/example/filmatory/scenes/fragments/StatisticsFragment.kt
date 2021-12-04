@@ -17,12 +17,16 @@ import com.anychart.enums.Align
 import com.anychart.enums.LegendLayout
 import com.example.filmatory.api.data.user.Favorites
 
-
 class StatisticsFragment : Fragment(R.layout.fragment_statistics) {
     private var totalFavoriteMovies : Int = 0
     private var totalFavoriteTvs : Int = 0
     private var totalWatchlistTvs : Int = 0
     private var totalWatchlistMovies : Int = 0
+
+    override fun onStart() {
+        super.onStart()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val anyChartView : AnyChartView = view.findViewById(R.id.chart_view)

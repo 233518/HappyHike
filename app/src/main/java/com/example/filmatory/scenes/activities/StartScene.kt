@@ -16,5 +16,4 @@ class StartScene : SuperScene() {
         setContentView(R.layout.start_screen)
         startController = StartController(this)
     }
-
 }
