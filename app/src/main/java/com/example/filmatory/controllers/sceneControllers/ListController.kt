@@ -41,15 +41,12 @@ class ListController(private val listScene: ListScene) : MainController(listScen
     val listId = intent.getStringExtra("listId")
 
     init {
-        if (listId != null) {
-            apiSystem.requestList(RequestBaseOptions(listId, null, ::getList, ::onFailure))
-        }
-        if(listScene.auth.currentUser?.uid != null){
-            apiSystem.requestUser(RequestBaseOptions(null, listScene.auth.currentUser!!.uid, ::checkIfOwner, ::onFailure))
-
-        }
-        listGui.listRecyclerView.layoutManager = GridLayoutManager(listScene, 2)
         val concatAdapter = ConcatAdapter(movieListAdapter, tvListAdapter)
+
+        if (listId != null) apiSystem.requestList(RequestBaseOptions(listId, null, ::getList, ::onFailure))
+        if(listScene.auth.currentUser?.uid != null) apiSystem.requestUser(RequestBaseOptions(null, listScene.auth.currentUser!!.uid, ::checkIfOwner, ::onFailure))
+
+        listGui.listRecyclerView.layoutManager = GridLayoutManager(listScene, 2)
         listGui.listRecyclerView.adapter = concatAdapter
     }
 
@@ -59,31 +56,31 @@ class ListController(private val listScene: ListScene) : MainController(listScen
      * @param list The respons from API
      */
     private fun getList(list: List){
-        listScene.runOnUiThread {
-            listScene.findViewById<TextView>(R.id.l_title).text = listName
-            for (item in list) {
-                if (item.type == "tv") {
-                    tvListArrayList.add(
-                        MediaModel(
-                            DataAdapter.TYPE_TV,
-                            item.title,
-                            item.releaseDate,
-                            "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
-                            item.id
-                        )
+        for (item in list) {
+            if (item.type == "tv") {
+                tvListArrayList.add(
+                    MediaModel(
+                        DataAdapter.TYPE_TV,
+                        item.title,
+                        item.releaseDate,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                        item.id
                     )
-                } else {
-                    movieListArrayList.add(
-                        MediaModel(
-                            DataAdapter.TYPE_MOVIE,
-                            item.title,
-                            item.releaseDate,
-                            "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
-                            item.id
-                        )
+                )
+            } else {
+                movieListArrayList.add(
+                    MediaModel(
+                        DataAdapter.TYPE_MOVIE,
+                        item.title,
+                        item.releaseDate,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                        item.id
                     )
-                }
+                )
             }
+        }
+        listScene.runOnUiThread {
+            listGui.listTitle.text = listName
             tvListAdapter.notifyDataSetChanged()
             movieListAdapter.notifyDataSetChanged()
         }
