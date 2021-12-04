@@ -1,17 +1,13 @@
 package com.example.filmatory.controllers.sceneControllers
 
-import androidx.viewpager2.widget.ViewPager2
-import com.example.filmatory.R
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.errors.BaseError
+import com.example.filmatory.guis.AccountInfoGui
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.ViewPageAdapter
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 
 /**
  * AccountInfoController manipulates the AccountInfoScene gui
@@ -19,68 +15,38 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @property accountInfoScene The AccountInfoScene to use
  */
 class AccountInfoController(private val accountInfoScene: AccountInfoScene) : MainController(accountInfoScene) {
-    private val tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem)
+    private val accountInfoGui = AccountInfoGui(accountInfoScene, this)
+    private var tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem)
+
     init {
-        initlizeTabAdapter()
+        initializeTabAdapter()
         apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavorites, ::onFailure))
         apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlist, ::onFailure))
         apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
-        apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavoritesStats, ::onFailure))
-        apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlistStats, ::onFailure))
     }
 
     private fun getUserFavorites(favorites: Favorites){
         tabAdapter.favoriteFragment.showFavorites(favorites)
+        tabAdapter.statisticsFragment.statisticsFavorites(favorites)
     }
 
     private fun getUserWatchlist(watchlist: Watchlist){
         tabAdapter.watchlistFragment.showWatchlist(watchlist)
+        tabAdapter.statisticsFragment.statisticsWatchlist(watchlist)
     }
 
     private fun getUserLists(userLists: UserLists){
         tabAdapter.listFragment.showUserLists(userLists)
     }
 
-    private fun getUserFavoritesStats(favorites: Favorites){
-        tabAdapter.statisticsFragment.statisticsFavorites(favorites)
-    }
-
-    private fun getUserWatchlistStats(watchlist: Watchlist){
-        tabAdapter.statisticsFragment.statisticsWatchlist(watchlist)
-    }
-
-
-
-    private fun initlizeTabAdapter(){
-        val tabLayout: TabLayout = accountInfoScene.findViewById(R.id.tab_layout)
-        val viewPager2: ViewPager2 = accountInfoScene.findViewById(R.id.tab_viewpager)
-        viewPager2.offscreenPageLimit = 5
-        viewPager2.adapter = tabAdapter
-
+    private fun initializeTabAdapter(){
         val defaultPage = 0
         val page = accountInfoScene.intent.getIntExtra("position", defaultPage)
-        viewPager2.currentItem = page
 
-        TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-            when (position) {
-                0 -> {
-                    tab.text = accountInfoScene.getString(R.string.acc_info)
-                }
-                1 -> {
-                    tab.text = accountInfoScene.getString(R.string.favorites)
-                }
-                2 -> {
-                    tab.text = accountInfoScene.getString(R.string.watchlist)
-                }
-                3 -> {
-                    tab.text = accountInfoScene.getString(R.string.mylists)
-                }
-                4 -> {
-                    tab.text = accountInfoScene.getString(R.string.statistics)
-                }
-            }
-        }.attach()
+        accountInfoGui.viewPager2.offscreenPageLimit = 5
+        accountInfoGui.viewPager2.adapter = tabAdapter
+
+        accountInfoGui.viewPager2.currentItem = page
+        accountInfoGui.initializeTab()
     }
-
-
 }
