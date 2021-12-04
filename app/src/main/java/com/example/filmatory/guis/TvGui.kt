@@ -15,6 +15,7 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
     var watchlistBtn : ImageButton = tvScene.findViewById(R.id.movie_watchlist_icon)
 
     var personsRecyclerView: RecyclerView = tvScene.findViewById(R.id.m_person_slider)
+    var reviewRecyclerView : RecyclerView = tvScene.findViewById(R.id.review_rv)
 
     var addToListBtn : TextView = tvScene.findViewById(R.id.movie_addtolist_btn)
     var tvTitle : TextView = tvScene.findViewById(R.id.m_title)

@@ -117,6 +117,19 @@
                     android:layout_height="match_parent" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/review_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/m_slider_wrapper"
+                android:padding="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/review_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/m_streaming_on"
                 android:layout_width="wrap_content"

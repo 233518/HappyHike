@@ -5,7 +5,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
+import com.example.filmatory.api.data.movie.MovieReviews
 import com.example.filmatory.api.data.tv.Tv
+import com.example.filmatory.api.data.tv.TvReviews
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
@@ -19,7 +21,9 @@ import com.example.filmatory.systems.TvSystem
 import com.example.filmatory.systems.WatchlistSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
+import com.example.filmatory.utils.adapters.ReviewAdapter
 import com.example.filmatory.utils.items.ListItem
+import com.example.filmatory.utils.items.ReviewItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -40,6 +44,9 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     private var listNameArrayList = arrayOf<String>()
     private var listArrayList : MutableList<ListItem> = ArrayList()
 
+    private val reviewArrayList: MutableList<ReviewItem> = ArrayList()
+    private val reviewAdapter = ReviewAdapter(reviewArrayList, tvScene)
+
     var tvIsWatched : Boolean = false
         private set
     var tvIsFavorited : Boolean = false
@@ -47,6 +54,8 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
 
     init {
         apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure), languageCode)
+        apiSystem.requestTvReviews(RequestBaseOptions(tvId.toString(), null, ::getReviews, ::onFailure), languageCode)
+
         if(tvScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
             apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
@@ -54,6 +63,9 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         }
         tvGui.personsRecyclerView.layoutManager = LinearLayoutManager(tvScene, LinearLayoutManager.HORIZONTAL, false)
         tvGui.personsRecyclerView.adapter = personsAdapter
+
+        tvGui.reviewRecyclerView.layoutManager = LinearLayoutManager(tvScene, LinearLayoutManager.VERTICAL, false)
+        tvGui.reviewRecyclerView.adapter = reviewAdapter
         //apiSystem.requestTvWatchProviders(tvId.toString(), ::getWatchprovider)
     }
 
@@ -362,6 +374,16 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
             personsAdapter.notifyDataSetChanged()
         }
     }
+
+    private fun getReviews(tvReviews: TvReviews){
+        tvScene.runOnUiThread {
+            tvReviews.forEach {
+                    item -> reviewArrayList.add(ReviewItem(item.author, item.avatar, item.date, item.text, item.stars, item.userId, item._id))
+            }
+            reviewAdapter.notifyDataSetChanged()
+        }
+    }
+
     fun addToFavorites(){
         tvIsFavorited = favoriteSystem.addTvToFavorites(tvId.toString())
         tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)

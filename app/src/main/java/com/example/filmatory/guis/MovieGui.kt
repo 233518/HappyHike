@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
+import com.example.filmatory.api.data.movie.MovieReviews
+import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.controllers.sceneControllers.MovieController
 import com.example.filmatory.scenes.activities.MovieScene
 
 class MovieGui(private var movieScene: MovieScene, private var movieController : MovieController) {
     var personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
+    var reviewRecyclerView : RecyclerView = movieScene.findViewById(R.id.review_rv)
 
     var favoriteBtn : ImageButton = movieScene.findViewById(R.id.movie_favorite_icon)
     var watchlistBtn : ImageButton = movieScene.findViewById(R.id.movie_watchlist_icon)
@@ -53,6 +56,7 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
             watchlistBtn.setBackgroundResource(drawable)
         }
     }
+
     fun setMovieInfo(movie: Movie) {
         movieScene.runOnUiThread {
             movieTitle.text = movie.filminfo.title

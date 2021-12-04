@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
+import com.example.filmatory.api.data.movie.MovieReviews
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
@@ -17,7 +18,9 @@ import com.example.filmatory.systems.MovieSystem
 import com.example.filmatory.systems.WatchlistSystem
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.adapters.PersonRecyclerViewAdapter
+import com.example.filmatory.utils.adapters.ReviewAdapter
 import com.example.filmatory.utils.items.ListItem
+import com.example.filmatory.utils.items.ReviewItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.ArrayList
 
@@ -39,6 +42,9 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
     private var listNameArray = arrayOf<String>()
     private val listArrayList: MutableList<ListItem> = ArrayList()
 
+    private val reviewArrayList: MutableList<ReviewItem> = ArrayList()
+    private val reviewAdapter = ReviewAdapter(reviewArrayList, movieScene)
+
     var movieIsWatched : Boolean  = false
         private set
     var movieIsFavorited : Boolean = false
@@ -48,6 +54,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
 
     init {
         apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure), languageCode)
+        apiSystem.requestMovieReviews(RequestBaseOptions(mId.toString(), null, ::getReviews, ::onFailure), languageCode)
 
         if(movieScene.auth.currentUser?.uid != null){
             apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
@@ -57,6 +64,9 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         movieGui.personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
         movieGui.personsRecyclerView.adapter = personsAdapter
+
+        movieGui.reviewRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.VERTICAL, false)
+        movieGui.reviewRecyclerView.adapter = reviewAdapter
     }
 
     /*private fun getWatchprovider(movieWatchProviders: MovieWatchProviders){
@@ -348,6 +358,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
      *
      * @param movie The response from API
      */
+
     private fun getMovie(movie: Movie){
         movieGui.setMovieInfo(movie)
         movie.cast.cast.take(10).forEach { item ->
@@ -364,6 +375,16 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
             personsAdapter.notifyDataSetChanged()
         }
     }
+
+    private fun getReviews(movieReviews: MovieReviews){
+        movieScene.runOnUiThread {
+            movieReviews.forEach {
+                item -> reviewArrayList.add(ReviewItem(item.author, item.avatar, item.date, item.text, item.stars, item.userId, item._id))
+            }
+            reviewAdapter.notifyDataSetChanged()
+        }
+    }
+
     fun addToFavorites(){
         movieIsFavorited = favoriteSystem.addMovieToFavorites(mId.toString())
         movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
