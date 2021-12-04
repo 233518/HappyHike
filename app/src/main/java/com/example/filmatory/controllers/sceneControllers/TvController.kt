@@ -384,6 +384,34 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         }
     }
 
+    private fun getUserLists(userLists: UserLists){
+        if(userLists.size != 0){
+            for(item in userLists){
+                listNameArrayList += arrayOf(item.listname)
+                listArrayList.add(ListItem(item.listname, item.listUserId, "", "", "", item.listId))
+            }
+        } else {
+            println("User does not have any lists")
+        }
+    }
+
+    private fun checkIfFavorited(favorites: Favorites){
+        tvIsFavorited = favoriteSystem.checkIfTvFavorited(favorites, tvId)
+        if(!tvIsFavorited) {
+            tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
+        } else {
+            tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
+        }
+    }
+
+    private fun checkIfWatchlist(watchlist: Watchlist){
+        tvIsFavorited = watchlistSystem.checkIfTvWatchlist(watchlist, tvId)
+        if(!tvIsFavorited) {
+            tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
+        } else {
+            tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
+        }
+    }
     fun addToFavorites(){
         tvIsFavorited = favoriteSystem.addTvToFavorites(tvId.toString())
         tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
@@ -419,35 +447,9 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
             .setSingleChoiceItems(listNameArrayList, chosenList) { dialog, which ->
                 chosenList = which
             }
-        .show()
+            .show()
     }
-
-    private fun getUserLists(userLists: UserLists){
-        if(userLists.size != 0){
-            for(item in userLists){
-                listNameArrayList += arrayOf(item.listname)
-                listArrayList.add(ListItem(item.listname, item.listUserId, "", "", "", item.listId))
-            }
-        } else {
-            println("User does not have any lists")
-        }
-    }
-
-    private fun checkIfFavorited(favorites: Favorites){
-        tvIsFavorited = favoriteSystem.checkIfTvFavorited(favorites, tvId)
-        if(!tvIsFavorited) {
-            tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
-        } else {
-            tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
-        }
-    }
-
-    private fun checkIfWatchlist(watchlist: Watchlist){
-        tvIsFavorited = watchlistSystem.checkIfTvWatchlist(watchlist, tvId)
-        if(!tvIsFavorited) {
-            tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
-        } else {
-            tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
-        }
+    fun notLoggedin() {
+        snackbarSystem.showSnackbarWarning("You need to log in to use this function!")
     }
 }

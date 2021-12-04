@@ -384,6 +384,35 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
+    private fun getUserLists(userLists: UserLists){
+        if (userLists.size != 0) {
+            for (item in userLists) {
+                listNameArray += arrayOf(item.listname)
+                listArrayList.add(
+                    ListItem(item.listname, item.listUserId, "", "", "", item.listId)
+                )
+            }
+        }
+    }
+
+    private fun checkIfFavorited(favorites: Favorites){
+        movieIsFavorited = favoriteSystem.checkIfMovieFavorited(favorites, mId)
+        if(!movieIsFavorited) {
+            movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
+        } else {
+            movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
+        }
+    }
+
+    private fun checkIfWatchlist(watchlist: Watchlist){
+        movieIsWatched = watchlistSystem.checkIfMovieWatchlist(watchlist, mId)
+        if(!movieIsWatched) {
+            movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
+        } else {
+            movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
+        }
+    }
+
     fun addToFavorites(){
         movieIsFavorited = favoriteSystem.addMovieToFavorites(mId.toString())
         movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
@@ -427,32 +456,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
-    private fun getUserLists(userLists: UserLists){
-        if (userLists.size != 0) {
-            for (item in userLists) {
-                listNameArray += arrayOf(item.listname)
-                listArrayList.add(
-                    ListItem(item.listname, item.listUserId, "", "", "", item.listId)
-                )
-            }
-        }
-    }
-
-    private fun checkIfFavorited(favorites: Favorites){
-        movieIsFavorited = favoriteSystem.checkIfMovieFavorited(favorites, mId)
-        if(!movieIsFavorited) {
-            movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
-        } else {
-            movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
-        }
-    }
-
-    private fun checkIfWatchlist(watchlist: Watchlist){
-        movieIsWatched = watchlistSystem.checkIfMovieWatchlist(watchlist, mId)
-        if(!movieIsWatched) {
-            movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
-        } else {
-            movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
-        }
+    fun notLoggedin() {
+        snackbarSystem.showSnackbarWarning("You need to be logged in to use this function!")
     }
 }

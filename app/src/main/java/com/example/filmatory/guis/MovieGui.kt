@@ -46,7 +46,17 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
                 movieController.addToUserList()
             }
         } else {
+            favoriteBtn.setOnClickListener {
+                movieController.notLoggedin()
+            }
 
+            watchlistBtn.setOnClickListener {
+                movieController.notLoggedin()
+            }
+
+            addToListBtn.setOnClickListener {
+                movieController.notLoggedin()
+            }
         }
     }
 

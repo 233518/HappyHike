@@ -45,6 +45,18 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
             addToListBtn.setOnClickListener {
                 tvController.addToUserList()
             }
+        } else {
+            favoriteBtn.setOnClickListener {
+               tvController.notLoggedin()
+            }
+
+            watchlistBtn.setOnClickListener {
+                tvController.notLoggedin()
+            }
+
+            addToListBtn.setOnClickListener {
+                tvController.notLoggedin()
+            }
         }
     }
 
