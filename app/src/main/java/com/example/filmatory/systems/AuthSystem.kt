@@ -1,6 +1,5 @@
 package com.example.filmatory.systems
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.util.Log
@@ -9,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.StartScene
 import com.google.firebase.auth.FirebaseAuth
-import java.util.*
 
 /**
  * AuthSystem takes care of authenticaton of users
@@ -33,6 +31,7 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                     // Sign in success
                     Log.d(TAG, "signInWithEmail:success")
                     val intent = Intent(scene, StartScene::class.java)
+                    scene.finish()
                     scene.startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -58,6 +57,7 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                     val user = auth.currentUser
                     newUserInDatabase(user!!.uid)
                     val intent = Intent(scene, StartScene::class.java)
+                    scene.finish()
                     scene.startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.

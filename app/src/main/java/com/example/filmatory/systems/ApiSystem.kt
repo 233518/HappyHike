@@ -147,6 +147,12 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestSearch(requestBaseOptions: RequestBaseOptions, title: String, language: String?) {
         api.runRequestGet("/search/get/$title?languageCode=$language", this, 21, requestBaseOptions)
     }
+    fun requestMovieReviews(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/movie/get/reviews/${requestBaseOptions.id}", this, 22, requestBaseOptions)
+    }
+    fun requestTvReviews(requestBaseOptions: RequestBaseOptions, language: String?) {
+        api.runRequestGet("/tv/get/reviews/${requestBaseOptions.id}", this, 23, requestBaseOptions)
+    }
 
     /** All the POST requests */
     fun postUser(postBaseOptions: PostBaseOptions) {
@@ -286,6 +292,8 @@ class ApiSystem : OnApiRequestFinishedListener {
             19 -> function(gson.fromJson(result, MovieWatchProviders::class.java))
             20 -> function(gson.fromJson(result, TvWatchProviders::class.java))
             21 -> function(gson.fromJson(result, Search::class.java))
+            22 -> function(gson.fromJson(result, MovieReviews::class.java))
+            23 -> function(gson.fromJson(result, TvReviews::class.java))
             else -> { // Note the block
                 print("Something went wrong, cant find requestId")
             }
