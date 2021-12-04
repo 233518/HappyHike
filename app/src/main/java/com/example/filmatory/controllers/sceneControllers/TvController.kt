@@ -57,10 +57,6 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         //apiSystem.requestTvWatchProviders(tvId.toString(), ::getWatchprovider)
     }
 
-    fun onFailure(baseError: BaseError) {
-
-    }
-
     /*private fun getWatchprovider(tvWatchProviders: TvWatchProviders){
         tvScene.runOnUiThread(Runnable {
             if(tvWatchProviders.results.NO != null){

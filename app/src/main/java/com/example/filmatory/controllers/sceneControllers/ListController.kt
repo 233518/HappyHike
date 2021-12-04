@@ -53,10 +53,6 @@ class ListController(private val listScene: ListScene) : MainController(listScen
         listGui.listRecyclerView.adapter = concatAdapter
     }
 
-    fun onFailure(baseError: BaseError) {
-
-    }
-
     /**
      * Update the gui with data from API
      *

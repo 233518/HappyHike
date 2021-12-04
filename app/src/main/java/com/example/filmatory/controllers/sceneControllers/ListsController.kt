@@ -26,10 +26,6 @@ class ListsController(private val listsScene: ListsScene) : MainController(lists
         apiSystem.requestAllLists(RequestBaseOptions(null, null, ::listsData, ::onFailure))
     }
 
-    fun onFailure(baseError: BaseError) {
-
-    }
-
     /**
      * Update the gui with data from API
      *

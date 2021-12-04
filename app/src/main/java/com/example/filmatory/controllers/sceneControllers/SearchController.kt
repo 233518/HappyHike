@@ -49,10 +49,6 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
         apiSystem.requestSearch(ApiSystem.RequestBaseOptions(null, null, ::onSearch, ::onFailure), title!!, languageCode)
     }
 
-    fun onFailure(baseError: BaseError) {
-        snackbarSystem.showSnackbarWarning(baseError.message)
-    }
-
     private fun onSearch(search: Search) {
         val mediaSorted = sortResult(search)
         for(movie in mediaSorted.movieArray) {

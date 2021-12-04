@@ -6,7 +6,6 @@ import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.tv.TvFrontpage
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.StartScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.DataAdapter
@@ -24,16 +23,6 @@ class StartController(private val startScene: StartScene) : MainController(start
         apiSystem.requestTvFrontpageDiscover(RequestBaseOptions(null, null, ::discoverTvData, ::onFailure), languageCode)
         apiSystem.requestMovieFrontpageRecommend(RequestBaseOptions(null, startScene.auth.currentUser?.uid, ::recMovieData, ::onFailure), languageCode)
         apiSystem.requestTvFrontpageRecommend(RequestBaseOptions(null, startScene.auth.currentUser?.uid, ::recTvData, ::onFailure), languageCode)
-        apiSystem.requestTest(RequestBaseOptions(null, null, ::test, ::onFailure))
-        //snackbarSystem.showSnackbarFailure("Something unexpected happen!", ::test, "Retry")
-    }
-
-    fun test(any: Any) {
-
-    }
-
-    fun onFailure(baseError: BaseError) {
-        println(baseError.message)
     }
 
     /**
@@ -42,16 +31,26 @@ class StartController(private val startScene: StartScene) : MainController(start
      * @param movieFrontpage The response from API
      */
     private fun discoverMoviesData(movieFrontpage: MovieFrontpage){
-        startScene.runOnUiThread(Runnable {
+        startScene.runOnUiThread {
             val discoverMoviesArraylist: ArrayList<MediaModel> = ArrayList()
-            val discoverMoviesAdapter = DataAdapter(startScene,startScene, discoverMoviesArraylist)
-            val discoverMoviesRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view)
-            movieFrontpage.forEach{
-                    item -> discoverMoviesArraylist.add(MediaModel(DataAdapter.TYPE_MOVIE_SLIDER ,item.original_title, item.release_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
+            val discoverMoviesAdapter = DataAdapter(startScene, startScene, discoverMoviesArraylist)
+            val discoverMoviesRecyclerView: RecyclerView =
+                startScene.findViewById(R.id.slider_recycler_view)
+            movieFrontpage.forEach { item ->
+                discoverMoviesArraylist.add(
+                    MediaModel(
+                        DataAdapter.TYPE_MOVIE_SLIDER,
+                        item.original_title,
+                        item.release_date,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path,
+                        item.id
+                    )
+                )
             }
-            discoverMoviesRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
+            discoverMoviesRecyclerView.layoutManager =
+                LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             discoverMoviesRecyclerView.adapter = discoverMoviesAdapter
-        })
+        }
     }
 
     /**
@@ -60,16 +59,26 @@ class StartController(private val startScene: StartScene) : MainController(start
      * @param tvFrontpage The respons from API
      */
     private fun discoverTvData(tvFrontpage: TvFrontpage){
-        startScene.runOnUiThread(Runnable {
+        startScene.runOnUiThread {
             val discoverTvsArrayList: ArrayList<MediaModel> = ArrayList()
             val discoverTvsAdapter = DataAdapter(startScene, startScene, discoverTvsArrayList)
-            val discoverTvsRecyclerView: RecyclerView = startScene.findViewById(R.id.slider_recycler_view2)
-            tvFrontpage.forEach{
-                    item -> discoverTvsArrayList.add(MediaModel(DataAdapter.TYPE_TV_SLIDER ,item.name, item.first_air_date, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path, item.id))
+            val discoverTvsRecyclerView: RecyclerView =
+                startScene.findViewById(R.id.slider_recycler_view2)
+            tvFrontpage.forEach { item ->
+                discoverTvsArrayList.add(
+                    MediaModel(
+                        DataAdapter.TYPE_TV_SLIDER,
+                        item.name,
+                        item.first_air_date,
+                        "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.poster_path,
+                        item.id
+                    )
+                )
             }
-            discoverTvsRecyclerView.layoutManager = LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
+            discoverTvsRecyclerView.layoutManager =
+                LinearLayoutManager(startScene, LinearLayoutManager.HORIZONTAL, false)
             discoverTvsRecyclerView.adapter = discoverTvsAdapter
-        })
+        }
     }
 
     /**

@@ -39,10 +39,6 @@ class PersonController(private val personScene: PersonScene) : MainController(pe
         }
     }
 
-    fun onFailure(baseError: BaseError) {
-
-    }
-
     /**
      * Update the gui with data from API
      *

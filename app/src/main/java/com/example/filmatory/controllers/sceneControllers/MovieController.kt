@@ -59,10 +59,6 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         movieGui.personsRecyclerView.adapter = personsAdapter
     }
 
-    fun onFailure(baseError: BaseError) {
-
-    }
-
     /*private fun getWatchprovider(movieWatchProviders: MovieWatchProviders){
         movieScene.runOnUiThread(Runnable {
             if(movieWatchProviders.results.NO != null){

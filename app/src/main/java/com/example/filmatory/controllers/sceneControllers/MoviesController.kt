@@ -33,10 +33,6 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         apiSystem.requestMoviesFilterDateDesc(RequestBaseOptions(null, null, ::moviesDataFilterDate, ::onFailure))
     }
 
-    fun onFailure(baseError: BaseError) {
-
-    }
-
     /**
      * Sets data from API to Arraylists and displays popular movies descending on activity start
      *

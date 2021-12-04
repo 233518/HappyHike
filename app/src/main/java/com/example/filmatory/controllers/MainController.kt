@@ -1,9 +1,12 @@
 package com.example.filmatory.controllers
 
+import android.content.Intent
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.ConfigurationCompat
 import com.example.filmatory.R
+import com.example.filmatory.errors.BaseError
+import com.example.filmatory.scenes.activities.AccountScene
 import com.example.filmatory.systems.NavSystem
 import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.systems.SnackbarSystem
@@ -17,9 +20,17 @@ import com.yariksoffice.lingver.Lingver
  *
  * @param scene The scene the controller will be connected to
  */
-open class MainController(scene : AppCompatActivity) {
+open class MainController(protected val scene : AppCompatActivity) {
     protected val navSystem = NavSystem(scene)
     protected val apiSystem = ApiSystem()
     protected val snackbarSystem = SnackbarSystem(scene.findViewById(R.id.snackbar_layout))
     protected val languageCode: String = Lingver.getInstance().getLanguage()
+    fun onFailure(error : BaseError) {
+        snackbarSystem.showSnackbarFailure(error.message, ::redirectHome, "Home")
+    }
+    fun redirectHome() {
+        val intent = Intent(scene, AccountScene::class.java)
+        scene.finish()
+        scene.startActivity(intent)
+    }
 }

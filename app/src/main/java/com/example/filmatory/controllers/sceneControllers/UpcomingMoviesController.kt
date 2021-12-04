@@ -27,10 +27,6 @@ class UpcomingMoviesController(private val upcomingMoviesScene: UpcomingMoviesSc
         upcomingMoviesRecyclerView.adapter = upcomingMoviesAdapter
     }
 
-    fun onFailure(baseError: BaseError){
-
-    }
-
     private fun upcomingMoviesData(upcomingMovies: UpcomingMovies){
         upcomingMoviesScene.runOnUiThread {
             upcomingMovies.forEach { item ->

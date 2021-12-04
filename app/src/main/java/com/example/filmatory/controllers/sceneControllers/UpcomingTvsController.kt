@@ -27,10 +27,6 @@ class UpcomingTvsController(private val upcomingTvsScene: UpcomingTvsScene) : Ma
         upcomingTvsRecyclerView.adapter = upcomingTvsAdapter
     }
 
-    fun onFailure(baseError: BaseError) {
-
-    }
-
     /**
      * Update the gui with data from API
      *

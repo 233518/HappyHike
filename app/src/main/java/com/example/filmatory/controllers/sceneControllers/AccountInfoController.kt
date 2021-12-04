@@ -29,10 +29,6 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlistStats, ::onFailure))
     }
 
-    fun onFailure(baseError: BaseError) {
-        snackbarSystem.showSnackbarWarning(baseError.message)
-    }
-
     private fun getUserFavorites(favorites: Favorites){
         tabAdapter.favoriteFragment.showFavorites(favorites)
     }

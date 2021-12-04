@@ -36,9 +36,6 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         apiSystem.requestTvsFilterTitleAZ(RequestBaseOptions(null, null, ::tvsDataFilterTitle, ::onFailure))
         apiSystem.requestTvsFilterDateDesc(RequestBaseOptions(null, null, ::tvsDataFilterDate, ::onFailure))
     }
-    fun onFailure(baseError: BaseError) {
-
-    }
 
     /**
      * Sets data from API to Arraylists and displays popular tvshows descending on activity start
