@@ -44,7 +44,7 @@ class ListController(private val listScene: ListScene) : MainController(listScen
         val concatAdapter = ConcatAdapter(movieListAdapter, tvListAdapter)
 
         if (listId != null) apiSystem.requestList(RequestBaseOptions(listId, null, ::getList, ::onFailure))
-        if(listScene.auth.currentUser?.uid != null) apiSystem.requestUser(RequestBaseOptions(null, listScene.auth.currentUser!!.uid, ::checkIfOwner, ::onFailure))
+        if(isLoggedIn) apiSystem.requestUser(RequestBaseOptions(null, listScene.auth.currentUser!!.uid, ::checkIfOwner, ::onFailure))
 
         listGui.listRecyclerView.layoutManager = GridLayoutManager(listScene, 2)
         listGui.listRecyclerView.adapter = concatAdapter

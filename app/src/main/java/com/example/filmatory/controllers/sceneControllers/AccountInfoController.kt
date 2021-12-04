@@ -20,9 +20,9 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
 
     init {
         initializeTabAdapter()
-        apiSystem.requestUserFavorites(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserFavorites, ::onFailure))
-        apiSystem.requestUserWatchlist(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserWatchlist, ::onFailure))
-        apiSystem.requestUserLists(RequestBaseOptions(null, accountInfoScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
+        apiSystem.requestUserFavorites(RequestBaseOptions(null, uid, ::getUserFavorites, ::onFailure))
+        apiSystem.requestUserWatchlist(RequestBaseOptions(null, uid, ::getUserWatchlist, ::onFailure))
+        apiSystem.requestUserLists(RequestBaseOptions(null, uid, ::getUserLists, ::onFailure), languageCode)
     }
 
     private fun getUserFavorites(favorites: Favorites){

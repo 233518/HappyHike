@@ -25,24 +25,26 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
     var tvImage : ImageView = tvScene.findViewById(R.id.m_img)
 
     init {
-        favoriteBtn.setOnClickListener {
-            if(!tvController.tvIsFavorited){
-                tvController.addToFavorites()
-            } else {
-                tvController.removeFromFavorites()
+        if(tvController.isLoggedIn) {
+            favoriteBtn.setOnClickListener {
+                if (!tvController.tvIsFavorited) {
+                    tvController.addToFavorites()
+                } else {
+                    tvController.removeFromFavorites()
+                }
             }
-        }
 
-        watchlistBtn.setOnClickListener {
-            if(!tvController.tvIsWatched){
-                tvController.addToWatchlist()
-            } else {
-                tvController.removeFromWatchlist()
+            watchlistBtn.setOnClickListener {
+                if (!tvController.tvIsWatched) {
+                    tvController.addToWatchlist()
+                } else {
+                    tvController.removeFromWatchlist()
+                }
             }
-        }
 
-        addToListBtn.setOnClickListener {
-            tvController.addToUserList()
+            addToListBtn.setOnClickListener {
+                tvController.addToUserList()
+            }
         }
     }
 

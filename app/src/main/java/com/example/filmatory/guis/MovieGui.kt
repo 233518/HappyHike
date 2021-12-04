@@ -27,22 +27,26 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
     var movieImage: ImageView = movieScene.findViewById(R.id.m_img)
 
     init {
-        favoriteBtn.setOnClickListener {
-            if(!movieController.movieIsFavorited){
-                movieController.addToFavorites()
-            } else{
-                movieController.removeFromFavorites()
+        if(movieController.isLoggedIn) {
+            favoriteBtn.setOnClickListener {
+                if (!movieController.movieIsFavorited) {
+                    movieController.addToFavorites()
+                } else {
+                    movieController.removeFromFavorites()
+                }
             }
-        }
-        watchlistBtn.setOnClickListener {
-            if(!movieController.movieIsWatched){
-                movieController.addToWatchlist()
-            } else {
-                movieController.removeFromWatchlist()
+            watchlistBtn.setOnClickListener {
+                if (!movieController.movieIsWatched) {
+                    movieController.addToWatchlist()
+                } else {
+                    movieController.removeFromWatchlist()
+                }
             }
-        }
-        addToListBtn.setOnClickListener {
-            movieController.addToUserList()
+            addToListBtn.setOnClickListener {
+                movieController.addToUserList()
+            }
+        } else {
+
         }
     }
 

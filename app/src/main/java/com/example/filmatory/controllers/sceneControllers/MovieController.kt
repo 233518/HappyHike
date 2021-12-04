@@ -31,6 +31,7 @@ import java.util.ArrayList
  * @param movieScene The MovieScene to use
  */
 class MovieController(private val movieScene: MovieScene) : MainController(movieScene) {
+    private val movieGui = MovieGui(movieScene, this)
     private var intent: Intent = movieScene.intent
     private val movieSystem = MovieSystem(apiSystem, snackbarSystem, movieScene)
     private val favoriteSystem = FavoriteSystem(movieScene, movieSystem, null)
@@ -50,16 +51,14 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
     var movieIsFavorited : Boolean = false
         private set
 
-    private val movieGui = MovieGui(movieScene, this)
-
     init {
         apiSystem.requestMovie(RequestBaseOptions(mId.toString(), null, ::getMovie, ::onFailure), languageCode)
         apiSystem.requestMovieReviews(RequestBaseOptions(mId.toString(), null, ::getReviews, ::onFailure), languageCode)
 
-        if(movieScene.auth.currentUser?.uid != null){
-            apiSystem.requestUserFavorites(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
-            apiSystem.requestUserWatchlist(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
-            apiSystem.requestUserLists(RequestBaseOptions(null, movieScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
+        if(isLoggedIn){
+            apiSystem.requestUserFavorites(RequestBaseOptions(null, uid, ::checkIfFavorited, ::onFailure))
+            apiSystem.requestUserWatchlist(RequestBaseOptions(null, uid, ::checkIfWatchlist, ::onFailure))
+            apiSystem.requestUserLists(RequestBaseOptions(null, uid, ::getUserLists, ::onFailure), languageCode)
         }
         //apiSystem.requestMovieWatchProviders(mId.toString(), ::getWatchprovider)
         movieGui.personsRecyclerView.layoutManager = LinearLayoutManager(movieScene, LinearLayoutManager.HORIZONTAL, false)
@@ -429,16 +428,12 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
     }
 
     private fun getUserLists(userLists: UserLists){
-        movieScene.runOnUiThread {
-            if (userLists.size != 0) {
-                for (item in userLists) {
-                    listNameArray += arrayOf(item.listname)
-                    listArrayList.add(
-                        ListItem(item.listname, item.listUserId, "", "", "", item.listId)
-                    )
-                }
-            } else {
-                println("User does not have any lists")
+        if (userLists.size != 0) {
+            for (item in userLists) {
+                listNameArray += arrayOf(item.listname)
+                listArrayList.add(
+                    ListItem(item.listname, item.listUserId, "", "", "", item.listId)
+                )
             }
         }
     }

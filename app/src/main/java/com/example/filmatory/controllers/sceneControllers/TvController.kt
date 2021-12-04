@@ -32,7 +32,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  * @param tvScene The TvScene to use
  */
 class TvController(private val tvScene: TvScene) : MainController(tvScene) {
-    var intent: Intent = tvScene.intent
+    private var intent: Intent = tvScene.intent
     private val tvSystem = TvSystem(apiSystem, snackbarSystem, tvScene)
     private val favoriteSystem = FavoriteSystem(tvScene, null, tvSystem)
     private val watchlistSystem = WatchlistSystem(tvScene, null, tvSystem)
@@ -56,10 +56,10 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         apiSystem.requestTV(RequestBaseOptions(tvId.toString(), null, ::getTv, ::onFailure), languageCode)
         apiSystem.requestTvReviews(RequestBaseOptions(tvId.toString(), null, ::getReviews, ::onFailure), languageCode)
 
-        if(tvScene.auth.currentUser?.uid != null){
-            apiSystem.requestUserFavorites(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfFavorited, ::onFailure))
-            apiSystem.requestUserWatchlist(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::checkIfWatchlist, ::onFailure))
-            apiSystem.requestUserLists(RequestBaseOptions(null, tvScene.auth.currentUser?.uid, ::getUserLists, ::onFailure), languageCode)
+        if(isLoggedIn){
+            apiSystem.requestUserFavorites(RequestBaseOptions(null, uid, ::checkIfFavorited, ::onFailure))
+            apiSystem.requestUserWatchlist(RequestBaseOptions(null, uid, ::checkIfWatchlist, ::onFailure))
+            apiSystem.requestUserLists(RequestBaseOptions(null, uid, ::getUserLists, ::onFailure), languageCode)
         }
         tvGui.personsRecyclerView.layoutManager = LinearLayoutManager(tvScene, LinearLayoutManager.HORIZONTAL, false)
         tvGui.personsRecyclerView.adapter = personsAdapter
@@ -434,7 +434,7 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     }
 
     private fun checkIfFavorited(favorites: Favorites){
-        tvIsFavorited = favoriteSystem.checkIfMovieFavorited(favorites, tvId)
+        tvIsFavorited = favoriteSystem.checkIfTvFavorited(favorites, tvId)
         if(!tvIsFavorited) {
             tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
         } else {
@@ -443,7 +443,7 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
     }
 
     private fun checkIfWatchlist(watchlist: Watchlist){
-        tvIsFavorited = watchlistSystem.checkIfMovieWatchlist(watchlist, tvId)
+        tvIsFavorited = watchlistSystem.checkIfTvWatchlist(watchlist, tvId)
         if(!tvIsFavorited) {
             tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
         } else {
