@@ -21,7 +21,7 @@ class AccinfoFragment(apiSystem: ApiSystem, var accountInfoScene: AccountInfoSce
     lateinit var changeUsernameBtn : Button
     lateinit var changePwBtn : Button
     var userInfoSystem = UserInfoSystem(apiSystem)
-    val authSystem = AuthSystem(apiSystem, accountInfoScene.auth, accountInfoScene)
+    val authSystem = AuthSystem(apiSystem, accountInfoScene.auth, accountInfoScene, null)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view : View = inflater.inflate(R.layout.fragment_accinfo, container, false)
         return view
