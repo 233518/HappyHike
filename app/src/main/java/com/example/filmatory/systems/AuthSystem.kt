@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.StartScene
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
+
 
 /**
  * AuthSystem takes care of authenticaton of users
@@ -36,8 +38,8 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(scene, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
+                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
                 }
             }
     }
@@ -62,8 +64,8 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(scene, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
+                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
                 }
             }
     }
@@ -74,12 +76,11 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful){
                     Log.d(TAG, "updatePassword:success")
-                    Toast.makeText(scene, "Password update success",
-                        Toast.LENGTH_SHORT).show()
+                    snackbarSystem?.showSnackbarSuccess("Password has been changed.")
                 } else {
                     Log.w(TAG, "updatePassword:failure", task.exception)
-                    Toast.makeText(scene, "Password update failed",
-                        Toast.LENGTH_SHORT).show()
+                    val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
+                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
                 }
             }
     }
@@ -89,12 +90,11 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
             .addOnCompleteListener { task ->
                 if(task.isSuccessful){
                     Log.d(TAG, "Email sent")
-                    Toast.makeText(scene, "Email has been sent",
-                        Toast.LENGTH_SHORT).show()
+                    snackbarSystem!!.showSnackbarSuccess("Email has been sent.")
                 } else {
                     Log.w(TAG, "Email did not send", task.exception)
-                    Toast.makeText(scene, "Reset email failed",
-                        Toast.LENGTH_SHORT).show()
+                    val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
+                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
                 }
             }
     }
@@ -117,7 +117,14 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
         Log.d(TAG, "$string")
     }
 
+    private fun retry() {
+        val intent = Intent(scene, StartScene::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        scene.finish()
+        scene.startActivity(intent)
+    }
+
     private fun onFailure(baseError: BaseError) {
-        TODO("Handel error")
+        snackbarSystem!!.showSnackbarFailure(baseError.message, ::retry, "Reload")
     }
 }
