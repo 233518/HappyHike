@@ -3,6 +3,7 @@ package com.example.filmatory.scenes.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,19 +19,74 @@ class FavoriteFragment(private var scene: SuperScene) : Fragment(R.layout.fragme
     private var allFavoritesArraylist: ArrayList<MediaModel> = ArrayList()
     private lateinit var movieAdapter: DataAdapter
     private lateinit var tvAdapter: DataAdapter
+    private lateinit var favorites: Favorites
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView : RecyclerView = view.findViewById(R.id.favorite_rv)
+        val movieBtn : Button = view.findViewById(R.id.movieFavoritesBtn)
+        val tvBtn : Button = view.findViewById(R.id.tvFavoritesBtn)
+        val allBtn : Button = view.findViewById(R.id.allFavoritesBtn)
         allFavoritesArraylist = (tvFavoritesArraylist + movieFavoritesArraylist) as ArrayList<MediaModel>
         movieAdapter =  DataAdapter(scene, requireActivity(), movieFavoritesArraylist)
         tvAdapter =  DataAdapter(scene, requireActivity(), tvFavoritesArraylist)
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         val concatAdapter = ConcatAdapter(movieAdapter, tvAdapter)
         recyclerView.adapter = concatAdapter
+        movieBtn.setOnClickListener {
+            showMovieFavorites()
+        }
+        tvBtn.setOnClickListener {
+            showTvFavorites()
+        }
+        allBtn.setOnClickListener {
+            showFavorites(favorites)
+        }
+    }
+
+    private fun showMovieFavorites() {
+        movieFavoritesArraylist.clear()
+        tvFavoritesArraylist.clear()
+        for (item in favorites.userMovieFavorites) {
+            movieFavoritesArraylist.add(
+                MediaModel(
+                    DataAdapter.TYPE_ACCINFO_MOVIE,
+                    item.title,
+                    item.releaseDate,
+                    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                    item.id
+                )
+            )
+        }
+        scene.runOnUiThread {
+            movieAdapter.notifyDataSetChanged()
+            tvAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun showTvFavorites() {
+        movieFavoritesArraylist.clear()
+        tvFavoritesArraylist.clear()
+        for (item in favorites.userTvFavorites) {
+            tvFavoritesArraylist.add(
+                MediaModel(
+                    DataAdapter.TYPE_ACCINFO_MOVIE,
+                    item.title,
+                    item.releaseDate,
+                    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
+                    item.id
+                )
+            )
+        }
+        scene.runOnUiThread {
+            movieAdapter.notifyDataSetChanged()
+            tvAdapter.notifyDataSetChanged()
+        }
     }
 
     fun showFavorites(favorites: Favorites){
+        movieFavoritesArraylist.clear()
+        tvFavoritesArraylist.clear()
         for (item in favorites.userAllFavorites) {
             if (item.type == "tv") {
                 tvFavoritesArraylist.add(
@@ -58,5 +114,6 @@ class FavoriteFragment(private var scene: SuperScene) : Fragment(R.layout.fragme
             movieAdapter.notifyDataSetChanged()
             tvAdapter.notifyDataSetChanged()
         }
+        this.favorites = favorites
     }
 }

@@ -5,7 +5,6 @@ import com.example.filmatory.scenes.activities.auth.ResetPasswordScene
 
 /**
  * RegisterController manipulates the RegisterScene gui
- * RegisterController manipulates the RegisterScene gui
  *
  * @property registerScene The RegisterScene to use
  */
