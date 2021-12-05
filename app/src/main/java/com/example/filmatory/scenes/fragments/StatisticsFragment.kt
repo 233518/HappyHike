@@ -7,14 +7,11 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
-import com.anychart.chart.common.listener.ListenersInterface
 import com.anychart.charts.Pie
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.Watchlist
-import android.widget.Toast
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.chart.common.listener.Event
 import com.anychart.enums.Align
 import com.anychart.enums.LegendLayout
 import com.example.filmatory.api.data.user.Favorites
@@ -36,17 +33,10 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics), AccountInfoOb
         super.onViewCreated(view, savedInstanceState)
         anyChartView = view.findViewById(R.id.chart_view)
         pie = AnyChart.pie()
-
-        /*
-        pie.setOnClickListener(object : ListenersInterface.OnClickListener(arrayOf("x", "value")) {
-            override fun onClick(event: Event) {
-                Toast.makeText(requireContext(), event.data["x"].toString() + ":" + event.data["value"], Toast.LENGTH_SHORT).show()
-            }
-        })
-         */
         notifyObservers()
     }
 
+    //https://github.com/AnyChart/AnyChart-Android/issues/145
     fun updateGraph(favorites: Favorites, watchlist: Watchlist) {
         for(item in favorites.userAllFavorites){
             if(item.type == "tv"){
@@ -62,7 +52,6 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics), AccountInfoOb
                 totalWatchlistMovies++
             }
         }
-
 
         data.add(ValueDataEntry("Favorite Tv-shows", totalFavoriteTvs))
         data.add(ValueDataEntry("Favorite Movies", totalFavoriteMovies))
@@ -82,18 +71,17 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics), AccountInfoOb
             .itemsLayout(LegendLayout.HORIZONTAL)
             .align(Align.CENTER)
         anyChartView.setChart(pie)
-        Log.v(TAG, "WTTTTTTTTTTTTTTTTTTTTTTH");
     }
 
-    override fun registerObserver(repositoryObserver: AccountInfoObserver) {
-        if(!mObservers.contains(repositoryObserver)) {
-            mObservers.add(repositoryObserver);
+    override fun registerObserver(accountInfoObserver: AccountInfoObserver) {
+        if(!mObservers.contains(accountInfoObserver)) {
+            mObservers.add(accountInfoObserver);
         }
     }
 
-    override fun removeObserver(repositoryObserver: AccountInfoObserver) {
-        if(mObservers.contains(repositoryObserver)) {
-            mObservers.remove(repositoryObserver);
+    override fun removeObserver(accountInfoObserver: AccountInfoObserver) {
+        if(mObservers.contains(accountInfoObserver)) {
+            mObservers.remove(accountInfoObserver);
         }
     }
 

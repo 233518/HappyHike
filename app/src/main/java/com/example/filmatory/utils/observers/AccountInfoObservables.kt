@@ -1,7 +1,7 @@
 package com.example.filmatory.utils.observers
 
 interface AccountInfoObservables {
-    fun registerObserver(repositoryObserver: AccountInfoObserver)
-    fun removeObserver(repositoryObserver: AccountInfoObserver)
+    fun registerObserver(accountInfoObserver: AccountInfoObserver)
+    fun removeObserver(accountInfoObserver: AccountInfoObserver)
     fun notifyObservers()
 }
