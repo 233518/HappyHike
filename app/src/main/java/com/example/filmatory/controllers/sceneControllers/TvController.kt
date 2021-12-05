@@ -15,6 +15,7 @@ import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.guis.TvGui
+import com.example.filmatory.scenes.activities.CreateReviewScene
 import com.example.filmatory.scenes.activities.TvScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.FavoriteSystem
@@ -453,6 +454,15 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
             }
             .show()
     }
+
+    fun newReviewActivity(){
+        val intent = Intent(tvScene, CreateReviewScene::class.java)
+        intent.putExtra("mediaId", tvId)
+        intent.putExtra("mediaType","tv")
+        tvScene.finish()
+        tvScene.startActivity(intent)
+    }
+
     fun notLoggedin() {
         snackbarSystem.showSnackbarWarning("You need to log in to use this function!")
     }

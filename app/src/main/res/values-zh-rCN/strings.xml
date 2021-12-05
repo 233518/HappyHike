@@ -74,6 +74,13 @@
     <string name="start_scene_secure">\u2022 安全</string>
     <string name="header_text">数以百万计的电影、电视节目和人物等待您去发现。立即探索。</string>
     <string name="reviews_heading">Reviews</string>
+    <string name="all">All</string>
+    <string name="movies">Movies</string>
+    <string name="tvs">Tvs</string>
+    <string name="create_review">Create Review</string>
+    <string name="rating">Rating</string>
+    <string name="your_review">Your Review</string>
+    <string name="back_btn">Back</string>
     <string-array name="media_array">
         <item>全部</item>
         <item>电影</item>
@@ -86,5 +93,12 @@
         <item>发布日期升序</item>
         <item>标题（A-Z）</item>
         <item>标题 (Z-A)</item>
+    </string-array>
+    <string-array name="rating_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 </resources>

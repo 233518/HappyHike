@@ -23,18 +23,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="All"/>
+            android:text="@string/all"/>
         <Button
             android:id="@+id/movieWatchlistBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="Movies"/>
+            android:text="@string/movies"/>
         <Button
             android:id="@+id/tvWatchlistBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tvs"/>
+            android:text="@string/tvs"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="80dp"

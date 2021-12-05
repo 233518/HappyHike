@@ -10,8 +10,8 @@ import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.errors.BaseError
 import com.example.filmatory.guis.MovieGui
+import com.example.filmatory.scenes.activities.CreateReviewScene
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.FavoriteSystem
@@ -456,6 +456,14 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
                 }
                 .show()
         }
+    }
+
+    fun newReviewActivity(){
+        val intent = Intent(movieScene, CreateReviewScene::class.java)
+        intent.putExtra("mediaId", mId)
+        intent.putExtra("mediaType","movie")
+        movieScene.finish()
+        movieScene.startActivity(intent)
     }
 
     fun notLoggedin() {

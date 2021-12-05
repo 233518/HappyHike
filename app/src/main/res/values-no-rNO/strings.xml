@@ -75,6 +75,13 @@
     <string name="start_scene_secure">\u2022 Trygt</string>
     <string name="header_text">Millioner av filmer, TV-serier og folk å oppdage. Utforsk nå.</string>
     <string name="reviews_heading">Reviews</string>
+    <string name="all">All</string>
+    <string name="movies">Movies</string>
+    <string name="tvs">Tvs</string>
+    <string name="create_review">Create Review</string>
+    <string name="rating">Rating</string>
+    <string name="your_review">Your Review</string>
+    <string name="back_btn">Back</string>
     <string-array name="media_array">
         <item>Alt</item>
         <item>Film</item>
@@ -87,5 +94,12 @@
         <item>Utgivelsesdato stigende</item>
         <item>Tittel (A-Z)</item>
         <item>Tittel (Z-A)</item>
+    </string-array>
+    <string-array name="rating_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 </resources>

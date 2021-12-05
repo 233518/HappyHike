@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    android:background="@drawable/login_scene_background"
+    tools:context=".scenes.activities.CreateReviewScene">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/overlay_75per"
+       >
+
+        <TextView
+            android:id="@+id/create_review_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_review"
+            android:textColor="@color/mint_cream"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:layout_marginTop="70dp"
+            />
+        <TextView
+            android:id="@+id/create_review_rating_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            android:layout_below="@+id/create_review_heading"
+            android:textColor="@color/mint_cream"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="80dp"
+            android:textStyle="italic"
+            android:textSize="16sp"/>
+        <Spinner
+            android:id="@+id/review_rating_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/create_review_rating_heading"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"/>
+
+        <TextView
+            android:id="@+id/create_review_overview_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/your_review"
+            android:layout_below="@+id/review_rating_spinner"
+            android:textColor="@color/mint_cream"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"
+            android:textStyle="italic"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/create_review_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_below="@+id/create_review_overview_heading"
+            android:background="@color/mint_cream"
+            android:autofillHints="Your review here"
+            android:textColorHint="@color/black_coffee"/>
+
+        <Button
+            android:id="@+id/create_review_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm_btn"
+            android:layout_below="@+id/create_review_edittext"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="20dp"/>
+        <Button
+            android:id="@+id/create_review_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/back_btn"
+            android:layout_below="@+id/create_review_edittext"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="20dp"/>
+    </RelativeLayout>
+
+    <include layout="@layout/snackbar_coordinatorayout" />
+
+    <include layout="@layout/toolbar" />
+
+    <include layout="@layout/nav_drawer" />
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -74,6 +74,13 @@
     <string name="start_scene_secure">\u2022 Sécurise</string>
     <string name="header_text">Des millions de films, d\'émissions de télévision et de personnes à découvrir. Explorez maintenant.</string>
     <string name="reviews_heading">Reviews</string>
+    <string name="all">All</string>
+    <string name="movies">Movies</string>
+    <string name="tvs">Tvs</string>
+    <string name="create_review">Create Review</string>
+    <string name="rating">Rating</string>
+    <string name="your_review">Your Review</string>
+    <string name="back_btn">Back</string>
     <string-array name="media_array">
         <item>Tout</item>
         <item>Film</item>
@@ -86,5 +93,12 @@
         <item>Date de sortie croissante</item>
         <item>Titre (A-Z)</item>
         <item>Titre (Z-A)</item>
+    </string-array>
+    <string-array name="rating_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.filmatory.guis;
 
+import android.content.Intent
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +13,7 @@ import com.example.filmatory.api.data.movie.MovieReviews
 import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.controllers.sceneControllers.MovieController
 import com.example.filmatory.scenes.activities.MovieScene
+import com.example.filmatory.scenes.activities.TvsScene
 
 class MovieGui(private var movieScene: MovieScene, private var movieController : MovieController) {
     var personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
@@ -26,6 +29,8 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
 
     var movieImage: ImageView = movieScene.findViewById(R.id.m_img)
     var reviewHeading: TextView = movieScene.findViewById(R.id.review_heading)
+
+    var newReviewBtn: Button = movieScene.findViewById(R.id.new_review_btn)
 
     init {
         if(movieController.isLoggedIn) {
@@ -46,6 +51,9 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
             addToListBtn.setOnClickListener {
                 movieController.addToUserList()
             }
+            newReviewBtn.setOnClickListener {
+                movieController.newReviewActivity()
+            }
         } else {
             favoriteBtn.setOnClickListener {
                 movieController.notLoggedin()
@@ -56,6 +64,9 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
             }
 
             addToListBtn.setOnClickListener {
+                movieController.notLoggedin()
+            }
+            newReviewBtn.setOnClickListener {
                 movieController.notLoggedin()
             }
         }

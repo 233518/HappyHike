@@ -116,24 +116,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
             </RelativeLayout>
-
             <TextView
                 android:id="@+id/review_heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/m_slider_wrapper"
+                android:layout_below="@+id/m_slider_wrapper"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/reviews_heading"
                 android:textColor="@color/white"
-                android:visibility="gone"
                 android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/new_review_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/review_heading"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="30dp"
+                android:text="New Review" />
+
 
             <RelativeLayout
                 android:id="@+id/review_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/review_heading"
+                android:layout_below="@+id/new_review_btn"
                 android:padding="10dp">
 
                 <androidx.recyclerview.widget.RecyclerView

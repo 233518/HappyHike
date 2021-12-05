@@ -1,5 +1,6 @@
 package com.example.filmatory.guis
 
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,6 +26,8 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
     var tvImage : ImageView = tvScene.findViewById(R.id.m_img)
     var reviewHeading: TextView = tvScene.findViewById(R.id.review_heading)
 
+    var newReviewBtn: Button = tvScene.findViewById(R.id.new_review_btn)
+
     init {
         if(tvController.isLoggedIn) {
             favoriteBtn.setOnClickListener {
@@ -46,6 +49,10 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
             addToListBtn.setOnClickListener {
                 tvController.addToUserList()
             }
+
+            newReviewBtn.setOnClickListener {
+                tvController.newReviewActivity()
+            }
         } else {
             favoriteBtn.setOnClickListener {
                tvController.notLoggedin()
@@ -56,6 +63,10 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
             }
 
             addToListBtn.setOnClickListener {
+                tvController.notLoggedin()
+            }
+
+            newReviewBtn.setOnClickListener {
                 tvController.notLoggedin()
             }
         }
