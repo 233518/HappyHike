@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.systems.ApiSystem

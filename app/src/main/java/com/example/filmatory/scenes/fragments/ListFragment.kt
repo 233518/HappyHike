@@ -33,11 +33,6 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        listsAdapter.notifyDataSetChanged()
-    }
-
     fun showUserLists(userLists: UserLists){
         for (item in userLists) {
             listsArrayList.add(

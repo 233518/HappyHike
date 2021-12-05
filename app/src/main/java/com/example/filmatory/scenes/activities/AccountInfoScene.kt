@@ -14,10 +14,6 @@ class AccountInfoScene : SuperScene() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account_information)
-    }
-
-    override fun onStart() {
-        super.onStart()
         accountInfoController = AccountInfoController(this)
     }
 }

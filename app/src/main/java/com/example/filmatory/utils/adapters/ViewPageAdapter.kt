@@ -14,6 +14,7 @@ class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, ac
     var listFragment = ListFragment(apiSystem, accountInfoScene)
     var statisticsFragment = StatisticsFragment()
     var accinfoFragment = AccinfoFragment(apiSystem, accountInfoScene)
+
     override fun getItemCount(): Int {
         return 5
     }

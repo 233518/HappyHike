@@ -29,7 +29,6 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
     private var toolbar: Toolbar = appCompatActivity.findViewById(R.id.main_toolbar)
     private var langBtn : ImageButton = appCompatActivity.findViewById(R.id.language_btn)
     init{
-        println("DEBUG NAV: " + appCompatActivity.findViewById(R.id.drawer_layout))
         appCompatActivity.setSupportActionBar(toolbar)
         appCompatActivity.supportActionBar?.setDisplayShowHomeEnabled(true)
         toggle = ActionBarDrawerToggle(
@@ -126,40 +125,39 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
                 0 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "en")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 1 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "no")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 2 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "de")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 3 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "fr")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 4 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "es")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
                 5 -> {
                     Lingver.getInstance().setLocale(appCompatActivity, "zh")
                     val intent = Intent(appCompatActivity, StartScene::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    appCompatActivity.finish()
                     appCompatActivity.startActivity(intent)
                 }
-
                 else -> {
                     println("Error her")
                 }

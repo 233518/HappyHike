@@ -28,7 +28,7 @@ open class MainController(protected val scene : SuperScene) {
     protected val languageCode: String = Lingver.getInstance().getLanguage()
 
     val uid = scene.auth.currentUser?.uid
-    val isLoggedIn : Boolean = scene.auth.currentUser?.uid != null
+    val isLoggedIn : Boolean = uid != null
 
     fun onFailure(error : BaseError) {
         snackbarSystem.showSnackbarFailure(error.message, ::redirectHome, "Home")

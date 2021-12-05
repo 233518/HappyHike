@@ -1,8 +1,6 @@
 package com.example.filmatory.controllers.sceneControllers
 
-import android.content.ContentValues.TAG
-import android.util.Log
-import androidx.lifecycle.Lifecycle
+import com.anychart.charts.Pie
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
@@ -12,7 +10,6 @@ import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.ViewPageAdapter
 import com.example.filmatory.utils.observers.AccountInfoObserver
-import kotlin.properties.Delegates
 
 /**
  * AccountInfoController manipulates the AccountInfoScene gui
@@ -61,9 +58,14 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         accountInfoGui.viewPager2.currentItem = page
         accountInfoGui.initializeTab()
     }
-    override fun onStatisticsInitialized() {
+    override fun onStatisticsInitialized(pie: Pie) {
         if(ready == 2) {
-            tabAdapter.statisticsFragment.updateGraph(favorites, watchlist)
+            tabAdapter.statisticsFragment.updateGraph(favorites, watchlist, pie)
+        } else {
+            while(ready != 2) {
+                Thread.sleep(500)
+            }
+            tabAdapter.statisticsFragment.updateGraph(favorites, watchlist, pie)
         }
     }
 }
