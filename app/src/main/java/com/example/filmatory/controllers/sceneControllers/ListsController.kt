@@ -37,7 +37,7 @@ class ListsController(private val listsScene: ListsScene) : MainController(lists
                     ListItem(
                         item.listName,
                         item.userName,
-                        "http://placeimg.com/189/124/arch?t=1638523644997",
+                        "https://picsum.photos/124/189",
                         item.numberOfTvShows.toString(),
                         item.numberOfMovies.toString(),
                         item.listId

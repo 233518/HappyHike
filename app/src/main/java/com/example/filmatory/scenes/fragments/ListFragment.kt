@@ -43,8 +43,8 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
             listsArrayList.add(
                 ListItem(
                     item.listname,
-                    item.listUserId,
-                    "http://placeimg.com/189/124/arch?t=1638523644997",
+                    "",
+                    "https://picsum.photos/124/189",
                     item.tvs.size.toString(),
                     item.movies.size.toString(),
                     item.listId
