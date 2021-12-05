@@ -11,5 +11,5 @@ import com.example.filmatory.systems.AuthSystem
  * @property authScene The AuthScene to use
  */
 open class AuthController(private val authScene: AuthScene) : MainController(authScene) {
-    protected var authSystem = AuthSystem(apiSystem, authScene.auth, authScene)
+    protected var authSystem = AuthSystem(apiSystem, authScene.auth, authScene, snackbarSystem)
 }

@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
  * @property auth The FirebaseAuth object to use
  * @property scene What scene it will be implemented in
  */
-class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAuth, private val scene: AppCompatActivity) {
+class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAuth, private val scene: AppCompatActivity, private val snackbarSystem: SnackbarSystem) {
 
     /**
      * loginUser logs the user in
