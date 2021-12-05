@@ -2,6 +2,7 @@ package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
 import com.example.filmatory.controllers.MainController
+import com.example.filmatory.guis.MovieGui
 import com.example.filmatory.guis.ReviewGui
 import com.example.filmatory.scenes.activities.CreateReviewScene
 import com.example.filmatory.scenes.activities.MovieScene
@@ -10,6 +11,7 @@ import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.systems.ReviewSystem
 
 class CreateReviewController(private val createReviewScene: CreateReviewScene) : MainController(createReviewScene) {
+    private val createReviewGui = ReviewGui(createReviewScene, this)
     private val reviewSystem = ReviewSystem(apiSystem, snackbarSystem, createReviewScene)
     private var intent: Intent = createReviewScene.intent
 
