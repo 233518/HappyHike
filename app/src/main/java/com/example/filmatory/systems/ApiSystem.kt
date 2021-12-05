@@ -266,6 +266,21 @@ class ApiSystem : OnApiRequestFinishedListener {
             .build()
         api.runRequestPostForm("/list/delete", formBody, this, 14, postBaseOptions)
     }
+    fun postReviewMoviePending(postBaseOptions: PostBaseOptions) {
+        val formBody = FormBody.Builder()
+            .add("data", postBaseOptions.params?.get("movie"))
+            .add("type", "movie")
+            .build()
+        api.runRequestPostForm("/review/new", formBody, this, 15, postBaseOptions)
+    }
+
+    fun postReviewTvPending(postBaseOptions: PostBaseOptions) {
+        val formBody = FormBody.Builder()
+            .add("data", postBaseOptions.params?.get("tv"))
+            .add("type", "tv")
+            .build()
+        api.runRequestPostForm("/review/new", formBody, this, 16, postBaseOptions)
+    }
 
     override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
         val gson = GsonBuilder().create()
@@ -316,6 +331,8 @@ class ApiSystem : OnApiRequestFinishedListener {
             12 -> function(result as (Any))
             13 -> function(result as (Any))
             14 -> function(result as (Any))
+            15 -> function(result as (Any))
+            16 -> function(result as (Any))
             else -> {
                 print("Something went wrong, cant find requestId")
             }

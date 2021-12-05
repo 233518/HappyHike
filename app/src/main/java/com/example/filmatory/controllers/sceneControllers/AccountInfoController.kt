@@ -16,7 +16,7 @@ import com.example.filmatory.utils.observers.AccountInfoObserver
  *
  * @property accountInfoScene The AccountInfoScene to use
  */
-class AccountInfoController(private val accountInfoScene: AccountInfoScene) : MainController(accountInfoScene), AccountInfoObserver{
+class AccountInfoController(private val accountInfoScene: AccountInfoScene) : MainController(accountInfoScene), AccountInfoObserver {
     private val accountInfoGui = AccountInfoGui(accountInfoScene, this)
     private var tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem)
     private lateinit var favorites: Favorites
@@ -47,7 +47,6 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         tabAdapter.listFragment.showUserLists(userLists)
     }
 
-
     private fun initializeTabAdapter(){
         val defaultPage = 0
         val page = accountInfoScene.intent.getIntExtra("position", defaultPage)
@@ -58,6 +57,7 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         accountInfoGui.viewPager2.currentItem = page
         accountInfoGui.initializeTab()
     }
+
     override fun onStatisticsInitialized(pie: Pie) {
         if(ready == 2) {
             tabAdapter.statisticsFragment.updateGraph(favorites, watchlist, pie)
