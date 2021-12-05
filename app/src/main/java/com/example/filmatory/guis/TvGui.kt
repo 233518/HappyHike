@@ -23,6 +23,7 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
     var tvOverview : TextView = tvScene.findViewById(R.id.m_overview)
 
     var tvImage : ImageView = tvScene.findViewById(R.id.m_img)
+    var reviewHeading: TextView = tvScene.findViewById(R.id.review_heading)
 
     init {
         if(tvController.isLoggedIn) {

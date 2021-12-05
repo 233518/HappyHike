@@ -74,6 +74,7 @@
     <string name="start_scene_free">\u2022 Gratis</string>
     <string name="start_scene_secure">\u2022 Trygt</string>
     <string name="header_text">Millioner av filmer, TV-serier og folk å oppdage. Utforsk nå.</string>
+    <string name="reviews_heading">Reviews</string>
     <string-array name="media_array">
         <item>Alt</item>
         <item>Film</item>

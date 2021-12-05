@@ -1,6 +1,7 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
+import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -377,6 +378,9 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
 
     private fun getReviews(tvReviews: TvReviews){
         tvScene.runOnUiThread {
+            if(tvReviews.size != 0) tvGui.reviewHeading.visibility = View.VISIBLE
+
+
             tvReviews.forEach {
                     item -> reviewArrayList.add(ReviewItem(item.author, item.avatar, item.date, item.text, item.stars, item.userId, item._id))
             }

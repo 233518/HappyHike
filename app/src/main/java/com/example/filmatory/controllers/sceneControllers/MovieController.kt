@@ -1,6 +1,7 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
@@ -377,6 +378,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
 
     private fun getReviews(movieReviews: MovieReviews){
         movieScene.runOnUiThread {
+            if(movieReviews.size != 0) movieGui.reviewHeading.visibility = View.VISIBLE
             movieReviews.forEach {
                 item -> reviewArrayList.add(ReviewItem(item.author, item.avatar, item.date, item.text, item.stars, item.userId, item._id))
             }

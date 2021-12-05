@@ -25,6 +25,7 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
     var movieOverview: TextView = movieScene.findViewById(R.id.m_overview)
 
     var movieImage: ImageView = movieScene.findViewById(R.id.m_img)
+    var reviewHeading: TextView = movieScene.findViewById(R.id.review_heading)
 
     init {
         if(movieController.isLoggedIn) {
