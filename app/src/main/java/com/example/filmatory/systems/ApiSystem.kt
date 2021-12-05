@@ -16,6 +16,7 @@ import com.example.filmatory.api.data.user.User
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.errors.BaseError
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
 import java.util.*
@@ -268,7 +269,10 @@ class ApiSystem : OnApiRequestFinishedListener {
     }
     fun postReviewMoviePending(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("data", postBaseOptions.params?.get("movie"))
+            .add("uid", postBaseOptions.uid)
+            .add("id", postBaseOptions.id)
+            .add("text", postBaseOptions.params?.get("text"))
+            .add("stars", postBaseOptions.params?.get("stars"))
             .add("type", "movie")
             .build()
         api.runRequestPostForm("/review/new", formBody, this, 15, postBaseOptions)
@@ -276,7 +280,10 @@ class ApiSystem : OnApiRequestFinishedListener {
 
     fun postReviewTvPending(postBaseOptions: PostBaseOptions) {
         val formBody = FormBody.Builder()
-            .add("data", postBaseOptions.params?.get("tv"))
+            .add("uid", postBaseOptions.uid)
+            .add("id", postBaseOptions.id)
+            .add("text", postBaseOptions.params?.get("text"))
+            .add("stars", postBaseOptions.params?.get("stars"))
             .add("type", "tv")
             .build()
         api.runRequestPostForm("/review/new", formBody, this, 16, postBaseOptions)
