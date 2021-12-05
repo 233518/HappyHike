@@ -27,21 +27,25 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
      * @param password The password for the user
      */
     fun loginUser(email : String, password : String) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(scene) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success
-                    Log.d(TAG, "signInWithEmail:success")
-                    val intent = Intent(scene, StartScene::class.java)
-                    scene.finish()
-                    scene.startActivity(intent)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
-                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+        if(email != "" && password != ""){
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(scene) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success
+                        Log.d(TAG, "signInWithEmail:success")
+                        val intent = Intent(scene, StartScene::class.java)
+                        scene.finish()
+                        scene.startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "signInWithEmail:failure", task.exception)
+                        val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
+                        snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+                    }
                 }
-            }
+        } else {
+            snackbarSystem!!.showSnackbarFailure("One or both fields are empty.", ::retry, "")
+        }
     }
 
     /**
@@ -51,23 +55,27 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
      * @param password The password for the new account
      */
     fun registerUser(email : String, password : String) {
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(scene) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    newUserInDatabase(user!!.uid)
-                    val intent = Intent(scene, StartScene::class.java)
-                    scene.finish()
-                    scene.startActivity(intent)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
-                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+        if(email != "" && password != ""){
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(scene) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val user = auth.currentUser
+                        newUserInDatabase(user!!.uid)
+                        val intent = Intent(scene, StartScene::class.java)
+                        scene.finish()
+                        scene.startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
+                        snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+                    }
                 }
-            }
+        } else {
+            snackbarSystem!!.showSnackbarFailure("Make sure all fields are filled", ::retry, "")
+        }
     }
 
     fun updatePassword(password: String){
@@ -86,17 +94,21 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
     }
 
     fun sendResetLink(email : String){
-        auth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                if(task.isSuccessful){
-                    Log.d(TAG, "Email sent")
-                    snackbarSystem!!.showSnackbarSuccess("Email has been sent.")
-                } else {
-                    Log.w(TAG, "Email did not send", task.exception)
-                    val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
-                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+        if(email != ""){
+            auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        Log.d(TAG, "Email sent")
+                        snackbarSystem!!.showSnackbarSuccess("Email has been sent.")
+                    } else {
+                        Log.w(TAG, "Email did not send", task.exception)
+                        val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
+                        snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+                    }
                 }
-            }
+        } else {
+            snackbarSystem!!.showSnackbarFailure("Make sure field is not empty.", ::retry, "")
+        }
     }
 
     /**
