@@ -19,19 +19,19 @@
         android:padding="10dp"
         android:layout_centerHorizontal="true">
         <Button
-            android:id="@+id/allFavoritesBtn"
+            android:id="@+id/allWatchlistBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:text="All"/>
         <Button
-            android:id="@+id/movieFavoritesBtn"
+            android:id="@+id/movieWatchlistBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:text="Movies"/>
         <Button
-            android:id="@+id/tvFavoritesBtn"
+            android:id="@+id/tvWatchlistBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tvs"/>
