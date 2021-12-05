@@ -73,6 +73,7 @@
     <string name="start_scene_free">\u2022 Libérer</string>
     <string name="start_scene_secure">\u2022 Sécurise</string>
     <string name="header_text">Des millions de films, d\'émissions de télévision et de personnes à découvrir. Explorez maintenant.</string>
+    <string name="reviews_heading">Reviews</string>
     <string-array name="media_array">
         <item>Tout</item>
         <item>Film</item>

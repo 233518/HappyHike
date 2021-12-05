@@ -73,6 +73,7 @@
     <string name="start_scene_free">\u2022 Kostenlos</string>
     <string name="start_scene_secure">\u2022 Sicher</string>
     <string name="header_text">Millionen Filme, Fernsehsendungen und Menschen, die es zu entdecken gilt. Jetzt erkunden.</string>
+    <string name="reviews_heading">Reviews</string>
     <string-array name="media_array">
         <item>Alle</item>
         <item>Film</item>

@@ -73,6 +73,7 @@
     <string name="start_scene_free">\u2022 免费</string>
     <string name="start_scene_secure">\u2022 安全</string>
     <string name="header_text">数以百万计的电影、电视节目和人物等待您去发现。立即探索。</string>
+    <string name="reviews_heading">Reviews</string>
     <string-array name="media_array">
         <item>全部</item>
         <item>电影</item>

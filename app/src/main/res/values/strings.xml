@@ -73,6 +73,7 @@
     <string name="start_scene_free">\u2022 Free</string>
     <string name="start_scene_secure">\u2022 Secure</string>
     <string name="header_text">Millions of movies, TV shows and people to discover. Explore now.</string>
+    <string name="reviews_heading">Reviews</string>
     <string-array name="media_array">
         <item>All</item>
         <item>Movie</item>
