@@ -4,17 +4,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.filmatory.controllers.sceneControllers.AccountInfoController
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.scenes.fragments.*
-import com.example.filmatory.systems.ApiSystem
-import com.example.filmatory.systems.SnackbarSystem
 
-class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, accountInfoScene: AccountInfoScene, apiSystem: ApiSystem, snackbarSystem: SnackbarSystem) : FragmentStateAdapter(fragmentManager, lifecycle) {
-    var favoriteFragment = FavoriteFragment(accountInfoScene)
-    var watchlistFragment = WatchlistFragment(accountInfoScene)
-    var listFragment = ListFragment(apiSystem, accountInfoScene)
+class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, accountInfoScene: AccountInfoScene, accountInfoController: AccountInfoController) : FragmentStateAdapter(fragmentManager, lifecycle) {
+    var favoriteFragment = FavoriteFragment(accountInfoScene, accountInfoController)
+    var watchlistFragment = WatchlistFragment(accountInfoScene, accountInfoController)
+    var listFragment = ListFragment(accountInfoController.apiSystem, accountInfoScene)
     var statisticsFragment = StatisticsFragment()
-    var accinfoFragment = AccinfoFragment(apiSystem, accountInfoScene, snackbarSystem)
+    var accinfoFragment = AccinfoFragment(accountInfoScene, accountInfoController)
 
     override fun getItemCount(): Int {
         return 5

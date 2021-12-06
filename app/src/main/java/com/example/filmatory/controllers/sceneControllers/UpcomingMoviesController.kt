@@ -17,7 +17,7 @@ import com.example.filmatory.utils.items.MediaModel
 class UpcomingMoviesController(private val upcomingMoviesScene: UpcomingMoviesScene) : MainController(upcomingMoviesScene) {
     private val upcomingMoviesGui = UpcomingMoviesGui(upcomingMoviesScene, this)
     private var upcomingMoviesArrayList : ArrayList<MediaModel> = ArrayList()
-    private var upcomingMoviesAdapter = DataAdapter(upcomingMoviesScene, upcomingMoviesScene, upcomingMoviesArrayList)
+    private var upcomingMoviesAdapter = DataAdapter(upcomingMoviesScene, this, upcomingMoviesScene, upcomingMoviesArrayList)
 
     init {
         apiSystem.requestMovieUpcoming(RequestBaseOptions(null, null, ::upcomingMoviesData, ::onFailure))

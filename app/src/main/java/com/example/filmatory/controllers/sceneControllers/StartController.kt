@@ -32,7 +32,7 @@ class StartController(private val startScene: StartScene) : MainController(start
      */
     private fun discoverMoviesData(movieFrontpage: MovieFrontpage){
         val discoverMoviesArraylist: ArrayList<MediaModel> = ArrayList()
-        val discoverMoviesAdapter = DataAdapter(startScene, startScene, discoverMoviesArraylist)
+        val discoverMoviesAdapter = DataAdapter(startScene, this, startScene, discoverMoviesArraylist)
 
         movieFrontpage.forEach { item ->
             discoverMoviesArraylist.add(
@@ -59,7 +59,7 @@ class StartController(private val startScene: StartScene) : MainController(start
      */
     private fun discoverTvData(tvFrontpage: TvFrontpage){
         val discoverTvsArrayList: ArrayList<MediaModel> = ArrayList()
-        val discoverTvsAdapter = DataAdapter(startScene, startScene, discoverTvsArrayList)
+        val discoverTvsAdapter = DataAdapter(startScene,this, startScene, discoverTvsArrayList)
 
         tvFrontpage.forEach { item ->
             discoverTvsArrayList.add(
@@ -86,7 +86,7 @@ class StartController(private val startScene: StartScene) : MainController(start
      */
     private fun recMovieData(movieFrontpage: MovieFrontpage){
         val recMoviesArrayList: ArrayList<MediaModel> = ArrayList()
-        val redMoviesAdapter = DataAdapter(startScene, startScene, recMoviesArrayList)
+        val redMoviesAdapter = DataAdapter(startScene,this, startScene, recMoviesArrayList)
 
         movieFrontpage.forEach { item ->
             recMoviesArrayList.add(
@@ -113,7 +113,7 @@ class StartController(private val startScene: StartScene) : MainController(start
      */
     private fun recTvData(tvFrontpage: TvFrontpage){
         val recTvsArrayList: ArrayList<MediaModel> = ArrayList()
-        val recTvsAdapter = DataAdapter(startScene, startScene, recTvsArrayList)
+        val recTvsAdapter = DataAdapter(startScene,this, startScene, recTvsArrayList)
 
         tvFrontpage.forEach { item ->
             recTvsArrayList.add(

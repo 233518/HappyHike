@@ -17,7 +17,7 @@ import com.example.filmatory.utils.items.MediaModel
 class UpcomingTvsController(private val upcomingTvsScene: UpcomingTvsScene) : MainController(upcomingTvsScene) {
     private val upcomingTvsGui = UpcomingTvsGui(upcomingTvsScene, this)
     private val upcomingTvsArraylist : ArrayList<MediaModel> = ArrayList()
-    private val upcomingTvsAdapter = DataAdapter(upcomingTvsScene, upcomingTvsScene, upcomingTvsArraylist)
+    private val upcomingTvsAdapter = DataAdapter(upcomingTvsScene,this, upcomingTvsScene, upcomingTvsArraylist)
 
     init {
         apiSystem.requestTvsUpcoming(RequestBaseOptions(null, null, ::upcomingTvsData, ::onFailure))

@@ -10,13 +10,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
+import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.scenes.activities.TvScene
 import com.example.filmatory.utils.items.MediaModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class DataAdapter(var scene: SuperScene, private var context : Context, var arrayList: ArrayList<MediaModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DataAdapter(private val scene: SuperScene, private val controller : MainController, private var context : Context, var arrayList: ArrayList<MediaModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var uid = scene.auth.uid
 

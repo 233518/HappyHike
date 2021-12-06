@@ -19,10 +19,10 @@ import com.yariksoffice.lingver.Lingver
  * @param scene The scene the controller will be connected to
  */
 open class MainController(protected val scene : SuperScene) {
-    protected val navSystem = NavSystem(scene)
-    protected val apiSystem = ApiSystem()
-    protected val snackbarSystem = SnackbarSystem(scene.findViewById(R.id.snackbar_layout))
-    protected val languageCode: String = Lingver.getInstance().getLanguage()
+    val navSystem = NavSystem(scene)
+    val apiSystem = ApiSystem()
+    val snackbarSystem = SnackbarSystem(scene.findViewById(R.id.snackbar_layout))
+    val languageCode: String = Lingver.getInstance().getLanguage()
 
     val uid = scene.auth.currentUser?.uid
     val isLoggedIn : Boolean = uid != null

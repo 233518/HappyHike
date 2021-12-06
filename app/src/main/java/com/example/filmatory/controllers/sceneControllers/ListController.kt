@@ -34,8 +34,8 @@ class ListController(private val listScene: ListScene) : MainController(listScen
 
     private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
     private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
-    private var movieListAdapter = DataAdapter(listScene, listScene, movieListArrayList)
-    private var tvListAdapter = DataAdapter(listScene, listScene, tvListArrayList)
+    private var movieListAdapter = DataAdapter(listScene, this, listScene, movieListArrayList)
+    private var tvListAdapter = DataAdapter(listScene, this, listScene, tvListArrayList)
     private var userIsOwner : Boolean  = false
 
     val listId = intent.getStringExtra("listId")

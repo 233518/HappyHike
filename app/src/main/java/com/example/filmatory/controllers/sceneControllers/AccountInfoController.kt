@@ -18,7 +18,7 @@ import com.example.filmatory.utils.observers.AccountInfoObserver
  */
 class AccountInfoController(private val accountInfoScene: AccountInfoScene) : MainController(accountInfoScene), AccountInfoObserver {
     private val accountInfoGui = AccountInfoGui(accountInfoScene, this)
-    private var tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, apiSystem, snackbarSystem)
+    private var tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, this)
     private lateinit var favorites: Favorites
     private lateinit var watchlist: Watchlist
     private var ready = 0

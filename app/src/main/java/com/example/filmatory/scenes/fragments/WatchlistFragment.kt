@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.Watchlist
+import com.example.filmatory.controllers.sceneControllers.AccountInfoController
 import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
-class WatchlistFragment(private var scene: SuperScene) : Fragment(R.layout.fragment_watchlist) {
+class WatchlistFragment(private val scene: SuperScene, private val accountInfoController: AccountInfoController) : Fragment(R.layout.fragment_watchlist) {
     private val movieWatchlistArraylist: ArrayList<MediaModel> = ArrayList()
     private val tvWatchlistArraylist: ArrayList<MediaModel> = ArrayList()
     private var allWatchlistArraylist: ArrayList<MediaModel> = ArrayList()
@@ -28,8 +29,8 @@ class WatchlistFragment(private var scene: SuperScene) : Fragment(R.layout.fragm
         val tvBtn : Button = view.findViewById(R.id.tvWatchlistBtn)
         val allBtn : Button = view.findViewById(R.id.allWatchlistBtn)
         allWatchlistArraylist = (tvWatchlistArraylist + movieWatchlistArraylist) as ArrayList<MediaModel>
-        movieAdapter = DataAdapter(scene, requireActivity(), movieWatchlistArraylist)
-        tvAdapter = DataAdapter(scene, requireActivity(), tvWatchlistArraylist)
+        movieAdapter = DataAdapter(scene, accountInfoController, requireActivity(), movieWatchlistArraylist)
+        tvAdapter = DataAdapter(scene, accountInfoController, requireActivity(), tvWatchlistArraylist)
         recyclerView.layoutManager = GridLayoutManager(activity, 2)
         val concatAdapter = ConcatAdapter(movieAdapter, tvAdapter)
         recyclerView.adapter = concatAdapter

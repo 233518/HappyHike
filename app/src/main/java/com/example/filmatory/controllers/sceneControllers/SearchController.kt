@@ -19,8 +19,8 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
 
     private var movieListArrayList: ArrayList<MediaModel> = ArrayList()
     private var tvListArrayList: ArrayList<MediaModel> = ArrayList()
-    private var movieListAdapter = DataAdapter(searchScene, searchScene, movieListArrayList)
-    private var tvListAdapter = DataAdapter(searchScene, searchScene, tvListArrayList)
+    private var movieListAdapter = DataAdapter(searchScene,this, searchScene, movieListArrayList)
+    private var tvListAdapter = DataAdapter(searchScene,this, searchScene, tvListArrayList)
 
     private inner class MediaSorted(val movieArray: ArrayList<SearchItem>, val tvArray: ArrayList<SearchItem>)
 
