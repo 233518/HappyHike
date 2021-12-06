@@ -8,6 +8,9 @@ import com.example.filmatory.controllers.MainController
 import com.example.filmatory.guis.AccountInfoGui
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
+import com.example.filmatory.systems.FavoriteSystem
+import com.example.filmatory.systems.MovieSystem
+import com.example.filmatory.systems.TvSystem
 import com.example.filmatory.utils.adapters.ViewPageAdapter
 import com.example.filmatory.utils.observers.AccountInfoObserver
 
@@ -19,6 +22,9 @@ import com.example.filmatory.utils.observers.AccountInfoObserver
 class AccountInfoController(private val accountInfoScene: AccountInfoScene) : MainController(accountInfoScene), AccountInfoObserver {
     private val accountInfoGui = AccountInfoGui(accountInfoScene, this)
     private var tabAdapter = ViewPageAdapter(accountInfoScene.supportFragmentManager, accountInfoScene.lifecycle, accountInfoScene, this)
+    private val movieSystem = MovieSystem(apiSystem, snackbarSystem, accountInfoScene)
+    private val tvSystem = TvSystem(apiSystem, snackbarSystem, accountInfoScene)
+    private val favoriteSystem = FavoriteSystem(accountInfoScene, movieSystem, tvSystem)
     private lateinit var favorites: Favorites
     private lateinit var watchlist: Watchlist
     private var ready = 0
@@ -67,5 +73,9 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
             }
             tabAdapter.statisticsFragment.updateGraph(favorites, watchlist, pie)
         }
+    }
+
+    override fun getFavoriteSystem(): FavoriteSystem {
+        return favoriteSystem
     }
 }

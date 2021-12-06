@@ -39,7 +39,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesData, ::onFailure))
         apiSystem.requestMoviesFilterTitleAZ(RequestBaseOptions(null, null, ::moviesDataFilterTitle, ::onFailure))
         apiSystem.requestMoviesFilterDateDesc(RequestBaseOptions(null, null, ::moviesDataFilterDate, ::onFailure))
-
+        moviesPopularAsc.reverse()
         moviesGui.nestedSv.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             // on scroll change we are checking when users scroll as bottom.
 
