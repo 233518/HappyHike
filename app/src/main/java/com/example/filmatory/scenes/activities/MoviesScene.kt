@@ -12,19 +12,11 @@ import com.example.filmatory.scenes.SuperScene
  * MoviesScene is the scene for showing movies
  *
  */
-class MoviesScene : SuperScene(), AdapterView.OnItemSelectedListener {
+class MoviesScene : SuperScene() {
     private lateinit var moviesController: MoviesController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.media_list_container)
         moviesController = MoviesController(this)
-    }
-
-    override fun onItemSelected(p0: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        moviesController.onNewSelected(p0.getItemAtPosition(pos))
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
     }
 }

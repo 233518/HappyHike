@@ -1,6 +1,7 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movies
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
@@ -9,6 +10,7 @@ import com.example.filmatory.scenes.activities.MoviesScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlin.collections.ArrayList
 
 /**
@@ -157,22 +159,47 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         }
     }
 
-    /**
-     * Listens to spinner changes, displays data accordingly
-     *
-     * @param itemAtPosition Chosen item in spinner
-     */
-    fun onNewSelected(itemAtPosition: Any) {
-        when(moviesGui.spinner.selectedItemPosition){
-            0 -> moviesPopularDesc()
-            1 -> moviesPopularAsc()
-            2 -> moviesDateAsc()
-            3 -> moviesDateDesc()
-            4 -> moviesTitleAZ()
-            5 -> moviesTitleZA()
-            else -> {
-                moviesPopularDesc()
-            }
+    fun showFilterList(){
+        moviesScene.runOnUiThread {
+            var chosenItem: Int = -1
+            MaterialAlertDialogBuilder(moviesScene)
+                .setTitle(moviesScene.resources.getString(R.string.filter))
+                .setNeutralButton(moviesScene.resources.getString(R.string.cancel_btn)) { dialog, which -> }
+                .setPositiveButton(moviesScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    when(chosenItem){
+                        0 -> moviesPopularDesc()
+                        1 -> moviesPopularAsc()
+                        2 -> moviesDateAsc()
+                        3 -> moviesDateDesc()
+                        4 -> moviesTitleAZ()
+                        5 -> moviesTitleZA()
+                        else -> {
+                            moviesPopularDesc()
+                        }
+                    }
+                }
+                .setSingleChoiceItems(R.array.filter_array, chosenItem) { dialog, which ->
+                    chosenItem = which
+                }
+            .show()
+        }
+    }
+
+    fun showGenreFilterList(){
+        moviesScene.runOnUiThread {
+            var chosenItem: Int = -1
+            MaterialAlertDialogBuilder(moviesScene)
+                .setTitle(moviesScene.resources.getString(R.string.filter_genre))
+                .setNeutralButton(moviesScene.resources.getString(R.string.close_btn)) { dialog, which -> }
+                .setPositiveButton(moviesScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    when(chosenItem){
+
+                    }
+                }
+                .setSingleChoiceItems(R.array.filter_genre_movie_array, chosenItem) { dialog, which ->
+                    chosenItem = which
+                }
+            .show()
         }
     }
 }

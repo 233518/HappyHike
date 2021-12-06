@@ -81,6 +81,9 @@
     <string name="rating">Rating</string>
     <string name="your_review">Your Review</string>
     <string name="back_btn">Back</string>
+    <string name="filter">Filter</string>
+    <string name="filter_genre">Filter Genre</string>
+    <string name="close_btn">Close</string>
     <string-array name="media_array">
         <item>All</item>
         <item>Movie</item>
@@ -100,5 +103,43 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+    <string-array name="filter_genre_movie_array">
+        <item>Action</item>
+        <item>Adventure</item>
+        <item>Animation</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Documentary</item>
+        <item>Drama</item>
+        <item>Family</item>
+        <item>Fantasy</item>
+        <item>History</item>
+        <item>Horror</item>
+        <item>Music</item>
+        <item>Mystery</item>
+        <item>Romance</item>
+        <item>Sci-fi</item>
+        <item>TV Movie</item>
+        <item>Thriller</item>
+        <item>War</item>
+        <item>Western</item>
+    </string-array>
+    <string-array name="filter_genre_tv_array">
+        <item>Action &amp; Adventure</item>
+        <item>Animation</item>
+        <item>Comedy</item>
+        <item>Crime</item>
+        <item>Documentary</item>
+        <item>Drama</item>
+        <item>Family</item>
+        <item>Kids</item>
+        <item>News</item>
+        <item>Reality</item>
+        <item>Sci-fi &amp; Fantasy</item>
+        <item>Soap</item>
+        <item>Talk</item>
+        <item>War &amp; Politics</item>
+        <item>Western</item>
     </string-array>
 </resources>

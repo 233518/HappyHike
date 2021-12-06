@@ -441,7 +441,7 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         var chosenList : Int = -1
         MaterialAlertDialogBuilder(tvScene)
             .setTitle(tvScene.resources.getString(R.string.mylists))
-            .setNeutralButton(tvScene.resources.getString(R.string.cancel_btn)) { _, which -> }
+            .setNeutralButton(tvScene.resources.getString(R.string.close_btn)) { _, which -> }
             .setPositiveButton(tvScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
                 if(chosenList != -1){
                     tvSystem.addTvToList(listArrayList[chosenList].list_id, tvId.toString())
@@ -452,7 +452,7 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
             .setSingleChoiceItems(listNameArrayList, chosenList) { dialog, which ->
                 chosenList = which
             }
-            .show()
+        .show()
     }
 
     fun newReviewActivity(){

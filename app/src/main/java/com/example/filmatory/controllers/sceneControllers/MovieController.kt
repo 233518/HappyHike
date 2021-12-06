@@ -440,7 +440,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
             var chosenList: Int = -1
             MaterialAlertDialogBuilder(movieScene)
                 .setTitle(movieScene.resources.getString(R.string.mylists))
-                .setNeutralButton(movieScene.resources.getString(R.string.cancel_btn)) { dialog, which -> }
+                .setNeutralButton(movieScene.resources.getString(R.string.close_btn)) { dialog, which -> }
                 .setPositiveButton(movieScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
                     if (chosenList != -1) {
                         movieSystem.addMovieToList(
@@ -454,7 +454,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
                 .setSingleChoiceItems(listNameArray, chosenList) { dialog, which ->
                     chosenList = which
                 }
-                .show()
+            .show()
         }
     }
 

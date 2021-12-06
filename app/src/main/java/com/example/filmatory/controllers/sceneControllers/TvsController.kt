@@ -14,6 +14,7 @@ import com.example.filmatory.scenes.activities.TvsScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * TvsController manipulates the TvsScene gui
@@ -161,22 +162,47 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         }
     }
 
-    /**
-     * Listens to spinner changes, displays data accordingly
-     *
-     * @param itemAtPosition Chosen item in spinner
-     */
-    fun onNewSelected(itemAtPosition: Any) {
-        when(tvsGui.spinner.selectedItemPosition){
-            0 -> tvsPopularDesc()
-            1 -> tvsPopularAsc()
-            2 -> tvsDateAsc()
-            3 -> tvsDateDesc()
-            4 -> tvsTitleAZ()
-            5 -> tvsTitleZA()
-            else -> {
-                tvsPopularDesc()
-            }
+    fun showFilterList(){
+        tvsScene.runOnUiThread {
+            var chosenItem: Int = -1
+            MaterialAlertDialogBuilder(tvsScene)
+                .setTitle(tvsScene.resources.getString(R.string.filter))
+                .setNeutralButton(tvsScene.resources.getString(R.string.close_btn)) { dialog, which -> }
+                .setPositiveButton(tvsScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    when(chosenItem){
+                        0 -> tvsPopularDesc()
+                        1 -> tvsPopularAsc()
+                        2 -> tvsDateAsc()
+                        3 -> tvsDateDesc()
+                        4 -> tvsTitleAZ()
+                        5 -> tvsTitleZA()
+                        else -> {
+                            tvsPopularDesc()
+                        }
+                    }
+                }
+                .setSingleChoiceItems(R.array.filter_array, chosenItem) { dialog, which ->
+                    chosenItem = which
+                }
+            .show()
+        }
+    }
+
+    fun showGenreFilterList(){
+        tvsScene.runOnUiThread {
+            var chosenItem: Int = -1
+            MaterialAlertDialogBuilder(tvsScene)
+                .setTitle(tvsScene.resources.getString(R.string.filter_genre))
+                .setNeutralButton(tvsScene.resources.getString(R.string.close_btn)) { dialog, which -> }
+                .setPositiveButton(tvsScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    when(chosenItem){
+
+                    }
+                }
+                .setSingleChoiceItems(R.array.filter_genre_tv_array, chosenItem) { dialog, which ->
+                    chosenItem = which
+                }
+            .show()
         }
     }
 }
