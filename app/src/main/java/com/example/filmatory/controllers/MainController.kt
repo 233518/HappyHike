@@ -1,9 +1,6 @@
 package com.example.filmatory.controllers
 
 import android.content.Intent
-import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.ConfigurationCompat
 import com.example.filmatory.R
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.SuperScene

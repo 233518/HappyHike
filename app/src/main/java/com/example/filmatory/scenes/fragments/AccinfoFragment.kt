@@ -12,15 +12,16 @@ import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.systems.AuthSystem
+import com.example.filmatory.systems.SnackbarSystem
 import com.example.filmatory.systems.UserInfoSystem
 import com.google.android.material.textfield.TextInputEditText
 
 
-class AccinfoFragment(apiSystem: ApiSystem, var accountInfoScene: AccountInfoScene) : Fragment() {
+class AccinfoFragment(apiSystem: ApiSystem, var accountInfoScene: AccountInfoScene, snackbarSystem: SnackbarSystem) : Fragment() {
     lateinit var changeUsernameBtn : Button
     lateinit var changePwBtn : Button
     var userInfoSystem = UserInfoSystem(apiSystem)
-    val authSystem = AuthSystem(apiSystem, accountInfoScene.auth, accountInfoScene, null)
+    val authSystem = AuthSystem(apiSystem, accountInfoScene.auth, accountInfoScene, snackbarSystem)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view : View = inflater.inflate(R.layout.fragment_accinfo, container, false)
         return view
