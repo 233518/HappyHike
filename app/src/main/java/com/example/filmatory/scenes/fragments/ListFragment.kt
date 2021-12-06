@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.UserLists
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.systems.UserInfoSystem
@@ -18,7 +19,7 @@ import com.example.filmatory.utils.adapters.ListsAdapter
 class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene) : Fragment(R.layout.fragment_list) {
     private val listsArrayList: MutableList<ListItem> = ArrayList()
     private lateinit var listsAdapter : ListsAdapter
-    var userInfoSystem = UserInfoSystem(apiSystem)
+    private var userInfoSystem = UserInfoSystem(apiSystem)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,7 +30,27 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
         recyclerView.adapter = listsAdapter
         createListBtn.setOnClickListener {
             val listName : String = view.findViewById<TextView>(R.id.accinfoNewListTextField).text.toString()
-            userInfoSystem.createList(accountInfoScene.auth.currentUser!!.uid, listName)
+            userInfoSystem.createList(accountInfoScene.auth.currentUser!!.uid, listName, ::addList, ::onFailure)
+        }
+    }
+
+    fun onFailure(baseError: BaseError) {
+
+    }
+
+    fun addList(id: String, name: String) {
+        listsArrayList.add(
+            ListItem(
+                name,
+                "",
+                "https://picsum.photos/124/189",
+                "0",
+                "0",
+                id
+            )
+        )
+        accountInfoScene.runOnUiThread {
+            listsAdapter.notifyDataSetChanged()
         }
     }
 
