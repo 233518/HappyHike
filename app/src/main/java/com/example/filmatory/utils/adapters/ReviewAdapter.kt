@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.RatingBar
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.PersonScene
@@ -25,7 +26,7 @@ class ReviewAdapter(private val arrayList: MutableList<ReviewItem>, private val 
         holder.reviewAuthor.text = arrayList[position].reviewAuthor
         holder.reviewDate.text = arrayList[position].reviewDate
         holder.reviewOverview.text = arrayList[position].reviewOverview
-        holder.reviewRating.text = arrayList[position].rating.toString()
+        holder.reviewRating.numStars = arrayList[position].rating
         Glide.with(context)
             .load("https://picsum.photos/40")
             .error(R.drawable.placeholder_image)
@@ -46,7 +47,7 @@ class ReviewAdapter(private val arrayList: MutableList<ReviewItem>, private val 
         val reviewDate: TextView = view.findViewById(R.id.review_date)
         val reviewOverview: TextView = view.findViewById(R.id.review_overview)
         val reviewAuthorAvatar: ImageView = view.findViewById(R.id.review_author_img)
-        val reviewRating: TextView = view.findViewById(R.id.review_rating)
+        val reviewRating: RatingBar = view.findViewById(R.id.rating_bar)
         var reviewAuthorId: String? = null
         var reviewId: String? = null
     }

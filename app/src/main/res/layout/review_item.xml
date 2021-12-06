@@ -47,16 +47,17 @@
                 android:textColor="@color/mint_cream"
                 android:text="27.05.2021"
                 />
-            <TextView
-                android:id="@+id/review_rating"
-                android:layout_below="@+id/review_date"
+            <RatingBar
+                android:id="@+id/rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
-                android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="@color/mint_cream"
-                android:text="Rating 3/5"
-                />
+                android:layout_below="@+id/review_date"
+                style="?android:attr/ratingBarStyleSmall"
+                android:theme="@style/RatingBar"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true" />
+
         </RelativeLayout>
         <LinearLayout
             android:layout_below="@+id/review_text_wrap"

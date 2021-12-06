@@ -27,4 +27,5 @@
     <color name="snackbar_failure">#df4759</color>
     <color name="snackbar_info">#467fd0</color>
     <color name="snackbar_warning">#ffc107</color>
+    <color name="golden">#FFD700</color>
 </resources>
