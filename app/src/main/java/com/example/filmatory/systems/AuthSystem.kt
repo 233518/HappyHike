@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuthException
  * @property auth The FirebaseAuth object to use
  * @property scene What scene it will be implemented in
  */
-class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAuth, private val scene: AppCompatActivity, private val snackbarSystem: SnackbarSystem?) {
+class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAuth, private val scene: AppCompatActivity, private val snackbarSystem: SnackbarSystem) {
 
     /**
      * loginUser logs the user in
@@ -40,11 +40,11 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
                         val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
-                        snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+                        snackbarSystem.showSnackbarFailure(errorCode!!, ::retry, "")
                     }
                 }
         } else {
-            snackbarSystem!!.showSnackbarFailure("One or both fields are empty.", ::retry, "")
+            snackbarSystem.showSnackbarFailure("One or both fields are empty.", ::retry, "")
         }
     }
 
@@ -70,11 +70,11 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "createUserWithEmail:failure", task.exception)
                         val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
-                        snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+                        snackbarSystem.showSnackbarFailure(errorCode!!, ::retry, "")
                     }
                 }
         } else {
-            snackbarSystem!!.showSnackbarFailure("Make sure all fields are filled", ::retry, "")
+            snackbarSystem.showSnackbarFailure("Make sure all fields are filled", ::retry, "")
         }
     }
 
@@ -84,11 +84,11 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful){
                     Log.d(TAG, "updatePassword:success")
-                    snackbarSystem?.showSnackbarSuccess("Password has been changed.")
+                    snackbarSystem.showSnackbarSuccess("Password has been changed.")
                 } else {
                     Log.w(TAG, "updatePassword:failure", task.exception)
                     val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
-                    snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+                    snackbarSystem.showSnackbarFailure(errorCode!!, ::retry, "")
                 }
             }
     }
@@ -99,15 +99,15 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful){
                         Log.d(TAG, "Email sent")
-                        snackbarSystem!!.showSnackbarSuccess("Email has been sent.")
+                        snackbarSystem.showSnackbarSuccess("Email has been sent.")
                     } else {
                         Log.w(TAG, "Email did not send", task.exception)
                         val errorCode = (task.exception as FirebaseAuthException?)!!.localizedMessage
-                        snackbarSystem!!.showSnackbarFailure(errorCode!!, ::retry, "")
+                        snackbarSystem.showSnackbarFailure(errorCode!!, ::retry, "")
                     }
                 }
         } else {
-            snackbarSystem!!.showSnackbarFailure("Make sure field is not empty.", ::retry, "")
+            snackbarSystem.showSnackbarFailure("Make sure field is not empty.", ::retry, "")
         }
     }
 
@@ -137,6 +137,6 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
     }
 
     private fun onFailure(baseError: BaseError) {
-        snackbarSystem!!.showSnackbarFailure(baseError.message, ::retry, "Reload")
+        snackbarSystem.showSnackbarFailure(baseError.message, ::retry, "Reload")
     }
 }
