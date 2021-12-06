@@ -1,14 +1,9 @@
 package com.example.filmatory.controllers.sceneControllers
 
-import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.tv.Tvs
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.errors.BaseError
 import com.example.filmatory.guis.TvsGui
 import com.example.filmatory.scenes.activities.TvsScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
@@ -32,6 +27,10 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private lateinit var tvsFilteredZA: ArrayList<MediaModel>
     private lateinit var tvsFilteredDateDesc: ArrayList<MediaModel>
 
+    private var tvsFilteredGenre : ArrayList<MediaModel> = ArrayList()
+
+    private var genreId : Int? = null
+
     init {
         apiSystem.requestTvs(RequestBaseOptions(null, null, ::tvsData, ::onFailure))
         apiSystem.requestTvsFilterTitleAZ(RequestBaseOptions(null, null, ::tvsDataFilterTitle, ::onFailure))
@@ -52,6 +51,21 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
 
         tvsScene.runOnUiThread {
             val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, tvsPopularDesc)
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
+            tvsAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun tvsFilteredGenreData(tvs: Tvs){
+        tvsFilteredGenre.clear()
+        tvs.forEach { item ->
+            if(item.genre.contains(genreId)){
+                tvsFilteredGenre.add(MediaModel(DataAdapter.TYPE_TV, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+            }
+        }
+        tvsScene.runOnUiThread {
+            val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, tvsFilteredGenre)
             tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
@@ -98,6 +112,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         }
     }
 
+    private fun filteredGenre(id : Int){
+        genreId = id
+        apiSystem.requestTvs(RequestBaseOptions(null, null, ::tvsFilteredGenreData, ::onFailure))
+    }
+
     fun showFilterList(){
         tvsScene.runOnUiThread {
             var chosenItem: Int = -1
@@ -132,7 +151,21 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
                 .setNeutralButton(tvsScene.resources.getString(R.string.close_btn)) { dialog, which -> }
                 .setPositiveButton(tvsScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
                     when(chosenItem){
-
+                        0 -> filteredGenre(10759)
+                        1 -> filteredGenre(16)
+                        2 -> filteredGenre(35)
+                        3 -> filteredGenre(80)
+                        4 -> filteredGenre(99)
+                        5 -> filteredGenre(18)
+                        6 -> filteredGenre(10751)
+                        7 -> filteredGenre(10762)
+                        8 -> filteredGenre(10763)
+                        9 -> filteredGenre(10764)
+                        10 -> filteredGenre(10765)
+                        11 -> filteredGenre(10766)
+                        12 -> filteredGenre(10767)
+                        13 -> filteredGenre(10768)
+                        14 -> filteredGenre(37)
                     }
                 }
                 .setSingleChoiceItems(R.array.filter_genre_tv_array, chosenItem) { dialog, which ->

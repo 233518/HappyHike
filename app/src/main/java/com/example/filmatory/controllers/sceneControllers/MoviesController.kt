@@ -33,6 +33,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
 
     private var moviesFilteredGenre : ArrayList<MediaModel> = ArrayList()
 
+    private var genreId : Int? = null
+
     init {
         apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesData, ::onFailure))
         apiSystem.requestMoviesFilterTitleAZ(RequestBaseOptions(null, null, ::moviesDataFilterTitle, ::onFailure))
@@ -58,10 +60,18 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
     }
 
     private fun moviesFilteredGenreData(movies: Movies){
+        moviesFilteredGenre.clear()
         movies.forEach { item ->
-            moviesFilteredGenre.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+            if(item.genre.contains(genreId)){
+                moviesFilteredGenre.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+            }
         }
-        println(moviesFilteredGenre)
+        moviesScene.runOnUiThread {
+            val moviesAdapter = DataAdapter(moviesScene, this, moviesScene, moviesFilteredGenre)
+            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
+            moviesGui.moviesRecyclerView.adapter = moviesAdapter
+            moviesAdapter.notifyDataSetChanged()
+        }
     }
 
     /**
@@ -110,7 +120,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         moviesFilteredDateDesc.reverse()
     }
 
-    private fun filteredGenre(){
+    private fun filteredGenre(id : Int){
+        genreId = id
         apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesFilteredGenreData, ::onFailure))
     }
 
@@ -161,7 +172,27 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
                 .setTitle(moviesScene.resources.getString(R.string.filter_genre))
                 .setNeutralButton(moviesScene.resources.getString(R.string.close_btn)) { dialog, which -> }
                 .setPositiveButton(moviesScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
-                    filteredGenre()
+                    when(chosenItem){
+                        0 -> filteredGenre(28)
+                        1 -> filteredGenre(12)
+                        2 -> filteredGenre(16)
+                        3 -> filteredGenre(35)
+                        4 -> filteredGenre(80)
+                        5 -> filteredGenre(99)
+                        6 -> filteredGenre(18)
+                        7 -> filteredGenre(10751)
+                        8 -> filteredGenre(14)
+                        9 -> filteredGenre(36)
+                        10 -> filteredGenre(27)
+                        11 -> filteredGenre(10402)
+                        12 -> filteredGenre(9648)
+                        13 -> filteredGenre(10749)
+                        14 -> filteredGenre(878)
+                        15 -> filteredGenre(10770)
+                        16 -> filteredGenre(53)
+                        17 -> filteredGenre(10752)
+                        18 -> filteredGenre(37)
+                    }
                 }
                 .setSingleChoiceItems(R.array.filter_genre_movie_array, chosenItem) { dialog, which ->
                     chosenItem = which
