@@ -25,7 +25,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/mint_cream"
-                android:text="Dybevik"
                 android:textStyle="bold|italic"
                 android:textSize="20sp"
                 />
@@ -45,7 +44,6 @@
                 android:textStyle="italic"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/mint_cream"
-                android:text="27.05.2021"
                 />
             <RatingBar
                 android:id="@+id/rating_bar"
@@ -70,7 +68,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Maecenas bibendum mi massa, et molestie velit eleifend id. In et elit sit amet tortor maximus commodo. Sed nec massa id odio facilisis suscipit at ac purus."
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="@color/mint_cream"
                 />
