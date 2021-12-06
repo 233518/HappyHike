@@ -166,7 +166,8 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
 
                     }
                     .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
-                        println(movieId)
+                        val favoriteSystem = controller.getFavoriteSystem()
+                        favoriteSystem?.removeMovieFromFavorites(movieId.toString())
                     }
                     .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
                         println(movieId)
@@ -208,7 +209,8 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
 
                     }
                     .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
-                        println(tvId)
+                        val favoriteSystem = controller.getFavoriteSystem()
+                        favoriteSystem?.removeTvFromFavorites(tvId.toString())
                     }
                     .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
                         println(tvId)
