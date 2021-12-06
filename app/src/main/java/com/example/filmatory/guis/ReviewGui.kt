@@ -16,7 +16,7 @@ class ReviewGui (createReviewScene: CreateReviewScene, private val createReviewC
     private var reviewCancelBtn : Button = createReviewScene.findViewById(R.id.create_review_cancel_btn)
 
     init {
-        ArrayAdapter.createFromResource(createReviewScene, R.array.rating_array, android.R.layout.simple_spinner_dropdown_item).also { adapter ->
+        ArrayAdapter.createFromResource(createReviewScene, R.array.rating_array, R.layout.spinner_item).also { adapter ->
             adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
             ratingDropdownList.visibility = View.VISIBLE
             ratingDropdownList.adapter = adapter

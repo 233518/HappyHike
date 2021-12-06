@@ -361,16 +361,7 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
 
     private fun getMovie(movie: Movie){
         movieGui.setMovieInfo(movie)
-        movie.cast.cast.take(10).forEach { item ->
-            personsArrayList.add(
-                PersonItem(
-                    item.name,
-                    item.character,
-                    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path,
-                    item.id
-                )
-            )
-        }
+        movie.cast.cast.take(10).forEach { item -> personsArrayList.add(PersonItem(item.name, item.character, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path, item.id)) }
         movieScene.runOnUiThread{
             personsAdapter.notifyDataSetChanged()
         }

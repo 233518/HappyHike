@@ -38,6 +38,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:backgroundTint="@color/mint_cream"
             android:layout_below="@+id/create_review_rating_heading"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
@@ -57,11 +58,13 @@
         <EditText
             android:id="@+id/create_review_edittext"
             android:layout_width="match_parent"
+            android:textColor="@color/dark_grey"
+            android:gravity="top|start"
             android:layout_height="150dp"
             android:layout_below="@+id/create_review_overview_heading"
             android:background="@color/mint_cream"
             android:autofillHints="Your review here"
-            android:textColorHint="@color/black_coffee"/>
+            android:textColorHint="@color/black"/>
 
         <Button
             android:id="@+id/create_review_btn"

@@ -1,6 +1,5 @@
 package com.example.filmatory.controllers.sceneControllers
 
-import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movies
@@ -11,7 +10,6 @@ import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlin.collections.ArrayList
 import androidx.core.widget.NestedScrollView
 
 
@@ -22,55 +20,50 @@ import androidx.core.widget.NestedScrollView
  */
 class MoviesController(private val moviesScene: MoviesScene) : MainController(moviesScene) {
     private val moviesGui = MoviesGui(moviesScene, this)
-
-    private val moviesPopularDesc : ArrayList<MediaModel> = ArrayList()
-    private val moviesFilteredAZ : ArrayList<MediaModel> = ArrayList()
-    private val moviesFilteredDateAsc : ArrayList<MediaModel> = ArrayList()
-
-    private var moviesPopularAsc: ArrayList<MediaModel> = ArrayList()
-    private var moviesFilteredZA: ArrayList<MediaModel> = ArrayList()
-    private var moviesFilteredDateDesc: ArrayList<MediaModel> = ArrayList()
-
-    private var moviesFilteredGenre : ArrayList<MediaModel> = ArrayList()
+    private var tempMoviesArray : ArrayList<MediaModel> = ArrayList()
+    private var movieHashMap : HashMap<String, ArrayList<MediaModel>> = HashMap()
 
     private var genreId : Int? = null
+    private var position : Int = 0
+    private val maxMovies : Int = 10
+    private var maxIterations : Int = 0
+    private var currentFilter : String = "moviesPopularDesc"
 
     init {
         apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesData, ::onFailure))
         apiSystem.requestMoviesFilterTitleAZ(RequestBaseOptions(null, null, ::moviesDataFilterTitle, ::onFailure))
         apiSystem.requestMoviesFilterDateDesc(RequestBaseOptions(null, null, ::moviesDataFilterDate, ::onFailure))
 
-        moviesGui.nestedSv.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            // on scroll change we are checking when users scroll as bottom.
-
-
-            if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
-                // in this method we are incrementing page number,
-                // making progress bar visible and calling get data method.
-                moviesGui.count++
-                println(moviesGui.count)
-                // on below line we are making our progress bar visible.
-                moviesGui.loadingBar.visibility = View.VISIBLE
-                if (moviesGui.count < 6) {
-                    println("HELLOOOO")
-                    apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesData, ::onFailure))
+        moviesGui.nestedSv.setOnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            if (v.getChildAt(v.childCount - 1) != null) {
+                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
+                    //code to fetch more data for endless scrolling
+                    loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
                 }
             }
-        })
+        }
     }
 
-    private fun moviesFilteredGenreData(movies: Movies){
-        moviesFilteredGenre.clear()
-        movies.forEach { item ->
-            if(item.genre.contains(genreId)){
-                moviesFilteredGenre.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
-            }
-        }
+    private fun loadMore(array : ArrayList<MediaModel>){
         moviesScene.runOnUiThread {
-            val moviesAdapter = DataAdapter(moviesScene, this, moviesScene, moviesFilteredGenre)
+            val moviesAdapter = DataAdapter(moviesScene, this, moviesScene, tempMoviesArray)
             moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesGui.moviesRecyclerView.adapter = moviesAdapter
-            moviesAdapter.notifyDataSetChanged()
+            if(maxIterations > position){
+                for(i in position*maxMovies+1..(position+1)*maxMovies step 1){
+                    tempMoviesArray.add(array[i])
+                    moviesAdapter.notifyItemInserted(i)
+                }
+                position++
+            } else if(maxIterations == position) {
+                for(i in position*maxMovies+1 until array.size step 1){
+                    tempMoviesArray.add(array[i])
+                    moviesAdapter.notifyItemInserted(i)
+                }
+                position++
+            } else {
+                moviesGui.disableLoadingBar()
+            }
         }
     }
 
@@ -80,18 +73,37 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      * @param movies The response from API
      */
     private fun moviesData(movies: Movies){
+        val moviesPopularDesc : ArrayList<MediaModel> = ArrayList()
         movies.forEach { item ->
             moviesPopularDesc.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
         }
-        moviesPopularAsc = ArrayList(moviesPopularDesc)
+        movieHashMap["moviesPopularDesc"] = moviesPopularDesc
+        val moviesPopularAsc: ArrayList<MediaModel> = ArrayList(moviesPopularDesc)
         moviesPopularAsc.reverse()
+        movieHashMap["moviesPopularAsc"] = moviesPopularAsc
+        maxIterations = moviesPopularDesc.size / maxMovies
+        loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+    }
 
-        moviesScene.runOnUiThread {
-            val moviesAdapter = DataAdapter(moviesScene, this, moviesScene, moviesPopularDesc)
-            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesGui.moviesRecyclerView.adapter = moviesAdapter
-            moviesAdapter.notifyDataSetChanged()
+    /**
+     * Sets data from API depending on which genre is chosen from genre filter
+     *
+     * @param movies The response from the API
+     */
+    private fun moviesFilteredGenreData(movies: Movies){
+        val moviesFilteredGenre : ArrayList<MediaModel> = ArrayList()
+        moviesFilteredGenre.clear()
+        movies.forEach { item ->
+            if(item.genre.contains(genreId)){
+                moviesFilteredGenre.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
+            }
         }
+        movieHashMap["moviesFilteredGenre"] = moviesFilteredGenre
+        currentFilter = "moviesFilteredGenre"
+        maxIterations = moviesFilteredGenre.size / maxMovies
+        loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+
+        if(moviesFilteredGenre.size < 3) moviesGui.disableLoadingBar()
     }
 
     /**
@@ -100,11 +112,14 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      * @param movies The response from API
      */
     private fun moviesDataFilterTitle(movies: Movies){
+        val moviesFilteredAZ : ArrayList<MediaModel> = ArrayList()
         movies.forEach{
             item -> moviesFilteredAZ.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
         }
-        moviesFilteredZA = ArrayList(moviesFilteredAZ)
+        movieHashMap["moviesFilteredAZ"] = moviesFilteredAZ
+        val moviesFilteredZA: ArrayList<MediaModel> = ArrayList(moviesFilteredAZ)
         moviesFilteredZA.reverse()
+        movieHashMap["moviesFilteredZA"] = moviesFilteredZA
     }
 
     /**
@@ -113,30 +128,19 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
      * @param movies The response from API
      */
     private fun moviesDataFilterDate(movies: Movies){
+        val moviesFilteredDateAsc : ArrayList<MediaModel> = ArrayList()
         movies.forEach{
             item -> moviesFilteredDateAsc.add(MediaModel(DataAdapter.TYPE_MOVIE, item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
         }
-        moviesFilteredDateDesc = ArrayList(moviesFilteredDateAsc)
+        movieHashMap["moviesFilteredDateAsc"] = moviesFilteredDateAsc
+        val moviesFilteredDateDesc: ArrayList<MediaModel> = ArrayList(moviesFilteredDateAsc)
         moviesFilteredDateDesc.reverse()
+        movieHashMap["moviesFilteredDateDesc"] = moviesFilteredDateDesc
     }
 
     private fun filteredGenre(id : Int){
         genreId = id
         apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesFilteredGenreData, ::onFailure))
-    }
-
-    /**
-     * Filtrerer filmene i valgt rekkefølge fra brukeren og oppdaterer adapteren
-     *
-     * @param arrayList : Dataen som skal vises
-     */
-    private fun moviesFilter(arrayList : ArrayList<MediaModel>){
-        val moviesAdapter = DataAdapter(moviesScene, this, moviesScene, arrayList)
-        moviesScene.runOnUiThread {
-            moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
-            moviesGui.moviesRecyclerView.adapter = moviesAdapter
-            moviesAdapter.notifyDataSetChanged()
-        }
     }
 
     fun showFilterList(){
@@ -146,15 +150,36 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
                 .setTitle(moviesScene.resources.getString(R.string.filter))
                 .setNeutralButton(moviesScene.resources.getString(R.string.cancel_btn)) { dialog, which -> }
                 .setPositiveButton(moviesScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    tempMoviesArray.clear()
+                    position = 0
                     when(chosenItem){
-                        0 -> moviesFilter(moviesPopularDesc)
-                        1 -> moviesFilter(moviesPopularAsc)
-                        2 -> moviesFilter(moviesFilteredDateAsc)
-                        3 -> moviesFilter(moviesFilteredDateDesc)
-                        4 -> moviesFilter(moviesFilteredAZ)
-                        5 -> moviesFilter(moviesFilteredZA)
+                        0 -> {
+                            currentFilter = "moviesPopularDesc"
+                            loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        1 -> {
+                            currentFilter = "moviesPopularAsc"
+                            loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        2 -> {
+                            currentFilter = "moviesFilteredDateAsc"
+                            loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        3 -> {
+                            currentFilter = "moviesFilteredDateDesc"
+                            loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        4 -> {
+                            currentFilter = "moviesFilteredAZ"
+                            loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        5 -> {
+                            currentFilter = "moviesFilteredZA"
+                            loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
                         else -> {
-                            moviesFilter(moviesPopularDesc)
+                            currentFilter = "moviesPopularDesc"
+                            loadMore(movieHashMap[currentFilter] as ArrayList<MediaModel>)
                         }
                     }
                 }
@@ -172,6 +197,8 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
                 .setTitle(moviesScene.resources.getString(R.string.filter_genre))
                 .setNeutralButton(moviesScene.resources.getString(R.string.close_btn)) { dialog, which -> }
                 .setPositiveButton(moviesScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    tempMoviesArray.clear()
+                    position = 0
                     when(chosenItem){
                         0 -> filteredGenre(28)
                         1 -> filteredGenre(12)
@@ -200,4 +227,5 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
             .show()
         }
     }
+
 }

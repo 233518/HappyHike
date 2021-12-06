@@ -1,5 +1,6 @@
 package com.example.filmatory.controllers.sceneControllers
 
+import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.filmatory.R
 import com.example.filmatory.api.data.tv.Tvs
@@ -18,23 +19,52 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
  */
 class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     private val tvsGui = TvsGui(tvsScene, this)
-
-    private val tvsPopularDesc : ArrayList<MediaModel> = ArrayList()
-    private val tvsFilteredAZ : ArrayList<MediaModel> = ArrayList()
-    private val tvsFilteredDateAsc : ArrayList<MediaModel> = ArrayList()
-
-    private lateinit var tvsPopularAsc: ArrayList<MediaModel>
-    private lateinit var tvsFilteredZA: ArrayList<MediaModel>
-    private lateinit var tvsFilteredDateDesc: ArrayList<MediaModel>
-
-    private var tvsFilteredGenre : ArrayList<MediaModel> = ArrayList()
+    private var tempTvsArray : ArrayList<MediaModel> = ArrayList()
+    private var tvsHashMap : HashMap<String, ArrayList<MediaModel>> = HashMap()
 
     private var genreId : Int? = null
+    private var position : Int = 0
+    private val maxTvs : Int = 10
+    private var maxIterations : Int = 0
+    private var currentFilter : String = "tvsPopularDesc"
 
     init {
         apiSystem.requestTvs(RequestBaseOptions(null, null, ::tvsData, ::onFailure))
         apiSystem.requestTvsFilterTitleAZ(RequestBaseOptions(null, null, ::tvsDataFilterTitle, ::onFailure))
         apiSystem.requestTvsFilterDateDesc(RequestBaseOptions(null, null, ::tvsDataFilterDate, ::onFailure))
+
+        tvsGui.nestedSv.setOnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            if (v.getChildAt(v.childCount - 1) != null) {
+                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
+                    //code to fetch more data for endless scrolling
+                    loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+                }
+            }
+        }
+    }
+
+
+    private fun loadMore(array : ArrayList<MediaModel>){
+        tvsScene.runOnUiThread {
+            val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, tempTvsArray)
+            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
+            tvsGui.tvsRecyclerView.adapter = tvsAdapter
+            if(maxIterations > position){
+                for(i in position*maxTvs+1..(position+1)*maxTvs step 1){
+                    tempTvsArray.add(array[i])
+                    tvsAdapter.notifyItemInserted(i)
+                }
+                position++
+            } else if(maxIterations == position) {
+                for(i in position*maxTvs+1 until array.size step 1){
+                    tempTvsArray.add(array[i])
+                    tvsAdapter.notifyItemInserted(i)
+                }
+                position++
+            } else {
+                tvsGui.disableLoadingBar()
+            }
+        }
     }
 
     /**
@@ -43,33 +73,32 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      * @param tvs The response from API
      */
     private fun tvsData(tvs: Tvs){
+        val tvsPopularDesc : ArrayList<MediaModel> = ArrayList()
         tvs.forEach { item ->
             tvsPopularDesc.add(MediaModel(DataAdapter.TYPE_TV, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
         }
-        tvsPopularAsc = ArrayList(tvsPopularDesc)
+        tvsHashMap["tvsPopularDesc"] = tvsPopularDesc
+        val tvsPopularAsc: ArrayList<MediaModel> = ArrayList(tvsPopularDesc)
         tvsPopularAsc.reverse()
-
-        tvsScene.runOnUiThread {
-            val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, tvsPopularDesc)
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
+        tvsHashMap["tvsPopularAsc"] = tvsPopularAsc
+        maxIterations = tvsPopularDesc.size / maxTvs
+        loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
     }
 
     private fun tvsFilteredGenreData(tvs: Tvs){
+        val tvsFilteredGenre : ArrayList<MediaModel> = ArrayList()
         tvsFilteredGenre.clear()
         tvs.forEach { item ->
             if(item.genre.contains(genreId)){
                 tvsFilteredGenre.add(MediaModel(DataAdapter.TYPE_TV, item.title, item.releaseDate, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
             }
         }
-        tvsScene.runOnUiThread {
-            val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, tvsFilteredGenre)
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
+        tvsHashMap["tvsFilteredGenre"] = tvsFilteredGenre
+        currentFilter = "tvsFilteredGenre"
+        maxIterations = tvsFilteredGenre.size / maxTvs
+        loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+
+        if(tvsFilteredGenre.size < 3) tvsGui.disableLoadingBar()
     }
 
     /**
@@ -78,11 +107,14 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      * @param tvs The response from API
      */
     private fun tvsDataFilterTitle(tvs: Tvs){
+        val tvsFilteredAZ : ArrayList<MediaModel> = ArrayList()
         tvs.forEach{
                 item -> tvsFilteredAZ.add(MediaModel(DataAdapter.TYPE_TV, item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
         }
-        tvsFilteredZA = ArrayList(tvsFilteredAZ)
+        tvsHashMap["tvsFilteredAZ"] = tvsFilteredAZ
+        val tvsFilteredZA: ArrayList<MediaModel> = ArrayList(tvsFilteredAZ)
         tvsFilteredZA.reverse()
+        tvsHashMap["tvsFilteredZA"] = tvsFilteredZA
     }
 
     /**
@@ -91,25 +123,14 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
      * @param tvs The response from API
      */
     private fun tvsDataFilterDate(tvs: Tvs){
+        val tvsFilteredDateAsc : ArrayList<MediaModel> = ArrayList()
         tvs.forEach{
                 item -> tvsFilteredDateAsc.add(MediaModel(DataAdapter.TYPE_TV, item.title, item.releaseDate,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl, item.id))
         }
-        tvsFilteredDateDesc = ArrayList(tvsFilteredDateAsc)
+        tvsHashMap["tvsFilteredDateAsc"] = tvsFilteredDateAsc
+        val tvsFilteredDateDesc: ArrayList<MediaModel> = ArrayList(tvsFilteredDateAsc)
         tvsFilteredDateDesc.reverse()
-    }
-
-    /**
-     * Filtrerer tv-seriene i valgt rekkefølge fra brukeren og oppdaterer adapteren
-     *
-     * @param arrayList : Dataen som skal vises
-     */
-    private fun tvsFilter(arrayList : ArrayList<MediaModel>){
-        val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, arrayList)
-        tvsScene.runOnUiThread {
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
+        tvsHashMap["tvsFilteredDateDesc"] = tvsFilteredDateDesc
     }
 
     private fun filteredGenre(id : Int){
@@ -124,15 +145,36 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
                 .setTitle(tvsScene.resources.getString(R.string.filter))
                 .setNeutralButton(tvsScene.resources.getString(R.string.close_btn)) { dialog, which -> }
                 .setPositiveButton(tvsScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    tempTvsArray.clear()
+                    position = 0
                     when(chosenItem){
-                        0 -> tvsFilter(tvsPopularDesc)
-                        1 -> tvsFilter(tvsPopularAsc)
-                        2 -> tvsFilter(tvsFilteredDateAsc)
-                        3 -> tvsFilter(tvsFilteredDateDesc)
-                        4 -> tvsFilter(tvsFilteredAZ)
-                        5 -> tvsFilter(tvsFilteredZA)
+                        0 -> {
+                            currentFilter = "tvsPopularDesc"
+                            loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        1 -> {
+                            currentFilter = "tvsPopularAsc"
+                            loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        2 -> {
+                            currentFilter = "tvsFilteredDateAsc"
+                            loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        3 -> {
+                            currentFilter = "tvsFilteredDateDesc"
+                            loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        4 -> {
+                            currentFilter = "tvsFilteredAZ"
+                            loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
+                        5 -> {
+                            currentFilter = "tvsFilteredZA"
+                            loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
+                        }
                         else -> {
-                            tvsFilter(tvsPopularDesc)
+                            currentFilter = "tvsPopularDesc"
+                            loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
                         }
                     }
                 }
@@ -150,6 +192,8 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
                 .setTitle(tvsScene.resources.getString(R.string.filter_genre))
                 .setNeutralButton(tvsScene.resources.getString(R.string.close_btn)) { dialog, which -> }
                 .setPositiveButton(tvsScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    tempTvsArray.clear()
+                    position = 0
                     when(chosenItem){
                         0 -> filteredGenre(10759)
                         1 -> filteredGenre(16)
