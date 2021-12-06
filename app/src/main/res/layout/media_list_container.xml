@@ -12,10 +12,11 @@
         android:scaleType="centerCrop"
         android:src="@drawable/movies_scene_background"/>
 
-    <LinearLayout
-        android:background="@color/overlay_75per"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:background="@color/overlay_75per"
+        android:id="@+id/nestedSv">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,9 +43,13 @@
                 android:layout_below="@+id/filter_btn"
                 android:layout_height="wrap_content"
                 android:id="@+id/recyclerView" />
+            <ProgressBar
+                android:id="@+id/rv_loading"
+                android:layout_below="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
-    </LinearLayout>
-
+    </androidx.core.widget.NestedScrollView>
     <include layout="@layout/snackbar_coordinatorayout" />
 
     <include

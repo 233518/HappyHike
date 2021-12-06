@@ -51,7 +51,7 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         tvsPopularAsc.reverse()
 
         tvsScene.runOnUiThread {
-            val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularDesc)
+            val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, tvsPopularDesc)
             tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsGui.tvsRecyclerView.adapter = tvsAdapter
             tvsAdapter.notifyDataSetChanged()
@@ -85,76 +85,12 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
     }
 
     /**
-     * Function to display tv-shows descending by popularity
+     * Filtrerer tv-seriene i valgt rekkefølge fra brukeren og oppdaterer adapteren
      *
+     * @param arrayList : Dataen som skal vises
      */
-    private fun tvsPopularDesc(){
-        tvsScene.runOnUiThread {
-            val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularDesc)
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
-    }
-
-    /**
-     * Function to display tv-shows ascending by popularity
-     *
-     */
-    private fun tvsPopularAsc(){
-        val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsPopularAsc)
-        tvsScene.runOnUiThread {
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
-    }
-
-    /**
-     * Function to display tv-shows alphabetically
-     *
-     */
-    private fun tvsTitleAZ(){
-        val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredAZ)
-        tvsScene.runOnUiThread {
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
-    }
-
-    /**
-     * Function to display tv-shows reversed alphabetically
-     *
-     */
-    private fun tvsTitleZA(){
-        val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredZA)
-        tvsScene.runOnUiThread {
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
-    }
-
-    /**
-     * Function to display tv-shows ascending by date
-     *
-     */
-    private fun tvsDateAsc(){
-        val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredDateAsc)
-        tvsScene.runOnUiThread {
-            tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
-            tvsGui.tvsRecyclerView.adapter = tvsAdapter
-            tvsAdapter.notifyDataSetChanged()
-        }
-    }
-
-    /**
-     * Function to display tv-shows descending by date
-     *
-     */
-    private fun tvsDateDesc(){
-        val tvsAdapter = DataAdapter(tvsScene, tvsScene, tvsFilteredDateDesc)
+    private fun tvsFilter(arrayList : ArrayList<MediaModel>){
+        val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, arrayList)
         tvsScene.runOnUiThread {
             tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsGui.tvsRecyclerView.adapter = tvsAdapter
@@ -170,14 +106,14 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
                 .setNeutralButton(tvsScene.resources.getString(R.string.close_btn)) { dialog, which -> }
                 .setPositiveButton(tvsScene.resources.getString(R.string.confirm_btn)) { dialog, which ->
                     when(chosenItem){
-                        0 -> tvsPopularDesc()
-                        1 -> tvsPopularAsc()
-                        2 -> tvsDateAsc()
-                        3 -> tvsDateDesc()
-                        4 -> tvsTitleAZ()
-                        5 -> tvsTitleZA()
+                        0 -> tvsFilter(tvsPopularDesc)
+                        1 -> tvsFilter(tvsPopularAsc)
+                        2 -> tvsFilter(tvsFilteredDateAsc)
+                        3 -> tvsFilter(tvsFilteredDateDesc)
+                        4 -> tvsFilter(tvsFilteredAZ)
+                        5 -> tvsFilter(tvsFilteredZA)
                         else -> {
-                            tvsPopularDesc()
+                            tvsFilter(tvsPopularDesc)
                         }
                     }
                 }
