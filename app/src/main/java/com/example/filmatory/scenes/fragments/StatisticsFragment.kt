@@ -73,22 +73,22 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics), AccountInfoOb
                 totalWatchlistMovies++
             }
         }
-        data.add(ValueDataEntry("Favorite Tv-shows", totalFavoriteTvs))
-        data.add(ValueDataEntry("Favorite Movies", totalFavoriteMovies))
-        data.add(ValueDataEntry("Watchlist Tv-shows", totalWatchlistTvs))
-        data.add(ValueDataEntry("Watchlist Movies", totalWatchlistMovies))
+        data.add(ValueDataEntry(requireActivity().resources.getString(R.string.favorite_tvs), totalFavoriteTvs))
+        data.add(ValueDataEntry(requireActivity().resources.getString(R.string.favorite_movies), totalFavoriteMovies))
+        data.add(ValueDataEntry(requireActivity().resources.getString(R.string.watchlist_tvs), totalWatchlistTvs))
+        data.add(ValueDataEntry(requireActivity().resources.getString(R.string.watchlist_movies), totalWatchlistMovies))
         pie.data(data)
     }
 
     override fun registerObserver(accountInfoObserver: AccountInfoObserver) {
         if(!mObservers.contains(accountInfoObserver)) {
-            mObservers.add(accountInfoObserver);
+            mObservers.add(accountInfoObserver)
         }
     }
 
     override fun removeObserver(accountInfoObserver: AccountInfoObserver) {
         if(mObservers.contains(accountInfoObserver)) {
-            mObservers.remove(accountInfoObserver);
+            mObservers.remove(accountInfoObserver)
         }
     }
 

@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/startscreen_imgView"
         android:layout_width="match_parent"
-        android:layout_height="2000dp"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src ="@drawable/account_menu_scene_background"
         />
@@ -19,20 +19,11 @@
         android:layout_height="match_parent"
         android:background="@color/overlay_75per">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp"
-            android:text="Hello Sivert"
-            android:fontFamily="@font/roboto"
-            android:textSize="22sp"
-            android:textColor="@color/white"/>
         <LinearLayout
             android:id="@+id/account_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp">
+            android:layout_marginTop="80dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/account_cardOne"

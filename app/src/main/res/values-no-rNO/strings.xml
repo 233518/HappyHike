@@ -74,17 +74,23 @@
     <string name="start_scene_free">\u2022 Gratis</string>
     <string name="start_scene_secure">\u2022 Trygt</string>
     <string name="header_text">Millioner av filmer, TV-serier og folk å oppdage. Utforsk nå.</string>
-    <string name="reviews_heading">Reviews</string>
-    <string name="all">All</string>
-    <string name="movies">Movies</string>
-    <string name="tvs">Tvs</string>
-    <string name="create_review">Create Review</string>
-    <string name="rating">Rating</string>
-    <string name="your_review">Your Review</string>
-    <string name="back_btn">Back</string>
+    <string name="reviews_heading">Anmeldelser</string>
+    <string name="all">Alle</string>
+    <string name="movies">Filmer</string>
+    <string name="tvs">TV-er</string>
+    <string name="create_review">Opprett anmeldelse</string>
+    <string name="rating">Vurdering</string>
+    <string name="your_review">Din anmeldelse</string>
+    <string name="back_btn">Tilbake</string>
     <string name="filter">Filter</string>
-    <string name="filter_genre">Filter Genre</string>
-    <string name="close_btn">Close</string>
+    <string name="filter_genre">Sjangerfilter</string>
+    <string name="close_btn">Lukk</string>
+    <string name="favorite_tvs">Favoritt TV-serier</string>
+    <string name="favorite_movies">Favorittfilmer</string>
+    <string name="watchlist_tvs">Sett-liste TV-serier</string>
+    <string name="watchlist_movies">Sett-liste Filmer</string>
+    <string name="add_to_list">Legg til i liste</string>
+    <string name="new_review">Ny anmeldelse</string>
     <string-array name="media_array">
         <item>Alt</item>
         <item>Film</item>
@@ -104,5 +110,43 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+    <string-array name="filter_genre_movie_array">
+        <item>Action</item>
+        <item>Eventyr</item>
+        <item>Animasjon</item>
+        <item>Komedie</item>
+        <item>Kriminalitet</item>
+        <item>Dokumentar</item>
+        <item>Drama</item>
+        <item>Familie</item>
+        <item>Fantasi</item>
+        <item>Historikk</item>
+        <item>Skrekk</item>
+        <item>Musikk</item>
+        <item>Mysterium</item>
+        <item>Romantikk</item>
+        <item>Sci-fi</item>
+        <item>TV-film</item>
+        <item>Thriller</item>
+        <item>Krig</item>
+        <item>Western</item>
+    </string-array>
+    <string-array name="filter_genre_tv_array">
+        <item>Action &amp; Eventyr</item>
+        <item>Animasjon</item>
+        <item>Komedie</item>
+        <item>Kriminalitet</item>
+        <item>Dokumentar</item>
+        <item>Drama</item>
+        <item>Familie</item>
+        <item>Barn</item>
+        <item>Nyheter</item>
+        <item>Virkelighet</item>
+        <item>Sci-fi &amp; Fantasy</item>
+        <item>Såpe</item>
+        <item>Snakk</item>
+        <item>Krig &amp; Politikk</item>
+        <item>Western</item>
     </string-array>
 </resources>

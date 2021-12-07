@@ -73,17 +73,23 @@
     <string name="start_scene_free">\u2022 Kostenlos</string>
     <string name="start_scene_secure">\u2022 Sicher</string>
     <string name="header_text">Millionen Filme, Fernsehsendungen und Menschen, die es zu entdecken gilt. Jetzt erkunden.</string>
-    <string name="reviews_heading">Reviews</string>
-    <string name="all">All</string>
-    <string name="movies">Movies</string>
-    <string name="tvs">Tvs</string>
-    <string name="create_review">Create Review</string>
-    <string name="rating">Rating</string>
-    <string name="your_review">Your Review</string>
-    <string name="back_btn">Back</string>
+    <string name="reviews_heading">Bewertungen</string>
+    <string name="all">Alle</string>
+    <string name="movies">Filme</string>
+    <string name="tvs">Fernseher</string>
+    <string name="create_review">Rezension erstellen</string>
+    <string name="rating">Bewertung</string>
+    <string name="your_review">Ihre Bewertung</string>
+    <string name="back_btn">Zurück</string>
     <string name="filter">Filter</string>
-    <string name="filter_genre">Filter Genre</string>
-    <string name="close_btn">Close</string>
+    <string name="filter_genre">Genre filtern</string>
+    <string name="close_btn">Nah dran</string>
+    <string name="favorite_tvs">Lieblingsfernsehsendungen</string>
+    <string name="favorite_movies">Lieblingsfilme</string>
+    <string name="watchlist_tvs">Watchlist-Fernsehsendungen</string>
+    <string name="watchlist_movies">Watchlist-Filme</string>
+    <string name="add_to_list">Zur Liste hinzufügen</string>
+    <string name="new_review">Neue Bewertung</string>
     <string-array name="media_array">
         <item>Alle</item>
         <item>Film</item>
@@ -103,5 +109,43 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+    <string-array name="filter_genre_movie_array">
+        <item>Aktion</item>
+        <item>Abenteuer</item>
+        <item>Animation</item>
+        <item>Komödie</item>
+        <item>Kriminalität</item>
+        <item>Dokumentation</item>
+        <item>Drama</item>
+        <item>Familie</item>
+        <item>Fantasy</item>
+        <item>Geschichte</item>
+        <item>Horror</item>
+        <item>Musik</item>
+        <item>Geheimnis</item>
+        <item>Romantik</item>
+        <item>Science-Fiction</item>
+        <item>Fernsehfilm</item>
+        <item>Thriller</item>
+        <item>Krieg</item>
+        <item>Westlich</item>
+    </string-array>
+    <string-array name="filter_genre_tv_array">
+        <item>Aktion &amp; Abenteuer</item>
+        <item>Animation</item>
+        <item>Komödie</item>
+        <item>Kriminalität</item>
+        <item>Dokumentation</item>
+        <item>Drama</item>
+        <item>Familie</item>
+        <item>Kinder</item>
+        <item>Neuigkeiten</item>
+        <item>Realität</item>
+        <item>Science-Fiction &amp; Fantasie</item>
+        <item>Seife</item>
+        <item>Reden</item>
+        <item>Krieg &amp; Politik</item>
+        <item>Westlich</item>
     </string-array>
 </resources>
