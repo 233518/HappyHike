@@ -2,21 +2,14 @@ package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.example.filmatory.R
 import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.controllers.MainController
 import com.example.filmatory.scenes.activities.PersonScene
-
-import android.net.Uri
-import com.example.filmatory.errors.BaseError
 import com.example.filmatory.guis.PersonGui
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 
 /**
- * PersonController manipulates the PersonScene gui
+ * PersonController controls everything related to the person page
  *
  * @param personScene The PersonScene to use
  */

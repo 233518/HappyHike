@@ -2,26 +2,20 @@ package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.filmatory.R
 import com.example.filmatory.api.data.lists.List
 import com.example.filmatory.api.data.user.User
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.errors.BaseError
 import com.example.filmatory.guis.ListGui
 import com.example.filmatory.scenes.activities.ListScene
-import com.example.filmatory.scenes.activities.ListsScene
 import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.ListSystem
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
 /**
- * ListController manipulates the ListScene gui
+ * ListController controls everything related to the list page
  *
  * @property listScene The ListScene to use
  */

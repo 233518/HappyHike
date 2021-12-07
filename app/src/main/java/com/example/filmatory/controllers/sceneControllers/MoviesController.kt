@@ -12,9 +12,8 @@ import com.example.filmatory.utils.items.MediaModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.core.widget.NestedScrollView
 
-
 /**
- * MoviesController manipulates the MoviesScene gui
+ * MoviesController controls everything related to the movies page
  *
  * @param moviesScene The MoviesScene to use
  */

@@ -5,21 +5,19 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.controllers.sceneControllers.AccountInfoController
 import com.example.filmatory.scenes.SuperScene
-import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.scenes.fragments.*
 
 /**
- * Custom adapter for fragments in accountinfoscene
+ * Custom fragment adapter
  *
  * @constructor
- *
+ * Extends FragmentStateAdapter
  *
  * @param fragmentManager
  * @param lifecycle
- * @param accountInfoScene
- * @param accountInfoController
+ * @param scene
+ * @param controller
  */
 class ViewPageAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, scene: SuperScene, controller: MainController) : FragmentStateAdapter(fragmentManager, lifecycle) {
     var favoriteFragment = FavoriteFragment(scene, controller)

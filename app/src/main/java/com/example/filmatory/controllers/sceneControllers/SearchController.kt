@@ -12,6 +12,11 @@ import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
+/**
+ * SearchController controls everything related to the search page
+ *
+ * @property searchScene : The searchScene to use
+ */
 class SearchController(private val searchScene : SearchScene) : MainController(searchScene) {
     private val searchGui = SearchGui(searchScene, this)
     private val intent: Intent = searchScene.intent
@@ -32,6 +37,11 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
         apiSystem.requestSearch(ApiSystem.RequestBaseOptions(null, null, ::onSearch, ::onFailure), title!!, languageCode)
     }
 
+    /**
+     * Update the gui with the data from API
+     *
+     * @param search : Response from API
+     */
     private fun onSearch(search: Search) {
         val mediaSorted = sortResult(search)
         for(movie in mediaSorted.movieArray) {
@@ -52,6 +62,12 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
         //TODO: MAKE ADAPTER UPDATE
     }
 
+    /**
+     * Sorts the result from the API
+     *
+     * @param search : The data to sort
+     * @return MediaSorted
+     */
     private fun sortResult(search: Search) : MediaSorted {
         var movieArray : ArrayList<SearchItem> = ArrayList()
         var tvArray : ArrayList<SearchItem> = ArrayList()

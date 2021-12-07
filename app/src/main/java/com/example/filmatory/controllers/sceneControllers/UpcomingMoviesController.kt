@@ -10,7 +10,7 @@ import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
 /**
- * UpcomingMoviesController manipulates the UpcomingMoviesController gui
+ * UpcomingMoviesController controls everything related to the upcoming movies page
  *
  * @param upcomingMoviesScene The UpcomingTvsScene to use
  */

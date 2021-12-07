@@ -25,9 +25,8 @@ import com.example.filmatory.utils.items.ReviewItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.ArrayList
 
-
 /**
- * MovieController manipulates the MovieScene gui
+ * MovieController controls everything related to the movie page
  *
  * @param movieScene The MovieScene to use
  */
@@ -353,7 +352,6 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         })
     }*/
 
-
     /**
      * Update the gui with data from API
      *
@@ -509,5 +507,23 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
      */
     fun notLoggedin() {
         snackbarSystem.showSnackbarWarning("You need to be logged in to use this function!")
+    }
+
+    /**
+     * Gets the system that contains methods for favorites
+     *
+     * @return favoriteSystem
+     */
+    override fun getFavoriteSystem(): FavoriteSystem {
+        return favoriteSystem
+    }
+
+    /**
+     * Gets the system that contains methods for watchlists
+     *
+     * @return watchlistSystem
+     */
+    override fun getWatchlistSystem(): WatchlistSystem {
+        return watchlistSystem
     }
 }
