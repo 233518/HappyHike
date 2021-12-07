@@ -35,7 +35,7 @@ class StartController(private val startScene: StartScene) : MainController(start
         val discoverMoviesArraylist: ArrayList<MediaModel> = ArrayList()
         val discoverMoviesAdapter = DataAdapter(startScene, this, startScene, discoverMoviesArraylist)
 
-        movieFrontpage.forEach { item ->
+        movieFrontpage.take(10).forEach { item ->
             discoverMoviesArraylist.add(
                 MediaModel(
                     DataAdapter.TYPE_MOVIE_SLIDER,
@@ -62,7 +62,7 @@ class StartController(private val startScene: StartScene) : MainController(start
         val discoverTvsArrayList: ArrayList<MediaModel> = ArrayList()
         val discoverTvsAdapter = DataAdapter(startScene,this, startScene, discoverTvsArrayList)
 
-        tvFrontpage.forEach { item ->
+        tvFrontpage.take(10).forEach { item ->
             discoverTvsArrayList.add(
                 MediaModel(
                     DataAdapter.TYPE_TV_SLIDER,
