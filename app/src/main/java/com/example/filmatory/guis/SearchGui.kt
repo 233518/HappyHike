@@ -20,20 +20,16 @@ class SearchGui(private val searchScene: SearchScene, private val searchControll
     var resultRecyclerView: RecyclerView = searchScene.findViewById(R.id.recyclerView)
     init {
         ArrayAdapter.createFromResource(searchScene, R.array.media_array, android.R.layout.simple_spinner_dropdown_item).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             dropdown.adapter = adapter
         }
         dropdown.onItemSelectedListener = this
     }
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
         searchController.onNewSelected(pos)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>) {
-        // Another interface callback
+        println("This should not happen")
     }
 }

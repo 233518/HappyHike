@@ -72,19 +72,6 @@ class ApiSystem : OnApiRequestFinishedListener {
     ) : BaseOptions()
 
     /** All the GET requests */
-
-    fun requestTest(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/test", this, 0, requestBaseOptions)
-    }
-    fun requestApprovedReviewById(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/review/approved/get/${requestBaseOptions.id}", this, 1, requestBaseOptions)
-    }
-    fun requestDeniedReviewById(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/review/denied/get/${requestBaseOptions.id}", this, 2, requestBaseOptions)
-    }
-    fun requestPendingReviewById(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/review/pending/get/${requestBaseOptions.id}", this, 3, requestBaseOptions)
-    }
     fun requestUser(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/user/get/${requestBaseOptions.uid}", this, 4, requestBaseOptions)
     }
@@ -115,12 +102,6 @@ class ApiSystem : OnApiRequestFinishedListener {
     fun requestMoviesFilterTitleAZ(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/movie/movies/filter/title/az", this, 10, requestBaseOptions)
     }
-    fun requestMoviesFilterTitleZA(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/movies/filter/title/za", this, 10, requestBaseOptions)
-    }
-    fun requestMoviesFilterDateAsc(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/movies/filter/date/asc", this, 10, requestBaseOptions)
-    }
     fun requestMoviesFilterDateDesc(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/movie/movies/filter/date/desc", this, 10, requestBaseOptions)
     }
@@ -129,12 +110,6 @@ class ApiSystem : OnApiRequestFinishedListener {
     }
     fun requestTvsFilterTitleAZ(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/tv/tvs/filter/title/az", this, 11, requestBaseOptions)
-    }
-    fun requestTvsFilterTitleZA(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/tvs/filter/title/za", this, 11, requestBaseOptions)
-    }
-    fun requestTvsFilterDateAsc(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/tvs/filter/date/asc", this, 11, requestBaseOptions)
     }
     fun requestTvsFilterDateDesc(requestBaseOptions: RequestBaseOptions) {
         api.runRequestGet("/tv/tvs/filter/date/desc", this, 11, requestBaseOptions)
@@ -159,12 +134,6 @@ class ApiSystem : OnApiRequestFinishedListener {
     }
     fun requestUserLists(requestBaseOptions: RequestBaseOptions, language: String?) {
         api.runRequestGet("/user/get/lists/${requestBaseOptions.uid}?languageCode=$language", this, 18, requestBaseOptions)
-    }
-    fun requestMovieWatchProviders(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/movie/get/watch/providers/${requestBaseOptions.id}", this, 19, requestBaseOptions)
-    }
-    fun requestTvWatchProviders(requestBaseOptions: RequestBaseOptions) {
-        api.runRequestGet("/tv/get/watch/providers/${requestBaseOptions.id}", this, 20, requestBaseOptions)
     }
     fun requestSearch(requestBaseOptions: RequestBaseOptions, title: String, language: String?) {
         api.runRequestGet("/search/get/$title?languageCode=$language", this, 21, requestBaseOptions)
@@ -313,10 +282,6 @@ class ApiSystem : OnApiRequestFinishedListener {
     override fun onSuccessRequestGet(result: String?, requestId: Int, function: (any : Any) -> Unit) {
         val gson = GsonBuilder().create()
         when (requestId) {
-            0 -> function("Test")
-            1 -> function(gson.fromJson(result, ApprovedReview::class.java))
-            2 -> function(gson.fromJson(result, DeniedReview::class.java))
-            3 -> function(gson.fromJson(result, PendingReview::class.java))
             4 -> function(gson.fromJson(result, User::class.java))
             5 -> function(gson.fromJson(result, Movie::class.java))
             6 -> function(gson.fromJson(result, MovieFrontpage::class.java))
@@ -332,8 +297,6 @@ class ApiSystem : OnApiRequestFinishedListener {
             16 -> function(gson.fromJson(result, Favorites::class.java))
             17 -> function(gson.fromJson(result, Watchlist::class.java))
             18 -> function(gson.fromJson(result, UserLists::class.java))
-            19 -> function(gson.fromJson(result, MovieWatchProviders::class.java))
-            20 -> function(gson.fromJson(result, TvWatchProviders::class.java))
             21 -> function(gson.fromJson(result, Search::class.java))
             22 -> function(gson.fromJson(result, MovieReviews::class.java))
             23 -> function(gson.fromJson(result, TvReviews::class.java))

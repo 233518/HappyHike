@@ -84,20 +84,6 @@ class TvSystem(private val apiSystem: ApiSystem, private val snackbarSystem: Sna
     }
 
     /**
-     * Sends request to remove tv from a specific list
-     *
-     * @param listId The list ID
-     * @param tvId The tv ID
-     */
-    fun removeTvFromList(listId: String, tvId: String){
-        var params : HashMap<String, String> = HashMap()
-        params["listId"] = listId
-        params["tvId"] = tvId
-
-        apiSystem.postListRemoveTv(PostBaseOptions(null, null, params, ::newPostResponse, ::onFailure))
-    }
-
-    /**
      * Shows snackbar message of post result
      *
      * @param string

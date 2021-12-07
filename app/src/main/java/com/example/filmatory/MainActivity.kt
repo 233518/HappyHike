@@ -74,7 +74,6 @@ open class MainActivity : AppCompatActivity() {
      * @param baseError The error
      */
     fun onFailure(baseError: BaseError) {
-        //Skulle blitt gjort noe her, men dette rakk vi ikke
         println(baseError.message)
     }
 

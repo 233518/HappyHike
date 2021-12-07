@@ -131,7 +131,6 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         if(ready == 2) {
             tabAdapter.statisticsFragment.updateGraph(favorites, watchlist, pie)
         } else {
-            //Bad! Making an observer on the ready variable would be a better option here, endless loop can happen
             while(ready != 2) {
                 Thread.sleep(500)
             }

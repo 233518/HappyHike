@@ -36,7 +36,6 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         tvsGui.nestedSv.setOnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
             if (v.getChildAt(v.childCount - 1) != null) {
                 if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight && scrollY > oldScrollY) {
-                    //code to fetch more data for endless scrolling
                     loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
                 }
             }

@@ -87,20 +87,6 @@ class MovieSystem(private val apiSystem: ApiSystem, private val snackbarSystem: 
     }
 
     /**
-     * Sends request to remove movie from a specific list
-     *
-     * @param listId The list ID
-     * @param movieId The movie ID
-     */
-    fun removeMovieFromList(listId: String, movieId: String){
-        var params : HashMap<String, String> = HashMap()
-        params["listId"] = listId
-        params["movieId"] = movieId
-
-        apiSystem.postListRemoveMovie(PostBaseOptions(null, null, params, ::newPostResponse, ::onFailure))
-    }
-
-    /**
      * Shows snackbar message of post result
      *
      * @param string The message
