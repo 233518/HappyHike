@@ -20,8 +20,8 @@ class UserInfoSystem(private val apiSystem: ApiSystem) {
      * @param uid The user ID
      * @param username The new username
      */
-    fun updateUsername(uid : String, username: String){
-        updateUsernameInDatabase(uid, username)
+    fun updateUsername(uid : String, username: String, callbackUsername: (message: String) -> Unit){
+        updateUsernameInDatabase(uid, username, callbackUsername)
     }
 
     /**
@@ -45,9 +45,10 @@ class UserInfoSystem(private val apiSystem: ApiSystem) {
      * @param uid The user ID
      * @param username The new username
      */
-    private fun updateUsernameInDatabase(uid : String, username : String){
+    private fun updateUsernameInDatabase(uid : String, username : String, callbackUsername: (message: String) -> Unit){
         val params: HashMap<String, String> = HashMap()
         params["username"] = username
+        this.callbackUsername = callbackUsername
         apiSystem.postUserUsername(PostBaseOptions(null, uid, params, ::updatedUsername, ::onFailure))
     }
 

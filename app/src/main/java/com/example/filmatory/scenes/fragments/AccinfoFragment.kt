@@ -38,7 +38,7 @@ class AccinfoFragment(scene: SuperScene, private val controller: MainController)
         changePwBtn = view.findViewById(R.id.accinfo_password_btn)
         changeUsernameBtn.setOnClickListener {
             val name : String = view.findViewById<TextInputEditText>(R.id.accinfoUsernameTextField).text.toString()
-            userInfoSystem.updateUsername(controller.uid!!, name)
+            userInfoSystem.updateUsername(controller.uid!!, name, ::showMessage)
         }
 
         changePwBtn.setOnClickListener {
@@ -50,5 +50,8 @@ class AccinfoFragment(scene: SuperScene, private val controller: MainController)
                 controller.snackbarSystem.showSnackbarWarning("Fields dont match!")
             }
         }
+    }
+    private fun showMessage(message: String) {
+        controller.snackbarSystem.showSnackbarSuccess(message)
     }
 }
