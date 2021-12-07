@@ -13,7 +13,7 @@ class MovieScene : SuperScene() {
     private lateinit var movieController : MovieController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_scene)
+        setContentView(R.layout.activity_media_scene)
         movieController = MovieController(this)
     }
 }

@@ -13,7 +13,7 @@ class TvScene : SuperScene() {
     private lateinit var tvController: TvController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_scene)
+        setContentView(R.layout.activity_media_scene)
         tvController = TvController(this)
     }
 }

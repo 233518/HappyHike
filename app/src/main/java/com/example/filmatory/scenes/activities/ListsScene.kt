@@ -13,7 +13,7 @@ class ListsScene : SuperScene() {
     private lateinit var listController : ListsController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.lists_container)
+        setContentView(R.layout.activity_lists)
         listController = ListsController(this)
     }
 }

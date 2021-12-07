@@ -21,7 +21,7 @@ import com.example.filmatory.utils.items.ReviewItem
 class ReviewAdapter(private val arrayList: MutableList<ReviewItem>, private val context: Context) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.review_item, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.layout_review_item, parent, false)
         )
     }
 

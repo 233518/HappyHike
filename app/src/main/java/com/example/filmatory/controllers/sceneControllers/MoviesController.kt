@@ -245,5 +245,4 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
             .show()
         }
     }
-
 }

@@ -22,7 +22,7 @@ import com.example.filmatory.utils.items.PersonItem
 class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, private val context: Context) : RecyclerView.Adapter<PersonRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.layout_slider_item, parent, false)
         )
     }
 

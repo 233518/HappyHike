@@ -13,7 +13,7 @@ class StartScene : SuperScene() {
     private lateinit var startController: StartController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.start_screen)
+        setContentView(R.layout.activity_start_screen)
         startController = StartController(this)
     }
 }

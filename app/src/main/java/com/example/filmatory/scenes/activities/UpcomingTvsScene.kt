@@ -14,7 +14,7 @@ class UpcomingTvsScene : SuperScene() {
     private lateinit var upcomingTvsController: UpcomingTvsController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.media_list_container)
+        setContentView(R.layout.layout_media_recyclerview)
         upcomingTvsController = UpcomingTvsController(this)
     }
 }

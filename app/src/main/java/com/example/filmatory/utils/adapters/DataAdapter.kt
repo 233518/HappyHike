@@ -459,18 +459,18 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
-            TYPE_MOVIE -> MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
-            TYPE_TV -> TvViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
-            TYPE_MOVIE_SLIDER -> MovieSliderViewHolder(LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false))
-            TYPE_TV_SLIDER -> TvSliderViewHolder(LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false))
-            TYPE_FAVORITES_MOVIE -> MovieFavoritesViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
-            TYPE_FAVORITES_TV -> TvFavoritesViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
-            TYPE_WATCHLIST_MOVIE -> MovieWatchlistViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
-            TYPE_WATCHLIST_TV -> TvWatchlistViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
+            TYPE_MOVIE -> MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_media_item, parent, false))
+            TYPE_TV -> TvViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_media_item, parent, false))
+            TYPE_MOVIE_SLIDER -> MovieSliderViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_slider_item, parent, false))
+            TYPE_TV_SLIDER -> TvSliderViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_slider_item, parent, false))
+            TYPE_FAVORITES_MOVIE -> MovieFavoritesViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_media_item, parent, false))
+            TYPE_FAVORITES_TV -> TvFavoritesViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_media_item, parent, false))
+            TYPE_WATCHLIST_MOVIE -> MovieWatchlistViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_media_item, parent, false))
+            TYPE_WATCHLIST_TV -> TvWatchlistViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_media_item, parent, false))
             TYPE_SEARCH_MOVIE -> MovieSearchViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_search_item, parent, false))
             TYPE_SEARCH_TV -> TvSearchViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_search_item, parent, false))
             else -> {
-                TvViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
+                TvViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_media_item, parent, false))
             }
         }
     }

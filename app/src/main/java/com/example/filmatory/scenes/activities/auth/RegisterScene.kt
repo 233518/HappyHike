@@ -12,7 +12,7 @@ class RegisterScene : AuthScene() {
     private lateinit var registerController: RegisterController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.register_screen)
+        setContentView(R.layout.activity_register_screen)
         registerController = RegisterController(this)
     }
 }

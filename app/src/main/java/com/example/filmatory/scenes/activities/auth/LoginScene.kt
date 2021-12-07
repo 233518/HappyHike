@@ -12,7 +12,7 @@ class LoginScene : AuthScene() {
     private lateinit var loginController: LoginController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_screen)
+        setContentView(R.layout.activity_login_screen)
         loginController = LoginController(this)
     }
 }

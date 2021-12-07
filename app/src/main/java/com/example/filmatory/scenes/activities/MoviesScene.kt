@@ -13,7 +13,7 @@ class MoviesScene : SuperScene() {
     private lateinit var moviesController: MoviesController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.media_list_container)
+        setContentView(R.layout.layout_media_recyclerview)
         moviesController = MoviesController(this)
     }
 }

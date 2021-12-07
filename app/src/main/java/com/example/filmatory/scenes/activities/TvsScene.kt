@@ -13,7 +13,7 @@ class TvsScene : SuperScene() {
     private lateinit var tvsController: TvsController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.media_list_container)
+        setContentView(R.layout.layout_media_recyclerview)
         tvsController = TvsController(this)
     }
 }
