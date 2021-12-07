@@ -16,18 +16,22 @@ import com.example.filmatory.api.data.user.User
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.errors.BaseError
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.FormBody
-import java.util.*
 
 /**
  * ApiSystem handles the interaction with the API
+ * This is the class to implement to run HTTP requests
+ * This is where you implement new requests
  *
  */
 class ApiSystem : OnApiRequestFinishedListener {
     private var api = Api()
 
+    /**
+     * Contains required information to run most requests
+     *
+     */
     abstract class BaseOptions {
         abstract val id: String?
         abstract val uid: String?
@@ -35,6 +39,14 @@ class ApiSystem : OnApiRequestFinishedListener {
         abstract val callbackFailure: (baseError: BaseError) -> Unit
     }
 
+    /**
+     * Extends BaseOptions and will contain information for GET requests
+     *
+     * @property id The id of the item
+     * @property uid The id of the user
+     * @property callbackSuccess The callback to run if success
+     * @property callbackFailure The callback to run if failed
+     */
     data class RequestBaseOptions(
         override val id: String?,
         override val uid: String?,
@@ -42,6 +54,15 @@ class ApiSystem : OnApiRequestFinishedListener {
         override val callbackFailure: (baseError: BaseError) -> Unit,
     ) : BaseOptions()
 
+    /**
+     * Extends BaseOptions and will contain information for POST requests
+     *
+     * @property id The id of the item
+     * @property uid The id of the user
+     * @property params Extra params to put in body/head
+     * @property callbackSuccess The callback to run if success
+     * @property callbackFailure The callback to run if failed
+     */
     data class PostBaseOptions(
         override val id: String?,
         override val uid: String?,
@@ -316,7 +337,7 @@ class ApiSystem : OnApiRequestFinishedListener {
             21 -> function(gson.fromJson(result, Search::class.java))
             22 -> function(gson.fromJson(result, MovieReviews::class.java))
             23 -> function(gson.fromJson(result, TvReviews::class.java))
-            else -> { // Note the block
+            else -> {
                 print("Something went wrong, cant find requestId")
             }
         }

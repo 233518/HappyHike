@@ -3,13 +3,11 @@ package com.example.filmatory.systems
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.StartScene
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
-
 
 /**
  * AuthSystem takes care of authenticaton of users
@@ -78,6 +76,11 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
         }
     }
 
+    /**
+     * Updates the password for the user
+     *
+     * @param password The new password
+     */
     fun updatePassword(password: String){
         val user = auth.currentUser
         user!!.updatePassword(password)
@@ -93,6 +96,11 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
             }
     }
 
+    /**
+     * Sends a reset password link to user
+     *
+     * @param email The email to send to
+     */
     fun sendResetLink(email : String){
         if(email != ""){
             auth.sendPasswordResetEmail(email)
@@ -129,13 +137,21 @@ class AuthSystem(private val apiSystem: ApiSystem, private val auth: FirebaseAut
         Log.d(TAG, "$string")
     }
 
+    /**
+     * Sends the user back to the start page
+     *
+     */
     private fun retry() {
         val intent = Intent(scene, StartScene::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         scene.finish()
         scene.startActivity(intent)
     }
 
+    /**
+     * If API fails, message will pop up
+     *
+     * @param baseError
+     */
     private fun onFailure(baseError: BaseError) {
         snackbarSystem.showSnackbarFailure(baseError.message, ::retry, "Reload")
     }

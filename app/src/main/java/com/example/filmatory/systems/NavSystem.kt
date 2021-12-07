@@ -115,6 +115,12 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
             true
         }
     }
+
+    /**
+     * Runs when language gets changed
+     *
+     * @param appCompatActivity The activity
+     */
     fun changeLangAlert(appCompatActivity: AppCompatActivity){
         var dialog : AlertDialog
         var availableLangs = arrayOf("English", "Norsk", "Deutsch", "Français", "Español", "中国人")
@@ -166,6 +172,12 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
         dialog = builder.create()
         dialog.show()
     }
+
+    /**
+     * Gets the current lang from activity
+     *
+     * @param appCompatActivity The activity
+     */
     fun currentLang(appCompatActivity: AppCompatActivity){
         val img : String = Lingver.getInstance().getLocale().toString()
         langBtn.setImageResource(appCompatActivity.resources.getIdentifier(img, "drawable", appCompatActivity.packageName))
