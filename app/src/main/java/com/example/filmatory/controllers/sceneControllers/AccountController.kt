@@ -5,7 +5,7 @@ import com.example.filmatory.guis.AccountGui
 import com.example.filmatory.scenes.activities.AccountScene
 
 /**
- * AccountController manipulates the AccountScene gui
+ * AccountController controls everything related to the account page
  *
  * @property accountScene The AccountScene to use
  */

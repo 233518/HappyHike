@@ -16,7 +16,8 @@ import com.example.filmatory.utils.adapters.ViewPageAdapter
 import com.example.filmatory.utils.observers.AccountInfoObserver
 
 /**
- * AccountInfoController manipulates the AccountInfoScene gui
+ * AccountInfoController controls everything related to the account info page
+ * Implements AccountInfoObserver for updating components
  *
  * @property accountInfoScene The AccountInfoScene to use
  */
@@ -98,7 +99,7 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     }
 
     /**
-     * TODO
+     * Runs a method to retrive user lists
      *
      * @param userLists : Object of user lists
      */
@@ -124,12 +125,13 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     /**
      * Updates the piechart statistics when favorite and watchlist data has loaded
      *
-     * @param pie : Piechart
+     * @param pie : Piechart that you want to update
      */
     override fun onStatisticsInitialized(pie: Pie) {
         if(ready == 2) {
             tabAdapter.statisticsFragment.updateGraph(favorites, watchlist, pie)
         } else {
+            //Bad! Making an observer on the ready variable would be a better option here, endless loop can happen
             while(ready != 2) {
                 Thread.sleep(500)
             }

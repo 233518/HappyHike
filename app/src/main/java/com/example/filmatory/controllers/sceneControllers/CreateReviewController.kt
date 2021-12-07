@@ -2,16 +2,14 @@ package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.guis.MovieGui
 import com.example.filmatory.guis.ReviewGui
 import com.example.filmatory.scenes.activities.CreateReviewScene
 import com.example.filmatory.scenes.activities.MovieScene
 import com.example.filmatory.scenes.activities.TvScene
-import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.systems.ReviewSystem
 
 /**
- * CreateReviewController manipulates the CreateReviewScene gui
+ * CreateReviewController controls everything related to the create review page
  *
  * @property createReviewScene : The CreateReviewScene to use
  */

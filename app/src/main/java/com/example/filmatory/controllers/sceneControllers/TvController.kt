@@ -2,18 +2,14 @@ package com.example.filmatory.controllers.sceneControllers
 
 import android.content.Intent
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.filmatory.R
-import com.example.filmatory.api.data.movie.MovieReviews
 import com.example.filmatory.api.data.tv.Tv
 import com.example.filmatory.api.data.tv.TvReviews
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.api.data.user.UserLists
 import com.example.filmatory.api.data.user.Watchlist
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.errors.BaseError
 import com.example.filmatory.guis.TvGui
 import com.example.filmatory.scenes.activities.CreateReviewScene
 import com.example.filmatory.scenes.activities.TvScene
@@ -29,7 +25,7 @@ import com.example.filmatory.utils.items.ReviewItem
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
- * TvController manipulates the TvScene gui
+ * TvController controls everything related to the tv page
  *
  * @param tvScene The TvScene to use
  */
@@ -516,5 +512,23 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
      */
     fun notLoggedin() {
         snackbarSystem.showSnackbarWarning("You need to log in to use this function!")
+    }
+
+    /**
+     * Gets the system that contains methods for favorites
+     *
+     * @return favoriteSystem
+     */
+    override fun getFavoriteSystem(): FavoriteSystem {
+        return favoriteSystem
+    }
+
+    /**
+     * Gets the system that contains methods for watchlists
+     *
+     * @return watchlistSystem
+     */
+    override fun getWatchlistSystem(): WatchlistSystem {
+        return watchlistSystem
     }
 }

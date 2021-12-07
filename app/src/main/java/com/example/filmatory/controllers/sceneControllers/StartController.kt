@@ -12,7 +12,7 @@ import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
 /**
- * StartController manipulates the StartScene gui
+ * StartController controls everything related to the start page
  *
  * @param startScene The StartScene to use
  */
@@ -56,7 +56,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     /**
      * Update the gui with data from API
      *
-     * @param tvFrontpage The respons from API
+     * @param tvFrontpage The response from API
      */
     private fun discoverTvData(tvFrontpage: TvFrontpage){
         val discoverTvsArrayList: ArrayList<MediaModel> = ArrayList()
@@ -83,7 +83,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     /**
      * Update the gui with data from API
      *
-     * @param movieFrontpage The respons from API
+     * @param movieFrontpage The response from API
      */
     private fun recMovieData(movieFrontpage: MovieFrontpage){
         val recMoviesArrayList: ArrayList<MediaModel> = ArrayList()
@@ -110,7 +110,7 @@ class StartController(private val startScene: StartScene) : MainController(start
     /**
      * Update the gui with data from API
      *
-     * @param tvFrontpage The respons from API
+     * @param tvFrontpage The response from API
      */
     private fun recTvData(tvFrontpage: TvFrontpage){
         val recTvsArrayList: ArrayList<MediaModel> = ArrayList()

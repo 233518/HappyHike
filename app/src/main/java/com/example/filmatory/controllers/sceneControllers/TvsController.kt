@@ -13,7 +13,7 @@ import com.example.filmatory.utils.items.MediaModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
- * TvsController manipulates the TvsScene gui
+ * TvsController controls everything related to the tvs page
  *
  * @param tvsScene The TvsScene to use
  */
