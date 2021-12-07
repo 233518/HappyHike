@@ -11,6 +11,12 @@ import com.example.filmatory.api.data.tv.Tv
 import com.example.filmatory.controllers.sceneControllers.TvController
 import com.example.filmatory.scenes.activities.TvScene
 
+/**
+ * TvGui contains all the gui elements for the tv page
+ *
+ * @property tvScene The scene to use
+ * @property tvController The controller to use
+ */
 class TvGui(private var tvScene: TvScene, private var tvController: TvController) {
     var favoriteBtn : ImageButton = tvScene.findViewById(R.id.movie_favorite_icon)
     var watchlistBtn : ImageButton = tvScene.findViewById(R.id.movie_watchlist_icon)
@@ -72,16 +78,33 @@ class TvGui(private var tvScene: TvScene, private var tvController: TvController
         }
     }
 
+    /**
+     * Sets the favorite button background icon
+     *
+     * @param drawable The drawable to set
+     */
     fun setFavoriteBtnBackground(drawable: Int) {
         tvScene.runOnUiThread {
             favoriteBtn.setBackgroundResource(drawable)
         }
     }
+
+    /**
+     * Sets the watched button background icon
+     *
+     * @param drawable The drawable to set
+     */
     fun setWatchedBtnBackground(drawable: Int) {
         tvScene.runOnUiThread {
             watchlistBtn.setBackgroundResource(drawable)
         }
     }
+
+    /**
+     * Sets the tv information
+     *
+     * @param movie The movie information
+     */
     fun setTvInfo(tv: Tv) {
         tvScene.runOnUiThread {
             tvTitle.text = tv.serieinfo.name

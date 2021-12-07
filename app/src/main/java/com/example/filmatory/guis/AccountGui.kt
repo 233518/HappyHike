@@ -7,6 +7,12 @@ import com.example.filmatory.controllers.sceneControllers.AccountController
 import com.example.filmatory.scenes.activities.AccountInfoScene
 import com.example.filmatory.scenes.activities.AccountScene
 
+/**
+ * AccountGui contains all the gui elements for the account page
+ *
+ * @property accountScene The scene to use
+ * @property accountController The controller to use
+ */
 class AccountGui(private val accountScene: AccountScene, private val accountController: AccountController) {
     var accountCardView: CardView = accountScene.findViewById(R.id.account_cardOne)
     var favoriteCardView: CardView = accountScene.findViewById(R.id.account_cardTwo)

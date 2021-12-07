@@ -9,6 +9,12 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.TvsController
 import com.example.filmatory.scenes.activities.TvsScene
 
+/**
+ * TvsGui contains all the gui elements for the tvs page
+ *
+ * @property tvsScene The scene to use
+ * @property tvsController The controller to use
+ */
 class TvsGui(private val tvsScene: TvsScene, private val tvsController: TvsController) {
     var tvsRecyclerView: RecyclerView = tvsScene.findViewById(R.id.recyclerView)
     var filterBtn : Button = tvsScene.findViewById(R.id.filter_btn)
@@ -28,6 +34,11 @@ class TvsGui(private val tvsScene: TvsScene, private val tvsController: TvsContr
             tvsController.showGenreFilterList()
         }
     }
+
+    /**
+     * Disables the loading bar
+     *
+     */
     fun disableLoadingBar(){
         tvsScene.runOnUiThread {
             loadingBar.visibility = View.GONE

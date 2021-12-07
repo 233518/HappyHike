@@ -9,6 +9,12 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.SearchController
 import com.example.filmatory.scenes.activities.SearchScene
 
+/**
+ * SearchGui contains all the gui elements for the search page
+ *
+ * @property searchScene The scene to use
+ * @property searchController The controller to use
+ */
 class SearchGui(private val searchScene: SearchScene, private val searchController: SearchController) : AdapterView.OnItemSelectedListener {
     var dropdown: Spinner = searchScene.findViewById(R.id.spinner1)
     var resultRecyclerView: RecyclerView = searchScene.findViewById(R.id.recyclerView)
@@ -29,9 +35,5 @@ class SearchGui(private val searchScene: SearchScene, private val searchControll
 
     override fun onNothingSelected(parent: AdapterView<*>) {
         // Another interface callback
-    }
-
-    fun updateRecycler() {
-
     }
 }

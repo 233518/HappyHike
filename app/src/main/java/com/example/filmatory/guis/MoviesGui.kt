@@ -9,6 +9,12 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.MoviesController
 import com.example.filmatory.scenes.activities.MoviesScene
 
+/**
+ * MoviesGui contains all the gui elements for the movies page
+ *
+ * @property moviesScene The scene to use
+ * @property moviesController The controller to use
+ */
 class MoviesGui(private val moviesScene: MoviesScene, private val moviesController: MoviesController) {
     var moviesRecyclerView: RecyclerView = moviesScene.findViewById(R.id.recyclerView)
     var filterBtn : Button = moviesScene.findViewById(R.id.filter_btn)
@@ -29,6 +35,10 @@ class MoviesGui(private val moviesScene: MoviesScene, private val moviesControll
         }
     }
 
+    /**
+     * Disables the loading bar
+     *
+     */
     fun disableLoadingBar(){
         moviesScene.runOnUiThread {
             loadingBar.visibility = View.GONE

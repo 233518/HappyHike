@@ -10,7 +10,12 @@ import com.example.filmatory.scenes.activities.auth.ResetPasswordScene
 import com.example.filmatory.systems.AuthSystem
 import com.google.android.material.textfield.TextInputEditText
 
-
+/**
+ * LoginGui contains all the gui elements for the login page
+ *
+ * @param loginScene The scene to use
+ * @param authSystem The auth system to use
+ */
 class LoginGui(loginScene: LoginScene, authSystem: AuthSystem) {
     private var regBtn = loginScene.findViewById<TextView>(R.id.regHereBtn)
     private var logBtn = loginScene.findViewById<Button>(R.id.login_btn)

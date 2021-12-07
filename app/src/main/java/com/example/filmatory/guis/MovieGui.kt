@@ -1,6 +1,5 @@
 package com.example.filmatory.guis;
 
-import android.content.Intent
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -9,12 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.api.data.movie.Movie
-import com.example.filmatory.api.data.movie.MovieReviews
-import com.example.filmatory.api.data.review.ApprovedReview
 import com.example.filmatory.controllers.sceneControllers.MovieController
 import com.example.filmatory.scenes.activities.MovieScene
-import com.example.filmatory.scenes.activities.TvsScene
 
+/**
+ * MovieGui contains all the gui elements for the movie page
+ *
+ * @property movieScene The scene to use
+ * @property movieController The controller to use
+ */
 class MovieGui(private var movieScene: MovieScene, private var movieController : MovieController) {
     var personsRecyclerView: RecyclerView = movieScene.findViewById(R.id.m_person_slider)
     var reviewRecyclerView : RecyclerView = movieScene.findViewById(R.id.review_rv)
@@ -72,17 +74,33 @@ class MovieGui(private var movieScene: MovieScene, private var movieController :
         }
     }
 
+    /**
+     * Sets the favorite button background icon
+     *
+     * @param drawable The drawable to set
+     */
     fun setFavoriteBtnBackground(drawable: Int) {
         movieScene.runOnUiThread {
             favoriteBtn.setBackgroundResource(drawable)
         }
     }
+
+    /**
+     * Sets the watched button background icon
+     *
+     * @param drawable The drawable to set
+     */
     fun setWatchedBtnBackground(drawable: Int) {
         movieScene.runOnUiThread {
             watchlistBtn.setBackgroundResource(drawable)
         }
     }
 
+    /**
+     * Sets the movie information
+     *
+     * @param movie The movie information
+     */
     fun setMovieInfo(movie: Movie) {
         movieScene.runOnUiThread {
             movieTitle.text = movie.filminfo.title

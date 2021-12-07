@@ -6,6 +6,12 @@ import com.example.filmatory.scenes.activities.auth.RegisterScene
 import com.example.filmatory.systems.AuthSystem
 import com.google.android.material.textfield.TextInputEditText
 
+/**
+ * RegisterGui contains all the gui elements for the register page
+ *
+ * @param registerScene The scene to use
+ * @param authSystem The auth system to use
+ */
 class RegisterGui(registerScene: RegisterScene, authSystem: AuthSystem) {
     private var registerBtn = registerScene.findViewById<Button>(R.id.reg_btn)
     private var emailEditField = registerScene.findViewById<TextInputEditText>(R.id.regEmailEditField)

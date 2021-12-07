@@ -11,6 +11,12 @@ import com.example.filmatory.api.data.person.Person
 import com.example.filmatory.controllers.sceneControllers.PersonController
 import com.example.filmatory.scenes.activities.PersonScene
 
+/**
+ * PersonGui contains all the gui elements for the person page
+ *
+ * @property personScene The scene to use
+ * @property personController The controller to use
+ */
 class PersonGui(private val personScene: PersonScene, private val personController: PersonController) {
     var personReadmoreBtn : Button = personScene.findViewById(R.id.person_readmore)
     var personReadlessBtn : Button = personScene.findViewById(R.id.person_readless)
@@ -36,6 +42,12 @@ class PersonGui(private val personScene: PersonScene, private val personControll
             personReadlessBtn.visibility = View.GONE
         }
     }
+
+    /**
+     * Creates the action for clicking on the imdb logo
+     *
+     * @param person Person info
+     */
     fun imdbLogoClick(person: Person) {
         personScene.runOnUiThread {
             personImdbLogo.visibility = View.VISIBLE
@@ -49,6 +61,12 @@ class PersonGui(private val personScene: PersonScene, private val personControll
             }
         }
     }
+
+    /**
+     * Creates the action for clicking on the facebook logo
+     *
+     * @param person Person info
+     */
     fun facebookLogoClick(person: Person) {
         personScene.runOnUiThread {
             personFacebookLogo.visibility = View.VISIBLE
@@ -62,6 +80,12 @@ class PersonGui(private val personScene: PersonScene, private val personControll
             }
         }
     }
+
+    /**
+     * Creates the action for clicking on the instagram logo
+     *
+     * @param person Person info
+     */
     fun instagramLogoClick(person: Person) {
         personScene.runOnUiThread {
             personInstagramLogo.visibility = View.VISIBLE
@@ -75,6 +99,12 @@ class PersonGui(private val personScene: PersonScene, private val personControll
             }
         }
     }
+
+    /**
+     * Creates the action for clicking on the twitter logo
+     *
+     * @param person Person info
+     */
     fun twitterLogoClick(person: Person) {
         personScene.runOnUiThread {
             personTwitterLogo.visibility = View.VISIBLE
@@ -88,6 +118,12 @@ class PersonGui(private val personScene: PersonScene, private val personControll
             }
         }
     }
+
+    /**
+     * Creates the action for clicking on the tmdb logo
+     *
+     * @param person Person info
+     */
     fun tmdbLogoClick(person: Person) {
         personTmdbLogo.setOnClickListener {
             personScene.startActivity(
@@ -98,6 +134,12 @@ class PersonGui(private val personScene: PersonScene, private val personControll
             )
         }
     }
+
+    /**
+     * Configures the slider
+     *
+     * @param person Person info
+     */
     fun configureSlider(person: Person) {
         personScene.runOnUiThread {
             Glide.with(personScene)

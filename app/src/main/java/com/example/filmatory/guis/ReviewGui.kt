@@ -9,6 +9,13 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.CreateReviewController
 import com.example.filmatory.scenes.activities.CreateReviewScene
 
+/**
+ * ReviewGui contains all the gui elements for the create review page
+ *
+ * @property createReviewController The controller to use
+ *
+ * @param createReviewScene The scene to use
+ */
 class ReviewGui (createReviewScene: CreateReviewScene, private val createReviewController: CreateReviewController) {
     private var ratingDropdownList : Spinner = createReviewScene.findViewById(R.id.review_rating_spinner)
     private var reviewOverview : EditText = createReviewScene.findViewById(R.id.create_review_edittext)
