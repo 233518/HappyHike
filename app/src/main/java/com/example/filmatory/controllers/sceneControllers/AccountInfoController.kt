@@ -11,6 +11,7 @@ import com.example.filmatory.systems.ApiSystem.RequestBaseOptions
 import com.example.filmatory.systems.FavoriteSystem
 import com.example.filmatory.systems.MovieSystem
 import com.example.filmatory.systems.TvSystem
+import com.example.filmatory.systems.WatchlistSystem
 import com.example.filmatory.utils.adapters.ViewPageAdapter
 import com.example.filmatory.utils.observers.AccountInfoObserver
 
@@ -25,6 +26,7 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
     private val movieSystem = MovieSystem(apiSystem, snackbarSystem, accountInfoScene)
     private val tvSystem = TvSystem(apiSystem, snackbarSystem, accountInfoScene)
     private val favoriteSystem = FavoriteSystem(accountInfoScene, movieSystem, tvSystem)
+    private val watchlistSystem = WatchlistSystem(accountInfoScene, movieSystem, tvSystem)
     private lateinit var favorites: Favorites
     private lateinit var watchlist: Watchlist
     private var ready = 0
@@ -106,5 +108,14 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
      */
     override fun getFavoriteSystem(): FavoriteSystem {
         return favoriteSystem
+    }
+
+    /**
+     * Gets the system that contains methods for watchlists
+     *
+     * @return watchlistSystem
+     */
+    override fun getWatchlistSystem(): WatchlistSystem {
+        return watchlistSystem
     }
 }
