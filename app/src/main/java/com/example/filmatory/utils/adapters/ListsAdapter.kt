@@ -22,7 +22,7 @@ import com.example.filmatory.utils.items.ListItem
 class ListsAdapter(private val arrayList: MutableList<ListItem>, private val context: Context) : RecyclerView.Adapter<ListsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.activity_lists_item, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.layout_list_item, parent, false)
         )
     }
 
