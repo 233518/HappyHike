@@ -5,14 +5,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.RatingBar
 import com.bumptech.glide.Glide
 import com.example.filmatory.R
-import com.example.filmatory.scenes.activities.PersonScene
-import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.items.ReviewItem
 
 /**

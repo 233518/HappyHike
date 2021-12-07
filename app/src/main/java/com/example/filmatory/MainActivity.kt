@@ -68,34 +68,64 @@ open class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Runs if API fails
+     *
+     * @param baseError The error
+     */
     fun onFailure(baseError: BaseError) {
         //Skulle blitt gjort noe her, men dette rakk vi ikke
         println(baseError.message)
     }
 
+    /**
+     * Discover movies response from API
+     *
+     * @param movieFrontpage The response data
+     */
     fun discoverMoviesData(movieFrontpage: MovieFrontpage) {
         discoverMovieFrontpage = movieFrontpage
         ready++
         startApp()
     }
 
+    /**
+     * Discover tv response from API
+     *
+     * @param tvFrontpage The response data
+     */
     fun discoverTvData(tvFrontpage: TvFrontpage) {
         discoverTvFrontpage = tvFrontpage
         ready++
         startApp()
     }
 
+    /**
+     * Recommended movie response from API
+     *
+     * @param movieFrontpage The response data
+     */
     fun recMovieData(movieFrontpage: MovieFrontpage) {
         recMovieFrontpage = movieFrontpage
         ready++
         startApp()
     }
+
+    /**
+     * Recommended tv response from API
+     *
+     * @param tvFrontpage The response data
+     */
     fun recTvData(tvFrontpage: TvFrontpage) {
         recTvFrontpage = tvFrontpage
         ready++
         startApp()
     }
 
+    /**
+     * Continues the app when information is fetched
+     *
+     */
     fun startApp() {
         if(ready == 4) {
             val intent = Intent(this, StartScene::class.java)
