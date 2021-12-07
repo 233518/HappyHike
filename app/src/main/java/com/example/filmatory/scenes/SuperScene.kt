@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.anychart.APIlib
 import com.bumptech.glide.Glide
+import com.example.filmatory.MainActivity
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.SearchScene
 import com.google.firebase.auth.ktx.auth
@@ -24,6 +25,10 @@ import com.google.android.material.navigation.NavigationView
 open class SuperScene : AppCompatActivity() {
     var auth = Firebase.auth
 
+    init {
+        MainActivity.auth = auth
+        MainActivity.uid = auth.currentUser?.uid
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.filmatoryTheme)
