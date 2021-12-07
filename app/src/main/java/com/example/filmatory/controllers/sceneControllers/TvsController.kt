@@ -43,7 +43,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         }
     }
 
-
+    /**
+     * Method to load 10 by 10 tv-shows as the user scrolls to bottom
+     *
+     * @param array : Array to be loaded
+     */
     private fun loadMore(array : ArrayList<MediaModel>){
         tvsScene.runOnUiThread {
             val tvsAdapter = DataAdapter(tvsScene, this, tvsScene, tempTvsArray)
@@ -85,6 +89,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         loadMore(tvsHashMap[currentFilter] as ArrayList<MediaModel>)
     }
 
+    /**
+     * Sets data from API depending on which genre is chosen from genre filter
+     *
+     * @param tvs The response from the API
+     */
     private fun tvsFilteredGenreData(tvs: Tvs){
         val tvsFilteredGenre : ArrayList<MediaModel> = ArrayList()
         tvsFilteredGenre.clear()
@@ -133,11 +142,21 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         tvsHashMap["tvsFilteredDateDesc"] = tvsFilteredDateDesc
     }
 
+    /**
+     * Sets genreId and requests the tv-shows to be filtered
+     *
+     * @param id : Id of the genre
+     */
     private fun filteredGenre(id : Int){
         genreId = id
         apiSystem.requestTvs(RequestBaseOptions(null, null, ::tvsFilteredGenreData, ::onFailure))
     }
 
+    /**
+     * Opens a confirm dialog to choose filter
+     * When filter is chosen, set the current filter and load it from the HashMap
+     *
+     */
     fun showFilterList(){
         tvsScene.runOnUiThread {
             var chosenItem: Int = -1
@@ -185,6 +204,11 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
         }
     }
 
+    /**
+     * Opens a confirm dialog to choose which genre to filter by
+     * When chosen, run a method to filter tv-shows by genreId
+     *
+     */
     fun showGenreFilterList(){
         tvsScene.runOnUiThread {
             var chosenItem: Int = -1

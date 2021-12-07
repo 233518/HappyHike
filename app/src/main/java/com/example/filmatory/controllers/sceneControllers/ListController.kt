@@ -86,6 +86,12 @@ class ListController(private val listScene: ListScene) : MainController(listScen
         }
     }
 
+    /**
+     * Checks if the user viewing the list is the owner of the list.
+     * If its the owner, make the delete button visible.
+     *
+     * @param user : Current user
+     */
     private fun checkIfOwner(user : User){
         listScene.runOnUiThread {
             for (item in user.lists) {

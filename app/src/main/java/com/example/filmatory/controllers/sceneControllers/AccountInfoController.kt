@@ -37,22 +37,41 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         tabAdapter.statisticsFragment.registerObserver(this)
     }
 
+    /**
+     * Runs a methods to retrieve user favorites
+     *
+     * @param favorites : Object of user favorites
+     */
     private fun getUserFavorites(favorites: Favorites){
         tabAdapter.favoriteFragment.showFavorites(favorites)
         this.favorites = favorites
         ready++
     }
 
+    /**
+     * Runs a methods to retrieve user watchlist
+     *
+     * @param watchlist : Object of user watchlist
+     */
     private fun getUserWatchlist(watchlist: Watchlist){
         tabAdapter.watchlistFragment.showWatchlist(watchlist)
         this.watchlist = watchlist
         ready++
     }
 
+    /**
+     * TODO
+     *
+     * @param userLists : Object of user lists
+     */
     private fun getUserLists(userLists: UserLists){
         tabAdapter.listFragment.showUserLists(userLists)
     }
 
+    /**
+     * Initlizes the tab adapter for tablayout in accountscene
+     *
+     */
     private fun initializeTabAdapter(){
         val defaultPage = 0
         val page = accountInfoScene.intent.getIntExtra("position", defaultPage)
@@ -64,6 +83,11 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         accountInfoGui.initializeTab()
     }
 
+    /**
+     * Updates the piechart statistics when favorite and watchlist data has loaded
+     *
+     * @param pie : Piechart
+     */
     override fun onStatisticsInitialized(pie: Pie) {
         if(ready == 2) {
             tabAdapter.statisticsFragment.updateGraph(favorites, watchlist, pie)
@@ -75,6 +99,11 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         }
     }
 
+    /**
+     * Gets the system that contains methods for favorites
+     *
+     * @return favoriteSystem
+     */
     override fun getFavoriteSystem(): FavoriteSystem {
         return favoriteSystem
     }

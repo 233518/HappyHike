@@ -44,6 +44,11 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         }
     }
 
+    /**
+     * Method to load 10 by 10 movies as the user scrolls to bottom
+     *
+     * @param array : Array to be loaded
+     */
     private fun loadMore(array : ArrayList<MediaModel>){
         moviesScene.runOnUiThread {
             val moviesAdapter = DataAdapter(moviesScene, this, moviesScene, tempMoviesArray)
@@ -138,11 +143,21 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         movieHashMap["moviesFilteredDateDesc"] = moviesFilteredDateDesc
     }
 
+    /**
+     * Sets genreId and requests the movies to be filtered
+     *
+     * @param id : Id of the genre
+     */
     private fun filteredGenre(id : Int){
         genreId = id
         apiSystem.requestMovies(RequestBaseOptions(null, null, ::moviesFilteredGenreData, ::onFailure))
     }
 
+    /**
+     * Opens a confirm dialog to choose filter
+     * When filter is chosen, set the current filter and load it from the HashMap
+     *
+     */
     fun showFilterList(){
         moviesScene.runOnUiThread {
             var chosenItem: Int = -1
@@ -190,6 +205,11 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
         }
     }
 
+    /**
+     * Opens a confirm dialog to choose which genre to filter by
+     * When chosen, run a method to filter movies by genreId
+     *
+     */
     fun showGenreFilterList(){
         moviesScene.runOnUiThread {
             var chosenItem: Int = -1

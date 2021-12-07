@@ -377,6 +377,11 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         }
     }
 
+    /**
+     * Update the gui with the reviews that belongs to the tv-show
+     *
+     * @param tvReviews : API response with the reviews
+     */
     private fun getReviews(tvReviews: TvReviews){
         tvScene.runOnUiThread {
             if(tvReviews.size != 0) tvGui.reviewHeading.visibility = View.VISIBLE
@@ -389,6 +394,11 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         }
     }
 
+    /**
+     * Gets the current users lists, and stores them in an arraylist
+     *
+     * @param userLists : Users lists
+     */
     private fun getUserLists(userLists: UserLists){
         if(userLists.size != 0){
             for(item in userLists){
@@ -400,6 +410,12 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         }
     }
 
+    /**
+     * Checks if the tv-show is favorited
+     * If favorited, set the correct icon
+     *
+     * @param favorites : Users favorites
+     */
     private fun checkIfFavorited(favorites: Favorites){
         tvIsFavorited = favoriteSystem.checkIfTvFavorited(favorites, tvId)
         if(!tvIsFavorited) {
@@ -409,6 +425,11 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         }
     }
 
+    /**
+     * Checks if the tv-show is in watchlist
+     *
+     * @param watchlist : Users watchlist
+     */
     private fun checkIfWatchlist(watchlist: Watchlist){
         tvIsFavorited = watchlistSystem.checkIfTvWatchlist(watchlist, tvId)
         if(!tvIsFavorited) {
@@ -417,26 +438,48 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
             tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
         }
     }
+
+    /**
+     * Runs a method which adds the tv-show to favorites
+     * Then updates icon
+     */
     fun addToFavorites(){
         tvIsFavorited = favoriteSystem.addTvToFavorites(tvId.toString())
         tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
     }
 
+    /**
+     * Runs a method which removes the tv-show from favorites
+     * Then updates icon
+     */
     fun removeFromFavorites(){
         tvIsFavorited = favoriteSystem.removeTvFromFavorites(tvId.toString())
         tvGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
     }
 
+    /**
+     * Runs a method which adds the tv-show to watchlist
+     * Then updates icon
+     */
     fun addToWatchlist(){
         tvIsFavorited = watchlistSystem.addTvToWatchlist(tvId.toString())
         tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
     }
 
+    /**
+     * Runs a method which removes the tv-show from watchlist
+     * Then updates icon
+     */
     fun removeFromWatchlist(){
         tvIsFavorited = watchlistSystem.removeMovieFromWatchlist(tvId.toString())
         tvGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
     }
 
+    /**
+     * Opens a confirm dialog and fills it with the users lists
+     * When positive button is pressed, run a method which adds the tv-show to selected list.
+     *
+     */
     fun addToUserList(){
         var chosenList : Int = -1
         MaterialAlertDialogBuilder(tvScene)
@@ -455,6 +498,10 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         .show()
     }
 
+    /**
+     * Methods which opens the review activity
+     *
+     */
     fun newReviewActivity(){
         val intent = Intent(tvScene, CreateReviewScene::class.java)
         intent.putExtra("mediaId", tvId)
@@ -463,6 +510,10 @@ class TvController(private val tvScene: TvScene) : MainController(tvScene) {
         tvScene.startActivity(intent)
     }
 
+    /**
+     * Message for the user if they are not logged in
+     *
+     */
     fun notLoggedin() {
         snackbarSystem.showSnackbarWarning("You need to log in to use this function!")
     }

@@ -353,12 +353,12 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         })
     }*/
 
+
     /**
      * Update the gui with data from API
      *
-     * @param movie The response from API
+     * @param movie The response from the API
      */
-
     private fun getMovie(movie: Movie){
         movieGui.setMovieInfo(movie)
         movie.cast.cast.take(10).forEach { item -> personsArrayList.add(PersonItem(item.name, item.character, "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.profile_path, item.id)) }
@@ -367,6 +367,11 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
+    /**
+     * Update the gui with the reviews that belongs to the movie
+     *
+     * @param movieReviews : API response with the reviews
+     */
     private fun getReviews(movieReviews: MovieReviews){
         movieScene.runOnUiThread {
             if(movieReviews.size != 0) movieGui.reviewHeading.visibility = View.VISIBLE
@@ -377,6 +382,11 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
+    /**
+     * Gets the current users lists, and stores them in an arraylist
+     *
+     * @param userLists : Users lists
+     */
     private fun getUserLists(userLists: UserLists){
         if (userLists.size != 0) {
             for (item in userLists) {
@@ -388,6 +398,12 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
+    /**
+     * Checks if the movie is favorited
+     * If favorited, set the correct icon
+     *
+     * @param favorites : Users favorites
+     */
     private fun checkIfFavorited(favorites: Favorites){
         movieIsFavorited = favoriteSystem.checkIfMovieFavorited(favorites, mId)
         if(!movieIsFavorited) {
@@ -397,6 +413,11 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
+    /**
+     * Checks if the movie is in watchlist
+     *
+     * @param watchlist : Users watchlist
+     */
     private fun checkIfWatchlist(watchlist: Watchlist){
         movieIsWatched = watchlistSystem.checkIfMovieWatchlist(watchlist, mId)
         if(!movieIsWatched) {
@@ -406,26 +427,47 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
+    /**
+     * Runs a method which adds the movie to favorites
+     * Then updates icon
+     */
     fun addToFavorites(){
         movieIsFavorited = favoriteSystem.addMovieToFavorites(mId.toString())
         movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_filled)
     }
 
+    /**
+     * Runs a method which removes the movie from favorites
+     * Then updates icon
+     */
     fun removeFromFavorites(){
         movieIsFavorited = favoriteSystem.removeMovieFromFavorites(mId.toString())
         movieGui.setFavoriteBtnBackground(R.drawable.favorite_icon_border)
     }
 
+    /**
+     * Runs a method which adds the movie to watchlist
+     * Then updates icon
+     */
     fun addToWatchlist(){
         movieIsWatched = watchlistSystem.addMovieToWatchlist(mId.toString())
         movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_filled)
     }
 
+    /**
+     * Runs a method which removes the movie from watchlist
+     * Then updates icon
+     */
     fun removeFromWatchlist(){
         movieIsWatched = watchlistSystem.removeMovieFromWatchlist(mId.toString())
         movieGui.setWatchedBtnBackground(R.drawable.watchlist_icon_border)
     }
 
+    /**
+     * Opens a confirm dialog and fills it with the users lists
+     * When positive button is pressed, run a method which adds the movie to selected list.
+     *
+     */
     fun addToUserList(){
         movieScene.runOnUiThread {
             var chosenList: Int = -1
@@ -449,6 +491,10 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         }
     }
 
+    /**
+     * Methods which opens the review activity
+     *
+     */
     fun newReviewActivity(){
         val intent = Intent(movieScene, CreateReviewScene::class.java)
         intent.putExtra("mediaId", mId)
@@ -457,6 +503,10 @@ class MovieController(private val movieScene: MovieScene) : MainController(movie
         movieScene.startActivity(intent)
     }
 
+    /**
+     * Message for the user if they are not logged in
+     *
+     */
     fun notLoggedin() {
         snackbarSystem.showSnackbarWarning("You need to be logged in to use this function!")
     }

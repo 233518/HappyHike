@@ -10,6 +10,11 @@ import com.example.filmatory.scenes.activities.TvScene
 import com.example.filmatory.systems.ApiSystem
 import com.example.filmatory.systems.ReviewSystem
 
+/**
+ * CreateReviewController manipulates the CreateReviewScene gui
+ *
+ * @property createReviewScene : The CreateReviewScene to use
+ */
 class CreateReviewController(private val createReviewScene: CreateReviewScene) : MainController(createReviewScene) {
     private val createReviewGui = ReviewGui(createReviewScene, this)
     private val reviewSystem = ReviewSystem(apiSystem, snackbarSystem, createReviewScene)
@@ -19,6 +24,11 @@ class CreateReviewController(private val createReviewScene: CreateReviewScene) :
     private var mediaType = intent.getStringExtra("mediaType")
     private var rating : Any = 0
 
+    /**
+     * Runs a method which creates a review
+     *
+     * @param reviewText : The review text
+     */
     fun submitCreateReview(reviewText : String){
         reviewSystem.addPendingReview(createReviewScene.auth.currentUser!!.uid,
         mediaId.toString(),
@@ -27,7 +37,10 @@ class CreateReviewController(private val createReviewScene: CreateReviewScene) :
             rating.toString()
     )}
 
-
+    /**
+     * Method to return the user to the movie or tv-show they are writing a review for.
+     *
+     */
     fun cancelCreateReview(){
         if(mediaType == "movie"){
             val intent = Intent(createReviewScene, MovieScene::class.java)
@@ -42,6 +55,11 @@ class CreateReviewController(private val createReviewScene: CreateReviewScene) :
         }
     }
 
+    /**
+     * Sets rating variable to the selected one in spinner
+     *
+     * @param itemAtPosition : Selected rating
+     */
     fun onNewSelected(itemAtPosition: Any) {
         rating = itemAtPosition
     }
