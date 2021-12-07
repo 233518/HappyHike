@@ -7,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.example.filmatory.R
-import com.example.filmatory.controllers.sceneControllers.AccountInfoController
-import com.example.filmatory.scenes.activities.AccountInfoScene
+import com.example.filmatory.controllers.MainController
+import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.systems.AuthSystem
 import com.example.filmatory.systems.UserInfoSystem
 import com.google.android.material.textfield.TextInputEditText
 
-class AccinfoFragment(private val accountInfoScene: AccountInfoScene, private val accountInfoController: AccountInfoController) : Fragment() {
+class AccinfoFragment(scene: SuperScene, private val controller: MainController) : Fragment() {
     lateinit var changeUsernameBtn : Button
     lateinit var changePwBtn : Button
-    var userInfoSystem = UserInfoSystem(accountInfoController.apiSystem)
-    val authSystem = AuthSystem(accountInfoController.apiSystem, accountInfoScene.auth, accountInfoScene, accountInfoController.snackbarSystem)
+    var userInfoSystem = UserInfoSystem(controller.apiSystem)
+    val authSystem = AuthSystem(controller.apiSystem, scene.auth, scene, controller.snackbarSystem)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view : View = inflater.inflate(R.layout.fragment_accinfo, container, false)
         return view
@@ -29,7 +29,7 @@ class AccinfoFragment(private val accountInfoScene: AccountInfoScene, private va
         changePwBtn = view.findViewById(R.id.accinfo_password_btn)
         changeUsernameBtn.setOnClickListener {
             val name : String = view.findViewById<TextInputEditText>(R.id.accinfoUsernameTextField).text.toString()
-            userInfoSystem.updateUsername(accountInfoController.uid!!, name)
+            userInfoSystem.updateUsername(controller.uid!!, name)
         }
 
         changePwBtn.setOnClickListener {
@@ -38,7 +38,7 @@ class AccinfoFragment(private val accountInfoScene: AccountInfoScene, private va
             if(passwordFieldOne == passwordFieldTwo){
                 authSystem.updatePassword(passwordFieldOne)
             } else {
-                accountInfoController.snackbarSystem.showSnackbarWarning("Fields dont match!")
+                controller.snackbarSystem.showSnackbarWarning("Fields dont match!")
             }
         }
     }

@@ -9,17 +9,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.UserLists
+import com.example.filmatory.controllers.MainController
 import com.example.filmatory.errors.BaseError
-import com.example.filmatory.scenes.activities.AccountInfoScene
-import com.example.filmatory.systems.ApiSystem
+import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.systems.UserInfoSystem
 import com.example.filmatory.utils.items.ListItem
 import com.example.filmatory.utils.adapters.ListsAdapter
 
-class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene) : Fragment(R.layout.fragment_list) {
+class ListFragment(val scene: SuperScene, controller: MainController) : Fragment(R.layout.fragment_list) {
     private val listsArrayList: MutableList<ListItem> = ArrayList()
     private lateinit var listsAdapter : ListsAdapter
-    private var userInfoSystem = UserInfoSystem(apiSystem)
+    private var userInfoSystem = UserInfoSystem(controller.apiSystem)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,7 +30,7 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
         recyclerView.adapter = listsAdapter
         createListBtn.setOnClickListener {
             val listName : String = view.findViewById<TextView>(R.id.accinfoNewListTextField).text.toString()
-            userInfoSystem.createList(accountInfoScene.auth.currentUser!!.uid, listName, ::addList, ::onFailure)
+            userInfoSystem.createList(scene.auth.currentUser!!.uid, listName, ::addList, ::onFailure)
         }
     }
 
@@ -49,7 +49,7 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
                 id
             )
         )
-        accountInfoScene.runOnUiThread {
+        scene.runOnUiThread {
             listsAdapter.notifyDataSetChanged()
         }
     }
@@ -67,7 +67,7 @@ class ListFragment(apiSystem: ApiSystem, val accountInfoScene: AccountInfoScene)
                 )
             )
         }
-        accountInfoScene.runOnUiThread {
+        scene.runOnUiThread {
             listsAdapter.notifyDataSetChanged()
         }
     }

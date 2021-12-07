@@ -17,9 +17,10 @@ import com.example.filmatory.utils.observers.AccountInfoObservables
 import com.example.filmatory.utils.observers.AccountInfoObserver
 import java.util.ArrayList
 
-
-
-
+/**
+ * This fragments is a component to show the users statistics in a pie chart
+ *
+ */
 class StatisticsFragment : Fragment(R.layout.fragment_statistics), AccountInfoObservables {
     private var totalFavoriteMovies : Int = 0
     private var totalFavoriteTvs : Int = 0

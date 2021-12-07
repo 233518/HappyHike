@@ -10,11 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.filmatory.R
 import com.example.filmatory.api.data.user.Favorites
 import com.example.filmatory.controllers.MainController
-import com.example.filmatory.scenes.activities.AccountInfoScene
+import com.example.filmatory.scenes.SuperScene
 import com.example.filmatory.utils.adapters.DataAdapter
 import com.example.filmatory.utils.items.MediaModel
 
-class FavoriteFragment(private val scene: AccountInfoScene, private val controller: MainController) : Fragment(R.layout.fragment_favorite) {
+/**
+ * This fragments is a component to show the users watchlist in a recycler view
+ *
+ * @property scene : The scene to use
+ * @property controller : The controller to use
+ */
+class FavoriteFragment(private val scene: SuperScene, private val controller: MainController) : Fragment(R.layout.fragment_favorite) {
     private val movieFavoritesArraylist: ArrayList<MediaModel> = ArrayList()
     private val tvFavoritesArraylist: ArrayList<MediaModel> = ArrayList()
     private var allFavoritesArraylist: ArrayList<MediaModel> = ArrayList()
@@ -44,10 +50,62 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
             showFavorites(favorites)
         }
     }
+
+    /**
+     * Notifies the movie and tv adapter that the data set changed
+     *
+     */
     fun updateDataSetChanged() {
         scene.runOnUiThread {
             movieAdapter.notifyDataSetChanged()
             tvAdapter.notifyDataSetChanged()
+        }
+    }
+
+    /**
+     * Removes a movie from array and notifies the adapter of item removed
+     *
+     * @param position : The position of the element to remove
+     */
+    fun removeMovieItem(position: Int) {
+        scene.runOnUiThread{
+            var movieMediaModel = movieFavoritesArraylist[position]
+            val items = favorites.userMovieFavorites.iterator()
+            while(items.hasNext()) {
+                val item = items.next()
+                if(item.id == movieMediaModel.itemId) items.remove()
+            }
+            val itemsAll = favorites.userAllFavorites.iterator()
+            while(itemsAll.hasNext()) {
+                val item = itemsAll.next()
+                if(item.id == movieMediaModel.itemId) itemsAll.remove()
+            }
+            movieFavoritesArraylist.removeAt(position)
+            movieAdapter.notifyItemRemoved(position)
+        }
+    }
+
+    /**
+     * Removes a tv from array and notifies the adapter of item removed
+     *
+     * @param position : The position of the element to remove
+     */
+    fun removeTvItem(position: Int) {
+        scene.runOnUiThread{
+            var tvMediaModel = tvFavoritesArraylist[position]
+            val items = favorites.userTvFavorites.iterator()
+            while(items.hasNext()) {
+                val item = items.next()
+                if(item.id == tvMediaModel.itemId) items.remove()
+            }
+
+            val itemsAll = favorites.userAllFavorites.iterator()
+            while(itemsAll.hasNext()) {
+                val item = itemsAll.next()
+                if(item.id == tvMediaModel.itemId) itemsAll.remove()
+            }
+            tvFavoritesArraylist.removeAt(position)
+            tvAdapter.notifyItemRemoved(position)
         }
     }
 

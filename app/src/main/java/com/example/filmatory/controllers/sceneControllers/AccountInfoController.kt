@@ -39,20 +39,40 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         tabAdapter.statisticsFragment.registerObserver(this)
     }
 
+    /**
+     * Runs a method to remove a movie from watchlist adapter and updates the view
+     *
+     * @param position : The position of the element
+     */
     override fun notifyMovieWatchlistAdapter(position: Int) {
         tabAdapter.watchlistFragment.removeMovieItem(position)
     }
 
+    /**
+     * Runs a method to remove a tv from watchlist adapter and updates the view
+     *
+     * @param position : The position of the element
+     */
     override fun notifyTvWatchlistAdapter(position: Int) {
         tabAdapter.watchlistFragment.removeTvItem(position)
     }
 
+    /**
+     * Runs a method to remove a movie from favorites adapter and updates the view
+     *
+     * @param position : The position of the element
+     */
     override fun notifyMovieFavoriteAdapter(position: Int) {
-
+        tabAdapter.favoriteFragment.removeMovieItem(position)
     }
 
+    /**
+     * Runs a method to remove a tv from favorites adapter and updates the view
+     *
+     * @param position : The position of the element
+     */
     override fun notifyTvFavoriteAdapter(position: Int) {
-
+        tabAdapter.favoriteFragment.removeTvItem(position)
     }
 
     /**
