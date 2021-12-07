@@ -40,4 +40,17 @@ open class MainController(protected val scene : SuperScene) {
     open fun getWatchlistSystem() : WatchlistSystem? {
         return null
     }
+
+    open fun notifyMovieWatchlistAdapter(position: Int) {
+        return
+    }
+    open fun notifyTvWatchlistAdapter(position: Int) {
+        return
+    }
+    open fun notifyMovieFavoriteAdapter(position: Int) {
+        return
+    }
+    open fun notifyTvFavoriteAdapter(position: Int) {
+        return
+    }
 }

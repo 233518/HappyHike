@@ -39,6 +39,22 @@ class AccountInfoController(private val accountInfoScene: AccountInfoScene) : Ma
         tabAdapter.statisticsFragment.registerObserver(this)
     }
 
+    override fun notifyMovieWatchlistAdapter(position: Int) {
+        tabAdapter.watchlistFragment.removeMovieItem(position)
+    }
+
+    override fun notifyTvWatchlistAdapter(position: Int) {
+        tabAdapter.watchlistFragment.removeTvItem(position)
+    }
+
+    override fun notifyMovieFavoriteAdapter(position: Int) {
+
+    }
+
+    override fun notifyTvFavoriteAdapter(position: Int) {
+
+    }
+
     /**
      * Runs a methods to retrieve user favorites
      *

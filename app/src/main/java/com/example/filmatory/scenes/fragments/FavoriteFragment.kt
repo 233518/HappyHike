@@ -44,6 +44,12 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
             showFavorites(favorites)
         }
     }
+    fun updateDataSetChanged() {
+        scene.runOnUiThread {
+            movieAdapter.notifyDataSetChanged()
+            tvAdapter.notifyDataSetChanged()
+        }
+    }
 
     private fun showMovieFavorites() {
         movieFavoritesArraylist.clear()
@@ -59,10 +65,7 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
                 )
             )
         }
-        scene.runOnUiThread {
-            movieAdapter.notifyDataSetChanged()
-            tvAdapter.notifyDataSetChanged()
-        }
+        updateDataSetChanged()
     }
 
     private fun showTvFavorites() {
@@ -79,10 +82,7 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
                 )
             )
         }
-        scene.runOnUiThread {
-            movieAdapter.notifyDataSetChanged()
-            tvAdapter.notifyDataSetChanged()
-        }
+        updateDataSetChanged()
     }
 
     fun showFavorites(favorites: Favorites){
@@ -111,10 +111,7 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
                 )
             }
         }
-        scene.runOnUiThread {
-            movieAdapter.notifyDataSetChanged()
-            tvAdapter.notifyDataSetChanged()
-        }
+        updateDataSetChanged()
         this.favorites = favorites
     }
 }

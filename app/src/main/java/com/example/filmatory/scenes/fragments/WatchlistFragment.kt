@@ -45,6 +45,27 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
         }
     }
 
+    fun updateDataSetChanged() {
+        scene.runOnUiThread {
+            movieAdapter.notifyDataSetChanged()
+            tvAdapter.notifyDataSetChanged()
+        }
+    }
+
+    fun removeMovieItem(position: Int) {
+        scene.runOnUiThread{
+            movieWatchlistArraylist.removeAt(position)
+            movieAdapter.notifyItemRemoved(position)
+        }
+    }
+
+    fun removeTvItem(position: Int) {
+        scene.runOnUiThread{
+            tvWatchlistArraylist.removeAt(position)
+            tvAdapter.notifyItemRemoved(position)
+        }
+    }
+
     fun showMovieWatchlist() {
         movieWatchlistArraylist.clear()
         tvWatchlistArraylist.clear()
@@ -59,10 +80,7 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
                 )
             )
         }
-        scene.runOnUiThread {
-            movieAdapter.notifyDataSetChanged()
-            tvAdapter.notifyDataSetChanged()
-        }
+        updateDataSetChanged()
     }
     fun showTvWatchlist() {
         movieWatchlistArraylist.clear()
@@ -78,10 +96,7 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
                 )
             )
         }
-        scene.runOnUiThread {
-            movieAdapter.notifyDataSetChanged()
-            tvAdapter.notifyDataSetChanged()
-        }
+        updateDataSetChanged()
     }
 
     fun showWatchlist(watchlist: Watchlist){
@@ -110,10 +125,7 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
                 )
             }
         }
-        scene.runOnUiThread {
-            movieAdapter.notifyDataSetChanged()
-            tvAdapter.notifyDataSetChanged()
-        }
+        updateDataSetChanged()
         this.watchlist = watchlist
     }
 }

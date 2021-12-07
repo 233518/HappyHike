@@ -217,6 +217,7 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
                     .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
                         val favoriteSystem = controller.getFavoriteSystem()
                         favoriteSystem?.removeMovieFromFavorites(movieId.toString())
+                        controller.notifyMovieFavoriteAdapter(position)
                     }
                     .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
                         println(movieId)
@@ -268,6 +269,7 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
                     .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
                         val favoriteSystem = controller.getFavoriteSystem()
                         favoriteSystem?.removeTvFromFavorites(tvId.toString())
+                        controller.notifyTvFavoriteAdapter(position)
                     }
                     .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
                         println(tvId)
@@ -319,6 +321,7 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
                     .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
                         val watchlistSystem = controller.getWatchlistSystem()
                         watchlistSystem?.removeMovieFromWatchlist(movieId.toString())
+                        controller.notifyMovieWatchlistAdapter(position)
                     }
                     .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
                         println(movieId)
@@ -370,6 +373,7 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
                     .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
                         val watchSystem = controller.getWatchlistSystem()
                         watchSystem?.removeTvFromWatchlist(tvId.toString())
+                        controller.notifyTvWatchlistAdapter(position)
                     }
                     .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
                         println(tvId)
