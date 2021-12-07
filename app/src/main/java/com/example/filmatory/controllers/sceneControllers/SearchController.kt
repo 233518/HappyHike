@@ -27,6 +27,10 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
     private var movieListAdapter = DataAdapter(searchScene,this, searchScene, movieListArrayList)
     private var tvListAdapter = DataAdapter(searchScene,this, searchScene, tvListArrayList)
 
+    private lateinit var mediaSorted : MediaSorted
+
+    private var firstRun = true
+
     private inner class MediaSorted(val movieArray: ArrayList<SearchItem>, val tvArray: ArrayList<SearchItem>)
 
     init {
@@ -43,7 +47,19 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
      * @param search : Response from API
      */
     private fun onSearch(search: Search) {
-        val mediaSorted = sortResult(search)
+        mediaSorted = sortResult(search)
+        showAll()
+    }
+
+    /**
+     * Method for showing all results
+     *
+     */
+    fun showAll() {
+        if(!firstRun) {
+            movieListArrayList.clear()
+            tvListArrayList.clear()
+        }
         for(movie in mediaSorted.movieArray) {
             movieListArrayList.add(MediaModel(DataAdapter.TYPE_SEARCH_MOVIE , movie.title, movie.overview,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + movie.poster_path, movie.id))
         }
@@ -51,15 +67,66 @@ class SearchController(private val searchScene : SearchScene) : MainController(s
         for(tv in mediaSorted.tvArray) {
             tvListArrayList.add(MediaModel(DataAdapter.TYPE_SEARCH_TV , tv.title, tv.overview,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + tv.poster_path, tv.id))
         }
+        notifyAdapater()
+    }
 
+    /**
+     * Method for showing only movies
+     *
+     */
+    fun showMovie() {
+        movieListArrayList.clear()
+        tvListArrayList.clear()
+        for(movie in mediaSorted.movieArray) {
+            movieListArrayList.add(MediaModel(DataAdapter.TYPE_SEARCH_MOVIE , movie.title, movie.overview,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + movie.poster_path, movie.id))
+        }
+        notifyAdapater()
+    }
+
+    /**
+     * Method for showing only TV
+     *
+     */
+    fun showTv() {
+        movieListArrayList.clear()
+        tvListArrayList.clear()
+        for(tv in mediaSorted.tvArray) {
+            tvListArrayList.add(MediaModel(DataAdapter.TYPE_SEARCH_TV , tv.title, tv.overview,"https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + tv.poster_path, tv.id))
+        }
+        notifyAdapater()
+    }
+
+    /**
+     * Notifies the adapters that data has changed
+     *
+     */
+    private fun notifyAdapater() {
         searchScene.runOnUiThread {
             tvListAdapter.notifyDataSetChanged()
             movieListAdapter.notifyDataSetChanged()
         }
     }
 
-    fun onNewSelected(itemAtPosition: Any) {
-        //TODO: MAKE ADAPTER UPDATE
+    /**
+     * Changes the data to correct filter
+     *
+     * @param itemAtPosition Position of the selection
+     */
+    fun onNewSelected(itemAtPosition: Int) {
+        when (itemAtPosition) {
+            0 -> {
+                if (firstRun) {
+                    firstRun = false
+                    return
+                }
+                showAll()
+            }
+            1 -> showMovie()
+            2 -> showTv()
+            else -> {
+                snackbarSystem.showSnackbarWarning("Something went wrong, try again?")
+            }
+        }
     }
 
     /**
