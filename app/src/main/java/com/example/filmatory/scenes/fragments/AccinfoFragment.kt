@@ -13,6 +13,15 @@ import com.example.filmatory.systems.AuthSystem
 import com.example.filmatory.systems.UserInfoSystem
 import com.google.android.material.textfield.TextInputEditText
 
+/**
+ * This fragment is a component to show the account info
+ *
+ * @property controller
+ * @constructor
+ * Extends Fragment
+ *
+ * @param scene The scene to use
+ */
 class AccinfoFragment(scene: SuperScene, private val controller: MainController) : Fragment() {
     lateinit var changeUsernameBtn : Button
     lateinit var changePwBtn : Button

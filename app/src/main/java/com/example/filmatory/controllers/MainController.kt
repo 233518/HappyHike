@@ -35,7 +35,7 @@ open class MainController(protected val scene : SuperScene) {
      * @param error
      */
     fun onFailure(error : BaseError) {
-        snackbarSystem.showSnackbarFailure(error.message, ::redirectHome, "Home")
+        snackbarSystem.showSnackbarFailure(error.message, ::redirectHome, scene.resources.getString(R.string.nav_home))
     }
 
     /**

@@ -53,10 +53,20 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics), AccountInfoOb
             .align(Align.CENTER)
 
         anyChartView.setChart(pie)
-        notifyObservers(pie)
+        notifyStatisticsObservers(pie)
     }
 
-    //https://github.com/AnyChart/AnyChart-Android/issues/145
+
+    /**
+     * Update the graph with data
+     *
+     * @param favorites The user's favorites
+     * @param watchlist The user's watchlist
+     * @param pie The pie chart to update
+     *
+     * There seems to be an issue where pie can be null:
+     * https://github.com/AnyChart/AnyChart-Android/issues/145
+     */
     fun updateGraph(favorites: Favorites, watchlist: Watchlist, pie: Pie) {
         data.clear()
         for(item in favorites.userAllFavorites){
@@ -92,7 +102,7 @@ class StatisticsFragment : Fragment(R.layout.fragment_statistics), AccountInfoOb
         }
     }
 
-    override fun notifyObservers(pie: Pie) {
+    override fun notifyStatisticsObservers(pie: Pie) {
         for (observer in mObservers) {
             observer.onStatisticsInitialized(pie)
         }

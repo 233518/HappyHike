@@ -6,7 +6,7 @@ import com.example.filmatory.controllers.sceneControllers.ListsController
 import com.example.filmatory.scenes.SuperScene
 
 /**
- * ListsScene is the scene for showing lists
+ * ListsScene contains all the components for creating a lists page
  *
  */
 class ListsScene : SuperScene() {

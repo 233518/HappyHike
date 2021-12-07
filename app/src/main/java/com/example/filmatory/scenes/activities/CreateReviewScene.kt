@@ -7,6 +7,10 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.CreateReviewController
 import com.example.filmatory.scenes.SuperScene
 
+/**
+ * CreateReviewScene contains all the components for creating a create review page
+ *
+ */
 class CreateReviewScene : SuperScene(), AdapterView.OnItemSelectedListener {
     private lateinit var createReviewController : CreateReviewController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +24,6 @@ class CreateReviewScene : SuperScene(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
+        println("Should not happen")
     }
 }

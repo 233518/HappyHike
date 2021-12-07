@@ -5,7 +5,7 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.auth.ResetPasswordController
 
 /**
- * RegisterScene is the scene for showing the register page
+ * RegisterScene contains all the components for creating a reset password page
  *
  */
 class ResetPasswordScene : AuthScene() {

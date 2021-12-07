@@ -1,16 +1,12 @@
 package com.example.filmatory.scenes.activities
 
-
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
-import com.bumptech.glide.Glide
 import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.TvsController
 import com.example.filmatory.scenes.SuperScene
 
 /**
- * TvsScene is the scene for showing tvs
+ * TvsScene contains all the components for creating a tvs page
  *
  */
 class TvsScene : SuperScene() {

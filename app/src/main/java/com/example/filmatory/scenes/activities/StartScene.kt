@@ -6,7 +6,7 @@ import com.example.filmatory.controllers.sceneControllers.StartController
 import com.example.filmatory.scenes.SuperScene
 
 /**
- * StartScene is the scene for showing the frontpage
+ * StartScene contains all the components for creating start page
  *
  */
 class StartScene : SuperScene() {

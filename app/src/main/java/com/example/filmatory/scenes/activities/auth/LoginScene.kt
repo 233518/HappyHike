@@ -5,7 +5,7 @@ import com.example.filmatory.R
 import com.example.filmatory.controllers.sceneControllers.auth.LoginController
 
 /**
- * LoginScene is the scene for showing the login page
+ * LoginScene contains all the components for creating the login page
  *
  */
 class LoginScene : AuthScene() {

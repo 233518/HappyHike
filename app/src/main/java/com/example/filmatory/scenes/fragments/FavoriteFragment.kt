@@ -109,6 +109,11 @@ class FavoriteFragment(private val scene: SuperScene, private val controller: Ma
         }
     }
 
+    /**
+     * Creates necessary data for showing movie favorites
+     * And notifies adapter of data set change
+     *
+     */
     private fun showMovieFavorites() {
         movieFavoritesArraylist.clear()
         tvFavoritesArraylist.clear()
@@ -126,6 +131,11 @@ class FavoriteFragment(private val scene: SuperScene, private val controller: Ma
         updateDataSetChanged()
     }
 
+    /**
+     * Creates necessary data for showing tv favorites
+     * And notifies adapter of data set change
+     *
+     */
     private fun showTvFavorites() {
         movieFavoritesArraylist.clear()
         tvFavoritesArraylist.clear()
@@ -143,6 +153,11 @@ class FavoriteFragment(private val scene: SuperScene, private val controller: Ma
         updateDataSetChanged()
     }
 
+    /**
+     * Creates necessary data for showing all favorites
+     * And notifies adapter of data set change
+     *
+     */
     fun showFavorites(favorites: Favorites){
         movieFavoritesArraylist.clear()
         tvFavoritesArraylist.clear()

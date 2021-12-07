@@ -6,7 +6,7 @@ import com.example.filmatory.controllers.sceneControllers.AccountInfoController
 import com.example.filmatory.scenes.SuperScene
 
 /**
- * AccountInfoScene is the scene for showing the account info?
+ * AccountInfoScene contains all the components for creating a account info page
  *
  */
 class AccountInfoScene : SuperScene() {
