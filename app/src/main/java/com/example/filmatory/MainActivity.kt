@@ -3,20 +3,104 @@ package com.example.filmatory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import com.example.filmatory.api.data.movie.MovieFrontpage
+import com.example.filmatory.api.data.tv.TvFrontpage
+import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.activities.StartScene
+import com.example.filmatory.systems.ApiSystem
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.yariksoffice.lingver.Lingver
 
 /**
  * Main activity - This is where everything starts
  */
-class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity() {
+    private var ready = 0;
+
+    companion object {
+        open var apiSystem = ApiSystem()
+        open var auth = Firebase.auth
+        open var uid = auth.currentUser?.uid
+
+        open lateinit var languageCode : String
+        open lateinit var discoverMovieFrontpage: MovieFrontpage
+        open lateinit var discoverTvFrontpage: TvFrontpage
+        open lateinit var recMovieFrontpage: MovieFrontpage
+        open lateinit var recTvFrontpage: TvFrontpage
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Lingver.init(application, "en")
+        languageCode = Lingver.getInstance().getLanguage()
+
+        apiSystem.requestMovieFrontpageDiscover(
+            ApiSystem.RequestBaseOptions(
+                null,
+                null,
+                ::discoverMoviesData,
+                ::onFailure
+            ), languageCode)
+        apiSystem.requestTvFrontpageDiscover(
+            ApiSystem.RequestBaseOptions(
+                null,
+                null,
+                ::discoverTvData,
+                ::onFailure
+            ), languageCode)
+        apiSystem.requestMovieFrontpageRecommend(
+            ApiSystem.RequestBaseOptions(
+                null,
+                uid,
+                ::recMovieData,
+                ::onFailure
+            ), languageCode)
+        apiSystem.requestTvFrontpageRecommend(
+            ApiSystem.RequestBaseOptions(
+                null,
+                uid,
+                ::recTvData,
+                ::onFailure
+            ), languageCode)
+
         setContentView(R.layout.activity_main)
-        val intent = Intent(this, StartScene::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        finish()
-        startActivity(intent)
+
+    }
+
+    fun onFailure(baseError: BaseError) {
+        //Skulle blitt gjort noe her, men dette rakk vi ikke
+        println(baseError.message)
+    }
+
+    fun discoverMoviesData(movieFrontpage: MovieFrontpage) {
+        discoverMovieFrontpage = movieFrontpage
+        ready++
+        startApp()
+    }
+
+    fun discoverTvData(tvFrontpage: TvFrontpage) {
+        discoverTvFrontpage = tvFrontpage
+        ready++
+        startApp()
+    }
+
+    fun recMovieData(movieFrontpage: MovieFrontpage) {
+        recMovieFrontpage = movieFrontpage
+        ready++
+        startApp()
+    }
+    fun recTvData(tvFrontpage: TvFrontpage) {
+        recTvFrontpage = tvFrontpage
+        ready++
+        startApp()
+    }
+
+    fun startApp() {
+        if(ready == 4) {
+            val intent = Intent(this, StartScene::class.java)
+            finish()
+            startActivity(intent)
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.filmatory.controllers
 
 import android.content.Intent
+import com.example.filmatory.MainActivity
 import com.example.filmatory.R
 import com.example.filmatory.errors.BaseError
 import com.example.filmatory.scenes.SuperScene
@@ -18,12 +19,18 @@ import com.yariksoffice.lingver.Lingver
  */
 open class MainController(protected val scene : SuperScene) {
     val navSystem = NavSystem(scene)
-    val apiSystem = ApiSystem()
     val snackbarSystem = SnackbarSystem(scene.findViewById(R.id.snackbar_layout))
-    val languageCode: String = Lingver.getInstance().getLanguage()
+    val apiSystem = MainActivity.apiSystem
 
-    val uid = scene.auth.currentUser?.uid
+    val languageCode = MainActivity.languageCode
+    val uid = MainActivity.uid
+
     val isLoggedIn : Boolean = uid != null
+
+    val discoverMovieFrontpage = MainActivity.discoverMovieFrontpage
+    val discoverTvFrontpage = MainActivity.discoverTvFrontpage
+    val recTvFrontPage = MainActivity.recTvFrontpage
+    val recMovieFrontpage = MainActivity.recMovieFrontpage
 
     fun onFailure(error : BaseError) {
         snackbarSystem.showSnackbarFailure(error.message, ::redirectHome, "Home")

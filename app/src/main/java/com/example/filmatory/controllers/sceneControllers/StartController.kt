@@ -1,6 +1,7 @@
 package com.example.filmatory.controllers.sceneControllers
 
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.filmatory.MainActivity
 import com.example.filmatory.api.data.movie.MovieFrontpage
 import com.example.filmatory.api.data.tv.TvFrontpage
 import com.example.filmatory.controllers.MainController
@@ -19,10 +20,10 @@ class StartController(private val startScene: StartScene) : MainController(start
     private val startGui = StartGui(startScene, this)
 
     init {
-        apiSystem.requestMovieFrontpageDiscover(RequestBaseOptions(null, null, ::discoverMoviesData, ::onFailure), languageCode)
-        apiSystem.requestTvFrontpageDiscover(RequestBaseOptions(null, null, ::discoverTvData, ::onFailure), languageCode)
-        apiSystem.requestMovieFrontpageRecommend(RequestBaseOptions(null, uid, ::recMovieData, ::onFailure), languageCode)
-        apiSystem.requestTvFrontpageRecommend(RequestBaseOptions(null, uid, ::recTvData, ::onFailure), languageCode)
+        discoverMoviesData(discoverMovieFrontpage)
+        discoverTvData(discoverTvFrontpage)
+        recMovieData(recMovieFrontpage)
+        recTvData(recTvFrontPage)
     }
 
     /**
