@@ -13,6 +13,12 @@ import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.ListScene
 import com.example.filmatory.utils.items.ListItem
 
+/**
+ * Custom adapter for recyclerview to display lists
+ *
+ * @property arrayList
+ * @property context
+ */
 class ListsAdapter(private val arrayList: MutableList<ListItem>, private val context: Context) : RecyclerView.Adapter<ListsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -20,6 +26,13 @@ class ListsAdapter(private val arrayList: MutableList<ListItem>, private val con
         )
     }
 
+    /**
+     * Updates the contents of the ViewHolder
+     * Makes clickable so redirect to list
+     *
+     * @param holder : ViewHolder
+     * @param position
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
         holder.itemTitle.text = arrayList[position].list_name
         holder.itemAuthor.text = arrayList[position].list_author
@@ -45,10 +58,22 @@ class ListsAdapter(private val arrayList: MutableList<ListItem>, private val con
         }
     }
 
+    /**
+     * Sets the number of items the adapter will display
+     *
+     * @return Size of array
+     */
     override fun getItemCount(): Int {
         return arrayList.size
     }
 
+    /**
+     * Binds data for the lists to view and creates a direct reference
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemImage: ImageView = view.findViewById(R.id.list_image)
         val itemTitle: TextView = view.findViewById(R.id.list_title)

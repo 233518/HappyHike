@@ -17,21 +17,41 @@ import com.example.filmatory.scenes.activities.TvScene
 import com.example.filmatory.utils.items.MediaModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+/**
+ * Custom adapter for recyclerview that contains movies or tv-shows
+ *
+ * @property scene
+ * @property controller
+ * @property context
+ * @property arrayList
+ */
 class DataAdapter(private val scene: SuperScene, private val controller : MainController, private var context : Context, var arrayList: ArrayList<MediaModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var uid = scene.auth.uid
 
+    /**
+     * Companion object for which ViewHolder to use
+     */
     companion object {
         const val TYPE_MOVIE = 1
         const val TYPE_TV = 2
         const val TYPE_MOVIE_SLIDER = 3
         const val TYPE_TV_SLIDER = 4
-        const val TYPE_ACCINFO_MOVIE = 5
-        const val TYPE_ACCINFO_TV = 6
-        const val TYPE_SEARCH_MOVIE = 7
-        const val TYPE_SEARCH_TV = 8
+        const val TYPE_FAVORITES_MOVIE = 5
+        const val TYPE_FAVORITES_TV = 6
+        const val TYPE_WATCHLIST_MOVIE = 7
+        const val TYPE_WATCHLIST_TV = 8
+        const val TYPE_SEARCH_MOVIE = 9
+        const val TYPE_SEARCH_TV = 10
     }
 
+    /**
+     * Binds data for movies to view and creates a direct reference
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     private inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.media_image)
         val itemTitle: TextView = itemView.findViewById(R.id.media_title)
@@ -58,6 +78,13 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
+    /**
+     * Binds data for tv-shows to view and creates a direct reference
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     private inner class TvViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.media_image)
         val itemTitle: TextView = itemView.findViewById(R.id.media_title)
@@ -84,6 +111,13 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
+    /**
+     * Binds data for tv-shows in slider to view and creates a direct reference
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     private inner class TvSliderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.slider_image)
         val itemTitle: TextView = itemView.findViewById(R.id.slider_title)
@@ -110,6 +144,13 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
+    /**
+     * Binds data for movies in slider to view and creates a direct reference
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     private inner class MovieSliderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.slider_image)
         val itemTitle: TextView = itemView.findViewById(R.id.slider_title)
@@ -135,7 +176,15 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
-    private inner class MovieAccinfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    /**
+     * Binds data for movies in favorites to view and creates a direct reference
+     * Makes clickable so redirect to movies page, and hold it to open window to remove from favorites
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
+    private inner class MovieFavoritesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.media_image)
         val itemTitle: TextView = itemView.findViewById(R.id.media_title)
         val itemDate: TextView = itemView.findViewById(R.id.media_date)
@@ -178,7 +227,15 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
-    private inner class TvAccinfoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    /**
+     * Binds data for tv-shows in favorites to view and creates a direct reference
+     * Makes clickable so redirect to tv-show page, and hold it to open window to remove from favorites
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
+    private inner class TvFavoritesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.media_image)
         val itemTitle: TextView = itemView.findViewById(R.id.media_title)
         val itemDate: TextView = itemView.findViewById(R.id.media_date)
@@ -221,6 +278,116 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
+    /**
+     * Binds data for movies in watchlist to view and creates a direct reference
+     * Makes clickable so redirect to movies page, and hold it to open window to remove from favorites
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
+    private inner class MovieWatchlistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemImage: ImageView = itemView.findViewById(R.id.media_image)
+        val itemTitle: TextView = itemView.findViewById(R.id.media_title)
+        val itemDate: TextView = itemView.findViewById(R.id.media_date)
+        var movieId: Int? = null
+        fun bind(position: Int) {
+            val viewmodel = arrayList[position]
+            itemTitle.text = viewmodel.itemTitle
+            itemDate.text = viewmodel.itemDate
+            movieId = viewmodel.itemId
+            Glide.with(context)
+                .load(viewmodel.itemImage)
+                .error(R.drawable.placeholder_image)
+                .fallback(R.drawable.placeholder_image)
+                .placeholder(R.drawable.placeholder_image)
+                .into(itemImage)
+            itemView.setOnClickListener {
+                val intent = Intent(context, MovieScene::class.java)
+                intent.putExtra("movieId", movieId)
+                scene.finish()
+                context.startActivity(intent)
+            }
+            itemView.setOnLongClickListener {
+                val menuItems = arrayOf("Delete")
+                val chosenList = -1
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(context.resources.getString(R.string.accinfo_mediamenu))
+                    .setNeutralButton(context.resources.getString(R.string.cancel_btn)) { dialog, which ->
+
+                    }
+                    .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                        val watchlistSystem = controller.getWatchlistSystem()
+                        watchlistSystem?.removeMovieFromWatchlist(movieId.toString())
+                    }
+                    .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
+                        println(movieId)
+                    }
+                    .show()
+                return@setOnLongClickListener true
+            }
+        }
+    }
+
+    /**
+     * Binds data for tv-shows in watchlist to view and creates a direct reference
+     * Makes clickable so redirect to tv-show page, and hold it to open window to remove from favorites
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
+    private inner class TvWatchlistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemImage: ImageView = itemView.findViewById(R.id.media_image)
+        val itemTitle: TextView = itemView.findViewById(R.id.media_title)
+        val itemDate: TextView = itemView.findViewById(R.id.media_date)
+        var tvId: Int? = null
+        fun bind(position: Int) {
+            val viewmodel = arrayList[position]
+            itemTitle.text = viewmodel.itemTitle
+            itemDate.text = viewmodel.itemDate
+            tvId = viewmodel.itemId
+            Glide.with(context)
+                .load(viewmodel.itemImage)
+                .error(R.drawable.placeholder_image)
+                .fallback(R.drawable.placeholder_image)
+                .placeholder(R.drawable.placeholder_image)
+                .into(itemImage)
+            itemView.setOnClickListener {
+                val intent = Intent(context, TvScene::class.java)
+                intent.putExtra("tvId", tvId)
+                scene.finish()
+                context.startActivity(intent)
+            }
+            itemView.setOnLongClickListener {
+                val menuItems = arrayOf("Delete")
+                val chosenList = -1
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(context.resources.getString(R.string.accinfo_mediamenu))
+                    .setNeutralButton(context.resources.getString(R.string.cancel_btn)) { dialog, which ->
+
+                    }
+                    .setPositiveButton(context.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                        val watchSystem = controller.getWatchlistSystem()
+                        watchSystem?.removeTvFromWatchlist(tvId.toString())
+                    }
+                    .setSingleChoiceItems(menuItems, chosenList) { dialog, which ->
+                        println(tvId)
+                    }
+                    .show()
+                return@setOnLongClickListener true
+            }
+        }
+    }
+
+    /**
+     * Binds data for movies from searchresult to view and creates a direct reference
+     * Makes clickable so redirect to movies
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     private inner class MovieSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.search_image)
         val itemTitle: TextView = itemView.findViewById(R.id.search_title)
@@ -246,6 +413,14 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
+    /**
+     * Binds data for movies from searchresult to view and creates a direct reference
+     * Makes clickable so redirect to tv-shows
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     private inner class TvSearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemImage: ImageView = itemView.findViewById(R.id.search_image)
         val itemTitle: TextView = itemView.findViewById(R.id.search_title)
@@ -271,15 +446,23 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
-
+    /**
+     * Switch to decide which ViewHolder to inflate, creates the ViewHolder required
+     *
+     * @param parent
+     * @param viewType : Required ViewHolder
+     * @return
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
             TYPE_MOVIE -> MovieViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
             TYPE_TV -> TvViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
             TYPE_MOVIE_SLIDER -> MovieSliderViewHolder(LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false))
             TYPE_TV_SLIDER -> TvSliderViewHolder(LayoutInflater.from(context).inflate(R.layout.slider_item_container, parent, false))
-            TYPE_ACCINFO_MOVIE -> MovieAccinfoViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
-            TYPE_ACCINFO_TV -> TvAccinfoViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
+            TYPE_FAVORITES_MOVIE -> MovieFavoritesViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
+            TYPE_FAVORITES_TV -> TvFavoritesViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
+            TYPE_WATCHLIST_MOVIE -> MovieWatchlistViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
+            TYPE_WATCHLIST_TV -> TvWatchlistViewHolder(LayoutInflater.from(context).inflate(R.layout.media_item_container, parent, false))
             TYPE_SEARCH_MOVIE -> MovieSearchViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_search_item, parent, false))
             TYPE_SEARCH_TV -> TvSearchViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_search_item, parent, false))
             else -> {
@@ -288,23 +471,42 @@ class DataAdapter(private val scene: SuperScene, private val controller : MainCo
         }
     }
 
+    /**
+     * Sets the number of items the adapter will display
+     *
+     * @return Size of array
+     */
     override fun getItemCount(): Int {
         return arrayList.size
     }
 
+    /**
+     * Updates the contents of the ItemView
+     *
+     * @param holder : ViewHolder
+     * @param position
+     */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(arrayList[position].viewType){
             TYPE_MOVIE -> (holder as MovieViewHolder).bind(position)
             TYPE_TV -> (holder as TvViewHolder).bind(position)
             TYPE_MOVIE_SLIDER -> (holder as MovieSliderViewHolder).bind(position)
             TYPE_TV_SLIDER -> (holder as TvSliderViewHolder).bind(position)
-            TYPE_ACCINFO_MOVIE -> (holder as MovieAccinfoViewHolder).bind(position)
-            TYPE_ACCINFO_TV -> (holder as TvAccinfoViewHolder).bind(position)
+            TYPE_FAVORITES_MOVIE -> (holder as MovieFavoritesViewHolder).bind(position)
+            TYPE_FAVORITES_TV -> (holder as TvFavoritesViewHolder).bind(position)
+            TYPE_WATCHLIST_MOVIE -> (holder as MovieWatchlistViewHolder).bind(position)
+            TYPE_WATCHLIST_TV -> (holder as TvWatchlistViewHolder).bind(position)
             TYPE_SEARCH_MOVIE -> (holder as MovieSearchViewHolder).bind(position)
             TYPE_SEARCH_TV -> (holder as TvSearchViewHolder).bind(position)
         }
     }
 
+    /**
+     * Gets the itemview type
+     *
+     * @param position
+     * @return ItemView Type
+     */
     override fun getItemViewType(position: Int): Int {
         return arrayList[position].viewType
     }

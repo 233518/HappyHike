@@ -1,6 +1,17 @@
 package com.example.filmatory.utils.items
 
-class ReviewItem(val reviewAuthor: String,
+/**
+ * Data class for review item
+ *
+ * @property reviewAuthor : Author
+ * @property reviewAuthorAvatar : Avatar image path
+ * @property reviewDate : Date
+ * @property reviewOverview : Review text
+ * @property rating : Review rating
+ * @property userId : UserId
+ * @property reviewId : ReviewId
+ */
+data class ReviewItem(val reviewAuthor: String,
                  val reviewAuthorAvatar: String,
                  val reviewDate: String,
                  val reviewOverview: String,

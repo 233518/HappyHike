@@ -9,13 +9,13 @@ class WatchlistSystem(private var superScene: SuperScene, private var movieSyste
         superScene.runOnUiThread {
             movieSystem?.addMovieToWatchlist(superScene.auth.currentUser!!.uid, mId)
         }
-        return true;
+        return true
     }
     fun removeMovieFromWatchlist(mId: String) : Boolean{
         superScene.runOnUiThread {
             movieSystem?.removeMovieFromWatchlist(superScene.auth.currentUser!!.uid, mId)
         }
-        return true;
+        return true
     }
     fun checkIfMovieWatchlist(watchlist: Watchlist, mId: Int) : Boolean {
         for (item in watchlist.userMovieWatched) {
@@ -27,13 +27,13 @@ class WatchlistSystem(private var superScene: SuperScene, private var movieSyste
         superScene.runOnUiThread {
             tvSystem?.addTvToWatchlist(superScene.auth.currentUser!!.uid, mId)
         }
-        return true;
+        return true
     }
     fun removeTvFromWatchlist(mId: String) : Boolean{
         superScene.runOnUiThread {
             tvSystem?.removeTvFromWatchlist(superScene.auth.currentUser!!.uid, mId)
         }
-        return true;
+        return true
     }
     fun checkIfTvWatchlist(watchlist: Watchlist, mId: Int) : Boolean {
         for (item in watchlist.userTvWatched) {

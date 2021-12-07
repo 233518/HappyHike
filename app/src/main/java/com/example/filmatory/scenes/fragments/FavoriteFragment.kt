@@ -51,7 +51,7 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
         for (item in favorites.userMovieFavorites) {
             movieFavoritesArraylist.add(
                 MediaModel(
-                    DataAdapter.TYPE_ACCINFO_MOVIE,
+                    DataAdapter.TYPE_FAVORITES_MOVIE,
                     item.title,
                     item.releaseDate,
                     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
@@ -71,7 +71,7 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
         for (item in favorites.userTvFavorites) {
             tvFavoritesArraylist.add(
                 MediaModel(
-                    DataAdapter.TYPE_ACCINFO_MOVIE,
+                    DataAdapter.TYPE_FAVORITES_TV,
                     item.title,
                     item.releaseDate,
                     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
@@ -92,7 +92,7 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
             if (item.type == "tv") {
                 tvFavoritesArraylist.add(
                     MediaModel(
-                        DataAdapter.TYPE_ACCINFO_TV,
+                        DataAdapter.TYPE_FAVORITES_TV,
                         item.title,
                         item.releaseDate,
                         "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
@@ -102,7 +102,7 @@ class FavoriteFragment(private val scene: AccountInfoScene, private val controll
             } else {
                 movieFavoritesArraylist.add(
                     MediaModel(
-                        DataAdapter.TYPE_ACCINFO_MOVIE,
+                        DataAdapter.TYPE_FAVORITES_MOVIE,
                         item.title,
                         item.releaseDate,
                         "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,

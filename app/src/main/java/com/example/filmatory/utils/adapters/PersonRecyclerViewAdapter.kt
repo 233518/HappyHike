@@ -13,6 +13,12 @@ import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.PersonScene
 import com.example.filmatory.utils.items.PersonItem
 
+/**
+ * Custom adapter for actor slider items
+ *
+ * @property arrayList
+ * @property context
+ */
 class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, private val context: Context) : RecyclerView.Adapter<PersonRecyclerViewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -20,6 +26,13 @@ class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, 
         )
     }
 
+    /**
+     * Updates the contents of the ViewHolder
+     * Makes clickable so redirect to list
+     *
+     * @param holder : ViewHolder
+     * @param position
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
         holder.itemRealName.text = arrayList[position].realName
         holder.itemCharName.text = arrayList[position].charName
@@ -41,10 +54,22 @@ class PersonRecyclerViewAdapter(private val arrayList: MutableList<PersonItem>, 
         }
     }
 
+    /**
+     * Sets the number of items the adapter will display
+     *
+     * @return Size of array
+     */
     override fun getItemCount(): Int {
         return arrayList.size
     }
 
+    /**
+     * Binds data for the person to view and creates a direct reference
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemImage: ImageView = view.findViewById(R.id.slider_image)
         val itemRealName: TextView = view.findViewById(R.id.slider_title)

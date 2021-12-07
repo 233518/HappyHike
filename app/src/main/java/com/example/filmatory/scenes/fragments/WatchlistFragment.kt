@@ -51,7 +51,7 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
         for (item in watchlist.userMovieWatched) {
             movieWatchlistArraylist.add(
                 MediaModel(
-                    DataAdapter.TYPE_ACCINFO_TV,
+                    DataAdapter.TYPE_WATCHLIST_MOVIE,
                     item.title,
                     item.releaseDate,
                     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
@@ -70,7 +70,7 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
         for (item in watchlist.userTvWatched) {
             tvWatchlistArraylist.add(
                 MediaModel(
-                    DataAdapter.TYPE_ACCINFO_TV,
+                    DataAdapter.TYPE_WATCHLIST_TV,
                     item.title,
                     item.releaseDate,
                     "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
@@ -91,7 +91,7 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
             if (item.type == "tv") {
                 tvWatchlistArraylist.add(
                     MediaModel(
-                        DataAdapter.TYPE_ACCINFO_TV,
+                        DataAdapter.TYPE_WATCHLIST_TV,
                         item.title,
                         item.releaseDate,
                         "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,
@@ -101,7 +101,7 @@ class WatchlistFragment(private val scene: SuperScene, private val accountInfoCo
             } else {
                 movieWatchlistArraylist.add(
                     MediaModel(
-                        DataAdapter.TYPE_ACCINFO_MOVIE,
+                        DataAdapter.TYPE_WATCHLIST_MOVIE,
                         item.title,
                         item.releaseDate,
                         "https://www.themoviedb.org/t/p/w600_and_h900_bestv2" + item.pictureUrl,

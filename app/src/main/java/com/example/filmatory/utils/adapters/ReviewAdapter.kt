@@ -15,6 +15,12 @@ import com.example.filmatory.scenes.activities.PersonScene
 import com.example.filmatory.utils.items.PersonItem
 import com.example.filmatory.utils.items.ReviewItem
 
+/**
+ * Custom adapter for review items
+ *
+ * @property arrayList
+ * @property context
+ */
 class ReviewAdapter(private val arrayList: MutableList<ReviewItem>, private val context: Context) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -22,6 +28,13 @@ class ReviewAdapter(private val arrayList: MutableList<ReviewItem>, private val 
         )
     }
 
+    /**
+     * Updates the contents of the ViewHolder
+     * Makes clickable so redirect to list
+     *
+     * @param holder : ViewHolder
+     * @param position
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
         holder.reviewAuthor.text = arrayList[position].reviewAuthor
         holder.reviewDate.text = arrayList[position].reviewDate
@@ -38,10 +51,22 @@ class ReviewAdapter(private val arrayList: MutableList<ReviewItem>, private val 
 
     }
 
+    /**
+     * Sets the number of items the adapter will display
+     *
+     * @return Size of array
+     */
     override fun getItemCount(): Int {
         return arrayList.size
     }
 
+    /**
+     * Binds data for the review to view and creates a direct reference
+     *
+     * @constructor
+     *
+     * @param itemView : The view to use
+     */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val reviewAuthor: TextView = view.findViewById(R.id.review_author_name)
         val reviewDate: TextView = view.findViewById(R.id.review_date)
