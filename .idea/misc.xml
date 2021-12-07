@@ -44,7 +44,9 @@
         <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/fragment_list.xml" value="0.33" />
         <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/fragment_statistics.xml" value="0.2828125" />
         <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/fragment_watchlist.xml" value="0.32916666666666666" />
+        <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/layout_media_recyclerview.xml" value="0.21666666666666667" />
         <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/layout_search_item.xml" value="0.5744791666666667" />
+        <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/layout_slider_item.xml" value="0.21666666666666667" />
         <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/lists_container.xml" value="0.32916666666666666" />
         <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/login_screen.xml" value="0.32916666666666666" />
         <entry key="..\:/Projects/MOB3000/app/src/main/res/layout/media_item_container.xml" value="0.32916666666666666" />
