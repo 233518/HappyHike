@@ -11,6 +11,7 @@ import com.example.filmatory.systems.ApiSystem.PostBaseOptions
 class UserInfoSystem(private val apiSystem: ApiSystem) {
     private lateinit var callbackList : (id: String, name: String) -> Unit
     private lateinit var callbackFailure : (baseError : BaseError) -> Unit
+    private lateinit var callbackUsername : (message: String) -> Unit
     private lateinit var listName : String
 
     /**
@@ -47,7 +48,7 @@ class UserInfoSystem(private val apiSystem: ApiSystem) {
     private fun updateUsernameInDatabase(uid : String, username : String){
         val params: HashMap<String, String> = HashMap()
         params["username"] = username
-        apiSystem.postUserUsername(PostBaseOptions(null, uid, params, ::newUserResponse, ::onFailure))
+        apiSystem.postUserUsername(PostBaseOptions(null, uid, params, ::updatedUsername, ::onFailure))
     }
 
     /**
@@ -69,6 +70,13 @@ class UserInfoSystem(private val apiSystem: ApiSystem) {
      */
     private fun newUserResponse(string : String?) {
         callbackList(string!!, listName)
+    }
+
+    /**
+     * Shows snackbar message when updating username
+     */
+    private fun updatedUsername(string : String?) {
+        callbackUsername(string!!)
     }
 
     /**
