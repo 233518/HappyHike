@@ -37,8 +37,11 @@ class AccinfoFragment(scene: SuperScene, private val controller: MainController)
         changeUsernameBtn = view.findViewById(R.id.accinfo_username_btn)
         changePwBtn = view.findViewById(R.id.accinfo_password_btn)
         changeUsernameBtn.setOnClickListener {
-            val name : String = view.findViewById<TextInputEditText>(R.id.accinfoUsernameTextField).text.toString()
+            val textInputField = view.findViewById<TextInputEditText>(R.id.accinfoUsernameTextField)
+            val name : String = textInputField.text.toString()
+            if(name.length <= 3) return@setOnClickListener controller.snackbarSystem.showSnackbarWarning(requireActivity().resources.getString(R.string.username_too_short))
             userInfoSystem.updateUsername(controller.uid!!, name, ::showMessage)
+            textInputField.text?.clear()
         }
 
         changePwBtn.setOnClickListener {

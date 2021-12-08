@@ -91,6 +91,8 @@
     <string name="watchlist_movies">Sett-liste Filmer</string>
     <string name="add_to_list">Legg til i liste</string>
     <string name="new_review">Ny anmeldelse</string>
+    <string name="list_name_to_short">Listenavnet ditt er for kort.</string>
+    <string name="username_too_short">Brukernavnet ditt er for kort.</string>
     <string-array name="media_array">
         <item>Alt</item>
         <item>Film</item>

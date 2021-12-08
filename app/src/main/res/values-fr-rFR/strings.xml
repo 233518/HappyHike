@@ -90,6 +90,8 @@
     <string name="watchlist_movies">Films à suivre</string>
     <string name="add_to_list">Ajouter à la liste</string>
     <string name="new_review">Nouvelle critique</string>
+    <string name="list_name_to_short">Votre nom de liste est trop court.</string>
+    <string name="username_too_short">Votre nom d\'utilisateur est trop court.</string>
     <string-array name="media_array">
         <item>Tout</item>
         <item>Film</item>

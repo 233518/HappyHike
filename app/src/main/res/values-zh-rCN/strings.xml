@@ -90,6 +90,8 @@
     <string name="watchlist_movies">观看列表电影</string>
     <string name="add_to_list">添加到列表</string>
     <string name="new_review">新评论</string>
+    <string name="list_name_to_short">您的列表名称太短。</string>
+    <string name="username_too_short">您的用户名太短。</string>
     <string-array name="media_array">
         <item>全部</item>
         <item>电影</item>

@@ -40,8 +40,11 @@ class ListFragment(private val scene: SuperScene, private val controller: MainCo
         recyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = listsAdapter
         createListBtn.setOnClickListener {
-            val listName : String = view.findViewById<TextView>(R.id.accinfoNewListTextField).text.toString()
+            val textView = view.findViewById<TextView>(R.id.accinfoNewListTextField)
+            val listName : String = textView.text.toString()
+            if(listName.length<= 3) return@setOnClickListener controller.snackbarSystem.showSnackbarWarning(requireActivity().resources.getString(R.string.list_name_to_short))
             userInfoSystem.createList(scene.auth.currentUser!!.uid, listName, ::addList, ::onFailure)
+            textView.text = ""
         }
     }
 
@@ -71,6 +74,7 @@ class ListFragment(private val scene: SuperScene, private val controller: MainCo
      * @param name The name of the list
      */
     fun addList(id: String, name: String) {
+        val newId : String = id.replace("\"", "" )
         listsArrayList.add(
             ListItem(
                 name,
@@ -78,7 +82,7 @@ class ListFragment(private val scene: SuperScene, private val controller: MainCo
                 "https://picsum.photos/124/189",
                 "0",
                 "0",
-                id
+                newId
             )
         )
         scene.runOnUiThread {

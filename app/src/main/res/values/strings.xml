@@ -90,6 +90,8 @@
     <string name="watchlist_movies">Watchlist Movies</string>
     <string name="add_to_list">Add to list</string>
     <string name="new_review">New Review</string>
+    <string name="list_name_to_short">Your listname is too short.</string>
+    <string name="username_too_short">Your username is too short.</string>
     <string-array name="media_array">
         <item>All</item>
         <item>Movie</item>
