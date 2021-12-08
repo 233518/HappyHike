@@ -10,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.filmatory.R
 import com.example.filmatory.scenes.activities.*
 import com.example.filmatory.scenes.activities.auth.LoginScene
+import com.example.filmatory.utils.items.MediaModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -121,56 +123,63 @@ class NavSystem(appCompatActivity: AppCompatActivity)  {
      *
      * @param appCompatActivity The activity
      */
-    fun changeLangAlert(appCompatActivity: AppCompatActivity){
-        var dialog : AlertDialog
-        var availableLangs = arrayOf("English", "Norsk", "Deutsch", "Français", "Español", "中国人")
-        var builder = AlertDialog.Builder(appCompatActivity)
-        builder.setTitle(R.string.choose_lang)
-        builder.setSingleChoiceItems(availableLangs,-1) { _, which ->
-            when(which){
-                0 -> {
-                    Lingver.getInstance().setLocale(appCompatActivity, "en")
-                    val intent = Intent(appCompatActivity, StartScene::class.java)
-                    appCompatActivity.finish()
-                    appCompatActivity.startActivity(intent)
+    private fun changeLangAlert(appCompatActivity: AppCompatActivity){
+        var chosenItem: Int = -1
+        val availableLangs = arrayOf("English", "Norsk", "Deutsch", "Français", "Español", "中国人")
+        MaterialAlertDialogBuilder(appCompatActivity)
+                .setTitle(appCompatActivity.resources.getString(R.string.choose_lang))
+                .setNeutralButton(appCompatActivity.resources.getString(R.string.cancel_btn)) { dialog, which -> }
+                .setPositiveButton(appCompatActivity.resources.getString(R.string.confirm_btn)) { dialog, which ->
+                    when(chosenItem){
+                        0 -> {
+                            Lingver.getInstance().setLocale(appCompatActivity, "en")
+                            val intent = Intent(appCompatActivity, StartScene::class.java)
+                            appCompatActivity.finish()
+                            appCompatActivity.startActivity(intent)
+                        }
+                        1 -> {
+                            Lingver.getInstance().setLocale(appCompatActivity, "no")
+                            val intent = Intent(appCompatActivity, StartScene::class.java)
+                            appCompatActivity.finish()
+                            appCompatActivity.startActivity(intent)
+                        }
+                        2 -> {
+                            Lingver.getInstance().setLocale(appCompatActivity, "de")
+                            val intent = Intent(appCompatActivity, StartScene::class.java)
+                            appCompatActivity.finish()
+                            appCompatActivity.startActivity(intent)
+                        }
+                        3 -> {
+                            Lingver.getInstance().setLocale(appCompatActivity, "fr")
+                            val intent = Intent(appCompatActivity, StartScene::class.java)
+                            appCompatActivity.finish()
+                            appCompatActivity.startActivity(intent)
+                        }
+                        4 -> {
+                            Lingver.getInstance().setLocale(appCompatActivity, "es")
+                            val intent = Intent(appCompatActivity, StartScene::class.java)
+                            appCompatActivity.finish()
+                            appCompatActivity.startActivity(intent)
+                        }
+                        5 -> {
+                            Lingver.getInstance().setLocale(appCompatActivity, "zh")
+                            val intent = Intent(appCompatActivity, StartScene::class.java)
+                            appCompatActivity.finish()
+                            appCompatActivity.startActivity(intent)
+                        }
+                        else -> {
+                            Lingver.getInstance().setLocale(appCompatActivity, "en")
+                            val intent = Intent(appCompatActivity, StartScene::class.java)
+                            appCompatActivity.finish()
+                            appCompatActivity.startActivity(intent)
+                        }
+                    }
                 }
-                1 -> {
-                    Lingver.getInstance().setLocale(appCompatActivity, "no")
-                    val intent = Intent(appCompatActivity, StartScene::class.java)
-                    appCompatActivity.finish()
-                    appCompatActivity.startActivity(intent)
+                .setSingleChoiceItems(availableLangs, chosenItem) { dialog, which ->
+                    chosenItem = which
                 }
-                2 -> {
-                    Lingver.getInstance().setLocale(appCompatActivity, "de")
-                    val intent = Intent(appCompatActivity, StartScene::class.java)
-                    appCompatActivity.finish()
-                    appCompatActivity.startActivity(intent)
-                }
-                3 -> {
-                    Lingver.getInstance().setLocale(appCompatActivity, "fr")
-                    val intent = Intent(appCompatActivity, StartScene::class.java)
-                    appCompatActivity.finish()
-                    appCompatActivity.startActivity(intent)
-                }
-                4 -> {
-                    Lingver.getInstance().setLocale(appCompatActivity, "es")
-                    val intent = Intent(appCompatActivity, StartScene::class.java)
-                    appCompatActivity.finish()
-                    appCompatActivity.startActivity(intent)
-                }
-                5 -> {
-                    Lingver.getInstance().setLocale(appCompatActivity, "zh")
-                    val intent = Intent(appCompatActivity, StartScene::class.java)
-                    appCompatActivity.finish()
-                    appCompatActivity.startActivity(intent)
-                }
-                else -> {
-                    println("Error her")
-                }
-            }
-        }
-        dialog = builder.create()
-        dialog.show()
+            .show()
+
     }
 
     /**
