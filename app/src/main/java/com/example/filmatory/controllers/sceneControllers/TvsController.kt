@@ -24,7 +24,7 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
 
     private var genreId : Int? = null
     private var position : Int = 0
-    private val maxTvs : Int = 10
+    private val maxTvs : Int = 11
     private var maxIterations : Int = 0
     private var currentFilter : String = "tvsPopularDesc"
 
@@ -53,13 +53,13 @@ class TvsController(private val tvsScene: TvsScene) : MainController(tvsScene) {
             tvsGui.tvsRecyclerView.layoutManager = GridLayoutManager(tvsScene, 2)
             tvsGui.tvsRecyclerView.adapter = tvsAdapter
             if(maxIterations > position){
-                for(i in position*maxTvs+1..(position+1)*maxTvs step 1){
+                for(i in position*(maxTvs+1)..(position+1)*maxTvs step 1){
                     tempTvsArray.add(array[i])
                     tvsAdapter.notifyItemInserted(i)
                 }
                 position++
             } else if(maxIterations == position) {
-                for(i in position*maxTvs+1 until array.size step 1){
+                for(i in position*(maxTvs+1) until array.size step 1){
                     tempTvsArray.add(array[i])
                     tvsAdapter.notifyItemInserted(i)
                 }

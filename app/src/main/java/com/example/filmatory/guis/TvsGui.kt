@@ -42,7 +42,7 @@ class TvsGui(private val tvsScene: TvsScene, private val tvsController: TvsContr
     fun disableLoadingBar(){
         tvsScene.runOnUiThread {
             loadingBar.visibility = View.GONE
-            tvsController.snackbarSystem.showSnackbarInfo("No more movies to load")
+            tvsController.snackbarSystem.showSnackbarInfo(tvsScene.resources.getString(R.string.no_more_tv))
         }
     }
 }

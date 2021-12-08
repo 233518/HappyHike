@@ -92,6 +92,8 @@
     <string name="new_review">Nouvelle critique</string>
     <string name="list_name_to_short">Votre nom de liste est trop court.</string>
     <string name="username_too_short">Votre nom d\'utilisateur est trop court.</string>
+    <string name="no_more_tv">No more tv-shows to load</string>
+    <string name="no_more_movies">No more movies to load</string>
     <string-array name="media_array">
         <item>Tout</item>
         <item>Film</item>

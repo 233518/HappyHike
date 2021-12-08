@@ -42,7 +42,7 @@ class MoviesGui(private val moviesScene: MoviesScene, private val moviesControll
     fun disableLoadingBar(){
         moviesScene.runOnUiThread {
             loadingBar.visibility = View.GONE
-            moviesController.snackbarSystem.showSnackbarInfo("No more movies to load")
+            moviesController.snackbarSystem.showSnackbarInfo(moviesScene.resources.getString(R.string.no_more_movies))
         }
     }
 }

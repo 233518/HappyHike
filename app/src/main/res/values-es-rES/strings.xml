@@ -92,6 +92,8 @@
     <string name = "new_review"> Nueva reseña </string>
     <string name="list_name_to_short">Su nombre de lista es demasiado corto.</string>
     <string name = "username_too_short"> Su nombre de usuario es demasiado corto. </string>
+    <string name="no_more_tv">No more tv-shows to load</string>
+    <string name="no_more_movies">No more movies to load</string>
     <string-array name = "media_array">
         <item> Todo </item>
         <item> Película </item>

@@ -24,7 +24,7 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
 
     private var genreId : Int? = null
     private var position : Int = 0
-    private val maxMovies : Int = 10
+    private val maxMovies : Int = 11
     private var maxIterations : Int = 0
     private var currentFilter : String = "moviesPopularDesc"
 
@@ -53,13 +53,13 @@ class MoviesController(private val moviesScene: MoviesScene) : MainController(mo
             moviesGui.moviesRecyclerView.layoutManager = GridLayoutManager(moviesScene, 2)
             moviesGui.moviesRecyclerView.adapter = moviesAdapter
             if(maxIterations > position){
-                for(i in position*maxMovies+1..(position+1)*maxMovies step 1){
+                for(i in position*(maxMovies+1)..(position+1)*maxMovies step 1){
                     tempMoviesArray.add(array[i])
                     moviesAdapter.notifyItemInserted(i)
                 }
                 position++
             } else if(maxIterations == position) {
-                for(i in position*maxMovies+1 until array.size step 1){
+                for(i in position*(maxMovies+1) until array.size step 1){
                     tempMoviesArray.add(array[i])
                     moviesAdapter.notifyItemInserted(i)
                 }
